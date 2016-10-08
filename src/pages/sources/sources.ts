@@ -1,6 +1,6 @@
 import { ViewChild, Component } from '@angular/core';
 
-import { NavController, NavParams, ActionSheetController, ModalController, AlertController, List, Content } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController, List, Content, FabContainer } from 'ionic-angular';
 import { SocialSharing } from 'ionic-native';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
@@ -31,12 +31,12 @@ export class SourcesPage {
   public filteredSources: Source[] = [];
   @ViewChild(List) list: List;
   @ViewChild(Content) content: Content;
+  @ViewChild(FabContainer) fab: FabContainer;
 
   constructor(
     public nav: NavController,
     public params: NavParams,
     public translate: TranslateService,
-    public actionSheetCtrl: ActionSheetController,
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public storage: AppStorage,
@@ -88,65 +88,7 @@ export class SourcesPage {
     this.storage.loadPendingsFromProjectId(this.projectId);
   }
 
-  createSource() {
-    this.translate.get(["PROJECT.TYPES.BOOK", "PROJECT.TYPES.ARTICLE", "PROJECT.TYPES.INTERNET", "PROJECT.TYPES.CD", "PROJECT.TYPES.MOVIE", "PROJECT.TYPES.INTERVIEW", "PROJECT.DETAIL.CHOOSE_TYPE", "COMMON.CANCEL"]).subscribe(translations => {
-      let action = this.actionSheetCtrl.create({
-        title: translations['PROJECT.DETAIL.CHOOSE_TYPE'],
-        buttons: [
-          {
-            text: translations['PROJECT.TYPES.BOOK'],
-            handler: () => {
-              this.openModal('book', action.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations['PROJECT.TYPES.ARTICLE'],
-            handler: () => {
-              this.openModal('article', action.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations['PROJECT.TYPES.INTERNET'],
-            handler: () => {
-              this.openModal('internet', action.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations['PROJECT.TYPES.CD'],
-            handler: () => {
-              this.openModal('cd', action.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations['PROJECT.TYPES.MOVIE'],
-            handler: () => {
-              this.openModal('movie', action.dismiss());
-              return false;
-            }
-          },
-          {
-            text: translations['PROJECT.TYPES.INTERVIEW'],
-            handler: () => {
-              this.openModal('interview', action.dismiss());
-              return false;
-            }
-          },
-          {
-            role: 'cancel',
-            text: translations["COMMON.CANCEL"]
-          }
-        ]
-      });
-
-      action.present();
-    });
-  }
-
-  openModal(type: string, transition: Promise<any> = Promise.resolve(), openScan: boolean = false, editing: boolean = false, source: Source = undefined) {
+  openModal(type: string, openScan: boolean = false, editing: boolean = false, source?: Source) {
     switch (type) {
       case 'book':
         var modal = this.modalCtrl.create(SourceModalBookPage, {
@@ -210,13 +152,13 @@ export class SourcesPage {
       this.loadPendingNumber();
     });
 
-    transition.then(() => {
-      modal.present();
+    modal.present().then(() => {
+      this.fab.close();
     });
   }
 
   editSource(source: Source) {
-    this.openModal(source.type, undefined, false, true, source);
+    this.openModal(source.type, false, true, source);
   }
 
   deleteSource(source: Source) {

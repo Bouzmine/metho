@@ -59,8 +59,16 @@
   </div>
 
   <ion-fab bottom right>
-    <button ion-fab (click)="createSource()">
+    <button ion-fab>
       <ion-icon name="add"></ion-icon>
     </button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="openModal('book')"><ion-icon name="book"></ion-icon></button>
+      <button ion-fab (click)="openModal('article')"><ion-icon name="paper"></ion-icon></button>
+      <button ion-fab (click)="openModal('internet')"><ion-icon name="at"></ion-icon></button>
+      <button ion-fab (click)="openModal('cd')"><ion-icon name="disc"></ion-icon></button>
+      <button ion-fab (click)="openModal('movie')"><ion-icon name="film"></ion-icon></button>
+      <button ion-fab (click)="openModal('interview')"><ion-icon name="quote"></ion-icon></button>
+    </ion-fab-list>
   </ion-fab>
 </ion-content>
