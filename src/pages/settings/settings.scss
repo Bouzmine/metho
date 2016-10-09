@@ -10,17 +10,13 @@ settings {
         margin-bottom: 0;
     }
 
-    .dimmed-50 {
-        color: rgba(0, 0, 0, 0.5);
-    }
-
     button p {
         text-overflow: ellipsis;
         overflow: hidden;
     }
 
     ion-label {
-        color: black;
+        color: $text-color !important;
     }
 
     .backdrop {

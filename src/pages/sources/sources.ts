@@ -89,61 +89,33 @@ export class SourcesPage {
   }
 
   openModal(type: string, openScan: boolean = false, editing: boolean = false, source?: Source) {
+    let navParams = {
+      projectId: this.projectId,
+      data: source,
+      editing: editing,
+      scan: openScan
+    };
+    let modalOpts = {
+      enableBackdropDismiss: false
+    };
     switch (type) {
       case 'book':
-        var modal = this.modalCtrl.create(SourceModalBookPage, {
-          projectId: this.projectId,
-          data: source,
-          editing: editing,
-          scan: openScan
-        }, {
-          enableBackdropDismiss: false
-        });
+        var modal = this.modalCtrl.create(SourceModalBookPage, navParams, modalOpts);
         break;
       case 'article':
-        var modal = this.modalCtrl.create(SourceModalArticlePage, {
-          projectId: this.projectId,
-          data: source,
-          editing: editing,
-        }, {
-          enableBackdropDismiss: false
-        });
+        var modal = this.modalCtrl.create(SourceModalArticlePage, navParams, modalOpts);
         break;
       case 'internet':
-        var modal = this.modalCtrl.create(SourceModalInternetPage, {
-          projectId: this.projectId,
-          data: source,
-          editing: editing,
-        }, {
-          enableBackdropDismiss: false
-        });
+        var modal = this.modalCtrl.create(SourceModalInternetPage, navParams, modalOpts);
         break;
       case 'cd':
-        var modal = this.modalCtrl.create(SourceModalCdPage, {
-          projectId: this.projectId,
-          data: source,
-          editing: editing,
-        }, {
-          enableBackdropDismiss: false
-        });
+        var modal = this.modalCtrl.create(SourceModalCdPage, navParams, modalOpts);
         break;
       case 'movie':
-        var modal = this.modalCtrl.create(SourceModalMoviePage, {
-          projectId: this.projectId,
-          data: source,
-          editing: editing,
-        }, {
-          enableBackdropDismiss: false
-        });
+        var modal = this.modalCtrl.create(SourceModalMoviePage, navParams, modalOpts);
         break;
       case 'interview':
-        var modal = this.modalCtrl.create(SourceModalInterviewPage, {
-          projectId: this.projectId,
-          data: source,
-          editing: editing,
-        }, {
-          enableBackdropDismiss: false
-        });
+        var modal = this.modalCtrl.create(SourceModalInterviewPage, navParams, modalOpts);
         break;
     }
 

@@ -7,11 +7,11 @@
 }
 
 .dimmed-50 {
-  color: rgba(0, 0, 0, 0.5);
+  color: transparentize($text-color, 0.5);
 }
 
 .dimmed-75 {
-  color: rgba(0, 0, 0, 0.6);
+  color: transparentize($text-color, 0.4);
 }
 
 em {
@@ -20,17 +20,29 @@ em {
 
 .toolbar-title {
   .page-title {
-    color: black;
+    color: $text-color;
     overflow: hidden;
     text-overflow: ellipsis !important;
   }
 
   .page-sub-title {
-    color: rgba(0, 0, 0, 0.6) !important;
+    color: transparentize($text-color, 0.4) !important;
     font-size: 0.75em !important;
     font-weight: normal;
     overflow: hidden;
     text-overflow: ellipsis !important;
+  }
+}
+
+.ios ion-action-sheet {
+  .action-sheet-button[icon-left] {
+    position: relative;
+
+    ion-icon {
+      position: absolute;
+      left: 10px;
+      top: 15px;
+    }
   }
 }
 
