@@ -1,16 +1,16 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from "@angular/core";
 
-import { Fetch } from './fetch';
-import { Parse } from './parse';
-import { Report } from './report';
+import { Fetch } from "./fetch";
+import { Parse } from "./parse";
+import { Report } from "./report";
 
 interface CordovaWindow extends Window {
   cordova: any;
 }
 declare var window: CordovaWindow;
 
-import PouchDB from 'pouchdb';
-import PouchDB_Adapter_Cordova_SQLite from 'pouchdb-adapter-cordova-sqlite';
+import PouchDB from "pouchdb";
+import PouchDB_Adapter_Cordova_SQLite from "pouchdb-adapter-cordova-sqlite";
 
 @Injectable()
 export class AppStorage {
@@ -18,7 +18,6 @@ export class AppStorage {
   public sourceDB: any = null;
   public pendingDB: any = null;
   public settingsDB: any = null;
-  public local: any;
   public projects: Map<string, Project> = <Map<string, Project>>new Map();
   public sources: Map<string, Source> = <Map<string, Source>>new Map();
   public sourcesByProject: Map<string, Map<string, Source>> = <Map<string, Map<string, Source>>>new Map();
@@ -31,35 +30,24 @@ export class AppStorage {
   public loadingPendings: boolean = true;
   public loadingSettings: boolean = true;
 
-  public projectEvents;
-  public sourcesEvents;
-  public pendingsEvents;
-  public settingsEvents;
+  public projectEvents = new EventEmitter();
+  public sourcesEvents = new EventEmitter();
+  public pendingsEvents = new EventEmitter();
+  public settingsEvents = new EventEmitter();
 
   constructor(
     public fetch: Fetch,
     public parse: Parse,
     public report: Report
-  ) {
-    this.projectEvents = new EventEmitter();
-    this.sourcesEvents = new EventEmitter();
-    this.pendingsEvents = new EventEmitter();
-    this.settingsEvents = new EventEmitter();
-  }
+  ) {}
 
   init() {
     PouchDB.plugin(PouchDB_Adapter_Cordova_SQLite);
-    if (!!window.cordova) {
-      this.projectDB = new PouchDB("projects", { adapter: "cordova-sqlite" });
-      this.sourceDB = new PouchDB("sources", { adapter: "cordova-sqlite" });
-      this.pendingDB = new PouchDB("pendings", { adapter: "cordova-sqlite" });
-      this.settingsDB = new PouchDB("settings", { adapter: "cordova-sqlite" });
-    }else {
-      this.projectDB = new PouchDB("projects", { adapter: "websql" });
-      this.sourceDB = new PouchDB("sources", { adapter: "websql" });
-      this.pendingDB = new PouchDB("pendings", { adapter: "websql" });
-      this.settingsDB = new PouchDB("settings", { adapter: "websql" });
-    }
+    let adapter = !!window.cordova ? "cordova-sqlite" : "websql";
+    this.projectDB = new PouchDB("projects", { adapter: adapter });
+    this.sourceDB = new PouchDB("sources", { adapter: adapter });
+    this.pendingDB = new PouchDB("pendings", { adapter: adapter });
+    this.settingsDB = new PouchDB("settings", { adapter: adapter });
 
     this.projectDB.allDocs({include_docs: true}).then(docs => {
       docs.rows.forEach((value) => {
@@ -140,10 +128,6 @@ export class AppStorage {
       releaseLock();
     });
 
-    if (this.projects.size == 0) {
-      this.local.set("theresProjects", false);
-    }
-
     return new Promise(resolve => {
       this.projectDB.remove(doc).then(result => {
         resolve(result);
@@ -191,12 +175,10 @@ export class AppStorage {
         this.projects.set(response.id, project);
         releaseSourceLock();
         releaseProjectLock();
-        this.local.set("theresProjects", true);
         resolve(response);
       }).catch((err) => {
         releaseSourceLock();
         releaseProjectLock();
-        this.local.set("theresProjects", true);
         this.report.report(err);
         resolve(err);
       });

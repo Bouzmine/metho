@@ -1,17 +1,17 @@
-import { ViewChild, Component } from '@angular/core';
+import { ViewChild, Component } from "@angular/core";
 
-import { NavController, ModalController, AlertController, List } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { NavController, ModalController, List } from "ionic-angular";
 
-import { ProjectModalPage } from '../project-modal/project-modal';
-import { SourcesPage } from '../sources/sources';
+import { ProjectModalPage } from "../project-modal/project-modal";
+import { SourcesPage } from "../sources/sources";
 
-import { AppStorage } from '../../providers/app-storage';
+import { AppStorage } from "../../providers/app-storage";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
 @Component({
-  selector: 'projects',
-  templateUrl: 'projects.html'
+  selector: "projects",
+  templateUrl: "projects.html"
 })
 export class ProjectsPage {
   public projects: any[] = [];
@@ -20,8 +20,7 @@ export class ProjectsPage {
 
   constructor(
     public nav: NavController,
-    public translate: TranslateService,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public modalCtrl: ModalController,
     public storage: AppStorage,
   ) {
@@ -68,30 +67,27 @@ export class ProjectsPage {
   }
 
   deleteProject(project: Project) {
-    this.translate.get(['PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE', 'PROJECT.TAB.POPUP.DELETE_PROJECT', 'PROJECT.TAB.POPUP.CANCEL', 'PROJECT.TAB.POPUP.DELETE']).subscribe(translations => {
-      let confirm = this.alertCtrl.create({
-        title: translations['PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE'],
-        message: translations['PROJECT.TAB.POPUP.DELETE_PROJECT'],
-        buttons: [
-          {
-            text: translations['PROJECT.TAB.POPUP.CANCEL'],
-            handler: () => {
-              this.list.closeSlidingItems();
-            }
-          },
-          {
-            text: translations['PROJECT.TAB.POPUP.DELETE'],
-            handler: () => {
-              this.storage.deleteProject(project._id);
-              let index = this.projects.indexOf(project);
-              if(index > -1) {
-                this.projects.splice(index, 1);
-              }
+    this.alertCtrl.present({
+      title: "PROJECT.TAB.POPUP.DELETE_PROJECT_TITLE",
+      message: "PROJECT.TAB.POPUP.DELETE_PROJECT",
+      buttons: [
+        {
+          text: "COMMON.CANCEL",
+          handler: () => {
+            this.list.closeSlidingItems();
+          }
+        },
+        {
+          text: "COMMON.DELETE",
+          handler: () => {
+            this.storage.deleteProject(project._id);
+            let index = this.projects.indexOf(project);
+            if(index > -1) {
+              this.projects.splice(index, 1);
             }
           }
-        ]
-      });
-      confirm.present();
+        }
+      ]
     });
   }
 

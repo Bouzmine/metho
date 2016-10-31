@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
+      <button ion-button clear (click)="dismiss()">{{"COMMON.CANCEL" | translate}}</button>
     </ion-buttons>
-    <ion-title>{{(isNew ? 'PROJECT.DETAIL.MODAL.TITLE' : 'PROJECT.SOURCE.MODAL.TITLE') | translate}}</ion-title>
+    <ion-title>{{(isNew ? "PROJECT.DETAIL.MODAL.TITLE" : "PROJECT.SOURCE.MODAL.TITLE") | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button clear (click)="confirm()">{{(isNew ? "COMMON.CREATE" : "COMMON.EDIT") | translate}}</button>
     </ion-buttons>
@@ -14,7 +14,7 @@
   <form [formGroup]="form" (keypress)="submitIfEnter($event)">
     <ion-list>
       <ion-item>
-        <ion-label>{{'PROJECT.DETAIL.MODAL.CD.HAS_AUTHORS' | translate}}</ion-label>
+        <ion-label>{{"PROJECT.DETAIL.MODAL.CD.HAS_AUTHORS" | translate}}</ion-label>
         <ion-checkbox formControlName="hasAuthors"></ion-checkbox>
       </ion-item>
       <div *ngIf="form.value.hasAuthors" class="authors">
@@ -34,19 +34,19 @@
         </div>
       </div>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.CD.DOC_TITLE' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.CD.DOC_TITLE" | translate}}</ion-label>
         <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.CD.DOC_TITLE_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.CD.EDITOR' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.CD.EDITOR" | translate}}</ion-label>
         <ion-input formControlName="editor" placeholder="{{'PROJECT.DETAIL.MODAL.CD.EDITOR_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.CD.PUBLICATION_LOCATION' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.CD.PUBLICATION_LOCATION" | translate}}</ion-label>
         <ion-input formControlName="publicationLocation" placeholder="{{'PROJECT.DETAIL.MODAL.CD.PUBLICATION_LOCATION_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.CD.PUBLICATION_DATE' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.CD.PUBLICATION_DATE" | translate}}</ion-label>
         <ion-input formControlName="publicationDate" placeholder="{{'PROJECT.DETAIL.MODAL.CD.PUBLICATION_DATE_PLACEHOLDER' | translate}}" pattern="[0-9]*"></ion-input>
       </ion-item>
     </ion-list>

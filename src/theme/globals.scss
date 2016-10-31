@@ -18,6 +18,10 @@ em {
   font-style: italic;
 }
 
+input[placeholder] {
+  text-overflow: ellipsis;
+}
+
 .toolbar-title {
   .page-title {
     color: $text-color;

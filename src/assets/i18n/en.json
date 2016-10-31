@@ -20,55 +20,33 @@
         "TAB":{
             "TAB_TITLE": "Projects",
             "EMPTY_TAB": "No projects? It'll come...",
-            "EDIT_ITEM": "Edit",
-            "DELETE_ITEM": "Delete",
             "UNKNOWN_MATTER": "Unknown subject",
-            "MODAL":{
-                "CANCEL": "Cancel",
+            "MODAL": {
                 "TITLE": "New project",
-                "ADD": "Create",
-                "PROJECT_NAME_LABEL": "Project name",
-                "PROJECT_NAME_PLACEHOLDER": "Essay on communication methods",
-                "MATTER_LABEL": "Subject",
-                "MATTER_PLACEHOLDER": "Geography"
-            },
-            "MODAL_EDIT":{
-                "CANCEL": "Cancel",
-                "TITLE": "Edit project",
-                "CONFIRM": "Edit",
+                "TITLE_EDIT": "Edit project",
                 "PROJECT_NAME_LABEL": "Project name",
                 "PROJECT_NAME_PLACEHOLDER": "Essay on communication methods",
                 "MATTER_LABEL": "Subject",
                 "MATTER_PLACEHOLDER": "Geography"
             },
             "POPUP": {
-                "ERROR_TEXT": "Error",
-                "NO_PROJECT_NAME": "Enter a project name",
                 "DELETE_PROJECT_TITLE": "Do you want to delete this project ?",
-                "DELETE_PROJECT": "Deleting this project will cause the loss of every source in it. This action cannot be cancelled.",
-                "CANCEL": "Cancel",
-                "DELETE": "Delete",
-                "MUST_HAVE_TYPE": "The project must have a name"
+                "DELETE_PROJECT": "Deleting this project will cause the loss of every source in it. This action cannot be cancelled."
             }
         },
         "DETAIL":{
             "EMPTY_TAB": "What's a project without sources ?",
-            "DELETE_ITEM": "Delete",
             "SEARCH": "Search",
             "EMPTY_SEARCH": "No result, you can search across all properties of the source like the author, title or type",
             "PENDING_ELEMENTS": "Drafts",
             "CHOOSE_TYPE": "Choose source type",
             "SHARE_TEXT": "Here are the sources for project « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
-                "CANCEL": "Cancel",
                 "TITLE": "New source",
-                "ADD": "Create",
                 "SCAN": "Scan barcode",
                 "BROWSER": "Web browser",
                 "DELETE_DRAFT": "Erase draft",
                 "BOOK": {
-                    "FIRSTNAME": "First Name",
-                    "LASTNAME": "Last Name",
                     "AUTHOR_NUMBER": "Number of authors",
                     "AUTHOR_1TO3": "Source has 1 to 3 authors",
                     "AUTHOR_MORE_3": "Source has more than 3 authors",
@@ -97,8 +75,6 @@
                     "TRANSLATOR_NAME": "Translator(s) name(s)"
                 },
                 "ARTICLE": {
-                    "FIRSTNAME": "First Name",
-                    "LASTNAME": "Last Name",
                     "AUTHOR_NAME": "Author",
                     "TITLE_LABEL": "Title of the article",
                     "TITLE_PLACEHOLDER": "Haiti tunes in to tourism potential",
@@ -113,8 +89,6 @@
                     "INDICATION_END_PLACEHOLDER": "End"
                 },
                 "INTERNET": {
-                    "FIRSTNAME":"First Name",
-                    "LASTNAME": "Last Name",
                     "HAS_AUTHORS": "Source has an author",
                     "WEBPAGE_NAME": "Webpage's title",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
@@ -126,8 +100,6 @@
                     "CONSULTATION_DATE_PLACEHOLDER": "21 mars 2009"
                 },
                 "CD": {
-                    "FIRSTNAME": "First Name",
-                    "LASTNAME": "Last Name",
                     "HAS_AUTHORS": "Source has an author",
                     "DOC_TITLE": "Document's title",
                     "DOC_TITLE_PLACEHOLDER": "Merriam-Webster's Collegiate Dictionary",
@@ -139,8 +111,6 @@
                     "PUBLICATION_DATE_PLACEHOLDER": "2001"
                 },
                 "MOVIE": {
-                    "FIRSTNAME": "First Name",
-                    "LASTNAME": "Last Name",
                     "HAS_MORE_THAN_ONE": "Source has more than one author/director",
                     "HAS_MORE_THAN_ONE_TRUE": "Enter main author/director's name, \"et al.\" mention will be added after meaning there's more than one author/director.",
                     "PRINCIPAL_AUTHOR": "Main author",
@@ -166,8 +136,6 @@
                     "CONSULTATION_DATE_PLACEHOLDER": "29 mars 1991"
                 },
                 "INTERVIEW": {
-                    "FIRSTNAME": "First Name",
-                    "LASTNAME": "Last Name",
                     "INTERVIEWER_NAME": "Interviewer's name",
                     "INTERVIEWED": "Interviewed person",
                     "CIVILITY_TITLE": "Civility",
@@ -195,15 +163,10 @@
             },
             "POPUP": {
                 "ERRORS_SOURCES": "The sources you're trying to share contain <strong>{{errNum}}</strong> error(s). Do you want to share them ?",
-                "ERROR_TEXT": "Error",
                 "SHARE_TEXT": "Sharing",
-                "CANCEL": "Cancel",
                 "SHARE": "Share",
-                "MUST_HAVE_TYPE": "Source must have a type",
-                "NEW_SOURCE": "New source",
                 "DELETE_TITLE": "Deletion",
                 "DELETE_TEXT": "Deleting this source will destroy all data related to it, the deletion won't affect other sources. This action cannot be cancelled.",
-                "DELETE": "Delete",
                 "BOOK_UNAVAILABLE_TITLE": "Book unavailable",
                 "BOOK_UNAVAILABLE_TEXT": "Barcode has been scanned, but this book isn't in our database.",
                 "TIMEOUT_TITLE": "Timeout",
@@ -224,7 +187,6 @@
                 "OVERWRITE": "Overwrite",
                 "ERROR": "Error",
                 "ERROR_500": "We're having problems with our servers, please try later.",
-                "OK": "OK",
                 "CAUTION": "Caution",
                 "USE_CD_FOR_INFORMATION": "You must use type CD only for information CDs. For everything else, use type media document.",
                 "DETAILS": "Details...",
@@ -234,30 +196,14 @@
             }
         },
         "SOURCE":{
-            "EDIT": "Edit",
             "NO_ERROR": "Zero error",
-            "CONFIRM": "Confirm",
-            "CANCEL": "Cancel",
             "MODAL": {
-                "CANCEL": "Cancel",
-                "TITLE": "Edit source",
-                "CONFIRM": "Edit"
+                "TITLE": "Edit source"
             }
         },
         "PENDING":{
             "TITLE": "Drafts",
-            "DELETE_ITEM": "Delete",
-            "SCAN_TO_ADD": "You can add a draft by scaning a barcode when offline",
-            "EMPTY_TAB": "No draft!",
-            "NEED_ADVANCED": "Advanced mode is required to use scan feature",
-            "MODAL": {
-                "CANCEL": "Cancel",
-                "TITLE": "New source",
-                "ADD": "Create"
-            },
             "POPUP": {
-                "NEW_SOURCE": "New source",
-                "MUST_HAVE_TYPE": "Source must have a type",
                 "BOOK_UNAVAILABLE_TITLE": "Book unavailable",
                 "BOOK_UNAVAILABLE_TEXT": "Barcode has been scanned, but this book isn't in our database. Do you want to search the Internet ?",
                 "SEARCH": "Search",
@@ -266,8 +212,7 @@
                 "TIMEOUT_TITLE": "Timeout",
                 "TIMEOUT_TEXT": "Timeout reached. You're probably on a slow network. Do you want to try again ?",
                 "NO_CONNECTION": "No connection",
-                "RETRY_?": "Do you want to try again ?",
-                "CANCEL": "Cancel"
+                "RETRY_?": "Do you want to try again ?"
             }
         },
         "TYPES":{
@@ -625,11 +570,8 @@
         "TAB_TITLE": "Settings",
         "IGNORE_ERRORS": "Ignore errors",
         "YOUR_NAME": "Your name",
-        "EDIT": "Edit",
         "EDIT_NAME": "Edit name",
-        "DELETE": "Delete",
         "FORGET": "Forget",
-        "CANCEL": "Cancel",
         "ADVANCED_MODE_LABEL": "Advanced mode",
         "LEARN_MORE": "Learn more...",
         "BUG_COMMENT": "Bug/Comment",
@@ -662,6 +604,8 @@
                 "ALREADY_TEXT": "Advanced mode is already activated",
                 "ERR_NETWORK_TITLE": "Offline",
                 "ERR_NETWORK": "You cannot buy or restore advanced mode while offline.",
+                "UNSUPPORTED_DEVICE_TITLE": "Unsupported device",
+                "UNSUPPORTED_DEVICE": "iPhone 4S, iPod Touch 5, iPad 2 and iPad mini 1 are not supported by the advanced mode.",
                 "RESTORE": "Restore",
                 "RESTORE_NO_FOUND": "No previously bought item was found."
             }
@@ -691,14 +635,6 @@
                 "FEATURE_TITLE": "Feature request"
             }
         }
-    },
-    "3D_TOUCH": {
-        "NEW_SOURCE": "New source",
-        "NEW_SOURCE_DESC": "Create a new source",
-        "SCAN": "Scanning",
-        "SCAN_DESC": "Scan a barcode",
-        "NO_PROJECT_TITLE": "No project",
-        "NO_PROJECT_MESSAGE": "You must create a project before creating sources. Do you want to create one now ?"
     },
     "REPORT": {
         "ERROR": "Error",

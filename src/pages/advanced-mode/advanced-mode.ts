@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { NavController } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { NavController } from "ionic-angular";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { AdvancedMode } from '../../providers/advanced-mode';
+import { AdvancedMode } from "../../providers/advanced-mode";
 
 
 @Component({
-  selector: 'advanced-mode',
-  templateUrl: 'advanced-mode.html'
+  selector: "advanced-mode",
+  templateUrl: "advanced-mode.html"
 })
 export class AdvancedModePage {
   public isAdvanced: boolean = false;

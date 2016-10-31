@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
+      <button ion-button clear (click)="dismiss()">{{"COMMON.CANCEL" | translate}}</button>
     </ion-buttons>
-    <ion-title>{{(isNew ? 'PROJECT.DETAIL.MODAL.TITLE' : 'PROJECT.SOURCE.MODAL.TITLE') | translate}}</ion-title>
+    <ion-title>{{(isNew ? "PROJECT.DETAIL.MODAL.TITLE" : "PROJECT.SOURCE.MODAL.TITLE") | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button clear (click)="confirm()">{{(isNew ? "COMMON.CREATE" : "COMMON.EDIT") | translate}}</button>
     </ion-buttons>
@@ -14,7 +14,7 @@
   <form [formGroup]="form" (keypress)="submitIfEnter($event)">
     <ion-list>
       <ion-list-header>
-        {{'PROJECT.DETAIL.MODAL.ARTICLE.AUTHOR_NAME' | translate}}
+        {{"PROJECT.DETAIL.MODAL.ARTICLE.AUTHOR_NAME" | translate}}
       </ion-list-header>
       <ion-item>
         <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
@@ -23,24 +23,24 @@
         <ion-input formControlName="author1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.TITLE_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.ARTICLE.TITLE_LABEL" | translate}}</ion-label>
         <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.TITLE_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.PERIODIC_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.ARTICLE.PERIODIC_LABEL" | translate}}</ion-label>
         <ion-input formControlName="editor" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.PERIODIC_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.EDITION_NUMBER_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.ARTICLE.EDITION_NUMBER_LABEL" | translate}}</ion-label>
         <ion-input formControlName="editionNumber" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.EDITION_NUMBER_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.ARTICLE.PUBLICATION_DATE_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.ARTICLE.PUBLICATION_DATE_LABEL" | translate}}</ion-label>
         <ion-input formControlName="publicationDate" placeholder="{{'PROJECT.DETAIL.MODAL.ARTICLE.PUBLICATION_DATE_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-list class="no-margin">
         <ion-list-header>
-          {{'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_END_LABEL' | translate}}
+          {{"PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_END_LABEL" | translate}}
         </ion-list-header>
         <ion-item>
           <ion-input formControlName="startPage" placeholder="{{ 'PROJECT.DETAIL.MODAL.ARTICLE.INDICATION_START_PLACEHOLDER' | translate }}" pattern="[0-9]*"></ion-input>

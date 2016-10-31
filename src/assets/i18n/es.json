@@ -20,55 +20,33 @@
         "TAB":{
             "TAB_TITLE": "Proyectos",
             "EMPTY_TAB": "¿ No proyecto ? Va a venir...",
-            "EDIT_ITEM": "Editar",
-            "DELETE_ITEM": "Eliminar",
             "UNKNOWN_MATTER": "Materia desconocida",
             "MODAL":{
-                "CANCEL": "Cancelar",
                 "TITLE": "Nuevo proyecto",
-                "ADD": "Añadir",
-                "PROJECT_NAME_LABEL": "Nombre del proyecto",
-                "PROJECT_NAME_PLACEHOLDER": "Ensayo sobre los medios de comunicación",
-                "MATTER_LABEL": "Materia",
-                "MATTER_PLACEHOLDER": "Geografía"
-            },
-            "MODAL_EDIT":{
-                "CANCEL": "Cancelar",
-                "TITLE": "Modificar el proyecto",
-                "CONFIRM": "Modificar",
+                "TITLE_EDIT": "Modificar el proyecto",
                 "PROJECT_NAME_LABEL": "Nombre del proyecto",
                 "PROJECT_NAME_PLACEHOLDER": "Ensayo sobre los medios de comunicación",
                 "MATTER_LABEL": "Materia",
                 "MATTER_PLACEHOLDER": "Geografía"
             },
             "POPUP": {
-                "ERROR_TEXT": "Error",
-                "NO_PROJECT_NAME": "Introduzca el nombre del proyecto",
                 "DELETE_PROJECT_TITLE": "¿ Eliminar el proyecto ?",
-                "DELETE_PROJECT": "La eliminación de este proyecto arrastrará la pérdida de todas las fuentes en eso. La eliminación es irreversible.",
-                "CANCEL": "Cancelar",
-                "DELETE": "Eliminar",
-                "MUST_HAVE_TYPE": "El proyecto debe tener un nombre"
+                "DELETE_PROJECT": "La eliminación de este proyecto arrastrará la pérdida de todas las fuentes en eso. La eliminación es irreversible."
             }
         },
         "DETAIL":{
             "EMPTY_TAB": "¿ Qué es un proyecto sin fuentes ?",
-            "DELETE_ITEM": "Eliminar",
             "SEARCH": "Buscar",
             "EMPTY_SEARCH": "Ningún resultado, puede buscar entre todas las informaciones de la fuente como el autor, el titulo o el type",
             "PENDING_ELEMENTS": "Borradores",
             "CHOOSE_TYPE": "Elegir un typo de fuente",
             "SHARE_TEXT": "Aquí está las fuentes del proyecto « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
-                "CANCEL": "Cancelar",
                 "TITLE": "Nueva fuente",
-                "ADD": "Añadir",
                 "SCAN": "Escáner el código de barras",
                 "BROWSER": "Navegador de Internet",
                 "DELETE_DRAFT": "Borrar el borrador",
                 "BOOK": {
-                    "FIRSTNAME": "Nombre",
-                    "LASTNAME": "Apellido",
                     "AUTHOR_NUMBER": "Número de autores",
                     "AUTHOR_1TO3": "La fuente tiene de 1 hasta 3 autores",
                     "AUTHOR_MORE_3": "La fuente tiene más de 3 autores",
@@ -97,8 +75,6 @@
                     "TRANSLATOR_NAME": "Nombre del/de los traductores"
                 },
                 "ARTICLE": {
-                    "FIRSTNAME": "Nombre",
-                    "LASTNAME": "Apellido",
                     "AUTHOR_NAME": "Autor",
                     "TITLE_LABEL": "Titule del artículo",
                     "TITLE_PLACEHOLDER": "El enigma Colón",
@@ -113,8 +89,6 @@
                     "INDICATION_END_PLACEHOLDER": "Fin"
                 },
                 "INTERNET": {
-                    "FIRSTNAME":"Nombre",
-                    "LASTNAME": "Apellido",
                     "HAS_AUTHORS": "La fuente tiene un autor",
                     "WEBPAGE_NAME": "Titulo del articulo",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
@@ -126,8 +100,6 @@
                     "CONSULTATION_DATE_PLACEHOLDER": "21 mars 2009"
                 },
                 "CD": {
-                    "FIRSTNAME": "Nombre",
-                    "LASTNAME": "Apellido",
                     "HAS_AUTHORS": "La fuente tiene un autor",
                     "DOC_TITLE": "Titulo del documento",
                     "DOC_TITLE_PLACEHOLDER": "Diccionario de Veterinaria",
@@ -139,8 +111,6 @@
                     "PUBLICATION_DATE_PLACEHOLDER": "2001"
                 },
                 "MOVIE": {
-                    "FIRSTNAME": "Nombre",
-                    "LASTNAME": "Apellido",
                     "HAS_MORE_THAN_ONE": "La fuente tiene más de un autor/director",
                     "HAS_MORE_THAN_ONE_TRUE": "Tiene que introducir el nombre del primero autor, la mención «et al.» será añadida para significar que hay más de un author/director.",
                     "PRINCIPAL_AUTHOR": "Autor principal",
@@ -166,8 +136,6 @@
                     "CONSULTATION_DATE_PLACEHOLDER": "29 mars 1991"
                 },
                 "INTERVIEW": {
-                    "FIRSTNAME": "Nombre",
-                    "LASTNAME": "Apellido",
                     "INTERVIEWER_NAME": "Nombre del entrevistador",
                     "INTERVIEWED": "Persona encontrada",
                     "CIVILITY_TITLE": "Tratamiento",
@@ -195,15 +163,10 @@
             },
             "POPUP": {
                 "ERRORS_SOURCES": "Las fuentes que trata de compartir contienen <strong>{{errNum}}</strong> error(es). ¿ Quiere compartirlas ?",
-                "ERROR_TEXT": "Error",
                 "SHARE_TEXT": "Compartición",
-                "CANCEL": "Cancelar",
                 "SHARE": "Compartir",
-                "MUST_HAVE_TYPE": "La fuente debe tener un typo",
-                "NEW_SOURCE": "Nueva fuente",
                 "DELETE_TITLE": "Eliminación",
                 "DELETE_TEXT": "La eliminación de esta fuente arrastrará la pérdida de todas la información en eso. La eliminación es irreversible.",
-                "DELETE": "Eliminar",
                 "BOOK_UNAVAILABLE_TITLE": "Libro inencontrable",
                 "BOOK_UNAVAILABLE_TEXT": "El codigo de barras era bien escánado pero este libro no es en nuestra base de datos.",
                 "TIMEOUT_TITLE": "Se acabó el tiempo",
@@ -224,7 +187,6 @@
                 "OVERWRITE": "Sobreescribir",
                 "ERROR": "Error",
                 "ERROR_500": "Tenemos problemos con nuestros servidores, reintenta más tarde.",
-                "OK": "OK",
                 "CAUTION": "Ojo",
                 "USE_CD_FOR_INFORMATION": "Puede utilizar el typo CD solo par los CD de informacion. Para la musica, utilisa el typo Documento audiovisual.",
                 "DETAILS": "Detalles...",
@@ -234,30 +196,14 @@
             }
         },
         "SOURCE":{
-            "EDIT": "Modificar",
             "NO_ERROR": "Ningún error",
-            "CONFIRM": "Confirmar",
-            "CANCEL": "Cancelar",
             "MODAL": {
-                "CANCEL": "Cancelar",
-                "TITLE": "Modificar la fuente",
-                "CONFIRM": "Modificar"
+                "TITLE": "Modificar la fuente"
             }
         },
         "PENDING":{
             "TITLE": "Borradores",
-            "DELETE_ITEM": "Eliminar",
-            "SCAN_TO_ADD": "Para añadir un borrador, tiene que escáner un código de barras cuando es desconectado",
-            "EMPTY_TAB": "Ningún borrador!",
-            "NEED_ADVANCED": "El modo avanzado es necesario para escáner",
-            "MODAL": {
-                "CANCEL": "Cancelar",
-                "TITLE": "Nueva fuente",
-                "ADD": "Añadir"
-            },
             "POPUP": {
-                "NEW_SOURCE": "Nueva fuente",
-                "MUST_HAVE_TYPE": "La fuente debe tener un typo",
                 "BOOK_UNAVAILABLE_TITLE": "Libro inencontrable",
                 "BOOK_UNAVAILABLE_TEXT": "El codigo de barras era bien escánado pero este libro no es en nuestra base de datos. ¿ Quiere buscar las informaciónes sobre Internet ?",
                 "SEARCH": "Buscar",
@@ -266,8 +212,7 @@
                 "TIMEOUT_TITLE": "Se acabó el tiempo",
                 "TIMEOUT_TEXT": "Se acabó el tiempo. Es probablemente en un red lento. ¿ Quiere reintentar ?",
                 "NO_CONNECTION": "No conexión",
-                "RETRY_?": "¿ Quiere reintentar ?",
-                "CANCEL": "Cancelar"
+                "RETRY_?": "¿ Quiere reintentar ?"
             }
         },
         "TYPES":{
@@ -625,11 +570,8 @@
         "TAB_TITLE": "Ajustes",
         "IGNORE_ERRORS": "Ignorar los errores",
         "YOUR_NAME": "Usted nombre",
-        "EDIT": "Modificar",
         "EDIT_NAME": "Modificar el nombre",
-        "DELETE": "Eliminar",
         "FORGET": "Olvidar",
-        "CANCEL": "Cancelar",
         "ADVANCED_MODE_LABEL": "Modo avanzado",
         "LEARN_MORE": "Saber más...",
         "BUG_COMMENT": "Problema/Comentario",
@@ -662,6 +604,8 @@
                 "ALREADY_TEXT": "El modo avanzado es ya activado",
                 "ERR_NETWORK_TITLE": "Desconectado",
                 "ERR_NETWORK": "No puede comprar o restorar el modo avanzado mientras de ser desconectado.",
+                "UNSUPPORTED_DEVICE_TITLE": "Apparto no soportado",
+                "UNSUPPORTED_DEVICE": "iPhone 4S, iPod Touch 5, iPad 2 et iPad mini 1 no son soportados.",
                 "RESTORE": "Restorar",
                 "RESTORE_NO_FOUND": "Ningun compra fue encontrado."
             }
@@ -691,14 +635,6 @@
                 "FEATURE_TITLE": "Sugerir una funcionalidad"
             }
         }
-    },
-    "3D_TOUCH": {
-        "NEW_SOURCE": "Nueva fuente",
-        "NEW_SOURCE_DESC": "Añadir una nueva fuente",
-        "SCAN": "Escáner",
-        "SCAN_DESC": "Escáner un código de barras",
-        "NO_PROJECT_TITLE": "Ningun proyecto",
-        "NO_PROJECT_MESSAGE": "Tiene que añadir un proyecto antes de añadir un fuente. Quiere añadir un proyecto ?"
     },
     "REPORT": {
         "ERROR": "Error",

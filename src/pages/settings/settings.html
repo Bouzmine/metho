@@ -1,47 +1,47 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{'SETTINGS.TAB_TITLE' | translate}}</ion-title>
+    <ion-title>{{"SETTINGS.TAB_TITLE" | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content [class.illuminati]="showIlluminatiEaster">
   <ion-list class="no-margin-bottom">
     <ion-item>
-      <ion-label>{{ 'SETTINGS.IGNORE_ERRORS' | translate }}</ion-label>
+      <ion-label>{{ "SETTINGS.IGNORE_ERRORS" | translate }}</ion-label>
       <ion-toggle [(ngModel)]="settings.ignoreErrors" (ionChange)="toggleIgnoreErrors()"></ion-toggle>
     </ion-item>
-    <ion-item>
+    <ion-item (click)="explainUnavailable()">
       <ion-label>
-        {{'SETTINGS.ADVANCED_MODE_LABEL' | translate}}&nbsp;<a [navPush]="advancedPage" class="nowrap"><div class="link-beautiful">{{ 'SETTINGS.LEARN_MORE' | translate }}</div></a>
+        {{"SETTINGS.ADVANCED_MODE_LABEL" | translate}}&nbsp;<a [navPush]="advancedPage" class="nowrap"><div class="link-beautiful">{{ "SETTINGS.LEARN_MORE" | translate }}</div></a>
       </ion-label>
-      <ion-toggle [(ngModel)]="settings.advanced" (ionChange)="toggleAdvanced()" [disabled]="!enableAdvanced"></ion-toggle>
+      <ion-toggle [(ngModel)]="settings.advanced" (ionChange)="toggleAdvanced()" [disabled]="!enableAdvanced || !advancedAvailable"></ion-toggle>
     </ion-item>
     <ion-item-sliding *ngIf="settings.firstname || settings.lastname">
       <ion-item>
-        <ion-label>{{'SETTINGS.YOUR_NAME' | translate}}</ion-label>
-        <ion-note item-right>{{ settings.firstname + ' ' + settings.lastname }}</ion-note>
+        <ion-label>{{"SETTINGS.YOUR_NAME" | translate}}</ion-label>
+        <ion-note item-right>{{ settings.firstname + " " + settings.lastname }}</ion-note>
       </ion-item>
 
       <ion-item-options>
-        <button ion-button (click)="editName()">{{'SETTINGS.EDIT' | translate}}</button>
-        <button ion-button color="danger" (click)="forgetName()">{{'SETTINGS.FORGET' | translate}}</button>
+        <button ion-button (click)="editName()">{{"COMMON.EDIT" | translate}}</button>
+        <button ion-button color="danger" (click)="forgetName()">{{"SETTINGS.FORGET" | translate}}</button>
       </ion-item-options>
     </ion-item-sliding>
     <ion-item>
-      <ion-label>{{'SETTINGS.LANGUAGE' | translate}}</ion-label>
-      <ion-select [(ngModel)]="settings.overideLang" okText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" cancelText="{{'PROJECT.DETAIL.POPUP.CANCEL' | translate}}" (ionChange)="changeLanguage()">
-        <ion-option value="">{{'SETTINGS.DEFAULT' | translate}}</ion-option>
-        <ion-option value="fr">{{'SETTINGS.FRENCH' | translate}}</ion-option>
-        <ion-option value="en">{{'SETTINGS.ENGLISH' | translate}}</ion-option>
-        <ion-option value="es">{{'SETTINGS.SPANISH' | translate}}</ion-option>
+      <ion-label>{{"SETTINGS.LANGUAGE" | translate}}</ion-label>
+      <ion-select [(ngModel)]="settings.overideLang" okText="{{'COMMON.OK' | translate}}" cancelText="{{'COMMON.CANCEL' | translate}}" (ionChange)="changeLanguage()">
+        <ion-option value="">{{"SETTINGS.DEFAULT" | translate}}</ion-option>
+        <ion-option value="fr">{{"SETTINGS.FRENCH" | translate}}</ion-option>
+        <ion-option value="en">{{"SETTINGS.ENGLISH" | translate}}</ion-option>
+        <ion-option value="es">{{"SETTINGS.SPANISH" | translate}}</ion-option>
       </ion-select>
     </ion-item>
     <button ion-item [navPush]="attributionsPage">
-      <h2>{{'SETTINGS.ATTRIBUTION_TAB' | translate}}</h2>
+      <h2>{{"SETTINGS.ATTRIBUTION_TAB" | translate}}</h2>
     </button>
     <button ion-item [navPush]="feedbackPage">
-      <h2>{{'SETTINGS.BUG_COMMENT' | translate}}</h2>
-      <p>{{'SETTINGS.BUG_COMMENT_LONG' | translate}}</p>
+      <h2>{{"SETTINGS.BUG_COMMENT" | translate}}</h2>
+      <p>{{"SETTINGS.BUG_COMMENT_LONG" | translate}}</p>
     </button>
   </ion-list>
   <p text-center innerHtml="{{'SETTINGS.ATTRIBUTIONS' | translate}}"></p>

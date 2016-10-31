@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { NavController, NavParams, ModalController, AlertController, LoadingController } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { NavController, NavParams, ModalController, LoadingController } from "ionic-angular";
 
-import { SourceModalBookPage } from '../source-modal-book/source-modal-book';
+import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
 
-import { AppStorage } from '../../providers/app-storage';
-import { Fetch } from '../../providers/fetch';
-import { Language } from '../../providers/language';
+import { AppStorage } from "../../providers/app-storage";
+import { Fetch } from "../../providers/fetch";
+import { Language } from "../../providers/language";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
 @Component({
-  selector: 'pendings',
-  templateUrl: 'pendings.html'
+  selector: "pendings",
+  templateUrl: "pendings.html"
 })
 export class PendingsPage {
   public projectId: string;
@@ -21,15 +21,14 @@ export class PendingsPage {
   constructor(
     public nav: NavController,
     public params: NavParams,
-    public translate: TranslateService,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public storage: AppStorage,
     public fetch: Fetch,
     public language: Language,
   ) {
-    this.projectId = params.get('pId');
+    this.projectId = params.get("pId");
   }
 
   loadPendings(dismissOnEmpty?: boolean) {
@@ -46,6 +45,7 @@ export class PendingsPage {
   }
 
   solvePending(pending: Pending) {
+    let index = this.pendings.indexOf(pending);
     if (!this.fetch.isISBNCached(pending.isbn)) {
       var loading = this.loadingCtrl.create();
       var isLoading = true;
@@ -57,10 +57,9 @@ export class PendingsPage {
       if (isLoading) {
         var loadingTransition = loading.dismiss();
       }
-      let i = this.pendings.indexOf(pending);
-      this.pendings[i].isLoaded = true;
-      this.pendings[i].data = data;
-      this.storage.setPendingFromId(this.pendings[i]._id, this.pendings[i]);
+      this.pendings[index].isLoaded = true;
+      this.pendings[index].data = data;
+      this.storage.setPendingFromId(this.pendings[index]._id, this.pendings[index]);
       if (isLoading) {
         loadingTransition.then(() => {
           this.openAfterLoad(data, pending._id);
@@ -71,67 +70,13 @@ export class PendingsPage {
     }).catch(err => {
       loading.dismiss();
       if (err == 404) {
-        this.translate.get(["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT", "PROJECT.PENDING.POPUP.SEARCH", "PROJECT.PENDING.POPUP.LATER"]).subscribe(translations => {
-          let alert = this.alertCtrl.create({
-            title: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE"],
-            message: translations["PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT"],
-            buttons: [
-              {
-                text: translations["PROJECT.PENDING.POPUP.SEARCH"],
-                handler: () => {
-                  let i = this.pendings.indexOf(pending);
-                  this.pendings[i].notAvailable = true;
-                  this.storage.setPendingFromId(this.pendings[i]._id, this.pendings[i]);
-                  this.openModalWithBrowser(this.pendings[i], alert.dismiss());
-                  return false;
-                }
-              },
-              {
-                text: translations["PROJECT.PENDING.POPUP.LATER"],
-                handler: () => {
-                  let i = this.pendings.indexOf(pending);
-                  this.pendings[i].notAvailable = true;
-                  this.storage.setPendingFromId(this.pendings[i]._id, this.pendings[i]);
-                }
-              }
-            ]
-          });
-
-          alert.present();
-        });
+        this.pendings[index].notAvailable = true;
+        this.storage.setPendingFromId(this.pendings[index]._id, this.pendings[index]);
+        this.alert404(index);
       }else if (err == 408) {
-        this.translate.get(["PROJECT.PENDING.POPUP.TIMEOUT_TITLE", "PROJECT.PENDING.POPUP.TIMEOUT_TEXT", "COMMON.CANCEL", "PROJECT.PENDING.POPUP.RETRY"]).subscribe((translations) => {
-          let alert = this.alertCtrl.create({
-            title: translations["PROJECT.PENDING.POPUP.TIMEOUT_TITLE"],
-            message: translations["PROJECT.PENDING.POPUP.TIMEOUT_TEXT"],
-            buttons: [
-              {
-                text: translations["COMMON.CANCEL"]
-              },
-              {
-                text: translations["PROJECT.PENDING.POPUP.RETRY"],
-                handler: () => {
-                  this.solvePending(pending);
-                }
-              }
-            ]
-          });
-          alert.present();
-        });
+        this.alert408(pending);
       }else if (err >= 500 && err <= 599) {
-        this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "COMMON.OK"]).subscribe(translations => {
-          let alert = this.alertCtrl.create({
-            title: translations["PROJECT.DETAIL.POPUP.ERROR"],
-            message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
-            buttons: [
-              {
-                text: translations["COMMON.OK"]
-              }
-            ]
-          });
-
-          alert.present();
-        });
+        this.alert500();
       }
     });
   }
@@ -151,7 +96,7 @@ export class PendingsPage {
     modal.present();
   }
 
-  openModalWithBrowser(pending: Pending, transition=Promise.resolve()) {
+  openModalWithBrowser(pending: Pending, transition: Promise<any> = Promise.resolve()) {
     let modal = this.modalCtrl.create(SourceModalBookPage, {
       projectId: this.projectId,
       pendingId: pending._id,
@@ -176,5 +121,56 @@ export class PendingsPage {
 
   ionViewWillEnter() {
     this.loadPendings();
+  }
+
+  alert404(index: number) {
+    let alert = this.alertCtrl.present({
+      title: "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TITLE",
+      message: "PROJECT.PENDING.POPUP.BOOK_UNAVAILABLE_TEXT",
+      buttons: [
+        {
+          text: "PROJECT.PENDING.POPUP.SEARCH",
+          handler: () => {
+            alert.then(obj => {
+              this.openModalWithBrowser(this.pendings[index], obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.PENDING.POPUP.LATER"
+        }
+      ]
+    });
+  }
+
+  alert408(pending: Pending) {
+    this.alertCtrl.present({
+      title: "PROJECT.PENDING.POPUP.TIMEOUT_TITLE",
+      message: "PROJECT.PENDING.POPUP.TIMEOUT_TEXT",
+      buttons: [
+        {
+          text: "COMMON.CANCEL"
+        },
+        {
+          text: "PROJECT.PENDING.POPUP.RETRY",
+          handler: () => {
+            this.solvePending(pending);
+          }
+        }
+      ]
+    });
+  }
+
+  alert500() {
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.ERROR",
+      message: "PROJECT.DETAIL.POPUP.ERROR_500",
+      buttons: [
+        {
+          text: "COMMON.OK"
+        }
+      ]
+    });
   }
 }

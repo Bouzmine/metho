@@ -1,8 +1,8 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from "@angular/core";
 
-import { Storage } from '@ionic/storage';
+import { Storage } from "@ionic/storage";
 
-import { AppStorage } from './app-storage';
+import { AppStorage } from "./app-storage";
 
 
 @Injectable()
@@ -42,7 +42,7 @@ export class Settings {
         }
 
         if (index == 6) {
-          if (this.isEmpty(settings)) { // LocalStorage may have been cleared by iOS or it's 1st boot
+          if (this.isEmpty(settings)) { // LocalStorage may have been cleared by iOS or it"s 1st boot
             this.storage.getSettings().then(backup => {
               if (this.isEmpty(backup)) { // Make defaults (1st boot)
                 Object.keys(this.defaults).map((value, index) => {

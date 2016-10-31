@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from "ionic-angular";
 
 
 @Component({
-  selector: 'license',
-  templateUrl: 'license.html'
+  selector: "license",
+  templateUrl: "license.html"
 })
 export class LicensePage {
   public type: string = "";
@@ -14,6 +14,6 @@ export class LicensePage {
     public nav: NavController,
     public params: NavParams,
   ) {
-    this.type = this.params.get('type');
+    this.type = this.params.get("type");
   }
 }

@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from "ionic-angular";
 
-import { ReferencesSubPage } from '../references-sub/references-sub';
+import { ReferencesSubPage } from "../references-sub/references-sub";
 
-import { References } from '../../providers/references';
+import { References } from "../../providers/references";
 
 
 @Component({
-  selector: 'references-detail',
-  templateUrl: 'references-detail.html'
+  selector: "references-detail",
+  templateUrl: "references-detail.html"
 })
 export class ReferencesDetailPage {
-  public name: string = '';
-  public text: string = '';
+  public name: string = "";
+  public text: string = "";
   public entries: any[] = [];
   public id: string;
 
@@ -22,7 +22,7 @@ export class ReferencesDetailPage {
     public params: NavParams,
     public references: References,
   ) {
-    this.id = this.params.get('id');
+    this.id = this.params.get("id");
     this.references.load().then(data => {
       this.text = data[this.id].text;
       this.entries = data[this.id].subPages;

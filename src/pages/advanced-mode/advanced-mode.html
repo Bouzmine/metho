@@ -1,29 +1,29 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{'SETTINGS.ADVANCED_MODE.TITLE' | translate}}</ion-title>
+    <ion-title>{{"SETTINGS.ADVANCED_MODE.TITLE" | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <button ion-button full color="light" class="button-dollar" (click)="enable()" [disabled]="isAdvanced">{{ price }}</button>
-  <p text-center>{{(isAdvanced ? 'SETTINGS.ADVANCED_MODE.THANKS_PURCHASE' : 'SETTINGS.ADVANCED_MODE.WAITING_FOR') | translate}}</p>
+  <p text-center>{{(isAdvanced ? "SETTINGS.ADVANCED_MODE.THANKS_PURCHASE" : "SETTINGS.ADVANCED_MODE.WAITING_FOR") | translate}}</p>
   <ion-list>
     <ion-item>
       <ion-thumbnail item-left>
         <img src="assets/img/barcode.png">
       </ion-thumbnail>
 
-      <h2>{{'SETTINGS.ADVANCED_MODE.SCANNING' | translate}}</h2>
-      <p class="wrap">{{'SETTINGS.ADVANCED_MODE.SCAN_DESC' | translate}}</p>
+      <h2>{{"SETTINGS.ADVANCED_MODE.SCANNING" | translate}}</h2>
+      <p class="wrap">{{"SETTINGS.ADVANCED_MODE.SCAN_DESC" | translate}}</p>
     </ion-item>
     <ion-item>
       <ion-thumbnail item-left>
         <img src="assets/img/rename.png">
       </ion-thumbnail>
 
-      <h2>{{'SETTINGS.ADVANCED_MODE.INSTANT_SEARCH' | translate}}</h2>
-      <p class="wrap">{{'SETTINGS.ADVANCED_MODE.INSTANT_SEARCH_DESC' | translate}}</p>
+      <h2>{{"SETTINGS.ADVANCED_MODE.INSTANT_SEARCH" | translate}}</h2>
+      <p class="wrap">{{"SETTINGS.ADVANCED_MODE.INSTANT_SEARCH_DESC" | translate}}</p>
     </ion-item>
   </ion-list>
-  <button ion-button full color="secondary" (click)="restore()" [disabled]="isAdvanced">{{ 'SETTINGS.ADVANCED_MODE.RESTORE' | translate }}</button>
+  <button ion-button full color="secondary" (click)="restore()" [disabled]="isAdvanced">{{ "SETTINGS.ADVANCED_MODE.RESTORE" | translate }}</button>
 </ion-content>

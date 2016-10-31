@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
+      <button ion-button clear (click)="dismiss()">{{"COMMON.CANCEL" | translate}}</button>
     </ion-buttons>
-    <ion-title>{{(isNew ? 'PROJECT.DETAIL.MODAL.TITLE' : 'PROJECT.SOURCE.MODAL.TITLE') | translate}}</ion-title>
+    <ion-title>{{(isNew ? "PROJECT.DETAIL.MODAL.TITLE" : "PROJECT.SOURCE.MODAL.TITLE") | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button clear (click)="confirm()">{{(isNew ? "COMMON.CREATE" : "COMMON.EDIT") | translate}}</button>
     </ion-buttons>
@@ -14,18 +14,18 @@
   <form [formGroup]="form" (keypress)="submitIfEnter($event)">
     <ion-list radio-group formControlName="hasAuthors" class="no-margin-bottom">
       <ion-list-header>
-        {{'PROJECT.DETAIL.MODAL.BOOK.AUTHOR_NUMBER' | translate}}
+        {{"PROJECT.DETAIL.MODAL.BOOK.AUTHOR_NUMBER" | translate}}
       </ion-list-header>
       <ion-item>
-        <ion-label>{{'PROJECT.DETAIL.MODAL.BOOK.AUTHOR_1TO3' | translate}}</ion-label>
+        <ion-label>{{"PROJECT.DETAIL.MODAL.BOOK.AUTHOR_1TO3" | translate}}</ion-label>
         <ion-radio value="13"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>{{'PROJECT.DETAIL.MODAL.BOOK.AUTHOR_MORE_3' | translate}}</ion-label>
+        <ion-label>{{"PROJECT.DETAIL.MODAL.BOOK.AUTHOR_MORE_3" | translate}}</ion-label>
         <ion-radio value="more3"></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>{{'PROJECT.DETAIL.MODAL.BOOK.AUTHOR_COLLLECTIVE' | translate}}</ion-label>
+        <ion-label>{{"PROJECT.DETAIL.MODAL.BOOK.AUTHOR_COLLLECTIVE" | translate}}</ion-label>
         <ion-radio value="collective"></ion-radio>
       </ion-item>
     </ion-list>
@@ -57,7 +57,7 @@
     <!-- La source a plus de 3 auteurs -->
     <ion-list *ngIf="form.value.hasAuthors == 'more3'" class="no-margin-with-header authors" no-lines>
       <ion-list-header>
-        {{'PROJECT.DETAIL.MODAL.BOOK.FIRST_2_AUTHOR_NAME' | translate}}
+        {{"PROJECT.DETAIL.MODAL.BOOK.FIRST_2_AUTHOR_NAME" | translate}}
       </ion-list-header>
       <ion-item>
         <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
@@ -77,7 +77,7 @@
     <!-- La source est un collectif -->
     <ion-list *ngIf="form.value.hasAuthors == 'collective'" class="no-margin-with-header authors" no-lines>
       <ion-list-header>
-        {{'PROJECT.DETAIL.MODAL.BOOK.DIRECTOR_NAMES' | translate}}
+        {{"PROJECT.DETAIL.MODAL.BOOK.DIRECTOR_NAMES" | translate}}
       </ion-list-header>
       <ion-item>
         <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
@@ -98,7 +98,7 @@
     <!-- Autres champs -->
     <ion-list class="no-margin">
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.TITLE_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.TITLE_LABEL" | translate}}</ion-label>
         <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate}}" (input)="search()"></ion-input>
         <ion-spinner *ngIf="instantStatus.loading" name="ios-small" class="spinner-suggestions" item-right></ion-spinner>
         <button ion-button *ngIf="instantStatus.ok" (click)="toggleInstantSearch()" [class.rotate-90]="instantStatus.shown" class="will-90" color="dark" clear item-right icon-only>
@@ -123,45 +123,45 @@
         </ion-scroll>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.EDITOR_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.EDITOR_LABEL" | translate}}</ion-label>
         <ion-input formControlName="editor" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.EDITOR_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_DATE_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_DATE_LABEL" | translate}}</ion-label>
         <ion-input formControlName="publicationDate" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_DATE_PLACEHOLDER' | translate}}" pattern="[0-9]*"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_LOCATION_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_LOCATION_LABEL" | translate}}</ion-label>
         <ion-input formControlName="publicationLocation" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.PUBLICATION_LOCATION_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_LABEL" | translate}}</ion-label>
         <ion-input type="number" formControlName="pageNumber" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.PAGE_NUMBER_PLACEHOLDER' | translate}}" pattern="[0-9]*"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.EDITION_NUMBER_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.EDITION_NUMBER_LABEL" | translate}}</ion-label>
         <ion-input formControlName="editionNumber" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.EDITION_NUMBER_PLACEHOLDER' | translate}}" pattern="[0-9]*"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.VOLUME_NUMBER_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.VOLUME_NUMBER_LABEL" | translate}}</ion-label>
         <ion-input formControlName="volumeNumber" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.VOLUME_NUMBER_PLACEHOLDER' | translate}}" pattern="[0-9]*"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.COLLECTION_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.COLLECTION_LABEL" | translate}}</ion-label>
         <ion-input formControlName="collection" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.COLLECTION_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>{{'PROJECT.DETAIL.MODAL.BOOK.HAS_BEEN_TRANSLATED' | translate}}</ion-label>
+        <ion-label>{{"PROJECT.DETAIL.MODAL.BOOK.HAS_BEEN_TRANSLATED" | translate}}</ion-label>
         <ion-checkbox formControlName="hasBeenTranslated"></ion-checkbox>
       </ion-item>
       <ion-list *ngIf="form.value.hasBeenTranslated == true" class="no-margin">
           <ion-item>
-            <ion-label stacked>{{'PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_LABEL' | translate}}</ion-label>
+            <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_LABEL" | translate}}</ion-label>
             <ion-input formControlName="translatedFrom" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_PLACEHOLDER' | translate}}"></ion-input>
           </ion-item>
           <ion-list class="no-margin-with-header" no-lines>
             <ion-list-header>
-              {{'PROJECT.DETAIL.MODAL.BOOK.TRANSLATOR_NAME' | translate}}
+              {{"PROJECT.DETAIL.MODAL.BOOK.TRANSLATOR_NAME" | translate}}
             </ion-list-header>
             <ion-item>
               <ion-input formControlName="translator1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
@@ -187,11 +187,11 @@
   <ion-toolbar default *ngIf="(isAdvanced && !hideScan) || showBrowser" class="no-padding">
     <button ion-button (click)="scan()" full *ngIf="!hideScan && !showBrowser" icon-left>
       <ion-icon name="qr-scanner" class="left-aligned"></ion-icon>
-      {{'PROJECT.DETAIL.MODAL.SCAN' | translate}}
+      {{"PROJECT.DETAIL.MODAL.SCAN" | translate}}
     </button>
     <button ion-button (click)="browser()" full *ngIf="showBrowser" icon-left>
       <ion-icon name="browsers" class="left-aligned"></ion-icon>
-      {{'PROJECT.DETAIL.MODAL.BROWSER' | translate}}
+      {{"PROJECT.DETAIL.MODAL.BROWSER" | translate}}
     </button>
   </ion-toolbar>
 </ion-footer>

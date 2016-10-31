@@ -1,15 +1,15 @@
-import { ViewChild, Component } from '@angular/core';
+import { ViewChild, Component } from "@angular/core";
 
-import { NavController, ViewController, Slides } from 'ionic-angular';
+import { NavController, ViewController, Slides } from "ionic-angular";
 
-import { Settings } from '../../providers/settings';
+import { Settings } from "../../providers/settings";
 
 @Component({
-  selector: 'boarding-scan',
-  templateUrl: 'boarding-scan.html'
+  selector: "boarding-scan",
+  templateUrl: "boarding-scan.html"
 })
 export class BoardingScanPage {
-  @ViewChild('slider') slider: Slides;
+  @ViewChild("slider") slider: Slides;
   public currentIndex: number = 0;
   public swiperOptions: any;
 
@@ -24,7 +24,7 @@ export class BoardingScanPage {
   }
 
   dismiss() {
-    this.settings.set('scanBoardingDone', true);
+    this.settings.set("scanBoardingDone", true);
     this.viewCtrl.dismiss();
   }
 

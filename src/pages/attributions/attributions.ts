@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { NavController } from 'ionic-angular';
-import { SafariViewController } from 'ionic-native';
+import { NavController } from "ionic-angular";
+import { SafariViewController } from "ionic-native";
 
-import { LicensePage } from '../license/license';
+import { LicensePage } from "../license/license";
 
 
 @Component({
-  selector: 'attributions',
-  templateUrl: 'attributions.html'
+  selector: "attributions",
+  templateUrl: "attributions.html"
 })
 export class AttributionsPage {
   constructor(

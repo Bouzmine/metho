@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component } from "@angular/core";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { NavController, ViewController, NavParams } from 'ionic-angular';
+import { NavController, ViewController, NavParams } from "ionic-angular";
+import { Keyboard } from "ionic-native";
 
-import { AppStorage } from '../../providers/app-storage';
+import { AppStorage } from "../../providers/app-storage";
 
 
 @Component({
-  selector: 'project-modal',
-  templateUrl: 'project-modal.html'
+  selector: "project-modal",
+  templateUrl: "project-modal.html"
 })
 export class ProjectModalPage {
   public isNew: Boolean;
@@ -22,9 +23,9 @@ export class ProjectModalPage {
     public storage: AppStorage,
     public fb: FormBuilder,
   ) {
-    if(this.params.get('previous')) {
+    if(this.params.get("previous")) {
       this.isNew = false;
-      this.previous = this.params.get('previous');
+      this.previous = this.params.get("previous");
     }else {
       this.isNew = true;
       this.previous = {
@@ -53,10 +54,12 @@ export class ProjectModalPage {
     if(this.projectForm.valid) {
       if(this.isNew) {
         this.storage.createProject(this.projectForm.value).then(() => {
+          Keyboard.close();
           this.viewCtrl.dismiss();
         });
       }else {
         this.storage.setProjectFromId(this.previous._id, this.projectForm.value).then(() => {
+          Keyboard.close();
           this.viewCtrl.dismiss();
         });
       }

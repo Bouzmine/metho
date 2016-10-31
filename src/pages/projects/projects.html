@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{'TAB_PROJECT' | translate}}</ion-title>
+    <ion-title>{{"TAB_PROJECT" | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="createProject()">
         <ion-icon name="add"></ion-icon>
@@ -15,19 +15,19 @@
     <button ion-button outline class="centered" (click)="createProject()" icon-only>
       <ion-icon name="add" color="primary"></ion-icon>
     </button><br>
-    <p class="center dimmed-50">{{'PROJECT.TAB.EMPTY_TAB' | translate}}</p>
+    <p class="center dimmed-50">{{"PROJECT.TAB.EMPTY_TAB" | translate}}</p>
   </div>
   <!-- When there is -->
   <ion-list *ngIf="projects.length">
     <ion-item-sliding *ngFor="let project of projects">
       <button ion-item (click)="openProjectDetail(project)">
         <h2>{{ project.name }}</h2>
-        <p>{{ project.matter ? project.matter : ('PROJECT.TAB.UNKNOWN_MATTER' | translate) }}</p>
+        <p>{{ project.matter ? project.matter : ("PROJECT.TAB.UNKNOWN_MATTER" | translate) }}</p>
       </button>
 
       <ion-item-options>
-        <button ion-button color="primary" (click)="editProject(project)">{{'COMMON.EDIT' | translate}}</button>
-        <button ion-button color="danger" (click)="deleteProject(project)">{{'COMMON.DELETE' | translate}}</button>
+        <button ion-button color="primary" (click)="editProject(project)">{{"COMMON.EDIT" | translate}}</button>
+        <button ion-button color="danger" (click)="deleteProject(project)">{{"COMMON.DELETE" | translate}}</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

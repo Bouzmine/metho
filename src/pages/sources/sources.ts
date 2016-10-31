@@ -1,26 +1,28 @@
-import { ViewChild, Component } from '@angular/core';
+import { ViewChild, Component } from "@angular/core";
 
-import { NavController, NavParams, ModalController, AlertController, List, Content, FabContainer } from 'ionic-angular';
-import { SocialSharing } from 'ionic-native';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { NavController, NavParams, ModalController, List, Content, FabContainer } from "ionic-angular";
+import { SocialSharing } from "ionic-native";
+import { TranslateService } from "ng2-translate/ng2-translate";
 
-import { AdvancedModePage } from '../advanced-mode/advanced-mode';
-import { SourceModalBookPage } from '../source-modal-book/source-modal-book';
-import { SourceModalArticlePage } from '../source-modal-article/source-modal-article';
-import { SourceModalInternetPage } from '../source-modal-internet/source-modal-internet';
-import { SourceModalCdPage } from '../source-modal-cd/source-modal-cd';
-import { SourceModalMoviePage } from '../source-modal-movie/source-modal-movie';
-import { SourceModalInterviewPage } from '../source-modal-interview/source-modal-interview';
-import { SourcePage } from '../source/source';
-import { PendingsPage } from '../pendings/pendings';
+import { AdvancedModePage } from "../advanced-mode/advanced-mode";
+import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
+import { SourceModalArticlePage } from "../source-modal-article/source-modal-article";
+import { SourceModalInternetPage } from "../source-modal-internet/source-modal-internet";
+import { SourceModalCdPage } from "../source-modal-cd/source-modal-cd";
+import { SourceModalMoviePage } from "../source-modal-movie/source-modal-movie";
+import { SourceModalInterviewPage } from "../source-modal-interview/source-modal-interview";
+import { SourcePage } from "../source/source";
+import { PendingsPage } from "../pendings/pendings";
 
-import { AppStorage } from '../../providers/app-storage';
-import { Settings } from '../../providers/settings';
+import { AppStorage } from "../../providers/app-storage";
+import { Settings } from "../../providers/settings";
+import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
 @Component({
-  selector: 'sources',
-  templateUrl: 'sources.html'
+  selector: "sources",
+  templateUrl: "sources.html"
 })
 export class SourcesPage {
   public projectId: string;
@@ -29,6 +31,7 @@ export class SourcesPage {
   public pendingNumber: number = 0;
   public searchQuery: string = "";
   public filteredSources: Source[] = [];
+  public typeTable: any = {};
   @ViewChild(List) list: List;
   @ViewChild(Content) content: Content;
   @ViewChild(FabContainer) fab: FabContainer;
@@ -37,16 +40,22 @@ export class SourcesPage {
     public nav: NavController,
     public params: NavParams,
     public translate: TranslateService,
-    public alertCtrl: AlertController,
+    public actionSheetCtrl: TranslatedActionSheetController,
+    public alertCtrl: TranslatedAlertController,
     public modalCtrl: ModalController,
     public storage: AppStorage,
     public settings: Settings,
   ) {
-    this.projectId = params.get('id');
+    this.projectId = params.get("id");
     this.loadProjectInfo();
+
+    this.translate.onLangChange.subscribe(() => {
+      this.generateTypeTable();
+    });
   }
 
   ionViewWillEnter() {
+    this.generateTypeTable();
     this.loadSources();
     this.loadPendingNumber();
   }
@@ -70,7 +79,26 @@ export class SourcesPage {
           return a.parsedSource.localeCompare(b.title);
         }
       });
-      this.updateSearch();
+    });
+  }
+
+  generateTypeTable() {
+    this.translate.get([
+      "PROJECT.TYPES.BOOK",
+      "PROJECT.TYPES.ARTICLE",
+      "PROJECT.TYPES.INTERNET",
+      "PROJECT.TYPES.CD_PARSE",
+      "PROJECT.TYPES.MOVIE",
+      "PROJECT.TYPES.INTERVIEW"
+    ]).subscribe(translations => {
+      this.typeTable = {
+        "PROJECT.TYPES.BOOK": translations["PROJECT.TYPES.BOOK"],
+        "PROJECT.TYPES.ARTICLE": translations["PROJECT.TYPES.ARTICLE"],
+        "PROJECT.TYPES.INTERNET": translations["PROJECT.TYPES.INTERNET"],
+        "PROJECT.TYPES.CD_PARSE": translations["PROJECT.TYPES.CD_PARSE"],
+        "PROJECT.TYPES.MOVIE": translations["PROJECT.TYPES.MOVIE"],
+        "PROJECT.TYPES.INTERVIEW": translations["PROJECT.TYPES.INTERVIEW"]
+      }
     });
   }
 
@@ -99,22 +127,22 @@ export class SourcesPage {
       enableBackdropDismiss: false
     };
     switch (type) {
-      case 'book':
+      case "book":
         var modal = this.modalCtrl.create(SourceModalBookPage, navParams, modalOpts);
         break;
-      case 'article':
+      case "article":
         var modal = this.modalCtrl.create(SourceModalArticlePage, navParams, modalOpts);
         break;
-      case 'internet':
+      case "internet":
         var modal = this.modalCtrl.create(SourceModalInternetPage, navParams, modalOpts);
         break;
-      case 'cd':
+      case "cd":
         var modal = this.modalCtrl.create(SourceModalCdPage, navParams, modalOpts);
         break;
-      case 'movie':
+      case "movie":
         var modal = this.modalCtrl.create(SourceModalMoviePage, navParams, modalOpts);
         break;
-      case 'interview':
+      case "interview":
         var modal = this.modalCtrl.create(SourceModalInterviewPage, navParams, modalOpts);
         break;
     }
@@ -134,28 +162,24 @@ export class SourcesPage {
   }
 
   deleteSource(source: Source) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.DELETE_TITLE", "PROJECT.DETAIL.POPUP.DELETE_TEXT", "COMMON.DELETE", "COMMON.CANCEL"]).subscribe(translations => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.DETAIL.POPUP.DELETE_TITLE"],
-        message: translations["PROJECT.DETAIL.POPUP.DELETE_TEXT"],
-        buttons: [
-          {
-            text: translations["COMMON.CANCEL"],
-            handler: () => {
-              this.list.closeSlidingItems();
-            }
-          },
-          {
-            text: translations["COMMON.DELETE"],
-            handler: () => {
-              this.storage.deleteSource(source._id);
-              this.sources.splice(this.sources.indexOf(source), 1);
-            }
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.DELETE_TITLE",
+      message: "PROJECT.DETAIL.POPUP.DELETE_TEXT",
+      buttons: [
+        {
+          text: "COMMON.CANCEL",
+          handler: () => {
+            this.list.closeSlidingItems();
           }
-        ]
-      });
-
-      alert.present();
+        },
+        {
+          text: "COMMON.DELETE",
+          handler: () => {
+            this.storage.deleteSource(source._id);
+            this.sources.splice(this.sources.indexOf(source), 1);
+          }
+        }
+      ]
     });
   }
 
@@ -171,35 +195,31 @@ export class SourcesPage {
         errNum += value.errors.length;
       });
 
-      if (errNum > 0 && !this.settings.get('ignoreErrors')) {
-        this.translate.get(["PROJECT.DETAIL.POPUP.ERRORS_SOURCES", "PROJECT.DETAIL.POPUP.SHARE_TEXT", "PROJECT.DETAIL.POPUP.SHARE", "COMMON.CANCEL"], { errNum:errNum }).subscribe((translations) => {
-          let alert = this.alertCtrl.create({
-            title: translations["PROJECT.DETAIL.POPUP.SHARE_TEXT"],
-            message: translations["PROJECT.DETAIL.POPUP.ERRORS_SOURCES"],
-            buttons: [
-              {
-                text: translations["COMMON.CANCEL"]
-              },
-              {
-                text: translations["PROJECT.DETAIL.POPUP.SHARE"],
-                handler: () => {
-                  SocialSharing.shareViaEmail(
-                    textToShare,
-                    this.project.name,
-                    [],
-                    [],
-                    [],
-                    []
-                  ).then(() => {
-                    this.promptForAdvanced();
-                  }).catch(() => {});
-                }
+      if (errNum > 0 && !this.settings.get("ignoreErrors")) {
+        this.alertCtrl.present({
+          title: "PROJECT.DETAIL.POPUP.SHARE_TEXT",
+          message: "PROJECT.DETAIL.POPUP.ERRORS_SOURCES",
+          buttons: [
+            {
+              text: "COMMON.CANCEL"
+            },
+            {
+              text: "PROJECT.DETAIL.POPUP.SHARE",
+              handler: () => {
+                SocialSharing.shareViaEmail(
+                  textToShare,
+                  this.project.name,
+                  [],
+                  [],
+                  [],
+                  []
+                ).then(() => {
+                  this.promptForAdvanced();
+                }).catch(() => {});
               }
-            ]
-          });
-
-          alert.present();
-        });
+            }
+          ]
+        }, undefined, { errNum: errNum });
       } else {
         SocialSharing.shareViaEmail(
           textToShare,
@@ -216,28 +236,26 @@ export class SourcesPage {
   }
 
   promptForAdvanced() {
-    if (!this.settings.get('advanced')) {
-      this.translate.get(["PROJECT.DETAIL.POPUP.ADVANCED_MODE", "PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE", "PROJECT.DETAIL.POPUP.DETAILS", "PROJECT.DETAIL.POPUP.NO_THANKS"]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.ADVANCED_MODE"],
-          message: translations["PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE"],
-          buttons: [
-            {
-              text: translations["PROJECT.DETAIL.POPUP.NO_THANKS"]
-            },
-            {
-              text: translations["PROJECT.DETAIL.POPUP.DETAILS"],
-              handler: () => {
-                alert.dismiss().then(() => {
+    if (!this.settings.get("advanced")) {
+      let alert = this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.ADVANCED_MODE",
+        message: "PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE",
+        buttons: [
+          {
+            text: "PROJECT.DETAIL.POPUP.NO_THANKS"
+          },
+          {
+            text: "PROJECT.DETAIL.POPUP.DETAILS",
+            handler: () => {
+              alert.then(obj => {
+                obj.dismiss().then(() => {
                   this.nav.push(AdvancedModePage);
                 });
-                return false;
-              }
+              });
+              return false;
             }
-          ]
-        });
-
-        alert.present();
+          }
+        ]
       });
     }
   }
@@ -247,23 +265,23 @@ export class SourcesPage {
 
     let q = this.searchQuery;
 
-    if (q.trim() == '') {
+    if (q.trim() == "") {
       return;
     }
 
-    let qa = q.trim().split(' ');
+    let qa = q.trim().split(" ");
 
     this.filteredSources = this.filteredSources.filter((v) => {
       if (qa.length > 1) {
         for (var i = 0; i < qa.length; i++) {
-          if (v.parsedSource.toLowerCase().indexOf(qa[i].toLowerCase()) > -1 || v.parsedType.toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
+          if (v.parsedSource.toLowerCase().indexOf(qa[i].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
           }else {
             return false;
           }
         }
         return true;
       }else {
-        if (v.parsedSource.toLowerCase().indexOf(qa[0].toLowerCase()) > -1 || v.parsedType.toLowerCase().indexOf(qa[0].toLowerCase()) > -1) {
+        if (v.parsedSource.toLowerCase().indexOf(qa[0].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[0].toLowerCase()) > -1) {
           return true;
         }
       }

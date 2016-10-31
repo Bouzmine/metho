@@ -1,11 +1,11 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()">{{'PROJECT.TAB.MODAL_EDIT.CANCEL' | translate}}</button>
+      <button ion-button clear (click)="dismiss()">{{"COMMON.CANCEL" | translate}}</button>
     </ion-buttons>
-    <ion-title>{{(isNew ? 'PROJECT.TAB.MODAL.TITLE' : 'PROJECT.TAB.MODAL_EDIT.TITLE') | translate}}</ion-title>
+    <ion-title>{{(isNew ? "PROJECT.TAB.MODAL.TITLE" : "PROJECT.TAB.MODAL.TITLE_EDIT") | translate}}</ion-title>
     <ion-buttons end>
-      <button ion-button clear (click)="confirm()">{{(isNew ? 'PROJECT.TAB.MODAL.ADD' : 'PROJECT.TAB.MODAL_EDIT.CONFIRM') | translate}}</button>
+      <button ion-button clear (click)="confirm()">{{(isNew ? "COMMON.CREATE" : "COMMON.EDIT") | translate}}</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -14,11 +14,11 @@
   <form [formGroup]="projectForm" (keypress)="submitIfEnter($event)">
     <ion-list>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.TAB.MODAL.PROJECT_NAME_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.TAB.MODAL.PROJECT_NAME_LABEL" | translate}}</ion-label>
         <ion-input formControlName="name" placeholder="{{'PROJECT.TAB.MODAL.PROJECT_NAME_PLACEHOLDER' | translate }}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.TAB.MODAL.MATTER_LABEL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.TAB.MODAL.MATTER_LABEL" | translate}}</ion-label>
         <ion-input formControlName="matter" placeholder="{{'PROJECT.TAB.MODAL.MATTER_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
     </ion-list>

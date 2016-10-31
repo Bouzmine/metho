@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>
       <div class="page-title"> {{project.name}} </div>
-      <div class="page-sub-title"> {{project.matter ? project.matter : ('PROJECT.TAB.UNKNOWN_MATTER' | translate)}} </div>
+      <div class="page-sub-title"> {{project.matter ? project.matter : ("PROJECT.TAB.UNKNOWN_MATTER" | translate)}} </div>
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="share()" [disabled]="!sources.length">
@@ -13,16 +13,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar *ngIf="sources.length" [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}"></ion-searchbar>
+  <ion-searchbar *ngIf="sources.length" [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'COMMON.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}" animated="true"></ion-searchbar>
   <button ion-item color="light" (click)="openPendingPage()" class="pendings" *ngIf="pendingNumber > 0 && searchQuery == ''">
-    {{'PROJECT.DETAIL.PENDING_ELEMENTS' | translate}}
+    {{"PROJECT.DETAIL.PENDING_ELEMENTS" | translate}}
     <ion-badge item-right>{{ pendingNumber }}</ion-badge>
   </button>
   <ion-list *ngIf="sources.length">
     <ion-item-sliding *ngFor="let source of filteredSources">
       <button ion-item (click)="openSourcePage(source)">
         <h2 [innerHtml]="source.title ? source.title : source.parsedSource"></h2>
-        <p>{{ source.parsedType }}</p>
+        <p>{{ source.parsedType | translate }}</p>
         <div *ngIf="source.warnings.length" item-right>
           <span>{{ source.warnings.length }}</span>
           <ion-icon name="warning" class="yellow"></ion-icon>
@@ -35,10 +35,10 @@
 
       <ion-item-options>
         <button ion-button color="primary" (click)="editSource(source)">
-          {{'COMMON.EDIT' | translate}}
+          {{"COMMON.EDIT" | translate}}
         </button>
         <button ion-button color="danger" (click)="deleteSource(source)">
-          {{'COMMON.DELETE' | translate}}
+          {{"COMMON.DELETE" | translate}}
         </button>
       </ion-item-options>
     </ion-item-sliding>
@@ -47,14 +47,14 @@
   <div class="flex-full" *ngIf="!sources.length">
     <ion-icon name="filing" isActive="false" class="biggest"></ion-icon>
     <p class="center dimmed-50">
-      {{'PROJECT.DETAIL.EMPTY_TAB' | translate}}
+      {{"PROJECT.DETAIL.EMPTY_TAB" | translate}}
     </p>
   </div>
 
   <div class="flex" padding *ngIf="sources.length && !filteredSources.length">
     <ion-icon name="close-circle" isActive="false" class="big"></ion-icon>
     <p class="center dimmed-50">
-      {{'PROJECT.DETAIL.EMPTY_SEARCH' | translate}}
+      {{"PROJECT.DETAIL.EMPTY_SEARCH" | translate}}
     </p>
   </div>
 

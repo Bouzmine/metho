@@ -20,55 +20,33 @@
         "TAB":{
             "TAB_TITLE": "Projets",
             "EMPTY_TAB": "Aucun projet? Ça viendra...",
-            "EDIT_ITEM": "Modifier",
-            "DELETE_ITEM": "Supprimer",
             "UNKNOWN_MATTER": "Matière inconnue",
             "MODAL":{
-                "CANCEL": "Annuler",
                 "TITLE": "Nouveau projet",
-                "ADD": "Créer",
-                "PROJECT_NAME_LABEL": "Nom du projet",
-                "PROJECT_NAME_PLACEHOLDER": "Essai sur les moyens de communication",
-                "MATTER_LABEL": "Matière",
-                "MATTER_PLACEHOLDER": "Géographie"
-            },
-            "MODAL_EDIT":{
-                "CANCEL": "Annuler",
-                "TITLE": "Modifier le projet",
-                "CONFIRM": "Modifier",
+                "TITLE_EDIT": "Modifier le projet",
                 "PROJECT_NAME_LABEL": "Nom du projet",
                 "PROJECT_NAME_PLACEHOLDER": "Essai sur les moyens de communication",
                 "MATTER_LABEL": "Matière",
                 "MATTER_PLACEHOLDER": "Géographie"
             },
             "POPUP": {
-                "ERROR_TEXT": "Erreur",
-                "NO_PROJECT_NAME": "Entrez un nom de projet",
                 "DELETE_PROJECT_TITLE": "Voulez-vous supprimer ce projet ?",
-                "DELETE_PROJECT": "La suppression de ce projet entrainera la perte de toutes les sources contenues dans celui-ci. Cette action est irréversible.",
-                "CANCEL": "Annuler",
-                "DELETE": "Supprimer",
-                "MUST_HAVE_TYPE": "Le projet doit avoir un nom"
+                "DELETE_PROJECT": "La suppression de ce projet entrainera la perte de toutes les sources contenues dans celui-ci. Cette action est irréversible."
             }
         },
         "DETAIL":{
             "EMPTY_TAB": "Qu'est-ce qu'un projet sans sources ?",
-            "DELETE_ITEM": "Supprimer",
             "SEARCH": "Rechercher",
             "EMPTY_SEARCH": "Aucun résultat, vous pouvez rechercher parmi toutes les informations de la source dont l'auteur, le titre ou encore le type",
             "PENDING_ELEMENTS": "Brouillons",
             "CHOOSE_TYPE": "Choisir le type de source",
             "SHARE_TEXT": "Voici les sources du projet « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
             "MODAL":{
-                "CANCEL": "Annuler",
                 "TITLE": "Nouvelle source",
-                "ADD": "Créer",
                 "SCAN": "Balayer le code",
                 "BROWSER": "Navigateur web",
                 "DELETE_DRAFT": "Effacer le brouillon",
                 "BOOK": {
-                    "FIRSTNAME": "Prénom",
-                    "LASTNAME": "Nom",
                     "AUTHOR_NUMBER": "Nombre d'auteurs",
                     "AUTHOR_1TO3": "La source a de 1 à 3 auteurs",
                     "AUTHOR_MORE_3": "La source a plus de 3 auteurs",
@@ -97,8 +75,6 @@
                     "TRANSLATOR_NAME": "Nom du ou des traducteurs"
                 },
                 "ARTICLE": {
-                    "FIRSTNAME": "Prénom",
-                    "LASTNAME": "Nom",
                     "AUTHOR_NAME": "Auteur",
                     "TITLE_LABEL": "Titre de l'article",
                     "TITLE_PLACEHOLDER": "Haïti, la lente reconstruction",
@@ -113,8 +89,6 @@
                     "INDICATION_END_PLACEHOLDER": "Fin"
                 },
                 "INTERNET": {
-                    "FIRSTNAME":"Prénom",
-                    "LASTNAME": "Nom",
                     "HAS_AUTHORS": "La source a un auteur",
                     "WEBPAGE_NAME": "Titre de l'article",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
@@ -126,8 +100,6 @@
                     "CONSULTATION_DATE_PLACEHOLDER": "21 mars 2009"
                 },
                 "CD": {
-                    "FIRSTNAME": "Prénom",
-                    "LASTNAME": "Nom",
                     "HAS_AUTHORS": "La source a un auteur",
                     "DOC_TITLE": "Titre du document",
                     "DOC_TITLE_PLACEHOLDER": "Multidictionnaire de la langue française",
@@ -139,8 +111,6 @@
                     "PUBLICATION_DATE_PLACEHOLDER": "2001"
                 },
                 "MOVIE": {
-                    "FIRSTNAME": "Prénom",
-                    "LASTNAME": "Nom",
                     "HAS_MORE_THAN_ONE": "La source a plus d'un auteur/réalisateur",
                     "HAS_MORE_THAN_ONE_TRUE": "Vous devez entrer l'auteur/réalisateur principal, la mention «et al.» sera ajoutée afin de signifier qu'il y a plus d'un auteur/réalisateur.",
                     "PRINCIPAL_AUTHOR": "Auteur principal",
@@ -166,8 +136,6 @@
                     "CONSULTATION_DATE_PLACEHOLDER": "29 mars 1991"
                 },
                 "INTERVIEW": {
-                    "FIRSTNAME": "Prénom",
-                    "LASTNAME": "Nom",
                     "INTERVIEWER_NAME": "Nom de l'intervieweur",
                     "INTERVIEWED": "Personne rencontrée",
                     "CIVILITY_TITLE": "Civilité",
@@ -195,15 +163,10 @@
             },
             "POPUP": {
                 "ERRORS_SOURCES": "Les source que vous essayez de partager contiennent <strong>{{errNum}}</strong> erreur(s). Voulez-vous les partager quand même ?",
-                "ERROR_TEXT": "Erreur",
                 "SHARE_TEXT": "Partage",
-                "CANCEL": "Annuler",
                 "SHARE": "Partager",
-                "MUST_HAVE_TYPE": "La source doit avoir un type",
-                "NEW_SOURCE": "Nouvelle source",
                 "DELETE_TITLE": "Suppression",
                 "DELETE_TEXT": "La suppression de cette source entrainera la perte de toutes les données ratachées à celle-ci. Cette action est irréversible.",
-                "DELETE": "Supprimer",
                 "BOOK_UNAVAILABLE_TITLE": "Livre introuvable",
                 "BOOK_UNAVAILABLE_TEXT": "Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données.",
                 "TIMEOUT_TITLE": "Temps d'attente écoulé",
@@ -224,7 +187,6 @@
                 "OVERWRITE": "Écraser",
                 "ERROR": "Erreur",
                 "ERROR_500": "Nous éprouvons des problèmes avec nos serveurs, veuillez réessayer plus tard.",
-                "OK": "OK",
                 "CAUTION": "Attention",
                 "USE_CD_FOR_INFORMATION": "Vous devez utiliser le type CD uniquement pour les cédéroms d'information. Pour les cédéroms de musique, utilisez le type Document audiovisuel.",
                 "DETAILS": "Détails...",
@@ -234,30 +196,14 @@
             }
         },
         "SOURCE":{
-            "EDIT": "Modifier",
             "NO_ERROR": "Aucune erreur",
-            "CONFIRM": "Confirmer",
-            "CANCEL": "Annuler",
             "MODAL": {
-                "CANCEL": "Annuler",
-                "TITLE": "Modif. la source",
-                "CONFIRM": "Modifier"
+                "TITLE": "Modif. la source"
             }
         },
         "PENDING":{
             "TITLE": "Brouillons",
-            "DELETE_ITEM": "Supprimer",
-            "SCAN_TO_ADD": "Pour ajouter un brouillon, balayez un code-barre lorsqu'hors-ligne",
-            "EMPTY_TAB": "Aucun brouillon",
-            "NEED_ADVANCED": "Le mode avancé est requis pour utiliser le balayage",
-            "MODAL": {
-                "CANCEL": "Annuler",
-                "TITLE": "Nouvelle source",
-                "ADD": "Créer"
-            },
             "POPUP": {
-                "NEW_SOURCE": "Nouvelle source",
-                "MUST_HAVE_TYPE": "La source doit avoir un type",
                 "BOOK_UNAVAILABLE_TITLE": "Livre introuvable",
                 "BOOK_UNAVAILABLE_TEXT": "Le code barre a bien été balayé, mais ce livre ne semble pas faire partie de notre base de données. Voulez-vous rechercher les informations sur Internet?",
                 "SEARCH": "Rechercher",
@@ -266,8 +212,7 @@
                 "TIMEOUT_TITLE": "Temps d'attente écoulé",
                 "TIMEOUT_TEXT": "Le temps d'attente est écoulé. Vous vous trouvez probablement sur un réseau lent. Voulez-vous réessayer ?",
                 "NO_CONNECTION": "Aucune connexion",
-                "RETRY_?": "Voulez-vous réessayer ?",
-                "CANCEL": "Annuler"
+                "RETRY_?": "Voulez-vous réessayer ?"
             }
         },
         "TYPES":{
@@ -625,11 +570,8 @@
         "TAB_TITLE": "Paramètres",
         "IGNORE_ERRORS": "Ignorer les erreurs",
         "YOUR_NAME": "Votre nom",
-        "EDIT": "Modifier",
         "EDIT_NAME": "Modifier le nom",
-        "DELETE": "Supprimer",
         "FORGET": "Oublier",
-        "CANCEL": "Annuler",
         "ADVANCED_MODE_LABEL": "Mode avancé",
         "LEARN_MORE": "En savoir plus...",
         "BUG_COMMENT": "Problème/Commentaire",
@@ -662,6 +604,8 @@
                 "ALREADY_TEXT": "Le mode avancé est déjà activé",
                 "ERR_NETWORK_TITLE": "Hors-ligne",
                 "ERR_NETWORK": "Vous ne pouvez pas acheter ou restaurer le mode avancé lorsqu'hors-ligne.",
+                "UNSUPPORTED_DEVICE_TITLE": "Appareil non supporté",
+                "UNSUPPORTED_DEVICE": "L'iPhone 4S, iPod Touch 5, iPad 2 et iPad mini 1 ne supportent pas le mode avancé.",
                 "RESTORE": "Restaurer",
                 "RESTORE_NO_FOUND": "Aucun item précédemment acheté n'a été trouvé."
             }
@@ -691,14 +635,6 @@
                 "FEATURE_TITLE": "Suggestion de fonctionalité"
             }
         }
-    },
-    "3D_TOUCH": {
-        "NEW_SOURCE": "Nouvelle source",
-        "NEW_SOURCE_DESC": "Créer une nouvelle source",
-        "SCAN": "Balayage",
-        "SCAN_DESC": "Balayer un code-barre",
-        "NO_PROJECT_TITLE": "Aucun projet",
-        "NO_PROJECT_MESSAGE": "Vous devez créer un project avant d'ajouter des sources. Voulez-vous en créer un maintenant ?"
     },
     "REPORT": {
         "ERROR": "Erreur",

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/Rx';
+import { Injectable } from "@angular/core";
+
+import { ReactiveHttp } from "./reactive-http";
 
 
 @Injectable()
@@ -11,7 +11,7 @@ export class Fetch {
   public API_keys: Array<string>;
 
   constructor(
-    public http: Http
+    public http: ReactiveHttp
   ) {
     this.cacheByISBN = {};
     this.cacheByName = {};
@@ -28,20 +28,17 @@ export class Fetch {
     }
 
     return new Promise((resolve, reject) => {
-      this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/book/" + isbn)
-        .timeout(2000, 408)
-        .map(res => res.json())
-        .subscribe(response => {
-          if (!!response.error) {
-            reject(404);
-          }else {
-            let parsed = this.parseFromISBNdb(response.data[0]);
-            this.cacheByISBN[isbn] = parsed;
-            resolve(parsed);
-          }
-        }, error => {
-          reject(error);
-        });
+      this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/book/" + isbn).then(response => {
+        if (!!response.error) {
+          reject(404);
+        }else {
+          let parsed = this.parseFromISBNdb(response.data[0]);
+          this.cacheByISBN[isbn] = parsed;
+          resolve(parsed);
+        }
+      }).catch(error => {
+        reject(error);
+      });
     });
   }
 
@@ -66,10 +63,7 @@ export class Fetch {
 
     return new Promise((resolve, reject) => {
       if (includeAuthors) {
-        this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined")
-        .timeout(2000, {status: 408})
-        .map(res => res.json())
-        .subscribe(response => {
+        this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined").then(response => {
           if (!!response.data.error) {
             reject(404);
           }else {
@@ -80,14 +74,11 @@ export class Fetch {
             this.cacheByNameWithAuthors[name] = books;
             resolve(books);
           }
-        }, error => {
+        }).catch(error => {
           reject(error);
         });
       }else {
-        this.http.get('http://isbndb.com/api/v2/json/' + this.pickISBNdbApiKey() + "/books?q=" + name)
-        .timeout(2000, {status: 408})
-        .map(res => res.json())
-        .subscribe(response => {
+        this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined").then(response => {
           if (!!response.error) {
             reject(404);
           }else {
@@ -98,7 +89,7 @@ export class Fetch {
             this.cacheByName[name] = books;
             resolve(books);
           }
-        }, error => {
+        }).catch(error => {
           reject(error);
         });
       }

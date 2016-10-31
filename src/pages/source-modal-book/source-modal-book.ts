@@ -1,21 +1,22 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component } from "@angular/core";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { ViewController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
-import { SafariViewController } from 'ionic-native';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { ViewController, NavParams } from "ionic-angular";
+import { SafariViewController, Keyboard } from "ionic-native";
 
-import { AppStorage } from '../../providers/app-storage';
-import { Fetch } from '../../providers/fetch';
-import { Language } from '../../providers/language';
-import { Parse } from '../../providers/parse';
-import { Scan } from '../../providers/scan';
-import { Settings } from '../../providers/settings';
+import { AppStorage } from "../../providers/app-storage";
+import { Fetch } from "../../providers/fetch";
+import { Language } from "../../providers/language";
+import { Parse } from "../../providers/parse";
+import { Scan } from "../../providers/scan";
+import { Settings } from "../../providers/settings";
+import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
 
 @Component({
-  selector: 'source-modal-book',
-  templateUrl: 'source-modal-book.html'
+  selector: "source-modal-book",
+  templateUrl: "source-modal-book.html"
 })
 export class SourceModalBookPage {
   public isNew: boolean;
@@ -48,9 +49,8 @@ export class SourceModalBookPage {
   constructor(
     public viewCtrl: ViewController,
     public params: NavParams,
-    public translate: TranslateService,
-    public actionSheetCtrl: ActionSheetController,
-    public alertCtrl: AlertController,
+    public actionSheetCtrl: TranslatedActionSheetController,
+    public alertCtrl: TranslatedAlertController,
     public storage: AppStorage,
     public fetch: Fetch,
     public language: Language,
@@ -59,33 +59,33 @@ export class SourceModalBookPage {
     public settings: Settings,
     public fb: FormBuilder,
   ) {
-    if(this.params.get('editing') == true) {
+    if(this.params.get("editing") == true) {
       this.isNew = false;
     }else {
       this.isNew = true;
     }
 
-    if (typeof this.params.get('data') !== "undefined") {
+    if (typeof this.params.get("data") !== "undefined") {
       this.noData = false;
-      this.previous = this.params.get('data');
+      this.previous = this.params.get("data");
     }else {
       this.noData = true;
     }
 
-    this.projectId = this.params.get('projectId');
+    this.projectId = this.params.get("projectId");
 
-    if (this.params.get('hideScan') == true) {
+    if (this.params.get("hideScan") == true) {
       this.hideScan = true;
     }else {
       this.hideScan = false;
     }
 
-    if (typeof this.params.get('pendingId') !== "undefined") {
-      this.pendingId = this.params.get('pendingId');
+    if (typeof this.params.get("pendingId") !== "undefined") {
+      this.pendingId = this.params.get("pendingId");
     }
 
-    if (typeof this.params.get('url') !== "undefined") {
-      this.url = this.params.get('url');
+    if (typeof this.params.get("url") !== "undefined") {
+      this.url = this.params.get("url");
       this.showBrowser = true;
       SafariViewController.mayLaunchUrl(this.url);
       this.viewCtrl.didEnter.subscribe(() => {
@@ -95,7 +95,7 @@ export class SourceModalBookPage {
       this.showBrowser = false;
     }
 
-    if (this.params.get('scan') == true) {
+    if (this.params.get("scan") == true) {
       this.viewCtrl.didEnter.subscribe(() => {
         this.scan();
       });
@@ -104,53 +104,51 @@ export class SourceModalBookPage {
     this.isAdvanced = this.settings.get("advanced");
 
     this.form = fb.group({
-      hasAuthors: [this.noData ? '' : this.previous.hasAuthors],
-      author1lastname: [this.noData ? '' : this.previous.author1lastname],
-      author1firstname: [this.noData ? '' : this.previous.author1firstname],
-      author2lastname: [this.noData ? '' : this.previous.author2lastname],
-      author2firstname: [this.noData ? '' : this.previous.author2firstname],
-      author3lastname: [this.noData ? '' : this.previous.author3lastname],
-      author3firstname: [this.noData ? '' : this.previous.author3firstname],
-      title: [this.noData ? '' : this.previous.title],
-      editor: [this.noData ? '' : this.previous.editor],
-      publicationDate: [this.noData ? '' : this.previous.publicationDate],
-      publicationLocation: [this.noData ? '' : this.previous.publicationLocation],
-      pageNumber: [this.noData ? '' : this.previous.pageNumber],
-      editionNumber: [this.noData ? '' : this.previous.editionNumber],
-      volumeNumber: [this.noData ? '' : this.previous.volumeNumber],
-      collection: [this.noData ? '' : this.previous.collection],
+      hasAuthors: [this.noData ? "" : this.previous.hasAuthors],
+      author1lastname: [this.noData ? "" : this.previous.author1lastname],
+      author1firstname: [this.noData ? "" : this.previous.author1firstname],
+      author2lastname: [this.noData ? "" : this.previous.author2lastname],
+      author2firstname: [this.noData ? "" : this.previous.author2firstname],
+      author3lastname: [this.noData ? "" : this.previous.author3lastname],
+      author3firstname: [this.noData ? "" : this.previous.author3firstname],
+      title: [this.noData ? "" : this.previous.title],
+      editor: [this.noData ? "" : this.previous.editor],
+      publicationDate: [this.noData ? "" : this.previous.publicationDate],
+      publicationLocation: [this.noData ? "" : this.previous.publicationLocation],
+      pageNumber: [this.noData ? "" : this.previous.pageNumber],
+      editionNumber: [this.noData ? "" : this.previous.editionNumber],
+      volumeNumber: [this.noData ? "" : this.previous.volumeNumber],
+      collection: [this.noData ? "" : this.previous.collection],
       hasBeenTranslated: [this.noData ? false : this.previous.hasBeenTranslated],
-      translatedFrom: [this.noData ? '' : this.previous.translatedFrom],
-      translator1firstname: [this.noData ? '' : this.previous.translator1firstname],
-      translator1lastname: [this.noData ? '' : this.previous.translator1lastname],
-      translator2firstname: [this.noData ? '' : this.previous.translator2firstname],
-      translator2lastname: [this.noData ? '' : this.previous.translator2lastname]
+      translatedFrom: [this.noData ? "" : this.previous.translatedFrom],
+      translator1firstname: [this.noData ? "" : this.previous.translator1firstname],
+      translator1lastname: [this.noData ? "" : this.previous.translator1lastname],
+      translator2firstname: [this.noData ? "" : this.previous.translator2firstname],
+      translator2lastname: [this.noData ? "" : this.previous.translator2lastname]
     });
   }
 
   dismiss() {
-    if (!this.isEmpty(true) && this.isNew) {
-      this.translate.get(["COMMON.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
-        let actionsheet = this.actionSheetCtrl.create({
-          buttons: [
-            {
-              text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
-              role: 'destructive',
-              handler: () => {
-                actionsheet.dismiss().then(() => {
+    if (!this.isEmpty(true) && this.isNew && !this.pendingId) {
+      let actionsheet = this.actionSheetCtrl.present({
+        buttons: [
+          {
+            text: "PROJECT.DETAIL.MODAL.DELETE_DRAFT",
+            role: "destructive",
+            handler: () => {
+              actionsheet.then(obj => {
+                obj.dismiss().then(() => {
                   this.viewCtrl.dismiss();
                 });
-                return false;
-              }
-            },
-            {
-              text: translations["COMMON.CANCEL"],
-              role: 'cancel'
+              });
+              return false;
             }
-          ]
-        });
-
-        actionsheet.present();
+          },
+          {
+            text: "COMMON.CANCEL",
+            role: "cancel"
+          }
+        ]
       });
     }else {
       this.viewCtrl.dismiss();
@@ -166,7 +164,7 @@ export class SourceModalBookPage {
 
   confirm() {
     let values = this.form.value;
-    values.type = 'book';
+    values.type = "book";
     let parsed = this.parse.parse(values);
     parsed.project_id = this.projectId;
 
@@ -179,54 +177,57 @@ export class SourceModalBookPage {
       this.storage.setSourceFromId(this.previous._id, parsed);
     }
 
+    Keyboard.close();
     this.viewCtrl.dismiss();
   }
 
   // Instant Search
   search() {
-    if (this._timeout) {
-      clearTimeout(this._timeout);
-    }
-    this._timeout = setTimeout(() => {
-      this.instantStatus.ok = false;
-      this.instantStatus.loading = false;
-      this.instantStatus.none = false;
-      this.instantStatus.err500 = false;
-      this.instantStatus.shown = false;
-      this.instantStatus.timeout = false;
-      if (this.form.value.title) {
-        this.instantStatus.loading = true;
-        let query: string = "";
-        let includeAuthors: boolean;
-        if (this.form.value.author1lastname || this.form.value.author1firstname) {
-          query = this.form.value.title + " " + this.form.value.author1lastname + " " + this.form.value.author1firstname;
-          includeAuthors = true;
-        }else {
-          query = this.form.value.title;
-          includeAuthors = false;
-        }
-        this.fetch.fromName(query, includeAuthors).then(list => {
-          if (list.length != 0) {
-            this.instantList = list;
-            this.instantStatus.loading = false;
-            this.instantStatus.ok = true;
-          }else {
-            this.instantStatus.loading = false;
-            this.instantStatus.none = true;
-          }
-        }, err => {
-          if (err.status >= 500 && err.status < 599) {
-            this.instantStatus.err500 = true;
-            this.instantStatus.loading = false;
-          }else if (err.status == 408) {
-            this.instantStatus.err500 = true;
-            this.instantStatus.timeout = true;
-            this.instantStatus.loading = false;
-          }
-        });
+    if (this.isAdvanced) {
+      if (this._timeout) {
+        clearTimeout(this._timeout);
       }
-      this._timeout = null;
-    }, 500);
+      this._timeout = setTimeout(() => {
+        this.instantStatus.ok = false;
+        this.instantStatus.loading = false;
+        this.instantStatus.none = false;
+        this.instantStatus.err500 = false;
+        this.instantStatus.shown = false;
+        this.instantStatus.timeout = false;
+        if (this.form.value.title) {
+          this.instantStatus.loading = true;
+          let query: string = "";
+          let includeAuthors: boolean;
+          if (this.form.value.author1lastname || this.form.value.author1firstname) {
+            query = this.form.value.title + " " + this.form.value.author1lastname + " " + this.form.value.author1firstname;
+            includeAuthors = true;
+          }else {
+            query = this.form.value.title;
+            includeAuthors = false;
+          }
+          this.fetch.fromName(query, includeAuthors).then(list => {
+            if (list.length != 0) {
+              this.instantList = list;
+              this.instantStatus.loading = false;
+              this.instantStatus.ok = true;
+            }else {
+              this.instantStatus.loading = false;
+              this.instantStatus.none = true;
+            }
+          }, err => {
+            if (err.status >= 500 && err.status < 599) {
+              this.instantStatus.err500 = true;
+              this.instantStatus.loading = false;
+            }else if (err.status == 408) {
+              this.instantStatus.err500 = true;
+              this.instantStatus.timeout = true;
+              this.instantStatus.loading = false;
+            }
+          });
+        }
+        this._timeout = null;
+      }, 500);
+    }
   }
 
   toggleInstantSearch() {
@@ -235,46 +236,34 @@ export class SourceModalBookPage {
 
   openExplaining() {
     if (this.instantStatus.none) {
-      this.translate.get(["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS", "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC", "COMMON.OK"]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS"],
-          message: translations["PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC"],
-          buttons: [
-            {
-              text: translations["COMMON.OK"]
-            }
-          ]
-        });
-
-        alert.present();
+      this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS",
+        message: "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
       });
     }else if (this.instantStatus.timeout) {
-      this.translate.get(["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE", "PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH", "COMMON.OK"]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE"],
-          message: translations["PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH"],
-          buttons: [
-            {
-              text: translations["COMMON.OK"]
-            }
-          ]
-        });
-
-        alert.present();
+      this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.TIMEOUT_TITLE",
+        message: "PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
       });
     }else if (this.instantStatus.err500) {
-      this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "COMMON.OK"]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.ERROR"],
-          message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
-          buttons: [
-            {
-              text: translations["COMMON.OK"]
-            }
-          ]
-        });
-
-        alert.present();
+      this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.ERROR",
+        message: "PROJECT.DETAIL.POPUP.ERROR_500",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
       });
     }
   }
@@ -285,26 +274,22 @@ export class SourceModalBookPage {
       this.instantStatus.shown = false;
       this.insertingFromScan = true;
     }else {
-      this.translate.get(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "COMMON.CANCEL"]).subscribe((translations) => {
-        let alert = this.alertCtrl.create({
-          title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
-          message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
-          buttons: [
-            {
-              text: translations["COMMON.CANCEL"]
-            },
-            {
-              text: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
-              handler: () => {
-                this.updateValues(suggestion);
-                this.instantStatus.shown = false;
-                this.insertingFromScan = true;
-              }
+      this.alertCtrl.present({
+        title: "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
+        message: "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
+        buttons: [
+          {
+            text: "COMMON.CANCEL"
+          },
+          {
+            text: "PROJECT.DETAIL.POPUP.OVERWRITE",
+            handler: () => {
+              this.updateValues(suggestion);
+              this.instantStatus.shown = false;
+              this.insertingFromScan = true;
             }
-          ]
-        });
-
-        alert.present();
+          }
+        ]
       });
     }
   }
@@ -318,24 +303,21 @@ export class SourceModalBookPage {
           this.insertingFromScan = true;
         }else {
           response.transition.then(() => {
-            this.translate.get(["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE", "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC", "PROJECT.DETAIL.POPUP.OVERWRITE", "COMMON.CANCEL"]).subscribe((translations) => {
-              let alert = this.alertCtrl.create({
-                title: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE"],
-                message: translations["PROJECT.DETAIL.POPUP.AUTO_FILL_DESC"],
-                buttons: [
-                  {
-                    text: translations["COMMON.CANCEL"]
-                  },
-                  {
-                    text: translations["PROJECT.DETAIL.POPUP.OVERWRITE"],
-                    handler: () => {
-                      this.updateValues(response.data);
-                      this.insertingFromScan = true;
-                    }
+            this.alertCtrl.present({
+              title: "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
+              message: "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
+              buttons: [
+                {
+                  text: "COMMON.CANCEL"
+                },
+                {
+                  text: "PROJECT.DETAIL.POPUP.OVERWRITE",
+                  handler: () => {
+                    this.updateValues(response.data);
+                    this.insertingFromScan = true;
                   }
-                ]
-              });
-              alert.present();
+                }
+              ]
             });
           });
         }
@@ -346,7 +328,7 @@ export class SourceModalBookPage {
   }
 
   updateValues(response: any) {
-    this.form = this.fb.group(this.mergeObjects(this.form.value, response));
+    this.form.patchValue(this.mergeObjects(this.form.value, response));
   }
 
   addPending(isbn: string, transition=Promise.resolve()) {
@@ -381,7 +363,7 @@ export class SourceModalBookPage {
   mergeObjects(obj1: any, obj2: any) {
     for (var variable in obj2) {
       if (obj2.hasOwnProperty(variable)) {
-        if (obj2[variable] != '') {
+        if (obj2[variable] != "") {
           obj1[variable] = [obj2[variable]];
         }else {
           obj1[variable] = [obj1[variable]];

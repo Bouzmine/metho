@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
+      <button ion-button clear (click)="dismiss()">{{"COMMON.CANCEL" | translate}}</button>
     </ion-buttons>
-    <ion-title>{{(isNew ? 'PROJECT.DETAIL.MODAL.TITLE' : 'PROJECT.SOURCE.MODAL.TITLE') | translate}}</ion-title>
+    <ion-title>{{(isNew ? "PROJECT.DETAIL.MODAL.TITLE" : "PROJECT.SOURCE.MODAL.TITLE") | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button clear (click)="confirm()">{{(isNew ? "COMMON.CREATE" : "COMMON.EDIT") | translate}}</button>
     </ion-buttons>
@@ -14,7 +14,7 @@
   <form [formGroup]="form" (keypress)="submitIfEnter($event)">
     <ion-list>
       <ion-item>
-        <ion-label>{{'PROJECT.DETAIL.MODAL.INTERNET.HAS_AUTHORS' | translate}}</ion-label>
+        <ion-label>{{"PROJECT.DETAIL.MODAL.INTERNET.HAS_AUTHORS" | translate}}</ion-label>
         <ion-checkbox formControlName="hasAuthors"></ion-checkbox>
       </ion-item>
       <div *ngIf="form.value.hasAuthors" class="authors">
@@ -26,20 +26,20 @@
         </ion-item>
       </div>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME" | translate}}</ion-label>
         <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME_PLACHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERNET.WEBSITE_NAME' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERNET.WEBSITE_NAME" | translate}}</ion-label>
         <ion-input formControlName="editor" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBSITE_NAME_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERNET.URL' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERNET.URL" | translate}}</ion-label>
         <ion-input autocapitalize="off" type="url" formControlName="url" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.URL_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>{{'PROJECT.DETAIL.MODAL.INTERNET.CONSULTATION_DATE' | translate}}</ion-label>
-        <ion-datetime formControlName="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" doneText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
+        <ion-label>{{"PROJECT.DETAIL.MODAL.INTERNET.CONSULTATION_DATE" | translate}}</ion-label>
+        <ion-datetime formControlName="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'COMMON.CANCEL' | translate}}" doneText="{{'COMMON.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
       </ion-item>
     </ion-list>
   </form>

@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component } from "@angular/core";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { ViewController, NavParams, ActionSheetController } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { ViewController, NavParams } from "ionic-angular";
+import { Keyboard } from "ionic-native";
 
-import { AppStorage } from '../../providers/app-storage';
-import { Language } from '../../providers/language';
-import { Parse } from '../../providers/parse';
+import { AppStorage } from "../../providers/app-storage";
+import { Language } from "../../providers/language";
+import { Parse } from "../../providers/parse";
+import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
 
 
 @Component({
-  selector: 'source-modal-movie',
-  templateUrl: 'source-modal-movie.html'
+  selector: "source-modal-movie",
+  templateUrl: "source-modal-movie.html"
 })
 export class SourceModalMoviePage {
   public isNew: boolean;
@@ -29,45 +30,44 @@ export class SourceModalMoviePage {
   constructor(
     public viewCtrl: ViewController,
     public params: NavParams,
-    public translate: TranslateService,
-    public actionSheetCtrl: ActionSheetController,
+    public actionSheetCtrl: TranslatedActionSheetController,
     public storage: AppStorage,
     public language: Language,
     public parse: Parse,
     public fb: FormBuilder,
   ) {
-    if(this.params.get('editing') == true) {
+    if(this.params.get("editing") == true) {
       this.isNew = false;
     }else {
       this.isNew = true;
     }
 
-    if (typeof this.params.get('data') !== "undefined") {
+    if (typeof this.params.get("data") !== "undefined") {
       this.noData = false;
-      this.previous = this.params.get('data');
+      this.previous = this.params.get("data");
     }else {
       this.noData = true;
     }
 
-    this.projectId = this.params.get('projectId');
+    this.projectId = this.params.get("projectId");
 
-    if (typeof this.params.get('pendingId') !== "undefined") {
-      this.pendingId = this.params.get('pendingId');
+    if (typeof this.params.get("pendingId") !== "undefined") {
+      this.pendingId = this.params.get("pendingId");
     }
 
     this.form = fb.group({
       hasAuthors: [this.noData ? false : this.previous.hasAuthors],
-      author1firstname: [this.noData ? '' : this.previous.author1firstname],
-      author1lastname: [this.noData ? '' : this.previous.author1lastname],
-      title: [this.noData ? '' : this.previous.title],
-      episodeTitle: [this.noData ? '' : this.previous.episodeTitle],
-      productionLocation: [this.noData ? '' : this.previous.productionLocation],
-      productor: [this.noData ? '' : this.previous.productor],
-      broadcaster: [this.noData ? '' : this.previous.broadcaster],
-      duration: [this.noData ? '' : this.previous.duration],
-      publicationDate: [this.noData ? '' : this.previous.publicationDate],
-      support: [this.noData ? '' : this.previous.support],
-      consultationDate: [this.noData ? '' : this.previous.consultationDate],
+      author1firstname: [this.noData ? "" : this.previous.author1firstname],
+      author1lastname: [this.noData ? "" : this.previous.author1lastname],
+      title: [this.noData ? "" : this.previous.title],
+      episodeTitle: [this.noData ? "" : this.previous.episodeTitle],
+      productionLocation: [this.noData ? "" : this.previous.productionLocation],
+      productor: [this.noData ? "" : this.previous.productor],
+      broadcaster: [this.noData ? "" : this.previous.broadcaster],
+      duration: [this.noData ? "" : this.previous.duration],
+      publicationDate: [this.noData ? "" : this.previous.publicationDate],
+      support: [this.noData ? "" : this.previous.support],
+      consultationDate: [this.noData ? "" : this.previous.consultationDate],
     });
     this.generateLabels();
   }
@@ -81,27 +81,25 @@ export class SourceModalMoviePage {
 
   dismiss() {
     if (!this.isEmpty() && this.isNew) {
-      this.translate.get(["COMMON.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
-        let actionsheet = this.actionSheetCtrl.create({
-          buttons: [
-            {
-              text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
-              role: 'destructive',
-              handler: () => {
-                actionsheet.dismiss().then(() => {
+      let actionsheet = this.actionSheetCtrl.present({
+        buttons: [
+          {
+            text: "PROJECT.DETAIL.MODAL.DELETE_DRAFT",
+            role: "destructive",
+            handler: () => {
+              actionsheet.then(obj => {
+                obj.dismiss().then(() => {
                   this.viewCtrl.dismiss();
                 });
-                return false;
-              }
-            },
-            {
-              text: translations["COMMON.CANCEL"],
-              role: 'cancel'
+              });
+              return false;
             }
-          ]
-        });
-
-        actionsheet.present();
+          },
+          {
+            text: "COMMON.CANCEL",
+            role: "cancel"
+          }
+        ]
       });
     }else {
       this.viewCtrl.dismiss();
@@ -117,7 +115,7 @@ export class SourceModalMoviePage {
 
   confirm() {
     var values = this.form.value;
-    values.type = 'movie';
+    values.type = "movie";
     let parsed = this.parse.parse(values);
     parsed.project_id = this.projectId;
     if (this.isNew) {
@@ -129,6 +127,7 @@ export class SourceModalMoviePage {
       this.storage.setSourceFromId(this.previous._id, parsed);
     }
 
+    Keyboard.close();
     this.viewCtrl.dismiss();
   }
 

@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()">{{'PROJECT.SOURCE.MODAL.CANCEL' | translate}}</button>
+      <button ion-button clear (click)="dismiss()">{{"COMMON.CANCEL" | translate}}</button>
     </ion-buttons>
-    <ion-title>{{(isNew ? 'PROJECT.DETAIL.MODAL.TITLE' : 'PROJECT.SOURCE.MODAL.TITLE') | translate}}</ion-title>
+    <ion-title>{{(isNew ? "PROJECT.DETAIL.MODAL.TITLE" : "PROJECT.SOURCE.MODAL.TITLE") | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button clear (click)="confirm()">{{(isNew ? "COMMON.CREATE" : "COMMON.EDIT") | translate}}</button>
     </ion-buttons>
@@ -14,7 +14,7 @@
   <form [formGroup]="form" (keypress)="submitIfEnter($event)">
     <ion-list class="no-margin">
       <ion-list-header>
-        {{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME' | translate}}
+        {{"PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME" | translate}}
       </ion-list-header>
       <ion-item>
         <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
@@ -26,14 +26,14 @@
     <ion-list class="no-margin-with-header">
       <div>
         <ion-list-header>
-          {{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED' | translate}}
+          {{"PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED" | translate}}
         </ion-list-header>
         <ion-item>
-          <ion-label>{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_TITLE' | translate}}</ion-label>
-          <ion-select formControlName="civility" [selectOptions]="civilityOpts" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}">
-            <ion-option value="mister">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER' | translate}}</ion-option>
-            <ion-option value="miss">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS' | translate}}</ion-option>
-            <ion-option value="miss_young">{{'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG' | translate}}</ion-option>
+          <ion-label>{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_TITLE" | translate}}</ion-label>
+          <ion-select formControlName="civility" selectOptions="{ title: {{ 'PROJECT.PARSE.CIVILITY_TITLE.TITLE' | translate }} }" cancelText="{{'COMMON.CANCEL' | translate}}">
+            <ion-option value="mister">{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER" | translate}}</ion-option>
+            <ion-option value="miss">{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS" | translate}}</ion-option>
+            <ion-option value="miss_young">{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG" | translate}}</ion-option>
           </ion-select>
         </ion-item>
         <ion-item>
@@ -43,17 +43,17 @@
           <ion-input formControlName="interviewed1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
         </ion-item>
         <ion-item class="authors">
-          <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE' | translate}}</ion-label>
+          <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE" | translate}}</ion-label>
           <ion-input formControlName="interviewedTitle" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE_PLACEHOLDER' | translate }}"></ion-input>
         </ion-item>
       </div>
       <ion-item>
-        <ion-label stacked>{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION' | translate}}</ion-label>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION" | translate}}</ion-label>
         <ion-input  formControlName="publicationLocation" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION_PLACEHOLDER' | translate }}"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label>{{'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_DATE' | translate}}</ion-label>
-        <ion-datetime formControlName="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'PROJECT.DETAIL.MODAL.CANCEL' | translate}}" doneText="{{'PROJECT.DETAIL.POPUP.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
+        <ion-label>{{"PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_DATE" | translate}}</ion-label>
+        <ion-datetime formControlName="consultationDate" [monthNames]="monthList" [monthShortNames]="monthShortList" [dayNames]="weekdayList" [dayShortNames]="weekdayShortList" cancelText="{{'COMMON.CANCEL' | translate}}" doneText="{{'COMMON.OK' | translate}}" pickerFormat="DD-MMM-YYYY" displayFormat="D MMMM YYYY"></ion-datetime>
       </ion-item>
     </ion-list>
   </form>

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { TranslateService } from "ng2-translate/ng2-translate";
 
 
 @Injectable()
@@ -159,16 +159,16 @@ export class Parse {
             sourceToParse.errors.push(this.addComplexError("AUTHOR_NUMBER", "hasAuthors", {
                 options: [
                   {
-                    text: 'PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3',
-                    value: '13'
+                    text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3",
+                    value: "13"
                   },
                   {
-                    text: 'PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3',
-                    value: 'more3'
+                    text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3",
+                    value: "more3"
                   },
                   {
-                    text: 'PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE',
-                    value: 'collective'
+                    text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE",
+                    value: "collective"
                   }
                 ],
                 type:"select"
@@ -227,14 +227,14 @@ export class Parse {
             // Traducteurs
             if (sourceToParse.translator1lastname || sourceToParse.translator1firstname) {
                 sourceToParse.parsedSource += "par ";
-                // Translator's first name
+                // Translator"s first name
                 if (sourceToParse.translator1firstname) {
                     sourceToParse.parsedSource += sourceToParse.translator1firstname.trim() + " ";
                 } else {
                     sourceToParse.errors.push(this.addError("FIRST_TRANSLATOR_FIRSTNAME", "translator1firstname"));
                     sourceToParse.parsedSource += "? ";
                 }
-                // Translator's last name
+                // Translator"s last name
                 if (sourceToParse.translator1lastname) {
                     sourceToParse.parsedSource += sourceToParse.translator1lastname.trim();
                 } else {
@@ -315,7 +315,7 @@ export class Parse {
             sourceToParse.pageNumber = Number(sourceToParse.pageNumber);
         } else {
             sourceToParse.parsedSource += "? p.";
-            sourceToParse.pageNumber = '';
+            sourceToParse.pageNumber = "";
             sourceToParse.errors.push(this.addError("PAGE_NUMBER", "pageNumber"));
         }
     } else if (sourceToParse.type == "article") {
@@ -329,7 +329,7 @@ export class Parse {
             }
 
             if (sourceToParse.author1firstname) {
-                sourceToParse.parsedSource += sourceToParse.author1firstname.toUpperCase() + ". ";
+                sourceToParse.parsedSource += sourceToParse.author1firstname + ". ";
             } else {
                 sourceToParse.parsedSource += "?. ";
                 sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname"));
@@ -338,7 +338,7 @@ export class Parse {
             sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
         }
 
-        // Titre de l'Article
+        // Titre de l"Article
         if (sourceToParse.title) {
             sourceToParse.parsedSource += "«" + sourceToParse.title + "», ";
         } else {
@@ -421,7 +421,7 @@ export class Parse {
             }
         }
 
-        // Titre de l'article
+        // Titre de l"article
         if (sourceToParse.title) {
             sourceToParse.parsedSource += "«" + sourceToParse.title + "», ";
         } else {
@@ -429,7 +429,7 @@ export class Parse {
             sourceToParse.errors.push(this.addError("PAGE_TITLE", "title"));
         }
 
-        // Titre de la page d'accueil (si il y a des auteurs)
+        // Titre de la page d"accueil (si il y a des auteurs)
         if (sourceToParse.hasAuthors) {
             if (sourceToParse.editor) {
                 sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
@@ -525,7 +525,7 @@ export class Parse {
             }
         }
 
-        // Titre de l'article
+        // Titre de l"article
         if (sourceToParse.title) {
             sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
         } else {
@@ -586,12 +586,12 @@ export class Parse {
             sourceToParse.parsedSource += ". ";
         }
 
-        // Titre de l'épisode
+        // Titre de l"épisode
         if (sourceToParse.episodeTitle) {
             sourceToParse.parsedSource += "«" + sourceToParse.episodeTitle + "», ";
         }
 
-        // Nom de l'émission ou du document
+        // Nom de l"émission ou du document
         if (sourceToParse.title) {
             sourceToParse.parsedSource += "<em>" + sourceToParse.title + "</em>, ";
         } else {
@@ -711,16 +711,16 @@ export class Parse {
             sourceToParse.errors.push(this.addComplexError("CIVILITY_TITLE", "civility", {
                 options: [
                   {
-                    text: 'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER',
-                    value: 'mister'
+                    text: "PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER",
+                    value: "mister"
                   },
                   {
-                    text: 'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS',
-                    value: 'miss'
+                    text: "PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS",
+                    value: "miss"
                   },
                   {
-                    text: 'PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG',
-                    value: 'miss_young'
+                    text: "PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG",
+                    value: "miss_young"
                   }
                 ],
                 type:"select"
@@ -768,7 +768,7 @@ export class Parse {
             sourceToParse.errors.push(this.addError("INTERVIEW_LOCATION", "publicationLocation"));
         }
 
-        // Date de l'entrevue
+        // Date de l"entrevue
         if (sourceToParse.consultationDate) {
             sourceToParse.parsedSource += "le " + this.formatDateLocale(sourceToParse.consultationDate) + ".";
         } else {
@@ -782,12 +782,12 @@ export class Parse {
 
   public addError(errorId: string, variable: string): SourceError {
     return {
-      errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
-      promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
-      promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+      errorTitle: "PROJECT.PARSE." + errorId + ".DESC",
+      promptTitle: "PROJECT.PARSE." + errorId + ".TITLE",
+      promptText: "PROJECT.PARSE." + errorId + ".TEXT",
       inputs: [
         {
-          example: this.translate.instant("PROJECT.PARSE." + errorId + ".EXAMPLE"),
+          example: "PROJECT.PARSE." + errorId + ".EXAMPLE",
           var: variable
         }
       ]
@@ -796,12 +796,12 @@ export class Parse {
 
   public addMultiInputError(inputs: {errorId:string, variable: string}[], errorId: string): SourceError {
     return {
-      errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
-      promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
-      promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+      errorTitle: "PROJECT.PARSE." + errorId + ".DESC",
+      promptTitle: "PROJECT.PARSE." + errorId + ".TITLE",
+      promptText: "PROJECT.PARSE." + errorId + ".TEXT",
       inputs: inputs.map(value => {
         return {
-          example: this.translate.instant("PROJECT.PARSE." + value.errorId + ".EXAMPLE"),
+          example: "PROJECT.PARSE." + value.errorId + ".EXAMPLE",
           var: value.variable
         }
       })
@@ -809,14 +809,10 @@ export class Parse {
   }
 
   public addComplexError(errorId: string, variable: string, complex: any): SourceError {
-    complex.options = complex.options.map((option) => {
-      option.text = this.translate.instant(option.text);
-      return option;
-    });
     return {
-      errorTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".DESC"),
-      promptTitle: this.translate.instant("PROJECT.PARSE." + errorId + ".TITLE"),
-      promptText: this.translate.instant("PROJECT.PARSE." + errorId + ".TEXT"),
+      errorTitle: "PROJECT.PARSE." + errorId + ".DESC",
+      promptTitle: "PROJECT.PARSE." + errorId + ".TITLE",
+      promptText: "PROJECT.PARSE." + errorId + ".TEXT",
       var: variable,
       complex: true,
       type: complex.type,
@@ -827,17 +823,17 @@ export class Parse {
   parseType(type: string): string {
     switch (type) {
       case "book":
-        return this.translate.instant("PROJECT.TYPES.BOOK");
+        return "PROJECT.TYPES.BOOK";
       case "internet":
-        return this.translate.instant("PROJECT.TYPES.INTERNET");
+        return "PROJECT.TYPES.INTERNET";
       case "article":
-        return this.translate.instant("PROJECT.TYPES.ARTICLE");
+        return "PROJECT.TYPES.ARTICLE";
       case "cd":
-        return this.translate.instant("PROJECT.TYPES.CD_PARSE");
+        return "PROJECT.TYPES.CD_PARSE";
       case "movie":
-        return this.translate.instant("PROJECT.TYPES.MOVIE");
+        return "PROJECT.TYPES.MOVIE";
       case "interview":
-        return this.translate.instant("PROJECT.TYPES.INTERVIEW");
+        return "PROJECT.TYPES.INTERVIEW";
     }
   }
 
@@ -846,8 +842,8 @@ export class Parse {
   }
 
   public formatDateLocale(string: string): string {
-    let datestring = string.replace(/-/g, '\/').replace(/T.+/, ''); // Outputs : "YYYY/MM/DD" to prevent timezone alteration
-    return new Date(datestring).toLocaleDateString('fr-CA', {year: "numeric", month: "long", day: "numeric"});
+    let datestring = string.replace(/-/g, "\/").replace(/T.+/, ""); // Outputs : "YYYY/MM/DD" to prevent timezone alteration
+    return new Date(datestring).toLocaleDateString("fr-CA", {year: "numeric", month: "long", day: "numeric"});
   }
 
   public format(num) {
@@ -856,7 +852,7 @@ export class Parse {
 		let count = 0;
 		for (var i = numString.length-1; i >= 0; i--) {
 			if (count != 0 && count % 3 == 0) {
-        after = numString[i] + ' ' + after;
+        after = numString[i] + " " + after;
       } else {
         after = numString[i] + after;
       }

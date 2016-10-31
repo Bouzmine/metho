@@ -1,25 +1,26 @@
-import { ViewChild, Component } from '@angular/core';
+import { ViewChild, Component } from "@angular/core";
 
-import { NavController, AlertController, List } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { NavController, List } from "ionic-angular";
 
-import { AdvancedModePage } from '../advanced-mode/advanced-mode';
-import { AttributionsPage } from '../attributions/attributions';
-import { FeedbackPage } from '../feedback/feedback';
+import { AdvancedModePage } from "../advanced-mode/advanced-mode";
+import { AttributionsPage } from "../attributions/attributions";
+import { FeedbackPage } from "../feedback/feedback";
 
-import { AdvancedMode } from '../../providers/advanced-mode';
-import { Language } from '../../providers/language';
-import { Settings } from '../../providers/settings';
+import { AdvancedMode } from "../../providers/advanced-mode";
+import { Language } from "../../providers/language";
+import { Settings } from "../../providers/settings";
+import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
-import deepcopy from 'deepcopy';
+import deepcopy from "deepcopy";
 
 @Component({
-  selector: 'settings',
-  templateUrl: 'settings.html'
+  selector: "settings",
+  templateUrl: "settings.html"
 })
 export class SettingsPage {
   public settings: SettingsList = {};
   public enableAdvanced: boolean = false;
+  public advancedAvailable: boolean = true;
   public advancedPage: any;
   public attributionsPage: any;
   public feedbackPage: any;
@@ -29,8 +30,7 @@ export class SettingsPage {
 
   constructor(
     public nav: NavController,
-    public translate: TranslateService,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public advanced: AdvancedMode,
     public language: Language,
     public settingService: Settings,
@@ -40,15 +40,21 @@ export class SettingsPage {
     this.feedbackPage = FeedbackPage;
     if (this.advanced.hasLoaded) {
       this.enableAdvanced = true;
+      this.settings.advanced = this.settingService.get("advanced");
     }else {
       this.advanced.loadEvents.subscribe(() => {
         this.enableAdvanced = true;
+        this.settings.advanced = this.settingService.get("advanced");
       });
     }
+    this.advancedAvailable = this.advanced.isAvailable();
   }
 
   loadSettings() {
     this.settings = deepcopy(this.settingService.getAll());
+    if (!this.enableAdvanced) {
+      this.settings.advanced = false;
+    }
   }
 
   ionViewWillEnter() {
@@ -71,14 +77,13 @@ export class SettingsPage {
 
   toggleIgnoreErrors() {
     if (this.settings.ignoreErrors != this.settingService.getAll().ignoreErrors) {
-      this.settingService.set('ignoreErrors', this.settings.ignoreErrors);
+      this.settingService.set("ignoreErrors", this.settings.ignoreErrors);
     }
   }
 
   editName() {
-    this.translate.get(["SETTINGS.EDIT_NAME", "SETTINGS.CANCEL", "SETTINGS.EDIT"]).subscribe(translations => {
-      let alert = this.alertCtrl.create({
-        title: translations["SETTINGS.EDIT_NAME"],
+      this.alertCtrl.present({
+        title: "SETTINGS.EDIT_NAME",
         inputs: [
           {
             type: "text",
@@ -93,30 +98,27 @@ export class SettingsPage {
         ],
         buttons: [
           {
-            text: translations["SETTINGS.CANCEL"],
+            text: "COMMON.CANCEL",
             handler: () => {
               this.list.closeSlidingItems();
             }
           },
           {
-            text: translations["SETTINGS.EDIT"],
+            text: "COMMON.EDIT",
             handler: results => {
-              this.settingService.set('firstname', results.firstname);
-              this.settingService.set('lastname', results.lastname);
+              this.settingService.set("firstname", results.firstname);
+              this.settingService.set("lastname", results.lastname);
               this.loadSettings();
               this.list.closeSlidingItems();
             }
           }
         ]
       });
-
-      alert.present();
-    });
   }
 
   forgetName() {
-    this.settingService.set('firstname', '');
-    this.settingService.set('lastname', '');
+    this.settingService.set("firstname", "");
+    this.settingService.set("lastname", "");
     this.loadSettings();
   }
 
@@ -129,5 +131,29 @@ export class SettingsPage {
   illuminatiEasterEgg() {
     this.showIlluminatiEaster = true;
     setTimeout(() => this.showIlluminatiEaster = false, 5250);
+  }
+
+  explainUnavailable() {
+    if (!this.enableAdvanced) {
+      this.alertCtrl.present({
+        title: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
+        message: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
+      });
+    }else if (!this.advancedAvailable) {
+      this.alertCtrl.present({
+        title: "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE_TITLE",
+        message: "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE",
+        buttons: [
+          {
+            text: "COMMON.OK"
+          }
+        ]
+      });
+    }
   }
 }

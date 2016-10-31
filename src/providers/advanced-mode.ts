@@ -1,11 +1,10 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from "@angular/core";
 
-import { AlertController } from 'ionic-angular';
-import { InAppPurchase } from 'ionic-native';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { InAppPurchase, Device } from "ionic-native";
 
-import { Report } from './report';
-import { Settings } from './settings';
+import { Report } from "./report";
+import { Settings } from "./settings";
+import { TranslatedAlertController } from "./translated-alert-controller";
 
 interface CordovaWindow extends Window {
   cordova: any;
@@ -19,10 +18,24 @@ export class AdvancedMode {
   public hasLoaded: boolean = false;
   public loadEvents: EventEmitter<any> = new EventEmitter();
   public productId: string = "";
+  public prohibited = [
+    // iPod Touch 5
+    "iPod5,1",
+    // iPhone 4S
+    "iPhone4,1",
+    // iPad 2
+    "iPad2,1",
+    "iPad2,2",
+    "iPad2,3",
+    "iPad2,4",
+    // iPad mini original
+    "iPad2,5",
+    "iPad2,6",
+    "iPad2,7"
+  ];
 
   constructor(
-    public translate: TranslateService,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public report: Report,
     public settings: Settings,
   ) {
@@ -57,32 +70,28 @@ export class AdvancedMode {
       return new Promise((resolve, reject) => {
         if (navigator.onLine && this.hasLoaded) {
           InAppPurchase.buy(this.productId).then((data) => {
-            this.settings.set('advanced', true);
+            this.settings.set("advanced", true);
             resolve();
           }).catch(err => {
             reject();
           });
         }else {
-          this.translate.get(["COMMON.OK", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"]).subscribe(translations => {
-            let alert = this.alertCtrl.create({
-              title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
-              message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
-              buttons: [
-                {
-                  text: translations["COMMON.OK"],
-                  handler: () => {
-                    reject();
-                  }
+          this.alertCtrl.present({
+            title: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
+            message: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK",
+            buttons: [
+              {
+                text: "COMMON.OK",
+                handler: () => {
+                  reject();
                 }
-              ]
-            });
-
-            alert.present();
+              }
+            ]
           });
         }
       });
     }else {
-      this.settings.set('advanced', true);
+      this.settings.set("advanced", true);
       return Promise.resolve();
     }
   }
@@ -93,21 +102,17 @@ export class AdvancedMode {
         if (navigator.onLine) {
           InAppPurchase.restorePurchases().then((data) => {
             if (data.length && data[0].productId == this.productId) {
-              this.settings.set('advanced', true);
+              this.settings.set("advanced", true);
               resolve();
             }else {
-              this.translate.get(["SETTINGS.ADVANCED_MODE.POPUP.RESTORE", "SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND", "COMMON.OK"]).subscribe((translations) => {
-                let alert = this.alertCtrl.create({
-                  title: translations["SETTINGS.ADVANCED_MODE.POPUP.RESTORE"],
-                  message: translations["SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND"],
-                  buttons: [
-                    {
-                      text: translations["COMMON.OK"]
-                    }
-                  ]
-                });
-
-                alert.present();
+              this.alertCtrl.present({
+                title: "SETTINGS.ADVANCED_MODE.POPUP.RESTORE",
+                message: "SETTINGS.ADVANCED_MODE.POPUP.RESTORE_NO_FOUND",
+                buttons: [
+                  {
+                    text: "COMMON.OK"
+                  }
+                ]
               });
             }
           }).catch(err => {
@@ -115,21 +120,17 @@ export class AdvancedMode {
             reject();
           });
         }else {
-          this.translate.get(["COMMON.OK", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE", "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"]).subscribe(translations => {
-            let alert = this.alertCtrl.create({
-              title: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE"],
-              message: translations["SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK"],
-              buttons: [
-                {
-                  text: translations["COMMON.OK"],
-                  handler: () => {
-                    reject();
-                  }
+          this.alertCtrl.present({
+            title: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK_TITLE",
+            message: "SETTINGS.ADVANCED_MODE.POPUP.ERR_NETWORK",
+            buttons: [
+              {
+                text: "COMMON.OK",
+                handler: () => {
+                  reject();
                 }
-              ]
-            });
-
-            alert.present();
+              }
+            ]
           });
         }
       });
@@ -139,10 +140,22 @@ export class AdvancedMode {
   }
 
   disable() {
-    this.settings.set('advanced', false);
+    this.settings.set("advanced", false);
   }
 
   isEnabled() {
-    return this.settings.get('advanced');
+    return this.settings.get("advanced");
+  }
+
+  isAvailable(): boolean {
+    if (Device.device.platform == "iOS") {
+      if (this.prohibited.indexOf(Device.device.model) > -1) {
+        return false;
+      }else {
+        return true;
+      }
+    }else {
+      return true;
+    }
   }
 }

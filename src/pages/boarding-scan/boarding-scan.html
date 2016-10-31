@@ -1,13 +1,13 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()" *ngIf="currentIndex == 0">{{'PROJECT.DETAIL.BOARDING.SKIP' | translate}}</button>
-      <button ion-button clear (click)="slider.slidePrev()" *ngIf="currentIndex > 0">{{'PROJECT.DETAIL.BOARDING.PREVIOUS' | translate}}</button>
+      <button ion-button clear (click)="dismiss()" *ngIf="currentIndex == 0">{{"PROJECT.DETAIL.BOARDING.SKIP" | translate}}</button>
+      <button ion-button clear (click)="slider.slidePrev()" *ngIf="currentIndex > 0">{{"PROJECT.DETAIL.BOARDING.PREVIOUS" | translate}}</button>
     </ion-buttons>
-    <ion-title>{{'PROJECT.DETAIL.BOARDING.TITLE' | translate}}</ion-title>
+    <ion-title>{{"PROJECT.DETAIL.BOARDING.TITLE" | translate}}</ion-title>
     <ion-buttons end>
-      <button ion-button clear (click)="slider.slideNext()" *ngIf="currentIndex < 2">{{'PROJECT.DETAIL.BOARDING.NEXT' | translate}}</button>
-      <button ion-button clear (click)="dismiss()" *ngIf="currentIndex == 2">{{'PROJECT.DETAIL.BOARDING.CLOSE' | translate}}</button>
+      <button ion-button clear (click)="slider.slideNext()" *ngIf="currentIndex < 2">{{"PROJECT.DETAIL.BOARDING.NEXT" | translate}}</button>
+      <button ion-button clear (click)="dismiss()" *ngIf="currentIndex == 2">{{"PROJECT.DETAIL.BOARDING.CLOSE" | translate}}</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -16,12 +16,12 @@
   <ion-slides pager #slider (ionDidChange)="onSlideChange()" [options]="swiperOptions">
     <ion-slide class="first">
       <h1 class="big">1 800 000</h1>
-      <p class="smallest">{{'PROJECT.DETAIL.BOARDING.BOOKS' | translate}}</p>
-      <p class="justified">{{'PROJECT.DETAIL.BOARDING.TEXT_RECOGNIZED' | translate}}</p>
+      <p class="smallest">{{"PROJECT.DETAIL.BOARDING.BOOKS" | translate}}</p>
+      <p class="justified">{{"PROJECT.DETAIL.BOARDING.TEXT_RECOGNIZED" | translate}}</p>
     </ion-slide>
     <ion-slide class="second">
       <img src="assets/img/lamp.png" alt="Lamp" />
-      <p class="center">{{'PROJECT.DETAIL.BOARDING.SCAN_TEXT' | translate}}</p>
+      <p class="center">{{"PROJECT.DETAIL.BOARDING.SCAN_TEXT" | translate}}</p>
     </ion-slide>
     <ion-slide class="third">
       <div class="imitateSVG" *ngIf="currentIndex != 2"></div>
@@ -31,7 +31,7 @@
       </svg>
       <div class="padding">
         <button ion-button (click)="dismiss()" color="light">
-          {{'PROJECT.DETAIL.BOARDING.SCAN_FIRST' | translate}}
+          {{"PROJECT.DETAIL.BOARDING.SCAN_FIRST" | translate}}
         </button>
       </div>
     </ion-slide>

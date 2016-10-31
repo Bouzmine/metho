@@ -1,22 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { ModalController, AlertController, LoadingController } from 'ionic-angular';
-import { BarcodeScanner } from 'ionic-native';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { ModalController, LoadingController } from "ionic-angular";
+import { BarcodeScanner } from "ionic-native";
 
-import { BoardingScanPage } from '../pages/boarding-scan/boarding-scan';
+import { BoardingScanPage } from "../pages/boarding-scan/boarding-scan";
 
-import { Fetch } from './fetch';
-import { Report } from './report';
-import { Settings } from './settings';
+import { Fetch } from "./fetch";
+import { Report } from "./report";
+import { Settings } from "./settings";
+import { TranslatedAlertController } from "./translated-alert-controller";
 
 
 @Injectable()
 export class Scan {
 
   constructor(
-    public translate: TranslateService,
-    public alertCtrl: AlertController,
+    public alertCtrl: TranslatedAlertController,
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
     public fetch: Fetch,
@@ -26,14 +25,14 @@ export class Scan {
 
   scan(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (!this.settings.get('scanBoardingDone')) {
+      if (!this.settings.get("scanBoardingDone")) {
         let modal = this.modalCtrl.create(BoardingScanPage);
         modal.onDidDismiss(() => {
           this.openScanner()
           .then((data) => resolve(data))
           .catch(err => reject(err));
         });
-        this.settings.set('scanBoardingDone', true);
+        this.settings.set("scanBoardingDone", true);
         modal.present();
       }else {
         this.openScanner()
@@ -84,7 +83,7 @@ export class Scan {
             if (isLoading) {
               var transition = loading.dismiss();
             }else {
-              var transition = <Promise<any>>Promise.resolve();
+              var transition = Promise.resolve(true);
             }
             transition.then(() => {
               switch (response) {
@@ -94,7 +93,26 @@ export class Scan {
                 case 408:
                 this.alert408(resolve, isbn);
                 break;
-                case 500, 501, 502, 503, 504, 505, 506, 507, 508, 509, 510, 511, 520, 521, 522, 523, 524, 525, 526, 530:
+                case 500:
+                case 501:
+                case 502:
+                case 503:
+                case 504:
+                case 505:
+                case 506:
+                case 507:
+                case 508:
+                case 509:
+                case 510:
+                case 511:
+                case 520:
+                case 521:
+                case 522:
+                case 523:
+                case 524:
+                case 525:
+                case 526:
+                case 530:
                 this.alert500(resolve);
                 break;
                 default:
@@ -111,138 +129,128 @@ export class Scan {
   }
 
   public alert404(resolve: (any) => any) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT", "COMMON.OK"]).subscribe((translations) => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
-        message: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT"],
-        buttons: [
-          {
-            text: translations["COMMON.OK"],
-            handler: () => {
-              resolve({});
-            }
+    let alert = this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE",
+      message: "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT",
+      buttons: [
+        {
+          text: "COMMON.OK",
+          handler: () => {
+            resolve({});
           }
-        ]
-      });
-      alert.present();
+        }
+      ]
     });
   }
 
   public alert408(resolve: (any) => void, isbn: string) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE", "PROJECT.DETAIL.POPUP.TIMEOUT_TEXT", "PROJECT.DETAIL.POPUP.ADD", "PROJECT.DETAIL.POPUP.RETRY"]).subscribe((translations) => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TITLE"],
-        message: translations["PROJECT.DETAIL.POPUP.TIMEOUT_TEXT"],
-        buttons: [
-          {
-            text: translations["PROJECT.DETAIL.POPUP.RETRY"],
-            handler: () => {
-              this.fetchFromISBN(isbn, alert.dismiss()).then((response) => {
+    let alert = this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.TIMEOUT_TITLE",
+      message: "PROJECT.DETAIL.POPUP.TIMEOUT_TEXT",
+      buttons: [
+        {
+          text: "PROJECT.DETAIL.POPUP.RETRY",
+          handler: () => {
+            alert.then(obj => {
+              this.fetchFromISBN(isbn, obj.dismiss()).then((response) => {
                 resolve(response);
               });
-              return false;
-            }
-          },
-          {
-            text: translations['PROJECT.DETAIL.POPUP.ADD'],
-            handler: () => {
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.DETAIL.POPUP.ADD",
+          handler: () => {
+            alert.then(obj => {
               resolve({
                 isbn: isbn,
                 addPending: true,
-                transition: alert.dismiss()
+                transition: obj.dismiss()
               });
-              return false;
-            }
+            });
+            return false;
           }
-        ]
-      });
-      alert.present();
+        }
+      ]
     });
   }
 
   public alert500(resolve: (any) => void) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.ERROR", "PROJECT.DETAIL.POPUP.ERROR_500", "COMMON.OK"]).subscribe((translations) => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.DETAIL.POPUP.ERROR"],
-        message: translations["PROJECT.DETAIL.POPUP.ERROR_500"],
-        buttons: [
-          {
-            text: translations["COMMON.OK"],
-            handler: () => {
-              resolve({});
-            }
+    let alert = this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.ERROR",
+      message: "PROJECT.DETAIL.POPUP.ERROR_500",
+      buttons: [
+        {
+          text: "COMMON.OK",
+          handler: () => {
+            resolve({});
           }
-        ]
-      });
-      alert.present();
+        }
+      ]
     });
   }
 
   public alertOffline(resolve: (any) => void, isbn: string) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.NO_CONNECTION", "PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS", "PROJECT.DETAIL.POPUP.RETRY", "PROJECT.DETAIL.POPUP.ADD"]).subscribe((translations) => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.DETAIL.POPUP.NO_CONNECTION"],
-        message: translations["PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS"],
-        buttons: [
-          {
-            text: translations["PROJECT.DETAIL.POPUP.RETRY"],
-            handler: () => {
-              this.fetchFromISBN(isbn, alert.dismiss()).then(response => {
+    let alert = this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.NO_CONNECTION",
+      message: "PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS",
+      buttons: [
+        {
+          text: "PROJECT.DETAIL.POPUP.RETRY",
+          handler: () => {
+            alert.then(obj => {
+              this.fetchFromISBN(isbn, obj.dismiss()).then(response => {
                 resolve(response);
               });
-              return false;
-            }
-          },
-          {
-            text: translations["PROJECT.DETAIL.POPUP.ADD"],
-            handler: () => {
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.DETAIL.POPUP.ADD",
+          handler: () => {
+            alert.then(obj => {
               resolve({
                 isbn: isbn,
                 addPending: true,
-                transition: alert.dismiss()
+                transition: obj.dismiss()
               });
-              return false;
-            }
+            });
+            return false;
           }
-        ]
-      });
-      alert.present();
+        }
+      ]
     });
   }
 
   public alertScanUnavailable(resolve: (any) => void) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN", "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT", "COMMON.OK"]).subscribe((translations) => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN"],
-        message: translations["PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT"],
-        buttons: [
-          {
-            text: translations["COMMON.OK"],
-            handler: () => {
-              resolve({});
-            }
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN",
+      message: "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT",
+      buttons: [
+        {
+          text: "COMMON.OK",
+          handler: () => {
+            resolve({});
           }
-        ]
-      });
-      alert.present();
+        }
+      ]
     });
   }
 
   public alertWrongBarcode(resolve: (any) => void) {
-    this.translate.get(["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE", "PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE", "COMMON.OK"]).subscribe((translations) => {
-      let alert = this.alertCtrl.create({
-        title: translations["PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE"],
-        message: translations["PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE"],
-        buttons: [
-          {
-            text: translations["COMMON.OK"],
-            handler: () => {
-              resolve({});
-            }
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE",
+      message: "PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE",
+      buttons: [
+        {
+          text: "COMMON.OK",
+          handler: () => {
+            resolve({});
           }
-        ]
-      });
-      alert.present();
+        }
+      ]
     });
   }
 }

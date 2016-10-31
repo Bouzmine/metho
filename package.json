@@ -1,6 +1,6 @@
 {
   "name": "metho",
-  "version": "0.11.5",
+  "version": "0.12.2",
   "description": "Easy bibliography",
   "license": "UNLICENSED",
   "repository": {
@@ -20,23 +20,31 @@
     "ionic_rollup": "./config/rollup.config.js"
   },
   "dependencies": {
-    "@ionic/storage": "^1.0.3",
+    "@angular/common": "^2.0.0",
+    "@angular/compiler": "^2.0.0",
+    "@angular/compiler-cli": "0.6.2",
+    "@angular/core": "^2.0.0",
+    "@angular/forms": "^2.0.0",
+    "@angular/http": "^2.0.0",
+    "@angular/platform-browser": "^2.0.0",
+    "@angular/platform-browser-dynamic": "^2.0.0",
+    "@angular/platform-server": "^2.0.0",
+    "@ionic/storage": "1.0.3",
     "deepcopy": "0.6.3",
-    "ionic-angular": "2.0.0-rc.0",
-    "ionic-native": "2.1.7",
+    "ionic-angular": "2.0.0-rc.1",
+    "ionic-native": "2.2.0",
     "ionicons": "^3.0.0",
     "js-extend": "1.0.1",
     "moment": "2.15.1",
-    "ng2-translate": "3.0.0",
-    "pouchdb": "6.0.6",
-    "pouchdb-adapter-cordova-sqlite": "1.0.0"
+    "ng2-translate": "3.1.2",
+    "pouchdb": "6.0.7",
+    "pouchdb-adapter-cordova-sqlite": "1.0.0",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "^0.6.21"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.30",
+    "@ionic/app-scripts": "0.0.36",
     "cordova-common": "1.2.0",
-    "rollup-plugin-json": "2.0.2",
-    "rollup-plugin-node-builtins": "2.0.0",
-    "rollup-plugin-node-globals": "1.0.9",
     "typescript": "2.0.3"
   },
   "cordovaPlugins": [
@@ -53,7 +61,9 @@
     "cordova-plugin-safariviewcontroller",
     "cordova-plugin-x-socialsharing",
     "cordova-plugin-sqlite-2",
-    "cordova-plugin-inapppurchase"
+    "cordova-plugin-inapppurchase",
+    "cordova-plugin-http",
+    "https://github.com/driftyco/cordova-plugin-wkwebview-engine.git"
   ],
   "cordovaPlatforms": [
     "ios@4.1.0"

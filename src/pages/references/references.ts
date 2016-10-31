@@ -1,16 +1,16 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
-import { NavController } from 'ionic-angular';
+import { NavController } from "ionic-angular";
 
-import { ReferencesDetailPage } from '../references-detail/references-detail';
+import { ReferencesDetailPage } from "../references-detail/references-detail";
 
-import { References } from '../../providers/references';
-import { Settings } from '../../providers/settings';
+import { References } from "../../providers/references";
+import { Settings } from "../../providers/settings";
 
 
 @Component({
-  selector: 'references',
-  templateUrl: 'references.html'
+  selector: "references",
+  templateUrl: "references.html"
 })
 export class ReferencesPage {
   public referenceData: any[] = [];

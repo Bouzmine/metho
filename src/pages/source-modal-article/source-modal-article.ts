@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Component } from "@angular/core";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
-import { ViewController, NavParams, ActionSheetController } from 'ionic-angular';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { ViewController, NavParams } from "ionic-angular";
+import { Keyboard } from "ionic-native";
 
-import { AppStorage } from '../../providers/app-storage';
-import { Language } from '../../providers/language';
-import { Parse } from '../../providers/parse';
+import { AppStorage } from "../../providers/app-storage";
+import { Language } from "../../providers/language";
+import { Parse } from "../../providers/parse";
+import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
 
 
 @Component({
-  selector: 'source-modal-article',
-  templateUrl: 'source-modal-article.html'
+  selector: "source-modal-article",
+  templateUrl: "source-modal-article.html"
 })
 export class SourceModalArticlePage {
   public isNew: boolean;
@@ -26,65 +27,62 @@ export class SourceModalArticlePage {
   constructor(
     public viewCtrl: ViewController,
     public params: NavParams,
-    public translate: TranslateService,
-    public actionSheetCtrl: ActionSheetController,
+    public actionSheetCtrl: TranslatedActionSheetController,
     public storage: AppStorage,
     public parse: Parse,
     public fb: FormBuilder,
   ) {
-    if(this.params.get('editing') == true) {
+    if(this.params.get("editing") == true) {
       this.isNew = false;
     }else {
       this.isNew = true;
     }
 
-    if (typeof this.params.get('data') !== "undefined") {
+    if (typeof this.params.get("data") !== "undefined") {
       this.noData = false;
-      this.previous = this.params.get('data');
+      this.previous = this.params.get("data");
     }else {
       this.noData = true;
     }
-    this.projectId = this.params.get('projectId');
+    this.projectId = this.params.get("projectId");
 
-    if (typeof this.params.get('pendingId') !== "undefined") {
-      this.pendingId = this.params.get('pendingId');
+    if (typeof this.params.get("pendingId") !== "undefined") {
+      this.pendingId = this.params.get("pendingId");
     }
 
     this.form = fb.group({
-      author1firstname: [this.noData ? '' : this.previous.author1firstname],
-      author1lastname: [this.noData ? '' : this.previous.author1lastname],
-      title: [this.noData ? '' : this.previous.title],
-      editor: [this.noData ? '' : this.previous.editor],
-      editionNumber: [this.noData ? '' : this.previous.editionNumber],
-      publicationDate: [this.noData ? '' : this.previous.publicationDate],
-      startPage: [this.noData ? '' : this.previous.startPage],
-      endPage: [this.noData ? '' : this.previous.endPage]
+      author1firstname: [this.noData ? "" : this.previous.author1firstname],
+      author1lastname: [this.noData ? "" : this.previous.author1lastname],
+      title: [this.noData ? "" : this.previous.title],
+      editor: [this.noData ? "" : this.previous.editor],
+      editionNumber: [this.noData ? "" : this.previous.editionNumber],
+      publicationDate: [this.noData ? "" : this.previous.publicationDate],
+      startPage: [this.noData ? "" : this.previous.startPage],
+      endPage: [this.noData ? "" : this.previous.endPage]
     });
   }
 
   dismiss() {
     if (!this.isEmpty() && this.isNew) {
-      this.translate.get(["COMMON.CANCEL", "PROJECT.DETAIL.MODAL.DELETE_DRAFT"]).subscribe(translations => {
-        let actionsheet = this.actionSheetCtrl.create({
-          buttons: [
-            {
-              text: translations["PROJECT.DETAIL.MODAL.DELETE_DRAFT"],
-              role: 'destructive',
-              handler: () => {
-                actionsheet.dismiss().then(() => {
+      let actionsheet = this.actionSheetCtrl.present({
+        buttons: [
+          {
+            text: "PROJECT.DETAIL.MODAL.DELETE_DRAFT",
+            role: "destructive",
+            handler: () => {
+              actionsheet.then(obj => {
+                obj.dismiss().then(() => {
                   this.viewCtrl.dismiss();
                 });
-                return false;
-              }
-            },
-            {
-              text: translations["COMMON.CANCEL"],
-              role: 'cancel'
+              });
+              return false;
             }
-          ]
-        });
-
-        actionsheet.present();
+          },
+          {
+            text: "COMMON.CANCEL",
+            role: "cancel"
+          }
+        ]
       });
     }else {
       this.viewCtrl.dismiss();
@@ -100,7 +98,7 @@ export class SourceModalArticlePage {
 
   confirm() {
     let values = this.form.value;
-    values.type = 'article';
+    values.type = "article";
     let parsed = this.parse.parse(values);
     parsed.project_id = this.projectId;
 
@@ -113,6 +111,7 @@ export class SourceModalArticlePage {
       this.storage.setSourceFromId(this.previous._id, parsed);
     }
 
+    Keyboard.close();
     this.viewCtrl.dismiss();
   }
 
