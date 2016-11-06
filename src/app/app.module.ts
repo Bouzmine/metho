@@ -41,6 +41,7 @@ import { Scan } from "../providers/scan";
 import { Settings } from "../providers/settings";
 import { TranslatedActionSheetController } from "../providers/translated-action-sheet-controller";
 import { TranslatedAlertController } from "../providers/translated-alert-controller";
+import { TranslatedToastController } from "../providers/translated-toast-controller";
 
 export function translateDeps (http: Http) {
   return new TranslateStaticLoader(http, "assets/i18n", ".json");
@@ -118,7 +119,8 @@ export function translateDeps (http: Http) {
     Scan,
     Storage,
     TranslatedActionSheetController,
-    TranslatedAlertController
+    TranslatedAlertController,
+    TranslatedToastController
   ]
 })
 export class AppModule {}
