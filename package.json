@@ -62,7 +62,8 @@
     "cordova-plugin-x-socialsharing",
     "cordova-plugin-sqlite-2",
     "cordova-plugin-inapppurchase",
-    "cordova-plugin-http"
+    "cordova-plugin-http",
+    "https://github.com/VersoSolutions/CordovaClipboard.git"
   ],
   "cordovaPlatforms": [
     "ios@4.1.0"

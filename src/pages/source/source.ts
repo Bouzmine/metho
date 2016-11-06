@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 import { NavController, NavParams, ModalController } from "ionic-angular";
-import { Keyboard } from "ionic-native";
+import { Keyboard, Clipboard } from "ionic-native";
 
 import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
 import { SourceModalArticlePage } from "../source-modal-article/source-modal-article";
@@ -13,6 +13,7 @@ import { SourceModalInterviewPage } from "../source-modal-interview/source-modal
 import { AppStorage } from "../../providers/app-storage";
 import { Parse } from "../../providers/parse";
 import { TranslatedAlertController } from "../../providers/translated-alert-controller";
+import { TranslatedToastController } from "../../providers/translated-toast-controller";
 
 
 @Component({
@@ -33,6 +34,7 @@ export class SourcePage {
     public params: NavParams,
     public alertCtrl: TranslatedAlertController,
     public modalCtrl: ModalController,
+    public toastCtrl: TranslatedToastController,
     public storage: AppStorage,
     public parse: Parse,
   ) {
@@ -167,5 +169,20 @@ export class SourcePage {
     });
 
     modal.present();
+  }
+
+  copy() {
+    let sourceWithoutHTML = this.source.parsedSource.replace(/[<][/]?[a-z]+[>]/g, "");
+    Clipboard.copy(sourceWithoutHTML).then(() => {
+      this.toastCtrl.present({
+        message: "PROJECT.SOURCE.COPIED",
+        duration: 1250,
+        dismissOnPageChange: true,
+        showCloseButton: false,
+        position: "top"
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 }

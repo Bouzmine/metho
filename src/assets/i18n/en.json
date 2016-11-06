@@ -197,6 +197,8 @@
         },
         "SOURCE":{
             "NO_ERROR": "Zero error",
+            "COPY": "Copy current source",
+            "COPIED": "Current source copied to clipboard",
             "MODAL": {
                 "TITLE": "Edit source"
             }
