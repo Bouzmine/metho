@@ -19,7 +19,7 @@
     "PROJECT":{
         "TAB":{
             "TAB_TITLE": "Proyectos",
-            "EMPTY_TAB": "¿ No proyecto ? Va a venir...",
+            "EMPTY_TAB": "Comienza con la creacion de un proyecto...",
             "UNKNOWN_MATTER": "Materia desconocida",
             "MODAL":{
                 "TITLE": "Nuevo proyecto",
@@ -35,7 +35,7 @@
             }
         },
         "DETAIL":{
-            "EMPTY_TAB": "¿ Qué es un proyecto sin fuentes ?",
+            "EMPTY_TAB": "Despues, cree una fuente...",
             "SEARCH": "Buscar",
             "EMPTY_SEARCH": "Ningún resultado, puede buscar entre todas las informaciones de la fuente como el autor, el titulo o el type",
             "PENDING_ELEMENTS": "Borradores",

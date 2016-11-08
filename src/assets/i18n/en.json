@@ -19,7 +19,7 @@
     "PROJECT":{
         "TAB":{
             "TAB_TITLE": "Projects",
-            "EMPTY_TAB": "No projects? It'll come...",
+            "EMPTY_TAB": "Start by creating a project...",
             "UNKNOWN_MATTER": "Unknown subject",
             "MODAL": {
                 "TITLE": "New project",
@@ -35,7 +35,7 @@
             }
         },
         "DETAIL":{
-            "EMPTY_TAB": "What's a project without sources ?",
+            "EMPTY_TAB": "Then create a source...",
             "SEARCH": "Search",
             "EMPTY_SEARCH": "No result, you can search across all properties of the source like the author, title or type",
             "PENDING_ELEMENTS": "Drafts",
