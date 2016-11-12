@@ -19,7 +19,8 @@ export class BoardingScanPage {
   ) {
     this.swiperOptions = {
       parallax: true,
-      keyboardControl: true
+      keyboardControl: true,
+      pager: true
     }
   }
 
