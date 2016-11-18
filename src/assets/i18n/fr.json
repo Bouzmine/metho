@@ -564,7 +564,8 @@
         }
     },
     "REFERENCES":{
-        "TAB_TITLE": "Référence"
+        "TAB_TITLE": "Référence",
+        "EMPTY_SEARCH": "Aucun résultat, vous pouvez rechercher parmi les titres et le contenu des articles du Guide de méthodologie"
     },
     "SETTINGS":{
         "TAB_TITLE": "Paramètres",

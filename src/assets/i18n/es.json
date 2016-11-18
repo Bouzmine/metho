@@ -564,7 +564,8 @@
         }
     },
     "REFERENCES":{
-        "TAB_TITLE": "Referencia"
+        "TAB_TITLE": "Referencia",
+        "EMPTY_SEARCH": "Ningún resultado, puede buscar entre el titulo y el contenido del articulo del Guide de méthodologie"
     },
     "SETTINGS":{
         "TAB_TITLE": "Ajustes",
