@@ -89,7 +89,7 @@ export class SourceModalBookPage {
       this.showBrowser = true;
       SafariViewController.mayLaunchUrl(this.url);
       this.viewCtrl.didEnter.subscribe(() => {
-        this.browser();
+        this.openBrowser();
       });
     }else {
       this.showBrowser = false;
@@ -373,7 +373,7 @@ export class SourceModalBookPage {
     return obj1;
   }
 
-  browser() {
+  openBrowser() {
     SafariViewController.isAvailable().then(avail => {
       if (avail) {
         SafariViewController.show({
