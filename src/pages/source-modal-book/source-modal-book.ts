@@ -13,27 +13,22 @@ import { Settings } from "../../providers/settings";
 import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
 import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
+import { SourceModalBase } from "../source-modal/source-modal";
 
 @Component({
   selector: "source-modal-book",
   templateUrl: "source-modal-book.html"
 })
-export class SourceModalBookPage {
-  public isNew: boolean;
-  public noData: boolean;
-  public previous: Source;
+export class SourceModalBookPage extends SourceModalBase {
+  public type = "book";
+  // Scan
   public url: string;
-  public pendingId: string;
-  public projectId: string;
   public hideScan: boolean;
   public showBrowser: boolean;
   public isAdvanced: boolean;
   public insertingFromScan: boolean;
-  public firstname: string;
-  public lastname: string;
-  public hasConfirmed: boolean = false;
 
-  public form: FormGroup;
+  // Instant Search
   public _timeout: any;
   public instantList: Array<any>;
   public instantStatus: any = {
@@ -59,29 +54,12 @@ export class SourceModalBookPage {
     public settings: Settings,
     public fb: FormBuilder,
   ) {
-    if(this.params.get("editing") == true) {
-      this.isNew = false;
-    }else {
-      this.isNew = true;
-    }
-
-    if (typeof this.params.get("data") !== "undefined") {
-      this.noData = false;
-      this.previous = this.params.get("data");
-    }else {
-      this.noData = true;
-    }
-
-    this.projectId = this.params.get("projectId");
+    super(viewCtrl, params, actionSheetCtrl, storage, parse);
 
     if (this.params.get("hideScan") == true) {
       this.hideScan = true;
     }else {
       this.hideScan = false;
-    }
-
-    if (typeof this.params.get("pendingId") !== "undefined") {
-      this.pendingId = this.params.get("pendingId");
     }
 
     if (typeof this.params.get("url") !== "undefined") {
@@ -126,59 +104,6 @@ export class SourceModalBookPage {
       translator2firstname: [this.noData ? "" : this.previous.translator2firstname],
       translator2lastname: [this.noData ? "" : this.previous.translator2lastname]
     });
-  }
-
-  dismiss() {
-    if (!this.isEmpty(true) && this.isNew && !this.pendingId) {
-      let actionsheet = this.actionSheetCtrl.present({
-        buttons: [
-          {
-            text: "PROJECT.DETAIL.MODAL.DELETE_DRAFT",
-            role: "destructive",
-            handler: () => {
-              actionsheet.then(obj => {
-                obj.dismiss().then(() => {
-                  this.viewCtrl.dismiss();
-                });
-              });
-              return false;
-            }
-          },
-          {
-            text: "COMMON.CANCEL",
-            role: "cancel"
-          }
-        ]
-      });
-    }else {
-      this.viewCtrl.dismiss();
-    }
-  }
-
-  submitIfEnter(event) {
-    if (event.keyCode == 13 && !this.hasConfirmed) {
-      this.confirm();
-      this.hasConfirmed = true;
-    }
-  }
-
-  confirm() {
-    let values = this.form.value;
-    values.type = "book";
-    let parsed = this.parse.parse(values);
-    parsed.project_id = this.projectId;
-
-    if (this.isNew) {
-      this.storage.createSource(parsed);
-      if (this.pendingId) {
-        this.storage.deletePending(this.pendingId);
-      }
-    }else {
-      this.storage.setSourceFromId(this.previous._id, parsed);
-    }
-
-    Keyboard.close();
-    this.viewCtrl.dismiss();
   }
 
   // Instant Search
@@ -327,10 +252,6 @@ export class SourceModalBookPage {
     });
   }
 
-  updateValues(response: any) {
-    this.form.patchValue(this.mergeObjects(this.form.value, response));
-  }
-
   addPending(isbn: string, transition=Promise.resolve()) {
     var creating = {
       isbn: isbn,
@@ -358,19 +279,6 @@ export class SourceModalBookPage {
     }else {
       return false;
     }
-  }
-
-  mergeObjects(obj1: any, obj2: any) {
-    for (var variable in obj2) {
-      if (obj2.hasOwnProperty(variable)) {
-        if (obj2[variable] != "") {
-          obj1[variable] = [obj2[variable]];
-        }else {
-          obj1[variable] = [obj1[variable]];
-        }
-      }
-    }
-    return obj1;
   }
 
   openBrowser() {
