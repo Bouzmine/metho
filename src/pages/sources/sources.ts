@@ -47,6 +47,7 @@ export class SourcesPage {
   ) {
     this.projectId = params.get("id");
     this.loadProjectInfo();
+    this.generateTypeTable();
 
     this.translate.onLangChange.subscribe(() => {
       this.generateTypeTable();
@@ -54,7 +55,6 @@ export class SourcesPage {
   }
 
   ionViewWillEnter() {
-    this.generateTypeTable();
     this.loadSources();
     this.loadPendingNumber();
   }
