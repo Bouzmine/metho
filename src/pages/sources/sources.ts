@@ -343,20 +343,13 @@ export class SourcesPage {
     let qa = q.trim().split(" ");
 
     this.filteredSources = this.filteredSources.filter((v) => {
-      if (qa.length > 1) {
-        for (var i = 0; i < qa.length; i++) {
-          if (v.parsedSource.toLowerCase().indexOf(qa[i].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
-          }else {
-            return false;
-          }
-        }
-        return true;
-      }else {
-        if (v.parsedSource.toLowerCase().indexOf(qa[0].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[0].toLowerCase()) > -1) {
-          return true;
+      for (var i = 0; i < qa.length; i++) {
+        if (v.parsedSource.toLowerCase().indexOf(qa[i].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
+        }else {
+          return false;
         }
       }
-      return false;
+      return true;
     });
   }
 
