@@ -55,10 +55,6 @@ sources {
         font-size: 72px;
     }
 
-    button[ion-fab] {
-        box-shadow: 0 4px 10px #6b6b6b;
-    }
-
     .pendings {
         background-color: transparent !important;
 
@@ -68,11 +64,15 @@ sources {
     }
 
     ion-fab {
+        button {
+          box-shadow: 0 4px 10px #6b6b6b;
+        }
+
         ion-fab-list button[ion-fab] {
             text-align: center;
             overflow: visible;
 
-            div {
+            div.label {
               position: absolute;
               right: 48px;
               background: rgba(248, 248, 248, 1);
@@ -82,7 +82,7 @@ sources {
               padding-right: 8px;
               padding-top: 5px;
               padding-bottom: 5px;
-              margin-top: 8px;
+              margin-top: 6px;
               border-radius: 5px;
               box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.14), 0 4px 5px rgba(0, 0, 0, 0.1);
             }
