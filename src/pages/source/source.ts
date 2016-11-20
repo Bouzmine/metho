@@ -78,7 +78,8 @@ export class SourcePage {
           }
         }
       ],
-      inputs: []
+      inputs: [],
+      enableBackdropDismiss: false
     };
     if (error.complex) {
       if (error.type == "select") {

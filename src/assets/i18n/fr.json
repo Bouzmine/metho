@@ -19,7 +19,7 @@
     "PROJECT":{
         "TAB":{
             "TAB_TITLE": "Projets",
-            "EMPTY_TAB": "Aucun projet? Ça viendra...",
+            "EMPTY_TAB": "Commencez par créer un projet...",
             "UNKNOWN_MATTER": "Matière inconnue",
             "MODAL":{
                 "TITLE": "Nouveau projet",
@@ -35,7 +35,7 @@
             }
         },
         "DETAIL":{
-            "EMPTY_TAB": "Qu'est-ce qu'un projet sans sources ?",
+            "EMPTY_TAB": "Et créez une source...",
             "SEARCH": "Rechercher",
             "EMPTY_SEARCH": "Aucun résultat, vous pouvez rechercher parmi toutes les informations de la source dont l'auteur, le titre ou encore le type",
             "PENDING_ELEMENTS": "Brouillons",
