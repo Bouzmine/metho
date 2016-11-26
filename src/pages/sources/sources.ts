@@ -47,6 +47,7 @@ export class SourcesPage {
   ) {
     this.projectId = params.get("id");
     this.loadProjectInfo();
+    this.generateTypeTable();
 
     this.translate.onLangChange.subscribe(() => {
       this.generateTypeTable();
@@ -54,7 +55,6 @@ export class SourcesPage {
   }
 
   ionViewWillEnter() {
-    this.generateTypeTable();
     this.loadSources();
     this.loadPendingNumber();
   }
@@ -68,7 +68,7 @@ export class SourcesPage {
   loadSources() {
     this.storage.getSourcesFromProjectId(this.projectId).then(sources => {
       this.sources = sources;
-      this.filteredSources = sources;
+      this.updateSearch();
       this.sources.sort((a, b) => {
         if (a.title && b.title) {
           return a.title.localeCompare(b.title);
@@ -343,20 +343,13 @@ export class SourcesPage {
     let qa = q.trim().split(" ");
 
     this.filteredSources = this.filteredSources.filter((v) => {
-      if (qa.length > 1) {
-        for (var i = 0; i < qa.length; i++) {
-          if (v.parsedSource.toLowerCase().indexOf(qa[i].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
-          }else {
-            return false;
-          }
-        }
-        return true;
-      }else {
-        if (v.parsedSource.toLowerCase().indexOf(qa[0].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[0].toLowerCase()) > -1) {
-          return true;
+      for (var i = 0; i < qa.length; i++) {
+        if (v.parsedSource.toLowerCase().indexOf(qa[i].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
+        }else {
+          return false;
         }
       }
-      return false;
+      return true;
     });
   }
 

@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>{{(isNew ? "PROJECT.TAB.MODAL.TITLE" : "PROJECT.TAB.MODAL.TITLE_EDIT") | translate}}</ion-title>
     <ion-buttons end>
-      <button ion-button clear (click)="confirm()">{{(isNew ? "COMMON.CREATE" : "COMMON.EDIT") | translate}}</button>
+      <button ion-button clear (click)="confirm()" [disabled]="projectForm.value.name == ''">{{(isNew ? "COMMON.CREATE" : "COMMON.EDIT") | translate}}</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
