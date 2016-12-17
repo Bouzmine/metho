@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 
 import { TranslateService } from "ng2-translate/ng2-translate";
 
+import ModalType from "../pages/source-modal/modals";
+
 
 @Injectable()
 export class Parse {
@@ -16,7 +18,7 @@ export class Parse {
     sourceToParse.errors = [];
     sourceToParse.warnings = [];
 
-    if (sourceToParse.type == "book") {
+    if (sourceToParse.type == ModalType.BOOK) {
       if (sourceToParse.hasAuthors == "13") {
 
         if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
@@ -318,7 +320,7 @@ export class Parse {
         sourceToParse.pageNumber = "";
         sourceToParse.errors.push(this.addError("PAGE_NUMBER", "pageNumber"));
       }
-    } else if (sourceToParse.type == "article") {
+    } else if (sourceToParse.type == ModalType.ARTICLE) {
       // Auteur
       if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
         if (sourceToParse.author1lastname) {
@@ -391,7 +393,7 @@ export class Parse {
         sourceToParse.parsedSource += "p. ?-?.";
         sourceToParse.errors.push(this.addMultiInputError([{errorId:"START_PAGE", variable: "startPage"}, {errorId:"END_PAGE", variable: "endPage"}], "START_END_PAGE"));
       }
-    } else if (sourceToParse.type == "internet") {
+    } else if (sourceToParse.type == ModalType.INTERNET) {
       if (sourceToParse.hasAuthors) {
         if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
           // Author last name
@@ -483,7 +485,7 @@ export class Parse {
       } else {
         sourceToParse.parsedSource += "(?)";
       }
-    } else if (sourceToParse.type == "cd") {
+    } else if (sourceToParse.type == ModalType.CD) {
       if (sourceToParse.hasAuthors) {
         if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
           // Author last name
@@ -559,7 +561,7 @@ export class Parse {
         sourceToParse.parsedSource += "s.d.";
         sourceToParse.warnings.push(this.addError("PUBLICATION_DATE", "publicationDate"))
       }
-    } else if (sourceToParse.type == "movie") {
+    } else if (sourceToParse.type == ModalType.MOVIE) {
       if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
         // Author last name
         if (sourceToParse.author1lastname) {
@@ -673,7 +675,7 @@ export class Parse {
       }
 
       sourceToParse.parsedSource += sourceToParse.parsedSource.endsWith(".") ? "" : ".";
-    } else if (sourceToParse.type == "interview") {
+    } else if (sourceToParse.type == ModalType.INTERVIEW) {
       sourceToParse.title = "";
       if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
         // Author last name
@@ -822,18 +824,18 @@ export class Parse {
 
   parseType(type: string): string {
     switch (type) {
-      case "book":
-      return "PROJECT.TYPES.BOOK";
-      case "internet":
-      return "PROJECT.TYPES.INTERNET";
-      case "article":
-      return "PROJECT.TYPES.ARTICLE";
-      case "cd":
-      return "PROJECT.TYPES.CD_PARSE";
-      case "movie":
-      return "PROJECT.TYPES.MOVIE";
-      case "interview":
-      return "PROJECT.TYPES.INTERVIEW";
+      case ModalType.BOOK:
+        return "PROJECT.TYPES.BOOK";
+      case ModalType.ARTICLE:
+        return "PROJECT.TYPES.ARTICLE";
+      case ModalType.INTERNET:
+        return "PROJECT.TYPES.INTERNET";
+      case ModalType.CD:
+        return "PROJECT.TYPES.CD_PARSE";
+      case ModalType.MOVIE:
+        return "PROJECT.TYPES.MOVIE";
+      case ModalType.INTERVIEW:
+        return "PROJECT.TYPES.INTERVIEW";
     }
   }
 
