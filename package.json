@@ -8,13 +8,8 @@
     "url": "https://github.com/bouzmine/metho.git"
   },
   "scripts": {
-    "build": "ionic-app-scripts build",
-    "watch": "ionic-app-scripts watch",
-    "serve:before": "watch",
-    "emulate:before": "build",
-    "deploy:before": "build",
-    "build:before": "build",
-    "run:before": "build"
+    "ionic:build": "ionic-app-scripts build",
+    "ionic:serve": "ionic-app-scripts serve"
   },
   "config": {
     "ionic_rollup": "./config/rollup.config.js"
@@ -43,7 +38,7 @@
     "zone.js": "~0.6.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.45",
+    "@ionic/app-scripts": "0.0.47",
     "cordova-common": "1.2.0",
     "typescript": "2.0.9"
   },
