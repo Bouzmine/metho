@@ -197,6 +197,8 @@
         },
         "SOURCE":{
             "NO_ERROR": "Ningún error",
+            "COPY": "Copiar la fuente",
+            "COPIED": "Fuente copiada hacia el portapapeles",
             "MODAL": {
                 "TITLE": "Modificar la fuente"
             }

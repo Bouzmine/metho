@@ -28,4 +28,6 @@
   <p class="no-errors" *ngIf="!source.warnings.length && !source.errors.length">
     {{"PROJECT.SOURCE.NO_ERROR" | translate}}
   </p>
+
+  <button ion-button full clear (click)="copy()">{{'PROJECT.SOURCE.COPY' | translate}}</button>
 </ion-content>

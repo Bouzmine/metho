@@ -65,6 +65,7 @@
     "cordova-plugin-http",
     "cordova-plugin-ios-disableshaketoedit",
     "https://github.com/driftyco/cordova-plugin-wkwebview-engine.git"
+    "https://github.com/VersoSolutions/CordovaClipboard.git"
   ],
   "cordovaPlatforms": [
     "ios@4.1.0"
