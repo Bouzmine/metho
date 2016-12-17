@@ -566,7 +566,8 @@
         }
     },
     "REFERENCES":{
-        "TAB_TITLE": "Reference"
+        "TAB_TITLE": "Reference",
+        "EMPTY_SEARCH": "No result, you can search across articles title and content"
     },
     "SETTINGS":{
         "TAB_TITLE": "Settings",

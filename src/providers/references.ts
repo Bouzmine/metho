@@ -33,4 +33,43 @@ export class References {
       img.src = this.data[i].icon;
     }
   }
+
+  search(q: string): any {
+    let qa = q.trim().split(" ");
+
+    let filteredList = [];
+
+    this.data.forEach(v => {
+      let currentObj = {
+        title: v.name,
+        id: v.id,
+        content: []
+      }
+      if (this.containsOneOf(qa, v.name)) {
+        currentObj.content.push(v);
+      }
+
+      v.subPages.forEach(sub => {
+        if (this.containsOneOf(qa, sub.name) || this.containsOneOf(qa, sub.text)) {
+          currentObj.content.push(sub);
+        }
+      });
+      
+      if (currentObj.content.length > 0) {
+        filteredList.push(currentObj);
+      }
+    });
+
+    return filteredList;
+  }
+
+  containsOneOf(qa: Array<string>, str: string): boolean {
+    for (var i = 0; i < qa.length; i++) {
+      if (str.toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
+      }else {
+        return false;
+      }
+    }
+    return true;
+  }
 }

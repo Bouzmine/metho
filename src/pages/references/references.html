@@ -5,7 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'COMMON.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}" animated="true"></ion-searchbar>
+  <ion-list *ngIf="searchQuery.trim() == ''">
     <button ion-item *ngFor="let reference of referenceData" (click)="goToReferenceDetailPage(reference.id)">
       <ion-thumbnail item-left>
         <img [src]="reference.icon">
@@ -14,4 +15,20 @@
       <p>{{ reference.description }}</p>
     </button>
   </ion-list>
+  <!-- Search results -->
+  <ion-list *ngIf="searchQuery.trim() && searchData.length">
+    <ion-item-group *ngFor="let section of searchData">
+      <ion-item-divider color="light">{{ section.title }}</ion-item-divider>
+      <button ion-item *ngFor="let entry of section.content" (click)="goToReferenceSubPage(section.id, entry.id)">
+        <h3>{{ entry.name }}</h3>
+      </button>
+    </ion-item-group>
+  </ion-list>
+  <!-- Empty screen when there's no search results -->
+  <div class="flex" padding *ngIf="searchQuery.trim() && !searchData.length">
+    <ion-icon name="close-circle" isActive="false" class="big"></ion-icon>
+    <p class="center dimmed-50">
+      {{"REFERENCES.EMPTY_SEARCH" | translate}}
+    </p>
+  </div>
 </ion-content>
