@@ -80,10 +80,9 @@ export class Scan {
               transition: loadingTransition || Promise.resolve()
             });
           }).catch((response) => {
+            var transition = <Promise<any>>Promise.resolve(true);
             if (isLoading) {
-              var transition = loading.dismiss();
-            }else {
-              var transition = Promise.resolve(true);
+              transition = loading.dismiss();
             }
             transition.then(() => {
               switch (response) {
