@@ -4,13 +4,8 @@ import { NavController, NavParams, ModalController, List, Content, FabContainer 
 import { SocialSharing } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
+import getModalFromType from "../source-modal/choose-modal";
 import { AdvancedModePage } from "../advanced-mode/advanced-mode";
-import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
-import { SourceModalArticlePage } from "../source-modal-article/source-modal-article";
-import { SourceModalInternetPage } from "../source-modal-internet/source-modal-internet";
-import { SourceModalCdPage } from "../source-modal-cd/source-modal-cd";
-import { SourceModalMoviePage } from "../source-modal-movie/source-modal-movie";
-import { SourceModalInterviewPage } from "../source-modal-interview/source-modal-interview";
 import { SourcePage } from "../source/source";
 import { PendingsPage } from "../pendings/pendings";
 
@@ -117,35 +112,17 @@ export class SourcesPage {
   }
 
   openModal(type: string, openScan: boolean = false, editing: boolean = false, source?: Source) {
-    let navParams = {
+    const navParams = {
       projectId: this.projectId,
       data: source,
       editing: editing,
       scan: openScan
     };
-    let modalOpts = {
+    const modalOpts = {
       enableBackdropDismiss: false
     };
-    switch (type) {
-      case "book":
-        var modal = this.modalCtrl.create(SourceModalBookPage, navParams, modalOpts);
-        break;
-      case "article":
-        var modal = this.modalCtrl.create(SourceModalArticlePage, navParams, modalOpts);
-        break;
-      case "internet":
-        var modal = this.modalCtrl.create(SourceModalInternetPage, navParams, modalOpts);
-        break;
-      case "cd":
-        var modal = this.modalCtrl.create(SourceModalCdPage, navParams, modalOpts);
-        break;
-      case "movie":
-        var modal = this.modalCtrl.create(SourceModalMoviePage, navParams, modalOpts);
-        break;
-      case "interview":
-        var modal = this.modalCtrl.create(SourceModalInterviewPage, navParams, modalOpts);
-        break;
-    }
+
+    let modal = this.modalCtrl.create(getModalFromType(type), navParams, modalOpts);
 
     modal.onWillDismiss(() => {
       this.loadSources();
