@@ -31,47 +31,38 @@ export class Settings {
 
   load() {
     var settings = {};
-    Object.keys(this.defaults).map((value, index) => {
-      this.localStorage.get("setting-" + value).then(res => {
-        if (res != null) {
-          settings[value] = this.transformIfBool(res);
-        }else {
-          if (value == "overideLang" && !this.isEmpty(settings)) {
-            settings[value] = "";
-          }
+    this.localStorage.forEach((value, key) => {
+      key = key.replace("setting-", "");
+      if (value != null) {
+        settings[key] = this.transformIfBool(value);
+      }else {
+        if (key == "overideLang" && !this.isEmpty(settings)) {
+          settings[key] = "";
         }
-
-        if (index == 6) {
-          if (this.isEmpty(settings)) { // LocalStorage may have been cleared by iOS or it"s 1st boot
-            this.storage.getSettings().then(backup => {
-              if (this.isEmpty(backup)) { // Make defaults (1st boot)
-                Object.keys(this.defaults).map((value, index) => {
-                  this.set(value, this.defaults[value]);
-
-                  if (index == 7) {
-                    this.isLoaded = true;
-                    this.loadEvents.emit(true);
-                  }
-                });
-              }else { // LocalStorage has been cleared by iOS but backup is there
-                Object.keys(backup).map((value, index) => {
-                  this.set(value, backup[value]);
-
-                  if (index == (Object.keys(backup).length - 1)) {
-                    this.isLoaded = true;
-                    this.loadEvents.emit(true);
-                  }
-                });
-              }
-            }).catch(err => console.log(err));
-          }else { // Everything is normal after 1st boot
-            this.settings = settings;
+      }
+    }).then(() => {
+      if (this.isEmpty(settings)) { // LocalStorage may have been cleared by iOS or it's 1st boot
+        this.storage.getSettings().then(backup => {
+          if (this.isEmpty(backup)) { // Make defaults (1st boot)
+            Object.keys(this.defaults).forEach((value, index) => {
+              this.set(value, this.defaults[value]);
+            });
             this.isLoaded = true;
             this.loadEvents.emit(true);
-            console.log(this.settings);
+          }else { // LocalStorage has been cleared by iOS but backup is there
+            Object.keys(backup).forEach((value, index) => {
+              this.set(value, backup[value]);
+            });
+            this.isLoaded = true;
+            this.loadEvents.emit(true);
           }
-        }
-      });
+        }).catch(err => console.log(err));
+      }else { // Everything is normal after 1st boot
+        this.settings = settings;
+        this.isLoaded = true;
+        this.loadEvents.emit(true);
+        console.log(this.settings);
+      }
     });
   }
 
