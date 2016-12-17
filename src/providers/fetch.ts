@@ -51,6 +51,8 @@ export class Fetch {
   }
 
   fromName(name: string, includeAuthors: boolean) {
+    name = encodeURI(name);
+
     if (includeAuthors) {
       if (this.cacheByNameWithAuthors[name]) {
         return Promise.resolve(this.cacheByNameWithAuthors[name]);
