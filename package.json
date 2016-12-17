@@ -63,7 +63,8 @@
     "cordova-plugin-sqlite-2",
     "cordova-plugin-inapppurchase",
     "cordova-plugin-http",
-    "cordova-plugin-ios-disableshaketoedit"
+    "cordova-plugin-ios-disableshaketoedit",
+    "https://github.com/driftyco/cordova-plugin-wkwebview-engine.git"
   ],
   "cordovaPlatforms": [
     "ios@4.1.0"

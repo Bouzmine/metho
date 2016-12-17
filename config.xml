@@ -26,6 +26,11 @@
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="IonicKeyboard" />
     </feature>
+    <feature name="CDVWKWebViewEngine">
+      <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
+
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <platform name="ios">
         <config-file parent="UISupportedInterfaceOrientations" platform="ios" target="*-Info.plist">
             <array>
@@ -78,4 +83,5 @@
     <icon src="resources/ios/icon/icon-small@3x.png" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.8" />
     <plugin name="cordova-plugin-ios-disableshaketoedit" spec="~1.0.0" />
+    <plugin name="cordova-plugin-wkwebview-engine" spec="https://github.com/driftyco/cordova-plugin-wkwebview-engine.git" />
 </widget>
