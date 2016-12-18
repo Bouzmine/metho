@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import ModalType from "../pages/source-modal/modals";
+import { AuthorNumber, MediaType, CivilityTitle } from "../pages/source-modal/source-enums";
 
 
 @Injectable()
@@ -118,7 +119,7 @@ export class Parse {
   }
 
   private parseBook(sourceToParse: Source): Source {
-    if (sourceToParse.hasAuthors == "13") {
+    if (sourceToParse.hasAuthors == AuthorNumber.OneToThree) {
       if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
         // Author last name
         if (sourceToParse.author1lastname) {
@@ -174,7 +175,7 @@ export class Parse {
       } else {
         sourceToParse.parsedSource += ". ";
       }
-    } else if (sourceToParse.hasAuthors == "more3") {
+    } else if (sourceToParse.hasAuthors == AuthorNumber.MoreThanThree) {
       if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
         // Author last name
         if (sourceToParse.author1lastname) {
@@ -215,7 +216,7 @@ export class Parse {
       } else {
         sourceToParse.parsedSource += " et al. ";
       }
-    } else if (sourceToParse.hasAuthors == "collective") {
+    } else if (sourceToParse.hasAuthors == AuthorNumber.Collective) {
       if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
         // Author last name
         if (sourceToParse.author1lastname) {
@@ -260,15 +261,15 @@ export class Parse {
         options: [
           {
             text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3",
-            value: "13"
+            value: AuthorNumber.OneToThree
           },
           {
             text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3",
-            value: "more3"
+            value: AuthorNumber.MoreThanThree
           },
           {
             text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE",
-            value: "collective"
+            value: AuthorNumber.Collective
           }
         ],
         type:"select"
@@ -755,12 +756,16 @@ export class Parse {
 
     // Support
     if (sourceToParse.support) {
-      if (sourceToParse.support == "dvd") {
-        sourceToParse.parsedSource += ", [DVD]";
-      } else if (sourceToParse.support == "cd") {
-        sourceToParse.parsedSource += ", [CD]";
-      } else if (sourceToParse.support == "internet") {
-        sourceToParse.parsedSource += ", [en ligne]";
+      switch (sourceToParse.support) {
+        case MediaType.DVD:
+          sourceToParse.parsedSource += ", [DVD]";
+          break;
+        case MediaType.CD:
+          sourceToParse.parsedSource += ", [CD]";
+          break;
+        case MediaType.INTERNET:
+          sourceToParse.parsedSource += ", [en ligne]";
+          break;
       }
     }else {
       sourceToParse.warnings.push(this.addComplexError("SUPPORT", "support", {
@@ -768,15 +773,15 @@ export class Parse {
         options: [
           {
             text: "PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_DVD",
-            value: "dvd"
+            value: MediaType.DVD
           },
           {
             text: "PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_CD",
-            value: "cd"
+            value: MediaType.CD
           },
           {
             text: "PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_INTERNET",
-            value: "internet"
+            value: MediaType.INTERNET
           }
         ]
       }));
@@ -817,13 +822,13 @@ export class Parse {
     sourceToParse.parsedSource += "Entrevue avec ";
     // Titre de civilité
     switch (sourceToParse.civility) {
-      case "mister":
+      case CivilityTitle.Mr:
       sourceToParse.parsedSource += "M. ";
       break;
-      case "miss":
+      case CivilityTitle.Ms:
       sourceToParse.parsedSource += "M<sup>me</sup> ";
       break;
-      case "miss_young":
+      case CivilityTitle.Mlle:
       sourceToParse.parsedSource += "M<sup>lle</sup> ";
       break;
       default:
@@ -831,15 +836,15 @@ export class Parse {
         options: [
           {
             text: "PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER",
-            value: "mister"
+            value: CivilityTitle.Mr
           },
           {
             text: "PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS",
-            value: "miss"
+            value: CivilityTitle.Ms
           },
           {
             text: "PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG",
-            value: "miss_young"
+            value: CivilityTitle.Mlle
           }
         ],
         type:"select"
