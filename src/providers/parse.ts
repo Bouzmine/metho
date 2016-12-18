@@ -118,162 +118,177 @@ export class Parse {
     return after;
   }
 
-  private parseBook(sourceToParse: Source): Source {
-    if (sourceToParse.hasAuthors == AuthorNumber.OneToThree) {
-      if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
-        // Author last name
-        if (sourceToParse.author1lastname) {
-          sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
-        } else {
-          sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
-          sourceToParse.parsedSource += "?, ";
-        }
-        // Author first name
-        if (sourceToParse.author1firstname) {
-          sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
-        } else {
-          sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
-          sourceToParse.parsedSource += "?";
-        }
+  private parseBookOneToThreeAuthors(sourceToParse: Source): Source {
+    if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
+      if (sourceToParse.author1lastname) {
+        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
       } else {
-        sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
+        sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+        sourceToParse.parsedSource += "?, ";
+      }
+
+      if (sourceToParse.author1firstname) {
+        sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
+      } else {
+        sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
         sourceToParse.parsedSource += "?";
-      }
-
-      if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
-        // Author 2 last name
-        if (sourceToParse.author2lastname) {
-          sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
-        } else {
-          sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
-          sourceToParse.parsedSource += ", ?";
-        }
-        // Author 2 first name
-        if (sourceToParse.author2firstname) {
-          sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
-        } else {
-          sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
-          sourceToParse.parsedSource += ", ?";
-        }
-      }
-
-      if (sourceToParse.author3lastname || sourceToParse.author3firstname) {
-        // Author 3 first name
-        if (sourceToParse.author3firstname) {
-          sourceToParse.parsedSource += " et " + sourceToParse.author3firstname.trim();
-        } else {
-          sourceToParse.errors.push(this.addError("THIRD_AUTHOR_FIRSTNAME", "author3firstname"));
-          sourceToParse.parsedSource += " et ?";
-        }
-        // Author 3 last name
-        if (sourceToParse.author3lastname) {
-          sourceToParse.parsedSource += " " + sourceToParse.author3lastname.toUpperCase().trim() + ". ";
-        } else {
-          sourceToParse.errors.push(this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname"));
-          sourceToParse.parsedSource += " ?. ";
-        }
-      } else {
-        sourceToParse.parsedSource += ". ";
-      }
-    } else if (sourceToParse.hasAuthors == AuthorNumber.MoreThanThree) {
-      if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
-        // Author last name
-        if (sourceToParse.author1lastname) {
-          sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
-        } else {
-          sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
-          sourceToParse.parsedSource += "?, ";
-        }
-        // Author first name
-        if (sourceToParse.author1firstname) {
-          sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
-        } else {
-          sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
-          sourceToParse.parsedSource += "?";
-        }
-      } else {
-        sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
-        sourceToParse.parsedSource += "?";
-      }
-
-      if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
-        // Author 2 last name
-        if (sourceToParse.author2lastname) {
-          sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
-        } else {
-          sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
-          sourceToParse.parsedSource += "?, ";
-        }
-        // Author 2 first name
-        if (sourceToParse.author2firstname) {
-          sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
-        } else {
-          sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
-          sourceToParse.parsedSource += "?";
-        }
-
-        sourceToParse.parsedSource += " et al. ";
-      } else {
-        sourceToParse.parsedSource += " et al. ";
-      }
-    } else if (sourceToParse.hasAuthors == AuthorNumber.Collective) {
-      if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
-        // Author last name
-        if (sourceToParse.author1lastname) {
-          sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
-        } else {
-          sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
-          sourceToParse.parsedSource += "?, ";
-        }
-        // Author first name
-        if (sourceToParse.author1firstname) {
-          sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
-        } else {
-          sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
-          sourceToParse.parsedSource += "?";
-        }
-      }
-
-      if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
-        // Author 2 last name
-        if (sourceToParse.author2lastname) {
-          sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
-        } else {
-          sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
-          sourceToParse.parsedSource += ", ?";
-        }
-        // Author 2 first name
-        if (sourceToParse.author2firstname) {
-          sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
-        } else {
-          sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
-          sourceToParse.parsedSource += ", ?";
-        }
-        sourceToParse.parsedSource += " (dir.). ";
-      } else {
-        if (sourceToParse.parsedSource) {
-          sourceToParse.parsedSource += " (dir.). ";
-        }
       }
     } else {
-      sourceToParse.parsedSource += "?. ";
-      sourceToParse.errors.push(this.addComplexError("AUTHOR_NUMBER", "hasAuthors", {
-        options: [
-          {
-            text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3",
-            value: AuthorNumber.OneToThree
-          },
-          {
-            text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3",
-            value: AuthorNumber.MoreThanThree
-          },
-          {
-            text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE",
-            value: AuthorNumber.Collective
-          }
-        ],
-        type:"select"
-      }));
+      sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
+      sourceToParse.parsedSource += "?";
+    }
+
+    if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
+      if (sourceToParse.author2lastname) {
+        sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
+      } else {
+        sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
+        sourceToParse.parsedSource += ", ?";
+      }
+
+      if (sourceToParse.author2firstname) {
+        sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
+      } else {
+        sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
+        sourceToParse.parsedSource += ", ?";
+      }
+    }
+
+    if (sourceToParse.author3lastname || sourceToParse.author3firstname) {
+      if (sourceToParse.author3firstname) {
+        sourceToParse.parsedSource += " et " + sourceToParse.author3firstname.trim();
+      } else {
+        sourceToParse.errors.push(this.addError("THIRD_AUTHOR_FIRSTNAME", "author3firstname"));
+        sourceToParse.parsedSource += " et ?";
+      }
+
+      if (sourceToParse.author3lastname) {
+        sourceToParse.parsedSource += " " + sourceToParse.author3lastname.toUpperCase().trim() + ". ";
+      } else {
+        sourceToParse.errors.push(this.addError("THIRD_AUTHOR_LASTNAME", "author3lastname"));
+        sourceToParse.parsedSource += " ?. ";
+      }
+    } else {
+      sourceToParse.parsedSource += ". ";
+    }
+
+    return sourceToParse;
+  }
+
+  private parseBookMoreThanThreeAuthors(sourceToParse: Source): Source {
+    if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
+      if (sourceToParse.author1lastname) {
+        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+      } else {
+        sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+        sourceToParse.parsedSource += "?, ";
+      }
+
+      if (sourceToParse.author1firstname) {
+        sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
+      } else {
+        sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+        sourceToParse.parsedSource += "?";
+      }
+    } else {
+      sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
+      sourceToParse.parsedSource += "?";
+    }
+
+    if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
+      if (sourceToParse.author2lastname) {
+        sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
+      } else {
+        sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
+        sourceToParse.parsedSource += "?, ";
+      }
+
+      if (sourceToParse.author2firstname) {
+        sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
+      } else {
+        sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
+        sourceToParse.parsedSource += "?";
+      }
+
+      sourceToParse.parsedSource += " et al. ";
+    } else {
+      sourceToParse.parsedSource += " et al. ";
+    }
+
+    return sourceToParse;
+  }
+
+  private parseBookCollectiveAuthors(sourceToParse: Source): Source {
+    if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
+      if (sourceToParse.author1lastname) {
+        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase().trim() + ", ";
+      } else {
+        sourceToParse.errors.push(this.addError("FIRST_AUTHOR_LASTNAME", "author1lastname"));
+        sourceToParse.parsedSource += "?, ";
+      }
+
+      if (sourceToParse.author1firstname) {
+        sourceToParse.parsedSource += sourceToParse.author1firstname.trim();
+      } else {
+        sourceToParse.errors.push(this.addError("FIRST_AUTHOR_FIRSTNAME", "author1firstname"));
+        sourceToParse.parsedSource += "?";
+      }
+    }
+
+    if (sourceToParse.author2lastname || sourceToParse.author2firstname) {
+      if (sourceToParse.author2lastname) {
+        sourceToParse.parsedSource += ", " + sourceToParse.author2lastname.toUpperCase().trim();
+      } else {
+        sourceToParse.errors.push(this.addError("SECOND_AUTHOR_LASTNAME", "author2lastname"));
+        sourceToParse.parsedSource += ", ?";
+      }
+
+      if (sourceToParse.author2firstname) {
+        sourceToParse.parsedSource += ", " + sourceToParse.author2firstname.trim();
+      } else {
+        sourceToParse.errors.push(this.addError("SECOND_AUTHOR_FIRSTNAME", "author2firstname"));
+        sourceToParse.parsedSource += ", ?";
+      }
+      sourceToParse.parsedSource += " (dir.). ";
+    } else {
+      if (sourceToParse.parsedSource) {
+        sourceToParse.parsedSource += " (dir.). ";
+      }
+    }
+
+    return sourceToParse;
+  }
+
+  private parseBook(sourceToParse: Source): Source {
+    switch (sourceToParse.hasAuthors) {
+      case AuthorNumber.OneToThree:
+        sourceToParse = this.parseBookOneToThreeAuthors(sourceToParse);
+        break;
+      case AuthorNumber.MoreThanThree:
+        sourceToParse = this.parseBookMoreThanThreeAuthors(sourceToParse);
+        break;
+      case AuthorNumber.Collective:
+        sourceToParse = this.parseBookCollectiveAuthors(sourceToParse);
+        break;
+      default:
+        sourceToParse.parsedSource += "?. ";
+        sourceToParse.errors.push(this.addComplexError("AUTHOR_NUMBER", "hasAuthors", {
+          options: [
+            {
+              text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_1TO3",
+              value: AuthorNumber.OneToThree
+            },
+            {
+              text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_MORE_3",
+              value: AuthorNumber.MoreThanThree
+            },
+            {
+              text: "PROJECT.PARSE.AUTHOR_NUMBER.AUTHOR_COLLECTIVE",
+              value: AuthorNumber.Collective
+            }
+          ],
+          type:"select"
+        }));
     }
 
     // Titre
