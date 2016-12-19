@@ -125,6 +125,7 @@ export class SourcesPage {
     let modal = this.modalCtrl.create(getModalFromType(type), navParams, modalOpts);
 
     modal.onWillDismiss(() => {
+      this.list.closeSlidingItems();
       this.loadSources();
       this.loadPendingNumber();
     });
