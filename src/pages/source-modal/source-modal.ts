@@ -9,9 +9,7 @@ import { Language } from "../../providers/language";
 import { Parse } from "../../providers/parse";
 import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
 
-@Component({
-  selector: 'page-source-modal'
-})
+
 export abstract class SourceModalBase {
   public isNew: boolean;
   public noData: boolean;
