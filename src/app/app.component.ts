@@ -6,6 +6,7 @@ import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { TabsPage } from "../pages/tabs/tabs";
 
+import { AdvancedMode } from "../providers/advanced-mode";
 import { AppStorage } from "../providers/app-storage";
 import { Language } from "../providers/language";
 import { References } from "../providers/references";
@@ -19,6 +20,7 @@ export class MyApp {
 
   constructor(
     public platform: Platform,
+    public advanced: AdvancedMode,
     public storage: AppStorage,
     public language: Language,
     public references: References,
@@ -33,6 +35,7 @@ export class MyApp {
           Splashscreen.hide();
           StatusBar.styleDefault();
           this.references.load();
+          this.advanced.init(false);
         }, 100);
       });
     });

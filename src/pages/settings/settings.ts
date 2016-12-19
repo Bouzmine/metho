@@ -48,6 +48,7 @@ export class SettingsPage {
       });
     }
     this.advancedAvailable = this.advanced.isAvailable();
+    this.advanced.init(true);
   }
 
   loadSettings() {

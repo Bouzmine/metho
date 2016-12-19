@@ -38,12 +38,12 @@ export class AdvancedMode {
     public alertCtrl: TranslatedAlertController,
     public report: Report,
     public settings: Settings,
-  ) {
-    this.init();
-  }
+  ) {}
 
-  init() {
-    if (navigator.onLine) {
+  init(retryOnFail: boolean) {
+    const isOnline = navigator.onLine;
+    const isAlreadyLoaded = (this.hasLoaded);
+    if (isOnline && !isAlreadyLoaded) {
       InAppPurchase.getProducts(["com.fclavette.metho.advanced"]).then(products => {
         let product = products[0];
         this.price = product.price;
@@ -58,9 +58,9 @@ export class AdvancedMode {
         this.hasLoaded = true;
         this.loadEvents.emit(true);
       });
-    }else {
+    }else if(!isAlreadyLoaded && retryOnFail) {
       setTimeout(() => {
-        this.init();
+        this.init(true);
       }, 5000);
     }
   }
