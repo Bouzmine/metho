@@ -32,13 +32,13 @@ export class SourceModalBookPage extends SourceModalBase {
   public _timeout: any;
   public instantList: Array<any>;
   public instantStatus: any = {
-    loading: false,
-    none: false,
-    err500: false,
-    noConnection: false,
-    ok: false,
-    shown: false,
-    timeout: false
+    isLoading: false,
+    noResult: false,
+    serverError: false,
+    notOnline: false,
+    isDone: false,
+    isShown: false,
+    timeoutError: false
   };
 
   constructor(
@@ -123,7 +123,7 @@ export class SourceModalBookPage extends SourceModalBase {
           this.fetch.fromName(query, hasAuthor).then(suggestions => {
             if (suggestions.length) {
               this.instantList = suggestions;
-              this.instantSearchIsOK();
+              this.instantSearchIsDone();
             }else {
               this.instantSearchHasNone();
             }
@@ -144,46 +144,46 @@ export class SourceModalBookPage extends SourceModalBase {
   }
 
   resetInstantSearchVars() {
-    this.instantStatus.ok = false;
-    this.instantStatus.loading = false;
-    this.instantStatus.none = false;
-    this.instantStatus.err500 = false;
-    this.instantStatus.shown = false;
-    this.instantStatus.timeout = false;
+    this.instantStatus.isDone = false;
+    this.instantStatus.isLoading = false;
+    this.instantStatus.noResult = false;
+    this.instantStatus.serverError = false;
+    this.instantStatus.isShown = false;
+    this.instantStatus.timeoutError = false;
   }
 
   instantSearchIsLoading() {
     this.resetInstantSearchVars();
-    this.instantStatus.loading = true;
+    this.instantStatus.isLoading = true;
   }
 
-  instantSearchIsOK() {
+  instantSearchIsDone() {
     this.resetInstantSearchVars();
-    this.instantStatus.ok = true;
+    this.instantStatus.isDone = true;
   }
 
   instantSearchHasNone() {
     this.resetInstantSearchVars();
-    this.instantStatus.none = true;
+    this.instantStatus.noResult = true;
   }
 
   instantSearchErr500() {
     this.resetInstantSearchVars();
-    this.instantStatus.err500 = true;
+    this.instantStatus.serverError = true;
   }
 
   instantSearchTimeout() {
     this.resetInstantSearchVars();
-    this.instantStatus.err500 = true;
-    this.instantStatus.timeout = true;
+    this.instantStatus.serverError = true;
+    this.instantStatus.timeoutError = true;
   }
 
   toggleInstantSearch() {
-    this.instantStatus.shown = !this.instantStatus.shown;
+    this.instantStatus.isShown = !this.instantStatus.isShown;
   }
 
   openExplaining() {
-    if (this.instantStatus.none) {
+    if (this.instantStatus.noResult) {
       this.alertCtrl.present({
         title: "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS",
         message: "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC",
@@ -193,7 +193,7 @@ export class SourceModalBookPage extends SourceModalBase {
           }
         ]
       });
-    }else if (this.instantStatus.timeout) {
+    }else if (this.instantStatus.timeoutError) {
       this.alertCtrl.present({
         title: "PROJECT.DETAIL.POPUP.TIMEOUT_TITLE",
         message: "PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH",
@@ -203,7 +203,7 @@ export class SourceModalBookPage extends SourceModalBase {
           }
         ]
       });
-    }else if (this.instantStatus.err500) {
+    }else if (this.instantStatus.serverError) {
       this.alertCtrl.present({
         title: "PROJECT.DETAIL.POPUP.ERROR",
         message: "PROJECT.DETAIL.POPUP.ERROR_500",
@@ -219,12 +219,12 @@ export class SourceModalBookPage extends SourceModalBase {
   fillInfos(suggestion: any) {
     if (this.isEmpty(false)) {
       this.updateValues(suggestion);
-      this.instantStatus.shown = false;
+      this.instantStatus.isShown = false;
       this.insertingFromScan = true;
     }else {
       this.askIfOverwrite(() => {
         this.updateValues(suggestion);
-        this.instantStatus.shown = false;
+        this.instantStatus.isShown = false;
         this.insertingFromScan = true;
       });
     }
