@@ -106,53 +106,73 @@ export class SourceModalBookPage extends SourceModalBase {
     });
   }
 
-  // Instant Search
   search() {
     if (this.isAdvanced) {
       if (this._timeout) {
         clearTimeout(this._timeout);
       }
       this._timeout = setTimeout(() => {
-        this.instantStatus.ok = false;
-        this.instantStatus.loading = false;
-        this.instantStatus.none = false;
-        this.instantStatus.err500 = false;
-        this.instantStatus.shown = false;
-        this.instantStatus.timeout = false;
-        if (this.form.value.title) {
-          this.instantStatus.loading = true;
-          let query: string = "";
-          let includeAuthors: boolean;
-          if (this.form.value.author1lastname || this.form.value.author1firstname) {
-            query = this.form.value.title + " " + this.form.value.author1lastname + " " + this.form.value.author1firstname;
-            includeAuthors = true;
-          }else {
-            query = this.form.value.title;
-            includeAuthors = false;
-          }
-          this.fetch.fromName(query, includeAuthors).then(list => {
-            if (list.length != 0) {
-              this.instantList = list;
-              this.instantStatus.loading = false;
-              this.instantStatus.ok = true;
+        const title = this.form.value.title;
+        const firstname = this.form.value.author1firstname;
+        const lastname = this.form.value.author1lastname;
+
+        if (title) {
+          this.instantSearchIsLoading();
+          const hasAuthor = (firstname || lastname);
+          let query = `${title} ${firstname} ${lastname}`.trim();
+          this.fetch.fromName(query, hasAuthor).then(suggestions => {
+            if (suggestions.length) {
+              this.instantList = suggestions;
+              this.instantSearchIsOK();
             }else {
-              this.instantStatus.loading = false;
-              this.instantStatus.none = true;
+              this.instantSearchHasNone();
             }
-          }, err => {
+          }).catch(err => {
             if (err.status >= 500 && err.status < 599) {
-              this.instantStatus.err500 = true;
-              this.instantStatus.loading = false;
+              this.instantSearchErr500();
             }else if (err.status == 408) {
-              this.instantStatus.err500 = true;
-              this.instantStatus.timeout = true;
-              this.instantStatus.loading = false;
+              this.instantSearchTimeout();
             }
           });
         }
         this._timeout = null;
       }, 500);
     }
+  }
+
+  resetInstantSearchVars() {
+    this.instantStatus.ok = false;
+    this.instantStatus.loading = false;
+    this.instantStatus.none = false;
+    this.instantStatus.err500 = false;
+    this.instantStatus.shown = false;
+    this.instantStatus.timeout = false;
+  }
+
+  instantSearchIsLoading() {
+    this.resetInstantSearchVars();
+    this.instantStatus.loading = true;
+  }
+
+  instantSearchIsOK() {
+    this.resetInstantSearchVars();
+    this.instantStatus.ok = true;
+  }
+
+  instantSearchHasNone() {
+    this.resetInstantSearchVars();
+    this.instantStatus.none = true;
+  }
+
+  instantSearchErr500() {
+    this.resetInstantSearchVars();
+    this.instantStatus.err500 = true;
+  }
+
+  instantSearchTimeout() {
+    this.resetInstantSearchVars();
+    this.instantStatus.err500 = true;
+    this.instantStatus.timeout = true;
   }
 
   toggleInstantSearch() {
@@ -199,27 +219,14 @@ export class SourceModalBookPage extends SourceModalBase {
       this.instantStatus.shown = false;
       this.insertingFromScan = true;
     }else {
-      this.alertCtrl.present({
-        title: "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
-        message: "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
-        buttons: [
-          {
-            text: "COMMON.CANCEL"
-          },
-          {
-            text: "PROJECT.DETAIL.POPUP.OVERWRITE",
-            handler: () => {
-              this.updateValues(suggestion);
-              this.instantStatus.shown = false;
-              this.insertingFromScan = true;
-            }
-          }
-        ]
+      this.askIfOverwrite(() => {
+        this.updateValues(suggestion);
+        this.instantStatus.shown = false;
+        this.insertingFromScan = true;
       });
     }
   }
 
-  // Scan
   scan() {
     this.scanProvider.scan().then((response) => {
       if (response.data) {
@@ -228,27 +235,31 @@ export class SourceModalBookPage extends SourceModalBase {
           this.insertingFromScan = true;
         }else {
           response.transition.then(() => {
-            this.alertCtrl.present({
-              title: "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
-              message: "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
-              buttons: [
-                {
-                  text: "COMMON.CANCEL"
-                },
-                {
-                  text: "PROJECT.DETAIL.POPUP.OVERWRITE",
-                  handler: () => {
-                    this.updateValues(response.data);
-                    this.insertingFromScan = true;
-                  }
-                }
-              ]
+            this.askIfOverwrite(() => {
+              this.updateValues(response.data);
+              this.insertingFromScan = true;
             });
           });
         }
       }else if (response.addPending) {
         this.addPending(response.isbn, response.transition);
       }
+    });
+  }
+
+  askIfOverwrite(callbackIfYes: () => void) {
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.AUTO_FILL_TITLE",
+      message: "PROJECT.DETAIL.POPUP.AUTO_FILL_DESC",
+      buttons: [
+        {
+          text: "COMMON.CANCEL"
+        },
+        {
+          text: "PROJECT.DETAIL.POPUP.OVERWRITE",
+          handler: callbackIfYes
+        }
+      ]
     });
   }
 
