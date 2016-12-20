@@ -134,6 +134,9 @@ export class SourceModalBookPage extends SourceModalBase {
               this.instantSearchTimeout();
             }
           });
+        }else {
+          this.instantList = [];
+          this.resetInstantSearchVars();
         }
         this._timeout = null;
       }, 500);
