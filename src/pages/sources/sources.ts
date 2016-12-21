@@ -1,7 +1,7 @@
 import { ViewChild, Component } from "@angular/core";
 
 import { NavController, NavParams, ModalController, List, Content, FabContainer } from "ionic-angular";
-import { SocialSharing } from "ionic-native";
+import { SocialSharing, Clipboard } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import getModalFromType from "../source-modal/choose-modal";
@@ -13,6 +13,7 @@ import { AppStorage } from "../../providers/app-storage";
 import { Settings } from "../../providers/settings";
 import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
 import { TranslatedAlertController } from "../../providers/translated-alert-controller";
+import { TranslatedToastController } from "../../providers/translated-toast-controller";
 
 
 @Component({
@@ -37,6 +38,7 @@ export class SourcesPage {
     public translate: TranslateService,
     public actionSheetCtrl: TranslatedActionSheetController,
     public alertCtrl: TranslatedAlertController,
+    public toastCtrl: TranslatedToastController,
     public modalCtrl: ModalController,
     public storage: AppStorage,
     public settings: Settings,
@@ -162,6 +164,36 @@ export class SourcesPage {
   }
 
   share() {
+    let action = this.actionSheetCtrl.present({
+      title: "",
+      buttons: [
+        {
+          text: "PROJECT.DETAIL.COPY",
+          handler: () => {
+            action.then(sheet => {
+              sheet.dismiss().then(() => this.exportViaCopy());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.DETAIL.EXPORT_EMAIL",
+          handler: () => {
+            action.then(sheet => {
+              sheet.dismiss().then(() => this.exportViaEmail());
+            });
+            return false;
+          }
+        },
+        {
+          text: "COMMON.CANCEL",
+          role: "cancel"
+        }
+      ]
+    });
+  }
+
+  exportViaEmail() {
     this.translate.get("PROJECT.DETAIL.SHARE_TEXT", { project_title: this.project.name }).subscribe(text => {
       let textToShare = text;
       let errNum = 0;
@@ -210,6 +242,24 @@ export class SourcesPage {
           this.promptForAdvanced();
         }).catch(() => {});
       }
+    });
+  }
+
+  exportViaCopy() {
+    let sourceWithoutHTML = this.sources.reduce((accumulator, current) => {
+      return accumulator + current.parsedSource + "\n\n";
+    }, "").replace(/[<][/]?[a-z]+[>]/g, "");
+    console.log(sourceWithoutHTML);
+    Clipboard.copy(sourceWithoutHTML).then(() => {
+      this.toastCtrl.present({
+        message: "PROJECT.DETAIL.COPIED",
+        duration: 1500,
+        dismissOnPageChange: true,
+        showCloseButton: false,
+        position: "top"
+      });
+    }).catch((err) => {
+      console.log(err);
     });
   }
 

@@ -41,6 +41,9 @@
             "PENDING_ELEMENTS": "Drafts",
             "CHOOSE_TYPE": "Choose source type",
             "SHARE_TEXT": "Here are the sources for project « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
+            "COPY": "Copy",
+            "COPIED": "Sources copied to clipboard",
+            "EXPORT_EMAIL": "Export by email",
             "MODAL":{
                 "TITLE": "New source",
                 "SCAN": "Scan barcode",

@@ -41,6 +41,9 @@
             "PENDING_ELEMENTS": "Borradores",
             "CHOOSE_TYPE": "Elegir un typo de fuente",
             "SHARE_TEXT": "Aquí está las fuentes del proyecto « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
+            "COPY": "Copiar",
+            "COPIED": "Fuentes copiadas hacia el portapapeles",
+            "EXPORT_EMAIL": "Exportar por mail",
             "MODAL":{
                 "TITLE": "Nueva fuente",
                 "SCAN": "Escáner el código de barras",

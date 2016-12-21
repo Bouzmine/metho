@@ -41,6 +41,9 @@
             "PENDING_ELEMENTS": "Brouillons",
             "CHOOSE_TYPE": "Choisir le type de source",
             "SHARE_TEXT": "Voici les sources du projet « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
+            "COPY": "Copier",
+            "COPIED": "Sources copiées dans le presse-papier",
+            "EXPORT_EMAIL": "Exporter par courriel",
             "MODAL":{
                 "TITLE": "Nouvelle source",
                 "SCAN": "Balayer le code",
