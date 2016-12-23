@@ -107,40 +107,41 @@ export class SourceModalBookPage extends SourceModalBase {
   }
 
   search() {
-    if (this.isAdvanced) {
-      if (this._timeout) {
-        clearTimeout(this._timeout);
-      }
-      this._timeout = setTimeout(() => {
-        const title = this.form.value.title;
-        const firstname = this.form.value.author1firstname;
-        const lastname = this.form.value.author1lastname;
+    if (!this.isAdvanced) return;
+    if (!navigator.onLine) return;
 
-        if (title) {
-          this.instantSearchIsLoading();
-          const hasAuthor = (firstname || lastname);
-          let query = `${title} ${firstname} ${lastname}`.trim();
-          this.fetch.fromName(query, hasAuthor).then(suggestions => {
-            if (suggestions.length) {
-              this.instantList = suggestions;
-              this.instantSearchIsDone();
-            }else {
-              this.instantSearchHasNone();
-            }
-          }).catch(err => {
-            if (err.status >= 500 && err.status < 599) {
-              this.instantSearchErr500();
-            }else if (err.status == 408) {
-              this.instantSearchTimeout();
-            }
-          });
-        }else {
-          this.instantList = [];
-          this.resetInstantSearchVars();
-        }
-        this._timeout = null;
-      }, 500);
+    if (this._timeout) {
+      clearTimeout(this._timeout);
     }
+    this._timeout = setTimeout(() => {
+      const title = this.form.value.title;
+      const firstname = this.form.value.author1firstname;
+      const lastname = this.form.value.author1lastname;
+
+      if (title) {
+        this.instantSearchIsLoading();
+        const hasAuthor = (firstname || lastname);
+        let query = `${title} ${firstname} ${lastname}`.trim();
+        this.fetch.fromName(query, hasAuthor).then(suggestions => {
+          if (suggestions.length) {
+            this.instantList = suggestions;
+            this.instantSearchIsDone();
+          }else {
+            this.instantSearchHasNone();
+          }
+        }).catch(err => {
+          if (err.status >= 500 && err.status < 599) {
+            this.instantSearchErr500();
+          }else if (err.status == 408) {
+            this.instantSearchTimeout();
+          }
+        });
+      }else {
+        this.instantList = [];
+        this.resetInstantSearchVars();
+      }
+      this._timeout = null;
+    }, 500);
   }
 
   resetInstantSearchVars() {
