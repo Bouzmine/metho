@@ -194,63 +194,77 @@ export class SourcesPage {
   }
 
   exportViaEmail() {
-    this.translate.get("PROJECT.DETAIL.SHARE_TEXT", { project_title: this.project.name }).subscribe(text => {
-      let textToShare = text;
-      let errNum = 0;
-      let arr_sources = JSON.parse(JSON.stringify(this.sources)).sort((a, b) => {
-        return a.parsedSource.localeCompare(b.parsedSource);
-      });
-      arr_sources.forEach(value => {
-        textToShare += value.parsedSource + "<br><br>";
-        errNum += value.errors.length;
-      });
+    this.translate.get("PROJECT.DETAIL.SHARE_TEXT", {
+      project_title: this.project.name
+    }).subscribe(header => {
+      let content = this.getExportText(false, header);
+      let numberOfErrors = this.getNumberOfErrors();
 
-      if (errNum > 0 && !this.settings.get("ignoreErrors")) {
-        this.alertCtrl.present({
-          title: "PROJECT.DETAIL.POPUP.SHARE_TEXT",
-          message: "PROJECT.DETAIL.POPUP.ERRORS_SOURCES",
-          buttons: [
-            {
-              text: "COMMON.CANCEL"
-            },
-            {
-              text: "PROJECT.DETAIL.POPUP.SHARE",
-              handler: () => {
-                SocialSharing.shareViaEmail(
-                  textToShare,
-                  this.project.name,
-                  [],
-                  [],
-                  [],
-                  []
-                ).then(() => {
-                  this.promptForAdvanced();
-                }).catch(() => {});
-              }
-            }
-          ]
-        }, undefined, { errNum: errNum });
+      if (numberOfErrors > 0 && !this.settings.get("ignoreErrors")) {
+        this.askIfIgnoreErrors(numberOfErrors, () => {
+          this.openEmailComposer(this.project.name, content).then(() => {
+            this.promptForAdvanced();
+          }).catch((err) => console.log(err));
+        });
       } else {
-        SocialSharing.shareViaEmail(
-          textToShare,
-          this.project.name,
-          [],
-          [],
-          [],
-          []
-        ).then(() => {
+        this.openEmailComposer(this.project.name, content).then(() => {
           this.promptForAdvanced();
-        }).catch(() => {});
+        }).catch((err) => console.log(err));
       }
     });
   }
 
+  getExportText(removeHTML: boolean, header: string = ""): string {
+    const lineEnding = removeHTML ? "\n\n" : "<br><br>";
+
+    let textWithHTML = this.sources.concat().sort((a, b) => {
+      return a.parsedSource.localeCompare(b.parsedSource);
+    }).reduce((accumulator, current) => {
+      return accumulator + current.parsedSource + lineEnding;
+    }, header);
+
+    if (removeHTML) {
+      return textWithHTML.replace(/[<][/]?[a-z]+[>]/g, "");
+    }else {
+      return textWithHTML;
+    }
+  }
+
+  getNumberOfErrors(): number {
+    return this.sources.reduce((acc, item) => {
+      return acc + item.errors.length;
+    }, 0);
+  }
+
+  askIfIgnoreErrors(numberOfErrors: number, callback: () => void) {
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.SHARE_TEXT",
+      message: "PROJECT.DETAIL.POPUP.ERRORS_SOURCES",
+      buttons: [
+        {
+          text: "COMMON.CANCEL"
+        },
+        {
+          text: "PROJECT.DETAIL.POPUP.SHARE",
+          handler: callback
+        }
+      ]
+    }, {}, { errNum: numberOfErrors });
+  }
+
+  openEmailComposer(title: string, body: string): Promise<any> {
+    return SocialSharing.shareViaEmail(
+        body,
+        title,
+        [],
+        [],
+        [],
+        []
+      );
+  }
+
   exportViaCopy() {
-    let sourceWithoutHTML = this.sources.reduce((accumulator, current) => {
-      return accumulator + current.parsedSource + "\n\n";
-    }, "").replace(/[<][/]?[a-z]+[>]/g, "");
-    console.log(sourceWithoutHTML);
-    Clipboard.copy(sourceWithoutHTML).then(() => {
+    Clipboard.copy(this.getExportText(true)).then(() => {
       this.toastCtrl.present({
         message: "PROJECT.DETAIL.COPIED",
         duration: 1500,
