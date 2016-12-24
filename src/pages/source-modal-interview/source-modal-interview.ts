@@ -93,14 +93,15 @@ export class SourceModalInterviewPage extends SourceModalBase {
   }
 
   isEmpty() {
-    if (!this.form.value.interviewed1firstname && !this.form.value.interviewed1lastname && !this.form.value.interviewedTitle && !this.form.value.publicationLocation && !this.form.value.civility && !this.form.value.publicationLocation) {
-      if (!this.form.value.author1firstname || !this.form.value.author1firstname || this.settings.get("firstname") || this.settings.get("lastname")) {
-        return true;
-      }else {
-        return false;
-      }
-    }else {
-      return false;
+    let exclusions = [];
+    if (this.settings.get("firstname") != "") {
+      exclusions.push("author1firstname");
     }
+
+    if (this.settings.get("lastname") != "") {
+      exclusions.push("author1lastname");
+    }
+
+    return super.isEmpty(exclusions);
   }
 }

@@ -54,7 +54,7 @@ export abstract class SourceModalBase {
   }
 
   dismiss() {
-    if (!this.isEmpty(true) && this.isNew) {
+    if (!this.isEmpty() && this.isNew) {
       let actionsheet = this.actionSheetCtrl.present({
         buttons: [
           {
@@ -108,7 +108,23 @@ export abstract class SourceModalBase {
     closeFunc.bind(this)();
   }
 
-  abstract isEmpty(includeTitle?: boolean): boolean;
+  isEmpty(exclusions: string[] = []): boolean {
+    exclusions.push("consultationDate");
+    
+    for (var key in this.form.value) {
+      if (!this.form.value.hasOwnProperty(key)) continue;
+
+      if (exclusions.indexOf(key) > -1) {
+        continue;
+      }
+
+      if (this.form.value[key] != "") {
+        return false;
+      }
+    }
+
+    return true;
+  }
 
   updateValues(newValue: any) {
     this.form.patchValue(newValue);

@@ -58,12 +58,4 @@ export class SourceModalCdPage extends SourceModalBase {
       this.settings.set("cdAlertShown", true);
     }
   }
-
-  isEmpty() {
-    if (!this.form.value.author1firstname && !this.form.value.author1lastname && !this.form.value.author2firstname && !this.form.value.author2lastname && !this.form.value.editor && !this.form.value.title && !this.form.value.hasAuthors && !this.form.value.publicationDate && !this.form.value.publicationLocation) {
-      return true;
-    }else {
-      return false;
-    }
-  }
 }

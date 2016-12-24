@@ -45,12 +45,4 @@ export class SourceModalMoviePage extends SourceModalBase {
       consultationDate: [this.noData ? "" : this.previous.consultationDate],
     });
   }
-
-  isEmpty() {
-    if (!this.form.value.hasAuthors && !this.form.value.author1firstname && !this.form.value.author1lastname && !this.form.value.title && !this.form.value.episodeTitle && !this.form.value.productionLocation && !this.form.value.productor && !this.form.value.broadcaster && !this.form.value.duration && !this.form.value.publicationDate && !this.form.value.support) {
-      return true;
-    }else {
-      return false;
-    }
-  }
 }

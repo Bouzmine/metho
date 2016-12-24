@@ -218,7 +218,7 @@ export class SourceModalBookPage extends SourceModalBase {
   }
 
   fillInfos(suggestion: any) {
-    if (this.isEmpty(false)) {
+    if (this.isEmpty(["title"])) {
       this.updateValues(suggestion);
       this.instantStatus.isShown = false;
       this.insertingFromScan = true;
@@ -234,7 +234,7 @@ export class SourceModalBookPage extends SourceModalBase {
   scan() {
     this.scanProvider.scan().then((response) => {
       if (response.data) {
-        if (this.isEmpty(true)) {
+        if (this.isEmpty()) {
           this.updateValues(response.data);
           this.insertingFromScan = true;
         }else {
@@ -278,22 +278,6 @@ export class SourceModalBookPage extends SourceModalBase {
     transition.then(() => {
       this.viewCtrl.dismiss();
     });
-  }
-
-  isEmpty(includeTitle: boolean) {
-    if (!this.form.value.author1firstname && !this.form.value.author1lastname && !this.form.value.author2firstname && !this.form.value.author2lastname && !this.form.value.author3firstname && !this.form.value.author3lastname && !this.form.value.editor && !this.form.value.hasAuthors && !this.form.value.pageNumber && !this.form.value.publicationDate && !this.form.value.publicationLocation) {
-      if (includeTitle) {
-        if (!this.form.value.title) {
-          return true;
-        }else {
-          return false;
-        }
-      }else {
-        return true;
-      }
-    }else {
-      return false;
-    }
   }
 
   openBrowser() {

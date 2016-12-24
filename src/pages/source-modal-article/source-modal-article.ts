@@ -40,12 +40,4 @@ export class SourceModalArticlePage extends SourceModalBase {
       endPage: [this.noData ? "" : this.previous.endPage]
     });
   }
-
-  isEmpty() {
-    if (!this.form.value.author1firstname && !this.form.value.author1lastname && !this.form.value.editor && !this.form.value.editionNumber && !this.form.value.publicationDate && !this.form.value.startPage && !this.form.value.endPage && !this.form.value.title) {
-      return true;
-    }else {
-      return false;
-    }
-  }
 }
