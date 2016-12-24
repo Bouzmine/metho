@@ -46,16 +46,20 @@ export class SourceModalCdPage extends SourceModalBase {
 
   ionViewDidEnter() {
     if (!this.settings.get("cdAlertShown")) {
-      let alert = this.alertCtrl.present({
-        title: "PROJECT.DETAIL.POPUP.CAUTION",
-        message: "PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION",
-        buttons: [
-          {
-            text: "COMMON.OK"
-          }
-        ]
-      });
+      this.showCdAlert();
       this.settings.set("cdAlertShown", true);
     }
+  }
+
+  showCdAlert() {
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.CAUTION",
+      message: "PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION",
+      buttons: [
+        {
+          text: "COMMON.OK"
+        }
+      ]
+    });
   }
 }
