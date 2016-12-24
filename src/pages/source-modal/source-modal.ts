@@ -54,7 +54,7 @@ export abstract class SourceModalBase {
   }
 
   dismiss() {
-    if (!this.isEmpty() && this.isNew) {
+    if (!this.isEmpty(true) && this.isNew) {
       let actionsheet = this.actionSheetCtrl.present({
         buttons: [
           {
