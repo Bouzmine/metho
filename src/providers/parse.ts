@@ -454,6 +454,7 @@ export class Parse {
         sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname"));
       }
     } else {
+      sourceToParse.parsedSource += "?, ?. ";
       sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
     }
 
