@@ -35,7 +35,6 @@ export class TranslatedAlertController {
     }
 
     let cleanTokens = tokens.filter(element => element !== undefined);
-    console.log(cleanTokens);
 
     return new Promise(resolve => {
       this.translate.get(cleanTokens, translationOpts).subscribe(translations => {
