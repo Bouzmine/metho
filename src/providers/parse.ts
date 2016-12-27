@@ -538,7 +538,7 @@ export class Parse {
       }
     } else {
       if (sourceToParse.editor) {
-        sourceToParse.parsedSource += sourceToParse.editor + ", ";
+        sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
       } else {
         sourceToParse.parsedSource += "?, ";
         sourceToParse.errors.push(this.addError("HOMEPAGE_TITLE", "editor"));
