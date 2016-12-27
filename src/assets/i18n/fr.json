@@ -93,6 +93,10 @@
                 },
                 "INTERNET": {
                     "HAS_AUTHORS": "La source a un auteur",
+                    "ORGANIZATION": "La source a un organisme",
+                    "ORGANIZATION_NAME": "Organisme",
+                    "ORGANIZATION_NAME_PLACEHOLDER": "Amnistie internationale",
+                    "NONE": "Aucun organisme ou auteur",
                     "WEBPAGE_NAME": "Titre de l'article",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
                     "WEBSITE_NAME": "Nom du site web",
@@ -414,6 +418,12 @@
                 "TEXT": "Entrez le titre de la page d'accueil",
                 "DESC": "Titre de la page d'accueil",
                 "EXAMPLE": "Wikipédia, l'encyclopédie libre"
+            },
+            "ORGANIZATION_NAME": {
+                "TITLE": "Organisme",
+                "TEXT": "Entrez le nom de l'organisme",
+                "DESC": "Nom de l'organisme",
+                "EXAMPLE": "Amnistie internationale"
             },
             "PAGE_TITLE": {
                 "TITLE": "Titre de la page",

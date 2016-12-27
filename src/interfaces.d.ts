@@ -42,6 +42,7 @@ interface Source extends PouchDBObject {
   startPage?: number;
   endPage?: number;
   // Internet
+  organization?: string;
   url?: string;
   consultationDate?: string;
   // Movie

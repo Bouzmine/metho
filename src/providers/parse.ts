@@ -516,7 +516,7 @@ export class Parse {
   }
 
   private parseInternet(sourceToParse: Source): Source {
-    if (sourceToParse.hasAuthors) {
+    if (sourceToParse.hasAuthors == "author") {
       if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
         // Author last name
         if (sourceToParse.author1lastname) {
@@ -536,6 +536,13 @@ export class Parse {
         sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
         sourceToParse.parsedSource += "?. ";
       }
+    }else if (sourceToParse.hasAuthors == "org") {
+      if (sourceToParse.organization) {
+        sourceToParse.parsedSource += sourceToParse.organization.toUpperCase().trim() + ", ";
+      } else {
+        sourceToParse.errors.push(this.addError("ORGANIZATION_NAME", "organization"));
+        sourceToParse.parsedSource += "?. ";
+      }
     } else {
       if (sourceToParse.editor) {
         sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
@@ -553,8 +560,8 @@ export class Parse {
       sourceToParse.errors.push(this.addError("PAGE_TITLE", "title"));
     }
 
-    // Titre de la page d"accueil (si il y a des auteurs)
-    if (sourceToParse.hasAuthors) {
+    // Titre de la page d'accueil (si il y a des auteurs)
+    if (sourceToParse.hasAuthors != "none") {
       if (sourceToParse.editor) {
         sourceToParse.parsedSource += "<em>" + sourceToParse.editor + "</em>, ";
       } else {

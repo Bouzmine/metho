@@ -37,6 +37,7 @@ export class SourceModalInternetPage extends SourceModalBase {
       hasAuthors: [this.noData ? false : this.previous.hasAuthors],
       author1firstname: [this.noData ? "" : this.previous.author1firstname],
       author1lastname: [this.noData ? "" : this.previous.author1lastname],
+      organization: [this.noData ? "" : this.previous.organization],
       title: [this.noData ? "" : this.previous.title],
       editor: [this.noData ? "" : this.previous.editor],
       url: [this.noData ? "" : this.previous.url],
