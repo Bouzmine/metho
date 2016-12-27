@@ -99,7 +99,7 @@
                     "NONE": "No organization or author",
                     "WEBPAGE_NAME": "Webpage's title",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
-                    "WEBSITE_NAME": "Website's title",
+                    "WEBSITE_NAME": "Homepage title",
                     "WEBSITE_NAME_PLACEHOLDER": "Wikipedia, the free encyclopedia",
                     "URL": "Web address",
                     "URL_PLACEHOLDER": "http://www.en.wikipedia.org",
@@ -414,9 +414,9 @@
                 "EXAMPLE": "16"
             },
             "HOMEPAGE_TITLE": {
-                "TITLE": "Website's title",
-                "TEXT": "Enter website's title",
-                "DESC": "Website's title",
+                "TITLE": "Homepage",
+                "TEXT": "Enter the homepage title",
+                "DESC": "Homepage title",
                 "EXAMPLE": "Wikipedia, the free encyclopedia"
             },
             "ORGANIZATION_NAME": {
