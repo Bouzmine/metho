@@ -34,7 +34,7 @@ export class SourceModalInternetPage extends SourceModalBase {
     let moment = this.language.getMoment();
     this.generateLabels(moment);
     this.form = fb.group({
-      hasAuthors: [this.noData ? "none" : this.previous.hasAuthors],
+      hasAuthors: [this.noData ? false : this.previous.hasAuthors],
       author1firstname: [this.noData ? "" : this.previous.author1firstname],
       author1lastname: [this.noData ? "" : this.previous.author1lastname],
       organization: [this.noData ? "" : this.previous.organization],
