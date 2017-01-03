@@ -43,6 +43,8 @@ import { TranslatedActionSheetController } from "../providers/translated-action-
 import { TranslatedAlertController } from "../providers/translated-alert-controller";
 import { TranslatedToastController } from "../providers/translated-toast-controller";
 
+import { SliderComponent } from "../components/slider/slider";
+
 export function translateDeps (http: Http) {
   return new TranslateStaticLoader(http, "assets/i18n", ".json");
 }
@@ -70,7 +72,8 @@ export function translateDeps (http: Http) {
     SourceModalInternetPage,
     SourceModalInterviewPage,
     SourceModalMoviePage,
-    SourcesPage
+    SourcesPage,
+    SliderComponent
   ],
   imports: [
     HttpModule,
