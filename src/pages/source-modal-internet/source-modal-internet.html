@@ -27,18 +27,20 @@
       </ion-item>
     </ion-list>
     <ion-list>
-      <div *ngIf="form.value.hasAuthors == 'author'" class="authors">
+      <slider [isOpen]="form.value.hasAuthors == 'author'" class="authors">
         <ion-item>
           <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
         </ion-item>
         <ion-item>
           <ion-input formControlName="author1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
         </ion-item>
-      </div>
-      <ion-item *ngIf="form.value.hasAuthors == 'org'">
-        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERNET.ORGANIZATION_NAME" | translate}}</ion-label>
-        <ion-input formControlName="organization" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.ORGANIZATION_NAME_PLACEHOLDER' | translate}}"></ion-input>
-      </ion-item>
+      </slider>
+      <slider [isOpen]="form.value.hasAuthors == 'org'">
+        <ion-item>
+          <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERNET.ORGANIZATION_NAME" | translate}}</ion-label>
+          <ion-input formControlName="organization" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.ORGANIZATION_NAME_PLACEHOLDER' | translate}}"></ion-input>
+        </ion-item>
+      </slider>
       <ion-item>
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME" | translate}}</ion-label>
         <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME_PLACHOLDER' | translate}}"></ion-input>

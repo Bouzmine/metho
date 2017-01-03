@@ -17,22 +17,24 @@
         <ion-label>{{"PROJECT.DETAIL.MODAL.CD.HAS_AUTHORS" | translate}}</ion-label>
         <ion-checkbox formControlName="hasAuthors"></ion-checkbox>
       </ion-item>
-      <div *ngIf="form.value.hasAuthors" class="authors">
-        <ion-item>
-          <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input formControlName="author1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
-        </ion-item>
-        <div *ngIf="form.value.author1firstname || form.value.author1lastname" class="inputs">
+      <slider [isOpen]="form.value.hasAuthors">
+        <div class="authors">
           <ion-item>
-            <ion-input formControlName="author2firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
+            <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-input formControlName="author2lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
+            <ion-input formControlName="author1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
           </ion-item>
+          <div *ngIf="form.value.author1firstname || form.value.author1lastname" class="inputs">
+            <ion-item>
+              <ion-input formControlName="author2firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input formControlName="author2lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
+            </ion-item>
+          </div>
         </div>
-      </div>
+      </slider>
       <ion-item>
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.CD.DOC_TITLE" | translate}}</ion-label>
         <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.CD.DOC_TITLE_PLACEHOLDER' | translate}}"></ion-input>

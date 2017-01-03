@@ -17,7 +17,9 @@
         <ion-label>{{"PROJECT.DETAIL.MODAL.MOVIE.HAS_MORE_THAN_ONE" | translate}}</ion-label>
         <ion-checkbox formControlName="hasAuthors"></ion-checkbox>
       </ion-item>
-      <ion-item-divider *ngIf="form.value.hasAuthors">{{"PROJECT.DETAIL.MODAL.MOVIE.HAS_MORE_THAN_ONE_TRUE" | translate}}</ion-item-divider>
+      <slider [isOpen]="form.value.hasAuthors">
+        <ion-item-divider>{{"PROJECT.DETAIL.MODAL.MOVIE.HAS_MORE_THAN_ONE_TRUE" | translate}}</ion-item-divider>
+      </slider>
       <ion-item>
         <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
       </ion-item>

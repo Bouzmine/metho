@@ -30,7 +30,7 @@ export class SourceModalBookPage extends SourceModalBase {
 
   // Instant Search
   public _timeout: any;
-  public instantList: Array<any>;
+  public instantList: Array<any> = [];
   public instantStatus: any = {
     isLoading: false,
     noResult: false,
