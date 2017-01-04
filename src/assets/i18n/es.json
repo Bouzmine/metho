@@ -185,7 +185,7 @@
                 "ADD_TO_PENDINGS": "¿ Quiere añadir el codigo de barras a los borradores ?",
                 "NOT_RIGHT_BARCODE_TYPE": "El codigo de barras era escánado pero este codigo de barras no es uno de libro. El codigo de barras normalmente tiene una mención ISBN sobre lo. Si hay dos codigos de barras, el incorrecto era tal vez escánado. Puede reintentar.",
                 "UNABLE_TO_SCAN": "Imposible de escáner",
-                "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages. Pruebe de activar el acceso a la cámara en la pestaña Confidentialidad de los Ajustes",
+                "UNABLE_TO_SCAN_TEXT": "Pruebe de activar el acceso a la cámara en la pestaña Confidentialidad de los Ajustes.",
                 "SAVE_INTERVIEWER_NAME": "¿ Quiere salvaguardar el nombre del entrevistador para una utilisación futura ?",
                 "NO_SUGGESTIONS": "Ningún sugerencia",
                 "NO_SUGGESTIONS_DESC": "No hay ningún sugerencia disponible",
