@@ -38,7 +38,8 @@ export class SourceModalBookPage extends SourceModalBase {
     notOnline: false,
     isDone: false,
     isShown: false,
-    timeoutError: false
+    timeoutError: false,
+    showStatus: false
   };
 
   constructor(
@@ -151,30 +152,36 @@ export class SourceModalBookPage extends SourceModalBase {
     this.instantStatus.serverError = false;
     this.instantStatus.isShown = false;
     this.instantStatus.timeoutError = false;
+    this.instantStatus.showStatus = false;
   }
 
   instantSearchIsLoading() {
     this.resetInstantSearchVars();
+    this.instantStatus.showStatus = true;
     this.instantStatus.isLoading = true;
   }
 
   instantSearchIsDone() {
     this.resetInstantSearchVars();
+    this.instantStatus.showStatus = true;
     this.instantStatus.isDone = true;
   }
 
   instantSearchHasNone() {
     this.resetInstantSearchVars();
+    this.instantStatus.showStatus = true;
     this.instantStatus.noResult = true;
   }
 
   instantSearchErr500() {
     this.resetInstantSearchVars();
+    this.instantStatus.showStatus = true;
     this.instantStatus.serverError = true;
   }
 
   instantSearchTimeout() {
     this.resetInstantSearchVars();
+    this.instantStatus.showStatus = true;
     this.instantStatus.serverError = true;
     this.instantStatus.timeoutError = true;
   }

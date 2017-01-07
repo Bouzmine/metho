@@ -97,20 +97,26 @@
 
     <!-- Autres champs -->
     <ion-list class="no-margin">
-      <ion-item>
-        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.TITLE_LABEL" | translate}}</ion-label>
-        <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate}}" (input)="search()"></ion-input>
-        <ion-spinner *ngIf="instantStatus.isLoading" name="ios-small" class="spinner-suggestions" item-right></ion-spinner>
-        <button ion-button *ngIf="instantStatus.isDone" (click)="toggleInstantSearch()" [class.rotate-90]="instantStatus.isShown" class="will-90" color="dark" clear item-right icon-only>
-          <ion-icon name="arrow-forward"></ion-icon>
-        </button>
-        <button ion-button *ngIf="instantStatus.noResult" (click)="openExplaining()" color="dark" clear item-right icon-only>
-          <ion-icon name="close-circle"></ion-icon>
-        </button>
-        <button ion-button *ngIf="instantStatus.serverError" (click)="openExplaining()" clear color="dark" item-right icon-only>
-          <ion-icon name="alert"></ion-icon>
-        </button>
-      </ion-item>
+      <ion-row>
+        <ion-col [attr.width-80]="instantStatus.showStatus ? true : null">
+          <ion-item>
+            <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.TITLE_LABEL" | translate}}</ion-label>
+            <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate}}" (input)="search()"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col width-20 class="flex" *ngIf="instantStatus.showStatus">
+          <ion-spinner *ngIf="instantStatus.isLoading" name="ios-small" class="spinner-suggestions" item-right></ion-spinner>
+          <button ion-button *ngIf="instantStatus.isDone" (click)="toggleInstantSearch()" [class.rotate-90]="instantStatus.isShown" class="will-90" color="dark" clear item-right icon-only>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </button>
+          <button ion-button *ngIf="instantStatus.noResult" (click)="openExplaining()" color="dark" clear item-right icon-only>
+            <ion-icon name="close-circle"></ion-icon>
+          </button>
+          <button ion-button *ngIf="instantStatus.serverError" (click)="openExplaining()" clear color="dark" item-right icon-only>
+            <ion-icon name="alert"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
       <slider [isOpen]="instantStatus.isShown">
         <ion-item>
           <ion-scroll scrollY="true" [class.height-one]="instantList.length == 1" [class.height-one-and-half]="instantList.length == 2" [class.height-two-and-half]="instantList.length > 2">
