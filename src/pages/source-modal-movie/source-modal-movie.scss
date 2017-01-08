@@ -1,4 +1,8 @@
 source-modal-movie {
+    ion-buttons[end] button {
+      font-weight: 600;
+    }
+
     .item-datetime ion-label {
         color: #7f7f7f;
     }

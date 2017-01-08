@@ -1,4 +1,8 @@
 source-modal-book {
+    ion-buttons[end] button {
+      font-weight: 600;
+    }
+
     .flex {
       display: flex;
       align-items: center;

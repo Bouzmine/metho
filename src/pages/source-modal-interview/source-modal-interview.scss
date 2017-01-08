@@ -1,4 +1,8 @@
 source-modal-interview {
+    ion-buttons[end] button {
+      font-weight: 600;
+    }
+
     .no-margin {
         margin-top: 0;
         margin-bottom: 0;

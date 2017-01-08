@@ -1,4 +1,8 @@
 source-modal-cd {
+    ion-buttons[end] button {
+      font-weight: 600;
+    }
+
     .authors {
         border-bottom: 1px;
         border-bottom-color: #c8c7cc;
