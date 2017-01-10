@@ -1,6 +1,7 @@
 source-modal-movie {
     @include GenericModal;
 
+    // Multi-line user info for more than one author
     ion-item-divider ion-label {
         white-space: normal;
     }
