@@ -1,7 +1,5 @@
 source-modal-book {
-    ion-buttons[end] button {
-      font-weight: 600;
-    }
+    @include GenericModal;
 
     .flex {
       display: flex;
@@ -12,20 +10,6 @@ source-modal-book {
 
     ion-col {
       padding: 0;
-    }
-
-    .no-margin-bottom {
-        margin-bottom: 0;
-    }
-
-    .no-margin {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    .no-margin-with-header {
-        margin-top: 11px;
-        margin-bottom: 0;
     }
 
     .no-padding {
@@ -66,17 +50,5 @@ source-modal-book {
 
     .height-two-and-half {
         height: 113px;
-    }
-
-    .authors {
-        border-bottom: 1px;
-        border-bottom-color: #c8c7cc;
-        border-bottom-style: solid;
-
-        div.inputs {
-            border-top: 1px;
-            border-top-color: #e4e2e8;
-            border-top-style: solid;
-        }
     }
 }
