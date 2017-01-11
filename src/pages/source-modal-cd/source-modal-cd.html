@@ -18,7 +18,7 @@
         <ion-checkbox formControlName="hasAuthors"></ion-checkbox>
       </ion-item>
       <slider [isOpen]="form.value.hasAuthors">
-        <div class="authors">
+        <ion-list class="authors" no-lines>
           <ion-item>
             <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
           </ion-item>
@@ -33,7 +33,7 @@
               <ion-input formControlName="author2lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
             </ion-item>
           </div>
-        </div>
+        </ion-list>
       </slider>
       <ion-item>
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.CD.DOC_TITLE" | translate}}</ion-label>
