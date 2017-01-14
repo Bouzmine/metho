@@ -41,9 +41,14 @@
     "cordova-plugin-globalization",
     "cordova-plugin-safariviewcontroller",
     "cordova-plugin-x-socialsharing",
-    "cordova-plugin-3dtouch",
     "phonegap-plugin-barcodescanner",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "com.verso.cordova.clipboard",
+    "cordova-plugin-app-version",
+    "cordova-plugin-http",
+    "cordova-plugin-inapppurchase",
+    "cordova-plugin-ios-disableshaketoedit",
+    "cordova-plugin-wkwebview-engine"
   ],
   "licenses": [
     {
