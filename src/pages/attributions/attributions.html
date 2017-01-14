@@ -15,7 +15,7 @@
     </button>
 
     <ion-item *ngFor="let plugin of data.plugins">
-      <h2>{{ plugin }}</h2>
+      <h2 class="plugin">{{ plugin }}</h2>
     </ion-item>
 
     <button ion-item *ngFor="let license of data.licenses" (click)="showLicense(license)">
