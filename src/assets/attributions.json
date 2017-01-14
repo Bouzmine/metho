@@ -32,23 +32,23 @@
     }
   ],
   "plugins": [
-    "cordova-plugin-splashscreen",
-    "cordova-plugin-console",
-    "cordova-plugin-device",
-    "cordova-plugin-statusbar",
-    "cordova-plugin-whitelist",
-    "cordova-plugin-sqlite-2",
-    "cordova-plugin-globalization",
-    "cordova-plugin-safariviewcontroller",
-    "cordova-plugin-x-socialsharing",
-    "phonegap-plugin-barcodescanner",
-    "ionic-plugin-keyboard",
     "com.verso.cordova.clipboard",
     "cordova-plugin-app-version",
+    "cordova-plugin-console",
+    "cordova-plugin-device",
+    "cordova-plugin-globalization",
     "cordova-plugin-http",
     "cordova-plugin-inapppurchase",
     "cordova-plugin-ios-disableshaketoedit",
-    "cordova-plugin-wkwebview-engine"
+    "cordova-plugin-safariviewcontroller",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-sqlite-2",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-wkwebview-engine",
+    "cordova-plugin-x-socialsharing",
+    "ionic-plugin-keyboard",
+    "phonegap-plugin-barcodescanner"
   ],
   "licenses": [
     {
