@@ -8,12 +8,14 @@ import { NavController, NavParams } from "ionic-angular";
   templateUrl: "license.html"
 })
 export class LicensePage {
-  public type: string = "";
+  public titleToken: string = "";
+  public content: string = "";
 
   constructor(
     public nav: NavController,
     public params: NavParams,
   ) {
-    this.type = this.params.get("type");
+    this.titleToken = this.params.get("titleToken");
+    this.content = this.params.get("content");
   }
 }

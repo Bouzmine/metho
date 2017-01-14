@@ -31,6 +31,7 @@ import { MyApp } from "./app.component";
 
 import { AdvancedMode } from "../providers/advanced-mode";
 import { AppStorage } from "../providers/app-storage";
+import { Attributions } from "../providers/attributions";
 import { Fetch } from "../providers/fetch";
 import { Language } from "../providers/language";
 import { Parse } from "../providers/parse";
@@ -111,6 +112,7 @@ export function translateDeps (http: Http) {
   ],
   providers: [
     AppStorage,
+    Attributions,
     Parse,
     Fetch,
     References,

@@ -5,20 +5,32 @@ import { SafariViewController } from "ionic-native";
 
 import { LicensePage } from "../license/license";
 
+import { Attributions } from "../../providers/attributions";
+
 
 @Component({
   selector: "attributions",
   templateUrl: "attributions.html"
 })
 export class AttributionsPage {
+  public data: any = {
+    libraries: [],
+    plugins: [],
+    licenses: []
+  };
+
   constructor(
     public nav: NavController,
+    public attributions: Attributions
   ) {
     SafariViewController.warmUp();
+    this.attributions.load().then(data => {
+      this.data = data;
+    });
   }
 
-  showLicense(type: string) {
-    this.nav.push(LicensePage, { type: type });
+  showLicense(licenseObj: any) {
+    this.nav.push(LicensePage, { titleToken: licenseObj.token, content: licenseObj.content });
   }
 
   openWebsite(url: string) {

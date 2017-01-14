@@ -1,93 +1,25 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{"SETTINGS.ATTRIBUTION_TAB" | translate}}</ion-title>
+    <ion-title>{{ "SETTINGS.ATTRIBUTION_TAB" | translate }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item (click)="openWebsite('http://ionicframework.com')">
-      <ion-thumbnail item-left>
-          <img src="assets/img/ionic.png">
+    <button ion-item *ngFor="let library of data.libraries" (click)="openWebsite(library.website)">
+      <ion-thumbnail item-left *ngIf="library.image">
+          <img [src]="library.image">
       </ion-thumbnail>
 
-      <h2>Ionic Framework</h2>
+      <h2>{{ library.label }}</h2>
     </button>
-    <button ion-item (click)="openWebsite('http://angular.io')">
-      <ion-thumbnail item-left>
-          <img src="assets/img/angular.png">
-      </ion-thumbnail>
 
-      <h2>Angular 2</h2>
-    </button>
-    <button ion-item (click)="openWebsite('http://cordova.apache.org')">
-      <ion-thumbnail item-left>
-          <img src="assets/img/cordova.png">
-      </ion-thumbnail>
+    <ion-item *ngFor="let plugin of data.plugins">
+      <h2>{{ plugin }}</h2>
+    </ion-item>
 
-      <h2>Cordova</h2>
-    </button>
-    <button ion-item (click)="openWebsite('http://pouchdb.com')">
-      <ion-thumbnail item-left>
-          <img src="assets/img/pouchdb.png">
-      </ion-thumbnail>
-
-      <h2>PouchDB</h2>
-    </button>
-    <button ion-item (click)="openWebsite('http://momentjs.com')">
-      <ion-thumbnail item-left>
-          <img src="assets/img/momentjs.png">
-      </ion-thumbnail>
-
-      <h2>MomentJS</h2>
-    </button>
-    <button ion-item (click)="openWebsite('http://angular-translate.github.io')">
-      <h2>Angular Translate</h2>
-    </button>
-    <ion-item>
-      <h2>cordova-plugin-splashscreen</h2>
-    </ion-item>
-    <ion-item>
-      <h2>cordova-plugin-console</h2>
-    </ion-item>
-    <ion-item>
-      <h2>cordova-plugin-device</h2>
-    </ion-item>
-    <ion-item>
-      <h2>cordova-plugin-statusbar</h2>
-    </ion-item>
-    <ion-item>
-      <h2>cordova-plugin-whitelist</h2>
-    </ion-item>
-    <ion-item>
-      <h2>cordova-plugin-sqlite-2</h2>
-    </ion-item>
-    <ion-item>
-      <h2>cordova-plugin-globalization</h2>
-    </ion-item>
-    <ion-item>
-      <h2>cordova-plugin-safariviewcontroller</h2>
-    </ion-item>
-    <ion-item>
-      <h2>cordova-plugin-x-socialsharing</h2>
-    </ion-item>
-    <ion-item>
-      <h2>cordova-plugin-3dtouch</h2>
-    </ion-item>
-    <ion-item>
-      <h2>phonegap-plugin-barcodescanner</h2>
-    </ion-item>
-    <ion-item>
-      <h2>ionic-plugin-keyboard</h2>
-    </ion-item>
-    <button ion-item (click)="showLicense('mit')">
-      {{ "SETTINGS.MIT_LICENSE" | translate }}
-    </button>
-    <button ion-item (click)="showLicense('bsd')">
-      {{ "SETTINGS.BSD_LICENSE" | translate }}
-    </button>
-    <button ion-item (click)="showLicense('apache')">
-      {{ "SETTINGS.APACHE_LICENSE" | translate }}
+    <button ion-item *ngFor="let license of data.licenses" (click)="showLicense(license)">
+      {{ license.token | translate }}
     </button>
   </ion-list>
 </ion-content>
