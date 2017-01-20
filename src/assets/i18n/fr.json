@@ -169,9 +169,9 @@
                 "BOOKS": "livres"
             },
             "POPUP": {
-                "ERRORS_SOURCES": "Les source que vous essayez de partager contiennent <strong>{{errNum}}</strong> erreur(s). Voulez-vous les partager quand même ?",
-                "SHARE_TEXT": "Partage",
-                "SHARE": "Partager",
+                "ERRORS_SOURCES": "Les sources que vous essayez d'exporter contiennent <strong>{{errNum}}</strong> erreur(s). Voulez-vous les exporter quand même ?",
+                "SHARE_TEXT": "Exportation",
+                "SHARE": "Exporter",
                 "DELETE_TITLE": "Suppression",
                 "DELETE_TEXT": "La suppression de cette source entrainera la perte de toutes les données ratachées à celle-ci. Cette action est irréversible.",
                 "BOOK_UNAVAILABLE_TITLE": "Livre introuvable",

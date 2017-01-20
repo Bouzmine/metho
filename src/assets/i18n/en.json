@@ -169,9 +169,9 @@
                 "BOOKS": "books"
             },
             "POPUP": {
-                "ERRORS_SOURCES": "The sources you're trying to share contain <strong>{{errNum}}</strong> error(s). Do you want to share them ?",
-                "SHARE_TEXT": "Sharing",
-                "SHARE": "Share",
+                "ERRORS_SOURCES": "The sources you're trying to export contain <strong>{{errNum}}</strong> error(s). Do you want to export them ?",
+                "SHARE_TEXT": "Export",
+                "SHARE": "Export",
                 "DELETE_TITLE": "Deletion",
                 "DELETE_TEXT": "Deleting this source will destroy all data related to it, the deletion won't affect other sources. This action cannot be cancelled.",
                 "BOOK_UNAVAILABLE_TITLE": "Book unavailable",

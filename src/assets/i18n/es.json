@@ -169,9 +169,9 @@
                 "BOOKS": "libros"
             },
             "POPUP": {
-                "ERRORS_SOURCES": "Las fuentes que trata de compartir contienen <strong>{{errNum}}</strong> error(es). ¿ Quiere compartirlas ?",
-                "SHARE_TEXT": "Compartición",
-                "SHARE": "Compartir",
+                "ERRORS_SOURCES": "Las fuentes que trata de exportar contienen <strong>{{errNum}}</strong> error(es). ¿ Quiere exportarles ?",
+                "SHARE_TEXT": "Exportacion",
+                "SHARE": "Exportar",
                 "DELETE_TITLE": "Eliminación",
                 "DELETE_TEXT": "La eliminación de esta fuente arrastrará la pérdida de todas la información en eso. La eliminación es irreversible.",
                 "BOOK_UNAVAILABLE_TITLE": "Libro inencontrable",

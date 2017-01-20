@@ -263,8 +263,8 @@ export class SourcesPage {
       );
   }
 
-  exportViaCopy() {
-    Clipboard.copy(this.getExportText(true)).then(() => {
+  copyTextToClipboard(text: string) {
+    Clipboard.copy(text).then(() => {
       this.toastCtrl.present({
         message: "PROJECT.DETAIL.COPIED",
         duration: 1500,
@@ -276,6 +276,20 @@ export class SourcesPage {
       console.log(err);
     });
   }
+
+  exportViaCopy() {
+    let numberOfErrors = this.getNumberOfErrors();
+    let text = this.getExportText(true);
+    if (numberOfErrors > 0 && !this.settings.get('ignoreErrors')) {
+      this.askIfIgnoreErrors(numberOfErrors, () => {
+        this.copyTextToClipboard(text);
+      });
+    }else {
+      this.copyTextToClipboard(text);
+    }
+  }
+
+
 
   promptForAdvanced() {
     if (!this.settings.get("advanced")) {
