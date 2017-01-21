@@ -11,18 +11,11 @@ import { Settings } from "../../providers/settings";
 export class BoardingScanPage {
   @ViewChild("slider") slider: Slides;
   public currentIndex: number = 0;
-  public swiperOptions: any;
 
   constructor(
     public viewCtrl: ViewController,
     public settings: Settings,
-  ) {
-    this.swiperOptions = {
-      parallax: true,
-      keyboardControl: true,
-      pager: true
-    }
-  }
+  ) {}
 
   dismiss() {
     this.settings.set("scanBoardingDone", true);
