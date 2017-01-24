@@ -28,20 +28,6 @@ export class SourceModalBookPage extends SourceModalBase {
   public isAdvanced: boolean;
   public insertingFromScan: boolean;
 
-  // Instant Search
-  public _timeout: any;
-  public instantList: Array<any> = [];
-  public instantStatus: any = {
-    isLoading: false,
-    noResult: false,
-    serverError: false,
-    notOnline: false,
-    isDone: false,
-    isShown: false,
-    timeoutError: false,
-    showStatus: false
-  };
-
   constructor(
     public viewCtrl: ViewController,
     public params: NavParams,
@@ -107,132 +93,13 @@ export class SourceModalBookPage extends SourceModalBase {
     });
   }
 
-  search() {
-    if (!this.isAdvanced) return;
-    if (!navigator.onLine) return;
-
-    if (this._timeout) {
-      clearTimeout(this._timeout);
-    }
-    this._timeout = setTimeout(() => {
-      const title = this.form.value.title;
-      const firstname = this.form.value.author1firstname;
-      const lastname = this.form.value.author1lastname;
-
-      if (title) {
-        this.instantSearchIsLoading();
-        const hasAuthor = (firstname || lastname);
-        let query = `${title} ${firstname} ${lastname}`.trim();
-        this.fetch.fromName(query, hasAuthor).then(suggestions => {
-          if (suggestions.length) {
-            this.instantList = suggestions;
-            this.instantSearchIsDone();
-          }else {
-            this.instantSearchHasNone();
-          }
-        }).catch(err => {
-          if (err.status >= 500 && err.status < 599) {
-            this.instantSearchErr500();
-          }else if (err.status == 408) {
-            this.instantSearchTimeout();
-          }
-        });
-      }else {
-        this.instantList = [];
-        this.resetInstantSearchVars();
-      }
-      this._timeout = null;
-    }, 500);
-  }
-
-  resetInstantSearchVars() {
-    this.instantStatus.isDone = false;
-    this.instantStatus.isLoading = false;
-    this.instantStatus.noResult = false;
-    this.instantStatus.serverError = false;
-    this.instantStatus.isShown = false;
-    this.instantStatus.timeoutError = false;
-    this.instantStatus.showStatus = false;
-  }
-
-  instantSearchIsLoading() {
-    this.resetInstantSearchVars();
-    this.instantStatus.showStatus = true;
-    this.instantStatus.isLoading = true;
-  }
-
-  instantSearchIsDone() {
-    this.resetInstantSearchVars();
-    this.instantStatus.showStatus = true;
-    this.instantStatus.isDone = true;
-  }
-
-  instantSearchHasNone() {
-    this.resetInstantSearchVars();
-    this.instantStatus.showStatus = true;
-    this.instantStatus.noResult = true;
-  }
-
-  instantSearchErr500() {
-    this.resetInstantSearchVars();
-    this.instantStatus.showStatus = true;
-    this.instantStatus.serverError = true;
-  }
-
-  instantSearchTimeout() {
-    this.resetInstantSearchVars();
-    this.instantStatus.showStatus = true;
-    this.instantStatus.serverError = true;
-    this.instantStatus.timeoutError = true;
-  }
-
-  toggleInstantSearch() {
-    this.instantStatus.isShown = !this.instantStatus.isShown;
-  }
-
-  openExplaining() {
-    if (this.instantStatus.noResult) {
-      this.alertCtrl.present({
-        title: "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS",
-        message: "PROJECT.DETAIL.POPUP.NO_SUGGESTIONS_DESC",
-        buttons: [
-          {
-            text: "COMMON.OK"
-          }
-        ]
-      });
-    }else if (this.instantStatus.timeoutError) {
-      this.alertCtrl.present({
-        title: "PROJECT.DETAIL.POPUP.TIMEOUT_TITLE",
-        message: "PROJECT.DETAIL.POPUP.TIMEOUT_SEARCH",
-        buttons: [
-          {
-            text: "COMMON.OK"
-          }
-        ]
-      });
-    }else if (this.instantStatus.serverError) {
-      this.alertCtrl.present({
-        title: "PROJECT.DETAIL.POPUP.ERROR",
-        message: "PROJECT.DETAIL.POPUP.ERROR_500",
-        buttons: [
-          {
-            text: "COMMON.OK"
-          }
-        ]
-      });
-    }
-  }
-
   fillInfos(suggestion: any) {
     if (this.isEmpty(["title"])) {
       this.updateValues(suggestion);
-      this.instantStatus.isShown = false;
       this.insertingFromScan = true;
     }else {
       this.askIfOverwrite(() => {
         this.updateValues(suggestion);
-        this.instantStatus.isShown = false;
         this.insertingFromScan = true;
       });
     }

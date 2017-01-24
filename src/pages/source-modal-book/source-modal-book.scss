@@ -15,43 +15,4 @@ source-modal-book {
         left: 10px;
         top: 12px;
     }
-
-    // Instant Search button
-    .flex {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    ion-col {
-      padding: 0;
-    }
-
-    .will-90 {
-        width: 100%;
-        height: 100%;
-
-        ion-icon {
-          font-size: 1.5em;
-          transition: transform 0.5s ease;
-        }
-    }
-
-    .rotate-90 ion-icon {
-        transform: rotate(90deg);
-    }
-
-    // Instant Search ion-scroll heights
-    .height-one {
-        height: 45px;
-    }
-
-    .height-one-and-half {
-        height: 68px;
-    }
-
-    .height-two-and-half {
-        height: 113px;
-    }
 }

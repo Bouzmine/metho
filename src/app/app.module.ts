@@ -44,6 +44,7 @@ import { TranslatedActionSheetController } from "../providers/translated-action-
 import { TranslatedAlertController } from "../providers/translated-alert-controller";
 import { TranslatedToastController } from "../providers/translated-toast-controller";
 
+import { InstantSearchComponent } from "../components/instant-search/instant-search";
 import { SliderComponent } from "../components/slider/slider";
 
 export function translateDeps (http: Http) {
@@ -74,6 +75,7 @@ export function translateDeps (http: Http) {
     SourceModalInterviewPage,
     SourceModalMoviePage,
     SourcesPage,
+    InstantSearchComponent,
     SliderComponent
   ],
   imports: [
