@@ -97,7 +97,6 @@ interface SettingsList {
   firstname?: string;
   lastname?: string;
   overideLang?: string;
-  lastLang?: string;
   ignoreErrors?: boolean;
   cdAlertShown?: boolean;
 }

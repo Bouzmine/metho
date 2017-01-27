@@ -14,7 +14,6 @@ export class Settings {
   public static userFirstname = "firstname";
   public static userLastname = "lastname";
   public static overridenLanguage = "overideLang";
-  public static lastLanguage = "lastLang";
   public static shouldIgnoreErrors = "ignoreErrors";
 
   public settings: SettingsList = {};
@@ -25,7 +24,6 @@ export class Settings {
     [Settings.userFirstname]: "",
     [Settings.userLastname]: "",
     [Settings.overridenLanguage]: "",
-    [Settings.lastLanguage]: "",
     [Settings.shouldIgnoreErrors]: false
   };
 
