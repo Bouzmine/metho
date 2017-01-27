@@ -20,7 +20,7 @@ import deepcopy from "deepcopy";
 export class SettingsPage {
   public settings: SettingsList = {};
   public enableAdvanced: boolean = false;
-  public advancedAvailable: boolean = true;
+  public advancedDeviceAllowed: boolean = true;
   public advancedPage: any;
   public attributionsPage: any;
   public feedbackPage: any;
@@ -47,7 +47,7 @@ export class SettingsPage {
         this.settings[Settings.isAdvanced] = this.settingService.get(Settings.isAdvanced);
       });
     }
-    this.advancedAvailable = this.advanced.isAvailable();
+    this.advancedDeviceAllowed = this.advanced.isAvailable();
     this.advanced.init(true);
   }
 
@@ -145,7 +145,7 @@ export class SettingsPage {
           }
         ]
       });
-    }else if (!this.advancedAvailable) {
+    }else if (!this.advancedDeviceAllowed) {
       this.alertCtrl.present({
         title: "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE_TITLE",
         message: "SETTINGS.ADVANCED_MODE.POPUP.UNSUPPORTED_DEVICE",

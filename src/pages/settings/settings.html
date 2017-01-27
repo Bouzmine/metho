@@ -14,7 +14,7 @@
       <ion-label>
         {{"SETTINGS.ADVANCED_MODE_LABEL" | translate}}&nbsp;<a [navPush]="advancedPage" class="nowrap"><div class="link-beautiful">{{ "SETTINGS.LEARN_MORE" | translate }}</div></a>
       </ion-label>
-      <ion-toggle [(ngModel)]="settings.advanced" (ionChange)="toggleAdvanced()" [disabled]="!enableAdvanced || !advancedAvailable"></ion-toggle>
+      <ion-toggle [(ngModel)]="settings.advanced" (ionChange)="toggleAdvanced()" [disabled]="!enableAdvanced || !advancedDeviceAllowed"></ion-toggle>
     </ion-item>
     <ion-item-sliding *ngIf="settings.firstname || settings.lastname">
       <ion-item>
