@@ -68,11 +68,11 @@ export class AdvancedMode {
   }
 
   enable(): Promise<any> {
-    if (!this.settings.get("advanced") && !!window.cordova) {
+    if (!this.settings.get(Settings.isAdvanced) && !!window.cordova) {
       return new Promise((resolve, reject) => {
         if (navigator.onLine && this.hasLoaded) {
           InAppPurchase.buy(this.productId).then((data) => {
-            this.settings.set("advanced", true);
+            this.settings.set(Settings.isAdvanced, true);
             resolve();
           }).catch(err => {
             reject();
@@ -93,18 +93,18 @@ export class AdvancedMode {
         }
       });
     }else {
-      this.settings.set("advanced", true);
+      this.settings.set(Settings.isAdvanced, true);
       return Promise.resolve();
     }
   }
 
   restore(): Promise<any> {
-    if (!this.settings.get("advanced")) {
+    if (!this.settings.get(Settings.isAdvanced)) {
       return new Promise((resolve, reject) => {
         if (navigator.onLine) {
           InAppPurchase.restorePurchases().then((data) => {
             if (data.length && data[0].productId == this.productId) {
-              this.settings.set("advanced", true);
+              this.settings.set(Settings.isAdvanced, true);
               resolve();
             }else {
               this.alertCtrl.present({
@@ -142,11 +142,11 @@ export class AdvancedMode {
   }
 
   disable() {
-    this.settings.set("advanced", false);
+    this.settings.set(Settings.isAdvanced, false);
   }
 
   isEnabled() {
-    return this.settings.get("advanced");
+    return this.settings.get(Settings.isAdvanced);
   }
 
   isAvailable(): boolean {

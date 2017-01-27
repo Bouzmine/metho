@@ -46,7 +46,7 @@ export class InstantSearchComponent implements ControlValueAccessor {
     public fetch: Fetch,
     public settings: Settings,
   ) {
-    this.isAdvanced = this.settings.get('advanced');
+    this.isAdvanced = this.settings.get(Settings.isAdvanced);
   }
 
   input() {

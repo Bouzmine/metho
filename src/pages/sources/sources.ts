@@ -200,7 +200,7 @@ export class SourcesPage {
       let content = this.getExportText(false, header);
       let numberOfErrors = this.getNumberOfErrors();
 
-      if (numberOfErrors > 0 && !this.settings.get("ignoreErrors")) {
+      if (numberOfErrors > 0 && !this.settings.get(Settings.shouldIgnoreErrors)) {
         this.askIfIgnoreErrors(numberOfErrors, () => {
           this.openEmailComposer(this.project.name, content).then(() => {
             this.promptForAdvanced();
@@ -280,7 +280,7 @@ export class SourcesPage {
   exportViaCopy() {
     let numberOfErrors = this.getNumberOfErrors();
     let text = this.getExportText(true);
-    if (numberOfErrors > 0 && !this.settings.get('ignoreErrors')) {
+    if (numberOfErrors > 0 && !this.settings.get(Settings.shouldIgnoreErrors)) {
       this.askIfIgnoreErrors(numberOfErrors, () => {
         this.copyTextToClipboard(text);
       });
@@ -292,7 +292,7 @@ export class SourcesPage {
 
 
   promptForAdvanced() {
-    if (!this.settings.get("advanced")) {
+    if (!this.settings.get(Settings.isAdvanced)) {
       let alert = this.alertCtrl.present({
         title: "PROJECT.DETAIL.POPUP.ADVANCED_MODE",
         message: "PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE",

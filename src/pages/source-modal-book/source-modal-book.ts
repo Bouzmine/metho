@@ -66,7 +66,7 @@ export class SourceModalBookPage extends SourceModalBase {
       });
     }
 
-    this.isAdvanced = this.settings.get("advanced");
+    this.isAdvanced = this.settings.get(Settings.isAdvanced);
 
     this.form = fb.group({
       hasAuthors: [this.noData ? "" : this.previous.hasAuthors],

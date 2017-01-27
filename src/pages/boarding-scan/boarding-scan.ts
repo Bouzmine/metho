@@ -18,7 +18,7 @@ export class BoardingScanPage {
   ) {}
 
   dismiss() {
-    this.settings.set("scanBoardingDone", true);
+    this.settings.set(Settings.wasScanBoardingShown, true);
     this.viewCtrl.dismiss();
   }
 

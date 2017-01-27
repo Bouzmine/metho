@@ -40,11 +40,11 @@ export class SettingsPage {
     this.feedbackPage = FeedbackPage;
     if (this.advanced.hasLoaded) {
       this.enableAdvanced = true;
-      this.settings.advanced = this.settingService.get("advanced");
+      this.settings[Settings.isAdvanced] = this.settingService.get(Settings.isAdvanced);
     }else {
       this.advanced.loadEvents.subscribe(() => {
         this.enableAdvanced = true;
-        this.settings.advanced = this.settingService.get("advanced");
+        this.settings[Settings.isAdvanced] = this.settingService.get(Settings.isAdvanced);
       });
     }
     this.advancedAvailable = this.advanced.isAvailable();
@@ -54,7 +54,7 @@ export class SettingsPage {
   loadSettings() {
     this.settings = deepcopy(this.settingService.getAll());
     if (!this.enableAdvanced) {
-      this.settings.advanced = false;
+      this.settings[Settings.isAdvanced] = false;
     }
   }
 
@@ -63,12 +63,12 @@ export class SettingsPage {
   }
 
   toggleAdvanced() {
-    if (this.settings.advanced != this.settingService.getAll().advanced) {
-      if (this.settings.advanced) {
+    if (this.settings[Settings.isAdvanced] != this.settingService.get(Settings.isAdvanced)) {
+      if (this.settings[Settings.isAdvanced]) {
         this.advanced.enable().then(() => {
 
         }).catch(err => {
-          this.settings.advanced = false;
+          this.settings[Settings.isAdvanced] = false;
         });
       }else {
         this.advanced.disable();
@@ -77,8 +77,8 @@ export class SettingsPage {
   }
 
   toggleIgnoreErrors() {
-    if (this.settings.ignoreErrors != this.settingService.getAll().ignoreErrors) {
-      this.settingService.set("ignoreErrors", this.settings.ignoreErrors);
+    if (this.settings[Settings.shouldIgnoreErrors] != this.settingService.get(Settings.shouldIgnoreErrors)) {
+      this.settingService.set(Settings.shouldIgnoreErrors, this.settings[Settings.shouldIgnoreErrors]);
     }
   }
 
@@ -89,12 +89,12 @@ export class SettingsPage {
           {
             type: "text",
             name: "firstname",
-            value: this.settings.firstname
+            value: this.settings[Settings.userFirstname]
           },
           {
             type: "text",
             name: "lastname",
-            value: this.settings.lastname
+            value: this.settings[Settings.userLastname]
           }
         ],
         buttons: [
@@ -107,8 +107,8 @@ export class SettingsPage {
           {
             text: "COMMON.EDIT",
             handler: results => {
-              this.settingService.set("firstname", results.firstname);
-              this.settingService.set("lastname", results.lastname);
+              this.settingService.set(Settings.userFirstname, results.firstname);
+              this.settingService.set(Settings.userLastname, results.lastname);
               this.loadSettings();
               this.list.closeSlidingItems();
             }
@@ -118,14 +118,14 @@ export class SettingsPage {
   }
 
   forgetName() {
-    this.settingService.set("firstname", "");
-    this.settingService.set("lastname", "");
+    this.settingService.set(Settings.userFirstname, "");
+    this.settingService.set(Settings.userLastname, "");
     this.loadSettings();
   }
 
   changeLanguage() {
-    if (this.settings.overideLang != this.settingService.getAll().overideLang) {
-      this.language.change(this.settings.overideLang);
+    if (this.settings[Settings.overridenLanguage] != this.settingService.get(Settings.overridenLanguage)) {
+      this.language.change(this.settings[Settings.overridenLanguage]);
     }
   }
 

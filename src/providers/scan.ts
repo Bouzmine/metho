@@ -25,14 +25,14 @@ export class Scan {
 
   scan(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (!this.settings.get("scanBoardingDone")) {
+      if (!this.settings.get(Settings.wasScanBoardingShown)) {
         let modal = this.modalCtrl.create(BoardingScanPage);
         modal.onDidDismiss(() => {
           this.openScanner()
           .then((data) => resolve(data))
           .catch(err => reject(err));
         });
-        this.settings.set("scanBoardingDone", true);
+        this.settings.set(Settings.wasScanBoardingShown, true);
         modal.present();
       }else {
         this.openScanner()

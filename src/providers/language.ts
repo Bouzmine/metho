@@ -37,7 +37,7 @@ export class Language {
 
   determineLang(): Promise<string> {
     return new Promise(resolve => {
-      this.settings.getAsync("overideLang").then(overideLang => {
+      this.settings.getAsync(Settings.overridenLanguage).then(overideLang => {
         if (overideLang == "") {
           Globalization.getPreferredLanguage().then(lang => {
             resolve(lang.value.split("-")[0]);
@@ -56,7 +56,7 @@ export class Language {
   }
 
   change(lang: string) {
-    this.settings.set("overideLang", lang);
+    this.settings.set(Settings.overridenLanguage, lang);
     this.init();
   }
 

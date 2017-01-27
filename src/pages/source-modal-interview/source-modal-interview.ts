@@ -36,8 +36,8 @@ export class SourceModalInterviewPage extends SourceModalBase {
     let moment = this.language.getMoment();
     this.generateLabels(moment);
     this.form = fb.group({
-      author1firstname: [this.noData ? this.settings.get("firstname") : this.previous.author1firstname],
-      author1lastname: [this.noData ? this.settings.get("lastname") : this.previous.author1lastname],
+      author1firstname: [this.noData ? this.settings.get(Settings.userFirstname) : this.previous.author1firstname],
+      author1lastname: [this.noData ? this.settings.get(Settings.userLastname) : this.previous.author1lastname],
       civility: [this.noData ? "" : this.previous.civility],
       interviewed1firstname: [this.noData ? "" : this.previous.interviewed1firstname],
       interviewed1lastname: [this.noData ? "" : this.previous.interviewed1lastname],
@@ -56,7 +56,7 @@ export class SourceModalInterviewPage extends SourceModalBase {
   }
 
   close() {
-    if (this.form.value.author1firstname && this.form.value.author1lastname && !this.settings.get("firstname") && !this.settings.get("lastname")) {
+    if (this.form.value.author1firstname && this.form.value.author1lastname && !this.settings.get(Settings.userFirstname) && !this.settings.get(Settings.userLastname)) {
       let alert = this.alertCtrl.present({
         title: "PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWER_NAME",
         message: "PROJECT.DETAIL.POPUP.SAVE_INTERVIEWER_NAME",
@@ -73,8 +73,8 @@ export class SourceModalInterviewPage extends SourceModalBase {
             handler: () => {
               alert.then(obj => {
                 let transition = obj.dismiss();
-                this.settings.set("firstname", this.form.value.author1firstname);
-                this.settings.set("lastname", this.form.value.author1lastname);
+                this.settings.set(Settings.userFirstname, this.form.value.author1firstname);
+                this.settings.set(Settings.userLastname, this.form.value.author1lastname);
 
                 transition.then(() => {
                   Keyboard.close();
@@ -94,11 +94,11 @@ export class SourceModalInterviewPage extends SourceModalBase {
 
   isEmpty() {
     let exclusions = [];
-    if (this.settings.get("firstname") != "") {
+    if (this.settings.get(Settings.userFirstname) != "") {
       exclusions.push("author1firstname");
     }
 
-    if (this.settings.get("lastname") != "") {
+    if (this.settings.get(Settings.userLastname) != "") {
       exclusions.push("author1lastname");
     }
 

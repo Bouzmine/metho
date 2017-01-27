@@ -7,16 +7,26 @@ import { AppStorage } from "./app-storage";
 
 @Injectable()
 export class Settings {
+  // CONSTANTS
+  public static isAdvanced = "advanced";
+  public static wasScanBoardingShown = "scanBoardingDone";
+  public static wasCdAlertShown = "cdAlertShown";
+  public static userFirstname = "firstname";
+  public static userLastname = "lastname";
+  public static overridenLanguage = "overideLang";
+  public static lastLanguage = "lastLang";
+  public static shouldIgnoreErrors = "ignoreErrors";
+
   public settings: SettingsList = {};
   public defaults: SettingsList = {
-    advanced: false,
-    scanBoardingDone: false,
-    cdAlertShown: false,
-    firstname: "",
-    lastname: "",
-    overideLang: "",
-    lastLang: "",
-    ignoreErrors: false
+    [Settings.isAdvanced]: false,
+    [Settings.wasScanBoardingShown]: false,
+    [Settings.wasCdAlertShown]: false,
+    [Settings.userFirstname]: "",
+    [Settings.userLastname]: "",
+    [Settings.overridenLanguage]: "",
+    [Settings.lastLanguage]: "",
+    [Settings.shouldIgnoreErrors]: false
   };
 
   public loadEvents: EventEmitter<any> = new EventEmitter();
@@ -36,7 +46,7 @@ export class Settings {
       if (value != null) {
         settings[key] = this.transformIfBool(value);
       }else {
-        if (key == "overideLang" && !this.isEmpty(settings)) {
+        if (key == Settings.overridenLanguage && !this.isEmpty(settings)) {
           settings[key] = "";
         }
       }

@@ -45,9 +45,9 @@ export class SourceModalCdPage extends SourceModalBase {
   }
 
   ionViewDidEnter() {
-    if (!this.settings.get("cdAlertShown")) {
+    if (!this.settings.get(Settings.wasCdAlertShown)) {
       this.showCdAlert();
-      this.settings.set("cdAlertShown", true);
+      this.settings.set(Settings.wasCdAlertShown, true);
     }
   }
 
