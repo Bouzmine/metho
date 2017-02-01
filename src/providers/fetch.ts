@@ -5,41 +5,24 @@ import { ReactiveHttp } from "./reactive-http";
 
 @Injectable()
 export class Fetch {
-  public cacheByISBN: any;
-  public cacheByName: any;
-  public cacheByNameWithAuthors: any;
-  public API_keys: Array<string>;
+  public cacheByISBN: any = {};
+  public cacheByName: any = {};
+  public cacheByNameWithAuthors: any = {};
+  public ISBNdbApiKeys: Array<string> = [
+    "S07CWYQY",
+    "YVFT6RLV"
+  ];
 
   constructor(
     public http: ReactiveHttp
-  ) {
-    this.cacheByISBN = {};
-    this.cacheByName = {};
-    this.cacheByNameWithAuthors = {};
-    this.API_keys = [
-      "S07CWYQY",
-      "YVFT6RLV"
-    ];
-  }
+  ) {}
 
   fromISBN(isbn: string) {
     if (this.cacheByISBN[isbn]) {
       return Promise.resolve(this.cacheByISBN[isbn]);
     }
 
-    return new Promise((resolve, reject) => {
-      this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/book/" + isbn).then(response => {
-        if (!!response.error) {
-          reject(404);
-        }else {
-          let parsed = this.parseFromISBNdb(response.data[0]);
-          this.cacheByISBN[isbn] = parsed;
-          resolve(parsed);
-        }
-      }).catch(error => {
-        reject(error);
-      });
-    });
+    return this.fromISBNdbByIsbn(isbn);
   }
 
   isISBNCached(isbn: string) {
@@ -63,6 +46,26 @@ export class Fetch {
       }
     }
 
+    return this.fromISBNdbByName(name, includeAuthors);
+  }
+
+  fromISBNdbByIsbn(isbn) {
+    return new Promise((resolve, reject) => {
+      this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/book/" + isbn).then(response => {
+        if (!!response.error) {
+          reject(404);
+        }else {
+          let parsed = this.parseFromISBNdb(response.data[0]);
+          this.cacheByISBN[isbn] = parsed;
+          resolve(parsed);
+        }
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
+
+  fromISBNdbByName(name, includeAuthors) {
     return new Promise((resolve, reject) => {
       if (includeAuthors) {
         this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined").then(response => {
@@ -158,8 +161,8 @@ export class Fetch {
   }
 
   pickISBNdbApiKey(): string {
-    let index = Math.floor(Math.random()*(this.API_keys.length-1-0+1)+0);
-    return this.API_keys[index];
+    let index = Math.floor(Math.random()*(this.ISBNdbApiKeys.length-1-0+1)+0);
+    return this.ISBNdbApiKeys[index];
   }
 
   capitalizeFirstLetter(str: string) {
