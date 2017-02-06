@@ -60,7 +60,11 @@ export class Fetch {
           reject(404);
         }
       }).catch(error => {
-        reject(error);
+        if (error.toString().startsWith("5")) {
+          reject(500);
+        }else {
+          reject(error);
+        }
       });
     });
   }
@@ -76,7 +80,11 @@ export class Fetch {
           resolve(parsed);
         }
       }).catch(error => {
-        reject(error);
+        if (error.toString().startsWith("5")) {
+          reject(500);
+        }else {
+          reject(error);
+        }
       });
     });
   }
