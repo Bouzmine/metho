@@ -22,7 +22,17 @@ export class Fetch {
       return Promise.resolve(this.cacheByISBN[isbn]);
     }
 
-    return this.fromISBNdbByIsbn(isbn);
+    console.log("trying with Open Library");
+    return this.fromOpenLibraryByIsbn(isbn).then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => {
+      if (err == 404 || err == 500) {
+        console.log("trying with ISBNdb");
+        return this.fromISBNdbByIsbn(isbn);
+      }else {
+        return Promise.reject(err);
+      }
+    });
   }
 
   isISBNCached(isbn: string) {
