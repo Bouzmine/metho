@@ -23,7 +23,7 @@ export class ProjectModalPage {
     public storage: AppStorage,
     public fb: FormBuilder,
   ) {
-    if(this.params.get("previous")) {
+    if (this.params.get("previous")) {
       this.isNew = false;
       this.previous = this.params.get("previous");
     }else {
@@ -51,8 +51,8 @@ export class ProjectModalPage {
   }
 
   confirm() {
-    if(this.projectForm.valid) {
-      if(this.isNew) {
+    if (this.projectForm.valid) {
+      if (this.isNew) {
         this.storage.createProject(this.projectForm.value).then(() => {
           Keyboard.close();
           this.viewCtrl.dismiss();

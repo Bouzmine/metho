@@ -127,7 +127,7 @@ export class Scan {
     });
   }
 
-  public alert404(resolve: (any) => any) {
+  public alert404(resolve: (data: any) => any) {
     let alert = this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE",
       message: "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT",
@@ -142,7 +142,7 @@ export class Scan {
     });
   }
 
-  public alert408(resolve: (any) => void, isbn: string) {
+  public alert408(resolve: (data: any) => void, isbn: string) {
     let alert = this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.TIMEOUT_TITLE",
       message: "PROJECT.DETAIL.POPUP.TIMEOUT_TEXT",
@@ -175,7 +175,7 @@ export class Scan {
     });
   }
 
-  public alert500(resolve: (any) => void) {
+  public alert500(resolve: (data: any) => void) {
     let alert = this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.ERROR",
       message: "PROJECT.DETAIL.POPUP.ERROR_500",
@@ -190,7 +190,7 @@ export class Scan {
     });
   }
 
-  public alertOffline(resolve: (any) => void, isbn: string) {
+  public alertOffline(resolve: (data: any) => void, isbn: string) {
     let alert = this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.NO_CONNECTION",
       message: "PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS",
@@ -223,7 +223,7 @@ export class Scan {
     });
   }
 
-  public alertScanUnavailable(resolve: (any) => void) {
+  public alertScanUnavailable(resolve: (data: any) => void) {
     this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN",
       message: "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT",
@@ -238,7 +238,7 @@ export class Scan {
     });
   }
 
-  public alertWrongBarcode(resolve: (any) => void) {
+  public alertWrongBarcode(resolve: (data: any) => void) {
     this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE",
       message: "PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE",

@@ -33,7 +33,7 @@ export abstract class SourceModalBase {
     public storage: AppStorage,
     public parse: Parse,
   ) {
-    if(this.params.get("editing") == true) {
+    if (this.params.get("editing") == true) {
       this.isNew = false;
     }else {
       this.isNew = true;
@@ -110,7 +110,7 @@ export abstract class SourceModalBase {
 
   isEmpty(exclusions: string[] = []): boolean {
     exclusions.push("consultationDate");
-    
+
     for (var key in this.form.value) {
       if (!this.form.value.hasOwnProperty(key)) continue;
 

@@ -141,7 +141,7 @@ export class SourceModalBookPage extends SourceModalBase {
     });
   }
 
-  addPending(isbn: string, transition=Promise.resolve()) {
+  addPending(isbn: string, transition = Promise.resolve()) {
     var creating = {
       isbn: isbn,
       date: this.language.getMoment()().toObject(),

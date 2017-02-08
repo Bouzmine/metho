@@ -44,7 +44,7 @@ export class References {
         title: v.name,
         id: v.id,
         content: []
-      }
+      };
       if (this.containsOneOf(qa, v.name)) {
         currentObj.content.push(v);
       }
@@ -54,7 +54,7 @@ export class References {
           currentObj.content.push(sub);
         }
       });
-      
+
       if (currentObj.content.length > 0) {
         filteredList.push(currentObj);
       }

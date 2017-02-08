@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef } from "@angular/core";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 import { Fetch } from "../../providers/fetch";
@@ -7,8 +7,8 @@ import { TranslatedAlertController } from "../../providers/translated-alert-cont
 
 
 @Component({
-  selector: 'instant-search',
-  templateUrl: 'instant-search.html',
+  selector: "instant-search",
+  templateUrl: "instant-search.html",
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -18,9 +18,9 @@ import { TranslatedAlertController } from "../../providers/translated-alert-cont
   ]
 })
 export class InstantSearchComponent implements ControlValueAccessor {
-  @Input('firstname') author1firstname: string = "";
-  @Input('lastname') author1lastname: string = "";
-  @Input('placeholder') _placeholderText: string = "";
+  @Input("firstname") author1firstname: string = "";
+  @Input("lastname") author1lastname: string = "";
+  @Input("placeholder") _placeholderText: string = "";
 
   @Output() onFill: EventEmitter<Source> = <EventEmitter<Source>>new EventEmitter();
 

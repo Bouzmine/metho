@@ -53,7 +53,7 @@ export class AdvancedMode {
         }
         this.completeInit("1,39$", "");
       });
-    }else if(!isAlreadyLoaded && retryOnFail) {
+    }else if (!isAlreadyLoaded && retryOnFail) {
       setTimeout(() => {
         this.init(true);
       }, 5000);

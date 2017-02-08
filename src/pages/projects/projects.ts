@@ -82,7 +82,7 @@ export class ProjectsPage {
           handler: () => {
             this.storage.deleteProject(project._id);
             let index = this.projects.indexOf(project);
-            if(index > -1) {
+            if (index > -1) {
               this.projects.splice(index, 1);
             }
           }

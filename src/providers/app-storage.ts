@@ -79,14 +79,14 @@ export class AppStorage {
 
       this.sourceDB.migrate((doc) => {
         if (doc.type != "internet") return;
-        if (typeof doc.hasAuthors == 'string') return;
+        if (typeof doc.hasAuthors == "string") return;
 
         if (doc.hasAuthors == true) {
           doc.hasAuthors = "author";
         }else {
           doc.hasAuthors = "none";
         }
-        
+
         doc.organization = "";
 
         return [doc];
@@ -167,7 +167,7 @@ export class AppStorage {
         this.projects.set(id, set);
         releaseLock();
         resolve(response);
-      }).catch(err =>{
+      }).catch(err => {
         releaseLock();
         this.report.report(err);
         resolve(err);
@@ -427,7 +427,7 @@ export class AppStorage {
   }
 
   waitForProject<T>(fn: () => T): Promise<T> {
-    if(this.loadingProjects){
+    if (this.loadingProjects) {
       return new Promise(resolve => {
         let subscription = this.projectEvents.subscribe(event => {
           subscription.unsubscribe();
@@ -448,7 +448,7 @@ export class AppStorage {
   }
 
   waitForSource<T>(fn: () => T): Promise<T> {
-    if(this.loadingSources){
+    if (this.loadingSources) {
       return new Promise(resolve => {
         let subscription = this.sourcesEvents.subscribe(event => {
           subscription.unsubscribe();
@@ -469,7 +469,7 @@ export class AppStorage {
   }
 
   waitForPending<T>(fn: () => T): Promise<T> {
-    if(this.loadingPendings){
+    if (this.loadingPendings) {
       return new Promise(resolve => {
         let subscription = this.pendingsEvents.subscribe(event => {
           subscription.unsubscribe();
@@ -490,7 +490,7 @@ export class AppStorage {
   }
 
   waitForSetting<T>(fn: () => T): Promise<T> {
-    if(this.loadingSettings){
+    if (this.loadingSettings) {
       return new Promise(resolve => {
         let subscription = this.settingsEvents.subscribe(event => {
           subscription.unsubscribe();

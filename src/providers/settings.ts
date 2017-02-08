@@ -81,7 +81,7 @@ export class Settings {
       return new Promise(resolve => {
         this.loadEvents.subscribe(() => {
           resolve(this.settings[key]);
-        })
+        });
       });
     }
   }

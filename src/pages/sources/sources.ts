@@ -95,7 +95,7 @@ export class SourcesPage {
         "PROJECT.TYPES.CD_PARSE": translations["PROJECT.TYPES.CD_PARSE"],
         "PROJECT.TYPES.MOVIE": translations["PROJECT.TYPES.MOVIE"],
         "PROJECT.TYPES.INTERVIEW": translations["PROJECT.TYPES.INTERVIEW"]
-      }
+      };
     });
   }
 

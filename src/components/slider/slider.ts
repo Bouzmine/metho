@@ -1,8 +1,8 @@
-import { Component, ElementRef, Input, OnChanges, AfterContentInit, AfterContentChecked } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, AfterContentInit, AfterContentChecked } from "@angular/core";
 
 @Component({
-  selector: 'slider',
-  templateUrl: 'slider.html'
+  selector: "slider",
+  templateUrl: "slider.html"
 })
 export class SliderComponent implements OnChanges, AfterContentInit, AfterContentChecked {
   @Input() isOpen: boolean = false;
@@ -26,8 +26,8 @@ export class SliderComponent implements OnChanges, AfterContentInit, AfterConten
     if (this.isOpen) {
       let element = this.elt.nativeElement.children[0].children[0];
       let domHeight = element.offsetHeight;
-      domHeight += parseInt(window.getComputedStyle(element).getPropertyValue('margin-top'));
-      domHeight += parseInt(window.getComputedStyle(element).getPropertyValue('margin-bottom'));
+      domHeight += parseInt(window.getComputedStyle(element).getPropertyValue("margin-top"));
+      domHeight += parseInt(window.getComputedStyle(element).getPropertyValue("margin-bottom"));
       this.height = domHeight + "px";
     }else {
       this.height = "0";

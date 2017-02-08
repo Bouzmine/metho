@@ -51,7 +51,7 @@ export class Parse {
     };
   }
 
-  public addMultiInputError(inputs: {errorId:string, variable: string}[], errorId: string): SourceError {
+  public addMultiInputError(inputs: {errorId: string, variable: string}[], errorId: string): SourceError {
     return {
       errorTitle: "PROJECT.PARSE." + errorId + ".DESC",
       promptTitle: "PROJECT.PARSE." + errorId + ".TITLE",
@@ -60,7 +60,7 @@ export class Parse {
         return {
           example: "PROJECT.PARSE." + value.errorId + ".EXAMPLE",
           var: value.variable
-        }
+        };
       })
     };
   }
@@ -98,8 +98,8 @@ export class Parse {
     return input.charAt(0).toUpperCase() + input.slice(1);
   }
 
-  public formatDateLocale(string: string): string {
-    let datestring = string.replace(/-/g, "\/").replace(/T.+/, ""); // Outputs : "YYYY/MM/DD" to prevent timezone alteration
+  public formatDateLocale(str: string): string {
+    let datestring = str.replace(/-/g, "\/").replace(/T.+/, ""); // Outputs : "YYYY/MM/DD" to prevent timezone alteration
     return new Date(datestring).toLocaleDateString("fr-CA", {year: "numeric", month: "long", day: "numeric"});
   }
 
@@ -134,7 +134,7 @@ export class Parse {
         sourceToParse.parsedSource += "?";
       }
     } else {
-      sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
+      sourceToParse.errors.push(this.addMultiInputError([{errorId: "FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId: "FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
       sourceToParse.parsedSource += "?";
     }
 
@@ -191,7 +191,7 @@ export class Parse {
         sourceToParse.parsedSource += "?";
       }
     } else {
-      sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
+      sourceToParse.errors.push(this.addMultiInputError([{errorId: "FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId: "FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
       sourceToParse.parsedSource += "?";
     }
 
@@ -287,7 +287,7 @@ export class Parse {
               value: AuthorNumber.Collective
             }
           ],
-          type:"select"
+          type: "select"
         }));
     }
 
@@ -358,7 +358,7 @@ export class Parse {
           sourceToParse.parsedSource += "? ";
         }
       } else {
-        sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_TRANSLATOR_FIRSTNAME", variable: "translator1firstname"}, {errorId:"FIRST_TRANSLATOR_LASTNAME", variable: "translator1lastname"}], "FIRST_TRANSLATOR"));
+        sourceToParse.errors.push(this.addMultiInputError([{errorId: "FIRST_TRANSLATOR_FIRSTNAME", variable: "translator1firstname"}, {errorId: "FIRST_TRANSLATOR_LASTNAME", variable: "translator1lastname"}], "FIRST_TRANSLATOR"));
         sourceToParse.parsedSource += "?";
       }
 
@@ -387,7 +387,7 @@ export class Parse {
       sourceToParse.parsedSource += this.capitalizeFirstLetter(sourceToParse.publicationLocation.trim()) + ", ";
     } else {
       sourceToParse.parsedSource += "s.l., ";
-      sourceToParse.warnings.push(this.addError("EDITION_LOCATION", "publicationLocation"))
+      sourceToParse.warnings.push(this.addError("EDITION_LOCATION", "publicationLocation"));
     }
 
     // Éditeur
@@ -403,11 +403,11 @@ export class Parse {
       sourceToParse.parsedSource += sourceToParse.publicationDate + ", ";
       var today = new Date();
       if (today.getFullYear() < Number(sourceToParse.publicationDate)) {
-        sourceToParse.warnings.push(this.addError("EDITION_DATE_TOO_HIGH", "publicationDate"))
+        sourceToParse.warnings.push(this.addError("EDITION_DATE_TOO_HIGH", "publicationDate"));
       }
     } else {
       sourceToParse.parsedSource += "s.d., ";
-      sourceToParse.warnings.push(this.addError("EDITION_DATE", "publicationDate"))
+      sourceToParse.warnings.push(this.addError("EDITION_DATE", "publicationDate"));
     }
 
     // Volume
@@ -424,9 +424,9 @@ export class Parse {
       }
 
       if (sourceToParse.pageNumber > 15000) {
-        sourceToParse.warnings.push(this.addError("PAGE_NUMBER_TOO_HIGH", "pageNumber"))
+        sourceToParse.warnings.push(this.addError("PAGE_NUMBER_TOO_HIGH", "pageNumber"));
       } else if (sourceToParse.pageNumber <= 0) {
-        sourceToParse.warnings.push(this.addError("PAGE_NUMBER_TOO_LOW", "pageNumber"))
+        sourceToParse.warnings.push(this.addError("PAGE_NUMBER_TOO_LOW", "pageNumber"));
       }
       sourceToParse.pageNumber = Number(sourceToParse.pageNumber);
     } else {
@@ -455,7 +455,7 @@ export class Parse {
       }
     } else {
       sourceToParse.parsedSource += "?, ?. ";
-      sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
+      sourceToParse.errors.push(this.addMultiInputError([{errorId: "FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId: "FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
     }
 
     // Titre de l"Article
@@ -509,7 +509,7 @@ export class Parse {
       sourceToParse.parsedSource += ".";
     } else {
       sourceToParse.parsedSource += "p. ?-?.";
-      sourceToParse.errors.push(this.addMultiInputError([{errorId:"START_PAGE", variable: "startPage"}, {errorId:"END_PAGE", variable: "endPage"}], "START_END_PAGE"));
+      sourceToParse.errors.push(this.addMultiInputError([{errorId: "START_PAGE", variable: "startPage"}, {errorId: "END_PAGE", variable: "endPage"}], "START_END_PAGE"));
     }
 
     return sourceToParse;
@@ -533,7 +533,7 @@ export class Parse {
           sourceToParse.parsedSource += "?. ";
         }
       } else {
-        sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
+        sourceToParse.errors.push(this.addMultiInputError([{errorId: "FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId: "FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
         sourceToParse.parsedSource += "?. ";
       }
     }else if (sourceToParse.hasAuthors == "org") {
@@ -601,7 +601,7 @@ export class Parse {
         sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
       }else {
         sourceToParse.parsedSource += "[" + sourceToParse.url + "] ";
-        sourceToParse.warnings.push(this.addError("INVALID_URL", "url"))
+        sourceToParse.warnings.push(this.addError("INVALID_URL", "url"));
       }
     } else {
       sourceToParse.parsedSource += "[?] ";
@@ -636,7 +636,7 @@ export class Parse {
           sourceToParse.parsedSource += "?";
         }
       } else {
-        sourceToParse.errors.push(this.addMultiInputError([{errorId:"FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
+        sourceToParse.errors.push(this.addMultiInputError([{errorId: "FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId: "FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
         sourceToParse.parsedSource += "?";
       }
 
@@ -676,7 +676,7 @@ export class Parse {
       sourceToParse.parsedSource += sourceToParse.publicationLocation + ", ";
     } else {
       sourceToParse.parsedSource += "s.l., ";
-      sourceToParse.warnings.push(this.addError("PUBLICATION_LOCATION", "publicationLocation"))
+      sourceToParse.warnings.push(this.addError("PUBLICATION_LOCATION", "publicationLocation"));
     }
 
     // Éditeur
@@ -692,7 +692,7 @@ export class Parse {
       sourceToParse.parsedSource += sourceToParse.publicationDate + ".";
     } else {
       sourceToParse.parsedSource += "s.d.";
-      sourceToParse.warnings.push(this.addError("PUBLICATION_DATE", "publicationDate"))
+      sourceToParse.warnings.push(this.addError("PUBLICATION_DATE", "publicationDate"));
     }
 
     return sourceToParse;
@@ -715,7 +715,7 @@ export class Parse {
         sourceToParse.parsedSource += "?";
       }
     } else {
-      sourceToParse.errors.push(this.addMultiInputError([{errorId:"DIRECTOR_FIRSTNAME", variable: "author1firstname"}, {errorId:"DIRECTOR_LASTNAME", variable: "author1lastname"}], "DIRECTOR"));
+      sourceToParse.errors.push(this.addMultiInputError([{errorId: "DIRECTOR_FIRSTNAME", variable: "author1firstname"}, {errorId: "DIRECTOR_LASTNAME", variable: "author1lastname"}], "DIRECTOR"));
       sourceToParse.parsedSource += "?";
     }
 
@@ -743,7 +743,7 @@ export class Parse {
       sourceToParse.parsedSource += sourceToParse.productionLocation + ", ";
     } else {
       sourceToParse.parsedSource += "s.l., ";
-      sourceToParse.warnings.push(this.addError("PRODUCTION_LOCATION", "productionLocation"))
+      sourceToParse.warnings.push(this.addError("PRODUCTION_LOCATION", "productionLocation"));
     }
 
     // Producteur
@@ -758,7 +758,7 @@ export class Parse {
     if (sourceToParse.broadcaster) {
       sourceToParse.parsedSource += sourceToParse.broadcaster + ", ";
     } else {
-      sourceToParse.warnings.push(this.addError("BROADCASTER", "broadcaster"))
+      sourceToParse.warnings.push(this.addError("BROADCASTER", "broadcaster"));
     }
 
     // Durée
@@ -773,7 +773,7 @@ export class Parse {
     if (sourceToParse.publicationDate) {
       sourceToParse.parsedSource += sourceToParse.publicationDate;
     } else {
-      sourceToParse.warnings.push(this.addError("PUBLICATION_DATE", "publicationDate"))
+      sourceToParse.warnings.push(this.addError("PUBLICATION_DATE", "publicationDate"));
       sourceToParse.parsedSource += "s.d.";
     }
 
@@ -792,7 +792,7 @@ export class Parse {
       }
     }else {
       sourceToParse.warnings.push(this.addComplexError("SUPPORT", "support", {
-        type:"select",
+        type: "select",
         options: [
           {
             text: "PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_DVD",
@@ -838,7 +838,7 @@ export class Parse {
         sourceToParse.parsedSource += "?. ";
       }
     } else {
-      sourceToParse.errors.push(this.addMultiInputError([{errorId:"INTERVIEWER_FIRSTNAME", variable: "author1firstname"}, {errorId:"INTERVIEWER_LASTNAME", variable: "author1lastname"}], "INTERVIEWER"));
+      sourceToParse.errors.push(this.addMultiInputError([{errorId: "INTERVIEWER_FIRSTNAME", variable: "author1firstname"}, {errorId: "INTERVIEWER_LASTNAME", variable: "author1lastname"}], "INTERVIEWER"));
       sourceToParse.parsedSource += "?. ";
     }
     // Texte
@@ -870,7 +870,7 @@ export class Parse {
             value: CivilityTitle.Mlle
           }
         ],
-        type:"select"
+        type: "select"
       }));
       sourceToParse.parsedSource += "? ";
     }
@@ -895,7 +895,7 @@ export class Parse {
         sourceToParse.title += "?";
       }
     } else {
-      sourceToParse.errors.push(this.addMultiInputError([{errorId:"INTERVIEWED_FIRSTNAME", variable: "interviewed1firstname"}, {errorId:"INTERVIEWED_LASTNAME", variable: "interviewed1lastname"}], "INTERVIEWED"));
+      sourceToParse.errors.push(this.addMultiInputError([{errorId: "INTERVIEWED_FIRSTNAME", variable: "interviewed1firstname"}, {errorId: "INTERVIEWED_LASTNAME", variable: "interviewed1lastname"}], "INTERVIEWED"));
       sourceToParse.parsedSource += "?, ";
     }
 
