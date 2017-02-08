@@ -76,9 +76,9 @@ export class InstantSearchComponent implements ControlValueAccessor {
             this.instantSearchHasNone();
           }
         }).catch(err => {
-          if (err.status >= 500 && err.status < 599) {
+          if (err == 500) {
             this.instantSearchErr500();
-          }else if (err.status == 408) {
+          }else if (err == 408) {
             this.instantSearchTimeout();
           }
         });
