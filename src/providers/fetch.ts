@@ -22,7 +22,17 @@ export class Fetch {
       return Promise.resolve(this.cacheByISBN[isbn]);
     }
 
-    return this.fromISBNdbByIsbn(isbn);
+    console.log("trying with Open Library");
+    return this.fromOpenLibraryByIsbn(isbn).then((response) => {
+      return Promise.resolve(response);
+    }).catch((err) => {
+      if (err == 404 || err == 500) {
+        console.log("trying with ISBNdb");
+        return this.fromISBNdbByIsbn(isbn);
+      }else {
+        return Promise.reject(err);
+      }
+    });
   }
 
   isISBNCached(isbn: string) {
@@ -49,6 +59,26 @@ export class Fetch {
     return this.fromISBNdbByName(name, includeAuthors);
   }
 
+  fromOpenLibraryByIsbn(isbn) {
+    return new Promise((resolve, reject) => {
+      this.http.get(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`).then(response => {
+        if (`ISBN:${isbn}` in response) {
+          let parsed = this.parseFromOpenLibrary(response[`ISBN:${isbn}`]);
+          this.cacheByISBN[isbn] = parsed;
+          resolve(parsed);
+        }else {
+          reject(404);
+        }
+      }).catch(error => {
+        if (error.toString().startsWith("5")) {
+          reject(500);
+        }else {
+          reject(error);
+        }
+      });
+    });
+  }
+
   fromISBNdbByIsbn(isbn) {
     return new Promise((resolve, reject) => {
       this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/book/" + isbn).then(response => {
@@ -60,7 +90,11 @@ export class Fetch {
           resolve(parsed);
         }
       }).catch(error => {
-        reject(error);
+        if (error.toString().startsWith("5")) {
+          reject(500);
+        }else {
+          reject(error);
+        }
       });
     });
   }
@@ -151,6 +185,75 @@ export class Fetch {
       if (response.author_data.length > 3) {
         newobj.hasAuthors = "more3";
       }else if (response.author_data.length == 0) {
+        newobj.hasAuthors = "collective";
+      }else {
+        newobj.hasAuthors = "13";
+      }
+    }
+
+    return newobj;
+  }
+
+  parseFromOpenLibrary(response: any): Source {
+    let newobj: any = {};
+
+    // Titre
+    if (response.title.toUpperCase() == response.title) {
+      newobj.title = this.capitalizeEveryFirstLetter(response.title.trim().toLowerCase());
+    }else if (response.title.toLowerCase() == response.title) {
+      newobj.title = this.capitalizeEveryFirstLetter(response.title.trim());
+    }else {
+      newobj.title = response.title.trim();
+    }
+    // Publisher/Editor
+    if (response.publishers.length) {
+      newobj.editor = this.capitalizeEveryFirstLetter(response.publishers[0].name.trim().toLowerCase());
+    }
+    // Date de publication
+    if (response.publish_date) {
+      newobj.publicationDate = response.publish_date;
+    } else {
+      newobj.publicationDate = "";
+    }
+
+    // Lieu de publication
+    if ("publish_places" in response && response.publish_places.length) {
+      newobj.publicationLocation = this.capitalizeEveryFirstLetter(response.publish_places[0].name.trim());
+    }
+    // Nombre de pages
+    if (response.number_of_pages) {
+      newobj.pageNumber = response.number_of_pages;
+    }else if (response.pagination) {
+      var arr_pages = response.pagination.split(" ");
+      if (arr_pages.indexOf("p.") != -1) {
+        newobj.pageNumber = arr_pages[arr_pages.indexOf("p.") - 1];
+      } else if (arr_pages.indexOf("pages") != -1) {
+        newobj.pageNumber = arr_pages[arr_pages.indexOf("pages") - 1];
+      }
+    }
+    // Auteur
+    if ("authors" in response && response.authors.length) {
+      for (var i = 0; i < response.authors.length; i++) {
+        if (response.authors[i].name.split(",")[0] == response.authors[i].name) {
+          let spaceSeparated = response.authors[i].name.split(" ");
+          if (spaceSeparated.length > 1) {
+            var firstName = [...spaceSeparated].splice(0, spaceSeparated.length - 1).join(" ");
+          }else {
+            var firstName = <string>spaceSeparated[0];
+          }
+
+          newobj["author" + String(i + 1) + "firstname"] = this.capitalizeFirstLetter(firstName.trim());
+          if (spaceSeparated.length > 1) {
+            newobj["author" + String(i + 1) + "lastname"] = this.capitalizeFirstLetter(spaceSeparated[spaceSeparated.length - 1].trim());
+          }
+        } else {
+          newobj["author" + String(i + 1) + "lastname"] = this.capitalizeFirstLetter(response.authors[i].name.split(",")[0].trim());
+          newobj["author" + String(i + 1) + "firstname"] = this.capitalizeFirstLetter(response.authors[i].name.split(",")[1].trim());
+        }
+      }
+      if (response.authors.length > 3) {
+        newobj.hasAuthors = "more3";
+      }else if (response.authors.length == 0) {
         newobj.hasAuthors = "collective";
       }else {
         newobj.hasAuthors = "13";
