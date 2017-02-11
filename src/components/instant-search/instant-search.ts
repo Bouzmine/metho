@@ -25,7 +25,7 @@ export class InstantSearchComponent implements ControlValueAccessor {
   @Output() onFill: EventEmitter<Source> = <EventEmitter<Source>>new EventEmitter();
 
   public _value: string = "";
-  public _timeout: any;
+  public _timeout: number;
   public isLoading: boolean = false;
   public noResult: boolean = false;
   public serverError: boolean = false;
@@ -34,7 +34,7 @@ export class InstantSearchComponent implements ControlValueAccessor {
   public isShown: boolean = false;
   public timeoutError: boolean = false;
   public showStatus: boolean = false;
-  public instantList: any[] = [];
+  public instantList: SourceFields[] = [];
 
   public isAdvanced: boolean = false;
   // ControlValueAccessor

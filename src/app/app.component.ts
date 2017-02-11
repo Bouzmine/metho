@@ -17,7 +17,7 @@ import { References } from "../providers/references";
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage: any = TabsPage;
+  rootPage: Component = TabsPage;
 
   constructor(
     public platform: Platform,

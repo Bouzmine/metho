@@ -12,7 +12,7 @@ export class TranslatedActionSheetController {
     public translate: TranslateService,
   ) {}
 
-  present(opts: ActionSheetOptions, translationOpts: any = {}): Promise<{ dismiss: () => Promise<any> }> {
+  present(opts: ActionSheetOptions, translationOpts: TranslationOptions = {}): Promise<{ dismiss: () => Promise<void> }> {
     let tokens = [
       opts.title,
       opts.subTitle

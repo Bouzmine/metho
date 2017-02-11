@@ -13,11 +13,9 @@ import { Attributions } from "../../providers/attributions";
   templateUrl: "attributions.html"
 })
 export class AttributionsPage {
-  public data: any = {
-    libraries: [],
-    plugins: [],
-    licenses: []
-  };
+  public libraries: LibraryObject[] = [];
+  public plugins: string[] = [];
+  public licenses: LicenseObject[] = [];
 
   constructor(
     public nav: NavController,
@@ -25,11 +23,13 @@ export class AttributionsPage {
   ) {
     SafariViewController.warmUp();
     this.attributions.load().then(data => {
-      this.data = data;
+      this.libraries = data.libraries;
+      this.plugins = data.plugins;
+      this.licenses = data.licenses;
     });
   }
 
-  showLicense(licenseObj: any) {
+  showLicense(licenseObj: LicenseObject) {
     this.nav.push(LicensePage, { titleToken: licenseObj.token, content: licenseObj.content });
   }
 

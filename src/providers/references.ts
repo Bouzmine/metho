@@ -5,13 +5,13 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class References {
-  data: any;
+  data: ReferenceObject[];
 
   constructor(
     private http: Http,
   ) {}
 
-  load() {
+  load(): Promise<ReferenceObject[]> {
     if (this.data) {
       return Promise.resolve(this.data);
     }
@@ -34,10 +34,10 @@ export class References {
     }
   }
 
-  search(q: string): any {
+  search(q: string): SearchReferenceObject[] {
     let qa = q.trim().split(" ");
 
-    let filteredList = [];
+    let filteredList: SearchReferenceObject[] = [];
 
     this.data.forEach(v => {
       let currentObj = {

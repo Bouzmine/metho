@@ -23,7 +23,7 @@ export class Scan {
     public settings: Settings,
   ) {}
 
-  scan(): Promise<any> {
+  scan(): Promise<ScanResponse> {
     return new Promise((resolve, reject) => {
       if (!this.settings.get(Settings.wasScanBoardingShown)) {
         let modal = this.modalCtrl.create(BoardingScanPage);
@@ -42,9 +42,9 @@ export class Scan {
     });
   }
 
-  public openScanner(): Promise<any> {
+  public openScanner(): Promise<ScanResponse> {
     return new Promise((resolve, reject) => {
-      BarcodeScanner.scan().then((data) => {
+      BarcodeScanner.scan().then((data: BarcodeScannerResponse) => {
         if (!data.cancelled) {
           if (data.format == "EAN_13") {
             this.fetchFromISBN(data.text).then(data => {
@@ -60,7 +60,7 @@ export class Scan {
     });
   }
 
-  public fetchFromISBN(isbn: string, transition: Promise<any> = Promise.resolve()): Promise<any> {
+  public fetchFromISBN(isbn: string, transition: Promise<void> = Promise.resolve()): Promise<ScanResponse> {
     return new Promise((resolve, reject) => {
       transition.then(() => {
         if (navigator.onLine) {
@@ -80,7 +80,7 @@ export class Scan {
               transition: loadingTransition || Promise.resolve()
             });
           }).catch((response) => {
-            var transition = <Promise<any>>Promise.resolve(true);
+            var transition = <Promise<void>>Promise.resolve();
             if (isLoading) {
               transition = loading.dismiss();
             }

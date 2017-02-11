@@ -74,7 +74,7 @@ export class Settings {
     });
   }
 
-  getAsync(key: string): any {
+  getAsync(key: string): Promise<any> {
     if (this.isLoaded) {
       return Promise.resolve(this.settings[key]);
     }else {
@@ -90,7 +90,7 @@ export class Settings {
     return this.settings[key];
   }
 
-  set(key: string, set: any): void {
+  set(key: string, set: boolean|string): void {
     this.settings[key] = this.transformIfBool(set);
     this.localStorage.set("setting-" + key, set.toString());
     this.storage.setSetting(key, set);
@@ -100,7 +100,7 @@ export class Settings {
     return this.settings;
   }
 
-  transformIfBool(input: string): boolean|string {
+  transformIfBool(input: string|boolean): boolean|string {
     if (input == "true") {
       return true;
     }else if (input == "false") {

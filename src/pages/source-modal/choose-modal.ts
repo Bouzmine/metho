@@ -1,3 +1,4 @@
+import { Component } from "@angular/core";
 import ModalType from "./modals";
 
 import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
@@ -7,7 +8,7 @@ import { SourceModalCdPage } from "../source-modal-cd/source-modal-cd";
 import { SourceModalMoviePage } from "../source-modal-movie/source-modal-movie";
 import { SourceModalInterviewPage } from "../source-modal-interview/source-modal-interview";
 
-export default function getModalFromType (type: string): any {
+export default function getModalFromType (type: string): Component {
   switch (type) {
     case ModalType.BOOK:
       return SourceModalBookPage;

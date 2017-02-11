@@ -15,8 +15,8 @@ import { Settings } from "../../providers/settings";
 })
 export class ReferencesPage {
   public searchQuery: string = "";
-  public referenceData: any[] = [];
-  public searchData: any[] = [];
+  public referenceData: ReferenceObject[] = [];
+  public searchData: SearchReferenceObject[] = [];
   public advanced: boolean;
 
   constructor(

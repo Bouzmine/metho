@@ -65,7 +65,7 @@ export class Parse {
     };
   }
 
-  public addComplexError(errorId: string, variable: string, complex: any): SourceError {
+  public addComplexError(errorId: string, variable: string, complex: ComplexSourceError): SourceError {
     return {
       errorTitle: "PROJECT.PARSE." + errorId + ".DESC",
       promptTitle: "PROJECT.PARSE." + errorId + ".TITLE",
@@ -103,7 +103,7 @@ export class Parse {
     return new Date(datestring).toLocaleDateString("fr-CA", {year: "numeric", month: "long", day: "numeric"});
   }
 
-  public format(num) {
+  public format(num: number) {
     let numString = num.toString();
     let after = "";
     let count = 0;
@@ -416,19 +416,20 @@ export class Parse {
     }
 
     // Nombre de pages
-    if (sourceToParse.pageNumber && !isNaN(sourceToParse.pageNumber)) {
-      if (sourceToParse.pageNumber >= 1000) {
-        sourceToParse.parsedSource += this.format(sourceToParse.pageNumber) + " p.";
+    let pageNumber = Number(sourceToParse.pageNumber);
+    if (pageNumber && !isNaN(pageNumber)) {
+      if (pageNumber >= 1000) {
+        sourceToParse.parsedSource += this.format(pageNumber) + " p.";
       }else {
-        sourceToParse.parsedSource += sourceToParse.pageNumber + " p.";
+        sourceToParse.parsedSource += pageNumber + " p.";
       }
 
-      if (sourceToParse.pageNumber > 15000) {
+      if (pageNumber > 15000) {
         sourceToParse.warnings.push(this.addError("PAGE_NUMBER_TOO_HIGH", "pageNumber"));
-      } else if (sourceToParse.pageNumber <= 0) {
+      } else if (pageNumber <= 0) {
         sourceToParse.warnings.push(this.addError("PAGE_NUMBER_TOO_LOW", "pageNumber"));
       }
-      sourceToParse.pageNumber = Number(sourceToParse.pageNumber);
+      sourceToParse.pageNumber = pageNumber;
     } else {
       sourceToParse.parsedSource += "? p.";
       sourceToParse.pageNumber = "";

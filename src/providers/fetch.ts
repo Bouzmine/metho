@@ -5,9 +5,9 @@ import { ReactiveHttp } from "./reactive-http";
 
 @Injectable()
 export class Fetch {
-  public cacheByISBN: any = {};
-  public cacheByName: any = {};
-  public cacheByNameWithAuthors: any = {};
+  public cacheByISBN: Cache = {};
+  public cacheByName: Cache = {};
+  public cacheByNameWithAuthors: Cache = {};
   public ISBNdbApiKeys: Array<string> = [
     "S07CWYQY",
     "YVFT6RLV"
@@ -17,7 +17,7 @@ export class Fetch {
     public http: ReactiveHttp
   ) {}
 
-  fromISBN(isbn: string) {
+  fromISBN(isbn: string): Promise<SourceFields> {
     if (this.cacheByISBN[isbn]) {
       return Promise.resolve(this.cacheByISBN[isbn]);
     }
@@ -43,7 +43,7 @@ export class Fetch {
     }
   }
 
-  fromName(name: string, includeAuthors: boolean) {
+  fromName(name: string, includeAuthors: boolean): Promise<SourceFields[]> {
     name = encodeURI(name);
 
     if (includeAuthors) {
@@ -59,7 +59,7 @@ export class Fetch {
     return this.fromISBNdbByName(name, includeAuthors);
   }
 
-  fromOpenLibraryByIsbn(isbn) {
+  fromOpenLibraryByIsbn(isbn): Promise<SourceFields> {
     return new Promise((resolve, reject) => {
       this.http.get(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`).then(response => {
         if (`ISBN:${isbn}` in response) {
@@ -79,7 +79,7 @@ export class Fetch {
     });
   }
 
-  fromISBNdbByIsbn(isbn) {
+  fromISBNdbByIsbn(isbn): Promise<SourceFields> {
     return new Promise((resolve, reject) => {
       this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/book/" + isbn).then(response => {
         if (!!response.error) {
@@ -99,7 +99,7 @@ export class Fetch {
     });
   }
 
-  fromISBNdbByName(name, includeAuthors) {
+  fromISBNdbByName(name, includeAuthors): Promise<SourceFields[]> {
     return new Promise((resolve, reject) => {
       if (includeAuthors) {
         this.http.get("http://isbndb.com/api/v2/json/" + this.pickISBNdbApiKey() + "/books?q=" + name + "&i=combined").then(response => {
@@ -135,8 +135,8 @@ export class Fetch {
     });
   }
 
-  parseFromISBNdb(response: any): Source {
-    var newobj: any = {};
+  parseFromISBNdb(response: ISBNdbResponse): SourceFields {
+    var newobj: SourceFields = {};
     // Titre
     if (response.title.toUpperCase() == response.title) {
       newobj.title = this.capitalizeEveryFirstLetter(response.title.replace(/\ufffd/g, "é").trim().toLowerCase());
@@ -194,8 +194,8 @@ export class Fetch {
     return newobj;
   }
 
-  parseFromOpenLibrary(response: any): Source {
-    let newobj: any = {};
+  parseFromOpenLibrary(response: OpenLibraryIsbnResponse): SourceFields {
+    let newobj: SourceFields = {};
 
     // Titre
     if (response.title.toUpperCase() == response.title) {

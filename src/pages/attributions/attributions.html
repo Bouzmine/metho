@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let library of data.libraries" (click)="openWebsite(library.website)">
+    <button ion-item *ngFor="let library of libraries" (click)="openWebsite(library.website)">
       <ion-thumbnail item-left *ngIf="library.image">
           <img [src]="library.image">
       </ion-thumbnail>
@@ -14,11 +14,11 @@
       <h2>{{ library.label }}</h2>
     </button>
 
-    <ion-item *ngFor="let plugin of data.plugins">
+    <ion-item *ngFor="let plugin of plugins">
       <h2 class="plugin">{{ plugin }}</h2>
     </ion-item>
 
-    <button ion-item *ngFor="let license of data.licenses" (click)="showLicense(license)">
+    <button ion-item *ngFor="let license of licenses" (click)="showLicense(license)">
       {{ license.token | translate }}
     </button>
   </ion-list>

@@ -12,7 +12,7 @@ export class TranslatedToastController {
     public translate: TranslateService,
   ) {}
 
-  present(opts: ToastOptions, translationOpts: any = {}): Promise<{ dismiss: () => Promise<any> }> {
+  present(opts: ToastOptions, translationOpts: TranslationOptions = {}): Promise<{ dismiss: () => Promise<void> }> {
     let tokens = [
       opts.message,
       opts.closeButtonText

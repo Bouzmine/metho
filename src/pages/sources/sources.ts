@@ -27,7 +27,14 @@ export class SourcesPage {
   public pendingNumber: number = 0;
   public searchQuery: string = "";
   public filteredSources: Source[] = [];
-  public typeTable: any = {};
+  public typeTable: SourceTypes = {
+    "PROJECT.TYPES.BOOK": "",
+    "PROJECT.TYPES.ARTICLE": "",
+    "PROJECT.TYPES.INTERNET": "",
+    "PROJECT.TYPES.CD_PARSE": "",
+    "PROJECT.TYPES.MOVIE": "",
+    "PROJECT.TYPES.INTERVIEW": ""
+  };
   @ViewChild(List) list: List;
   @ViewChild(Content) content: Content;
   @ViewChild(FabContainer) fab: FabContainer;
@@ -252,7 +259,7 @@ export class SourcesPage {
     }, {}, { errNum: numberOfErrors });
   }
 
-  openEmailComposer(title: string, body: string): Promise<any> {
+  openEmailComposer(title: string, body: string): Promise<void> {
     return SocialSharing.shareViaEmail(
         body,
         title,

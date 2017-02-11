@@ -93,7 +93,7 @@ export class SourceModalBookPage extends SourceModalBase {
     });
   }
 
-  fillInfos(suggestion: any) {
+  fillInfos(suggestion: SourceFields) {
     if (this.isEmpty(["title"])) {
       this.updateValues(suggestion);
       this.insertingFromScan = true;

@@ -1,3 +1,12 @@
+interface SourceTypes {
+  "PROJECT.TYPES.BOOK": string;
+  "PROJECT.TYPES.ARTICLE": string;
+  "PROJECT.TYPES.INTERNET": string;
+  "PROJECT.TYPES.CD_PARSE": string;
+  "PROJECT.TYPES.MOVIE": string;
+  "PROJECT.TYPES.INTERVIEW": string;
+}
+
 interface PouchDBObject {
   _id?: string;
   _rev?: string;
@@ -8,7 +17,7 @@ interface Project extends PouchDBObject {
   matter: string;
 }
 
-interface Source extends PouchDBObject {
+interface Source extends PouchDBObject, SourceFields {
   title: string;
   type: string;
   parsedSource?: string;
@@ -16,6 +25,10 @@ interface Source extends PouchDBObject {
   project_id?: string;
   errors?: SourceError[];
   warnings?: SourceError[];
+}
+
+interface SourceFields {
+  title?: string;
   // General
   author1lastname?: string;
   author1firstname?: string;
@@ -37,7 +50,7 @@ interface Source extends PouchDBObject {
   editor?: string;
   publicationDate?: string;
   volumeNumber?: string;
-  pageNumber?: any;
+  pageNumber?: string | number;
   // Article
   startPage?: number;
   endPage?: number;
@@ -86,7 +99,7 @@ interface Pending extends PouchDBObject {
   date: any; // moment.MomentDateObject
   isbn: string;
   isLoaded?: boolean;
-  data?: any;
+  data?: SourceFields;
   notAvailable?: boolean;
   datestring?: string; // Localized datestring
 }
@@ -99,4 +112,100 @@ interface SettingsList {
   overideLang?: string;
   ignoreErrors?: boolean;
   cdAlertShown?: boolean;
+}
+
+interface AttributionsObjects {
+  libraries: LibraryObject[];
+  licenses: LicenseObject[];
+  plugins: string[];
+}
+
+interface LicenseObject {
+  token: string;
+  content: string;
+}
+
+interface LibraryObject {
+  label: string;
+  website: string;
+  image: string;
+}
+
+interface ReferenceObject {
+  id: number;
+  name: string;
+  description?: string;
+  icon?: string;
+  text: string;
+  containsSub?: boolean;
+  subPages: ReferenceObject[];
+}
+
+interface SearchReferenceObject {
+  title: string;
+  id: number;
+  content: ReferenceObject[];
+}
+
+interface ComplexSourceError {
+  type: string;
+  options: {
+    text: string;
+    value: string;
+  }[];
+}
+
+interface Cache {
+  [key: string]: SourceFields;
+}
+
+interface ISBNdbResponse {
+  title: string;
+  title_latin: string;
+  publisher_name: string;
+  edition_info: string;
+  publisher_text: string;
+  physical_description_text: string;
+  author_data: {
+    name: string;
+  }[];
+  isbn13: string;
+  isbn10: string;
+}
+
+interface OpenLibraryIsbnResponse {
+  title: string;
+  publishers: {
+    name: string;
+  }[];
+  publish_date: string;
+  publish_places: {
+    name: string;
+  }[];
+  number_of_pages: number;
+  pagination: string;
+  authors: {
+    url: string;
+    name: string;
+  }[];
+  by_statement: string;
+  url: string;
+  notes: string;
+}
+
+interface ScanResponse {
+  data?: SourceFields;
+  transition?: Promise<any>;
+  addPending?: boolean;
+  isbn?: string;
+}
+
+interface TranslationOptions {
+  [key: string]: any;
+}
+
+interface BarcodeScannerResponse {
+  cancelled: boolean;
+  format: string;
+  text: string;
 }

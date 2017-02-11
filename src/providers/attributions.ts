@@ -4,13 +4,13 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class Attributions {
-  public data: any;
+  public data: AttributionsObjects;
 
   constructor(
     private http: Http,
   ) {}
 
-  load() {
+  load(): Promise<AttributionsObjects> {
     console.log("load start");
     if (this.data) {
       return Promise.resolve(this.data);

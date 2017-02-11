@@ -70,7 +70,7 @@ export class Report {
     });
   }
 
-  askForRefresh(transition: Promise<any> = Promise.resolve()) {
+  askForRefresh(transition: Promise<void> = Promise.resolve()) {
     transition.then(() => {
       this.alertCtrl.present({
         title: "REPORT.ERROR",

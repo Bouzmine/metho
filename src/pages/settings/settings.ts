@@ -21,9 +21,9 @@ export class SettingsPage {
   public settings: SettingsList = {};
   public enableAdvanced: boolean = false;
   public advancedDeviceAllowed: boolean = true;
-  public advancedPage: any;
-  public attributionsPage: any;
-  public feedbackPage: any;
+  public advancedPage: Component;
+  public attributionsPage: Component;
+  public feedbackPage: Component;
   @ViewChild(List) list: List;
 
   public showIlluminatiEaster: boolean = false;

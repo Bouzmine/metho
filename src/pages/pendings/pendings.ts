@@ -81,7 +81,7 @@ export class PendingsPage {
     });
   }
 
-  openAfterLoad(data: Source, id: string) {
+  openAfterLoad(data: SourceFields, id: string) {
     let modal = this.modalCtrl.create(SourceModalBookPage, {
       data: data,
       projectId: this.projectId,
@@ -96,7 +96,7 @@ export class PendingsPage {
     modal.present();
   }
 
-  openModalWithBrowser(pending: Pending, transition: Promise<any> = Promise.resolve()) {
+  openModalWithBrowser(pending: Pending, transition: Promise<void> = Promise.resolve()) {
     let modal = this.modalCtrl.create(SourceModalBookPage, {
       projectId: this.projectId,
       pendingId: pending._id,

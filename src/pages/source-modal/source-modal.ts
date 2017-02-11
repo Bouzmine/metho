@@ -126,7 +126,7 @@ export abstract class SourceModalBase {
     return true;
   }
 
-  updateValues(newValue: any) {
+  updateValues(newValue: SourceFields) {
     this.form.patchValue(newValue);
   }
 

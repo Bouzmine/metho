@@ -14,7 +14,7 @@ import { TranslatedAlertController } from "../../providers/translated-alert-cont
   templateUrl: "projects.html"
 })
 export class ProjectsPage {
-  public projects: any[] = [];
+  public projects: Project[] = [];
   public loading: Boolean = true;
   @ViewChild(List) list: List;
 

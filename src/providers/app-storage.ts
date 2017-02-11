@@ -24,7 +24,7 @@ export class AppStorage {
   public sourcesByProject: Map<string, Map<string, Source>> = <Map<string, Map<string, Source>>>new Map();
   public pendings: Map<string, Pending> = <Map<string, Pending>>new Map();
   public pendingsByProject: Map<string, Map<string, Pending>> = <Map<string, Map<string, Pending>>>new Map();
-  public settings: any = {};
+  public settings: SettingsList = {};
 
   public loadingProjects: boolean = true;
   public loadingSources: boolean = true;
@@ -296,7 +296,7 @@ export class AppStorage {
 
   parseSources() {
     this.waitForSource(() => {
-      let sources: Map<string, any> = <Map<string, any>>new Map();
+      let sources: Map<string, Source> = <Map<string, Source>>new Map();
       this.sources.forEach((source) => {
         sources.set(source._id, this.parse.parse(source));
       });
@@ -395,13 +395,13 @@ export class AppStorage {
     });
   }
 
-  getSettings(): Promise<any> {
+  getSettings(): Promise<SettingsList> {
     return this.waitForSetting(() => {
       return this.settings;
     });
   }
 
-  setSetting(key: string, value: any): void {
+  setSetting(key: string, value: string|boolean): void {
     let releaseLock = this.lockSettings();
     this.settingsDB.get(key).then(doc => {
       doc.value = value;
