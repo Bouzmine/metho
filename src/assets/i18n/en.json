@@ -93,10 +93,6 @@
                 },
                 "INTERNET": {
                     "HAS_AUTHORS": "Source has an author",
-                    "ORGANIZATION": "Source has an organization",
-                    "ORGANIZATION_NAME": "Organization",
-                    "ORGANIZATION_NAME_PLACEHOLDER": "Amnesty International",
-                    "NONE": "No organization or author",
                     "WEBPAGE_NAME": "Webpage's title",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
                     "WEBSITE_NAME": "Homepage title",
@@ -418,12 +414,6 @@
                 "TEXT": "Enter the homepage title",
                 "DESC": "Homepage title",
                 "EXAMPLE": "Wikipedia, the free encyclopedia"
-            },
-            "ORGANIZATION_NAME": {
-                "TITLE": "Organization",
-                "TEXT": "Enter organization name",
-                "DESC": "Organization name",
-                "EXAMPLE": "Amnesty International"
             },
             "PAGE_TITLE": {
                 "TITLE": "Webpage's title",

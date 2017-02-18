@@ -12,33 +12,19 @@
 
 <ion-content>
   <form [formGroup]="form" (keypress)="submitIfEnter($event)">
-    <ion-list radio-group formControlName="hasAuthors" class="no-margin-bottom">
+    <ion-list class="no-margin-bottom">
       <ion-item>
         <ion-label>{{"PROJECT.DETAIL.MODAL.INTERNET.HAS_AUTHORS" | translate}}</ion-label>
-        <ion-radio value="author"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{"PROJECT.DETAIL.MODAL.INTERNET.ORGANIZATION" | translate}}</ion-label>
-        <ion-radio value="org"></ion-radio>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{"PROJECT.DETAIL.MODAL.INTERNET.NONE" | translate}}</ion-label>
-        <ion-radio value="none"></ion-radio>
+        <ion-checkbox formControlName="hasAuthors"></ion-checkbox>
       </ion-item>
     </ion-list>
     <ion-list>
-      <slider [isOpen]="form.value.hasAuthors == 'author'" class="authors">
+      <slider [isOpen]="form.value.hasAuthors" class="authors">
         <ion-item>
           <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
         </ion-item>
         <ion-item>
           <ion-input formControlName="author1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
-        </ion-item>
-      </slider>
-      <slider [isOpen]="form.value.hasAuthors == 'org'">
-        <ion-item>
-          <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERNET.ORGANIZATION_NAME" | translate}}</ion-label>
-          <ion-input formControlName="organization" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.ORGANIZATION_NAME_PLACEHOLDER' | translate}}"></ion-input>
         </ion-item>
       </slider>
       <ion-item>

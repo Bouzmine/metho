@@ -55,7 +55,6 @@ interface SourceFields {
   startPage?: number;
   endPage?: number;
   // Internet
-  organization?: string;
   url?: string;
   consultationDate?: string;
   // Movie

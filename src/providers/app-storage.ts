@@ -11,7 +11,6 @@ declare var window: CordovaWindow;
 
 import PouchDB from "pouchdb";
 import PouchDB_Adapter_Cordova_SQLite from "pouchdb-adapter-cordova-sqlite";
-import PouchDB_Migrate from "pouchdb-migrate";
 
 @Injectable()
 export class AppStorage {
@@ -44,7 +43,6 @@ export class AppStorage {
 
   init() {
     PouchDB.plugin(PouchDB_Adapter_Cordova_SQLite);
-    PouchDB.plugin(PouchDB_Migrate);
     let adapter = !!window.cordova ? "cordova-sqlite" : "websql";
     this.projectDB = new PouchDB("projects", { adapter: adapter });
     this.sourceDB = new PouchDB("sources", { adapter: adapter });
@@ -76,23 +74,7 @@ export class AppStorage {
         }
         this.sourcesByProject.set(value.doc.project_id, this.sourcesByProject.get(value.doc.project_id).set(value.doc._id, value.doc));
       });
-
-      this.sourceDB.migrate((doc) => {
-        if (doc.type != "internet") return;
-        if (typeof doc.hasAuthors == "string") return;
-
-        if (doc.hasAuthors == true) {
-          doc.hasAuthors = "author";
-        }else {
-          doc.hasAuthors = "none";
-        }
-
-        doc.organization = "";
-
-        return [doc];
-      }).then(() => {
-        this.lockSources()();
-      });
+      this.lockSources()();
     }).catch(err => {
       this.lockSources()();
       this.report.report(err);
