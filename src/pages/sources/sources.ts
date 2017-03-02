@@ -1,6 +1,6 @@
 import { ViewChild, Component } from "@angular/core";
 
-import { NavController, NavParams, ModalController, List, Content, FabContainer } from "ionic-angular";
+import { NavController, NavParams, ModalController, List, Content } from "ionic-angular";
 import { SocialSharing, Clipboard } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
@@ -37,7 +37,6 @@ export class SourcesPage {
   };
   @ViewChild(List) list: List;
   @ViewChild(Content) content: Content;
-  @ViewChild(FabContainer) fab: FabContainer;
 
   constructor(
     public nav: NavController,
@@ -120,7 +119,79 @@ export class SourcesPage {
     this.storage.loadPendingsFromProjectId(this.projectId);
   }
 
-  openModal(type: string, openScan: boolean = false, editing: boolean = false, source?: Source) {
+  createSource() {
+    let actionsheet = this.actionSheetCtrl.present({
+      title: "PROJECT.DETAIL.CHOOSE_TYPE",
+      buttons: [
+        {
+          text: "PROJECT.TYPES.BOOK",
+          icon: "book",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("book", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.TYPES.ARTICLE",
+          icon: "paper",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("article", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.TYPES.INTERNET",
+          icon: "at",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("internet", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.TYPES.CD",
+          icon: "disc",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("cd", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.TYPES.MOVIE",
+          icon: "film",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("movie", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.TYPES.INTERVIEW",
+          icon: "quote",
+          handler: () => {
+            actionsheet.then(obj => {
+              this.openModal("interview", obj.dismiss());
+            });
+            return false;
+          }
+        },
+        {
+          role: "cancel",
+          text: "COMMON.CANCEL"
+        }
+      ]
+    });
+  }
+
+  openModal(type: string, transition: Promise<any> = Promise.resolve(), openScan: boolean = false, editing: boolean = false, source: Source = undefined) {
     const navParams = {
       projectId: this.projectId,
       data: source,
@@ -139,13 +210,13 @@ export class SourcesPage {
       this.loadPendingNumber();
     });
 
-    modal.present().then(() => {
-      this.fab.close();
+    transition.then(() => {
+      modal.present();
     });
   }
 
   editSource(source: Source) {
-    this.openModal(source.type, false, true, source);
+    this.openModal(source.type, undefined, false, true, source);
   }
 
   deleteSource(source: Source) {

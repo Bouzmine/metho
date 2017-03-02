@@ -59,34 +59,8 @@
   </div>
 
   <ion-fab bottom right>
-    <button ion-fab>
+    <button ion-fab (click)="createSource()">
       <ion-icon name="add"></ion-icon>
     </button>
-    <ion-fab-list side="top">
-      <button ion-fab (click)="openModal('book')">
-        <ion-icon name="book"></ion-icon>
-        <div class="label">{{'PROJECT.TYPES.BOOK' | translate}}</div>
-      </button>
-      <button ion-fab (click)="openModal('article')">
-        <ion-icon name="paper"></ion-icon>
-        <div class="label">{{'PROJECT.TYPES.ARTICLE' | translate}}</div>
-      </button>
-      <button ion-fab (click)="openModal('internet')">
-        <ion-icon name="at"></ion-icon>
-        <div class="label">{{'PROJECT.TYPES.INTERNET' | translate}}</div>
-      </button>
-      <button ion-fab (click)="openModal('cd')">
-        <ion-icon name="disc"></ion-icon>
-        <div class="label">{{'PROJECT.TYPES.CD' | translate}}</div>
-      </button>
-      <button ion-fab (click)="openModal('movie')">
-        <ion-icon name="film"></ion-icon>
-        <div class="label">{{'PROJECT.TYPES.MOVIE' | translate}}</div>
-      </button>
-      <button ion-fab (click)="openModal('interview')">
-        <ion-icon name="quote"></ion-icon>
-        <div class="label">{{'PROJECT.TYPES.INTERVIEW' | translate}}</div>
-      </button>
-    </ion-fab-list>
   </ion-fab>
 </ion-content>
