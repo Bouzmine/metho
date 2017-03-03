@@ -87,7 +87,7 @@ export class InstantSearchComponent implements ControlValueAccessor {
         this.resetInstantSearchVars();
       }
       this._timeout = null;
-    }, 500);
+    }, 750);
   }
 
   fillRequest(suggestion: Source) {
