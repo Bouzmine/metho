@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 
 import { NavController } from "ionic-angular";
+import { Keyboard } from "ionic-native";
 
 import { ReferencesDetailPage } from "../references-detail/references-detail";
 import { ReferencesSubPage } from "../references-sub/references-sub";
@@ -31,6 +32,12 @@ export class ReferencesPage {
   updateSearch() {
     if (this.searchQuery.trim() != "") {
       this.searchData = this.references.search(this.searchQuery);
+    }
+  }
+
+  closeKeyboard(event: KeyboardEvent) {
+    if (event.keyCode == 13) {
+      Keyboard.close();
     }
   }
 

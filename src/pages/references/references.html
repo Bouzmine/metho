@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'COMMON.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}" animated="true"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (keypress)="closeKeyboard($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'COMMON.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}" animated="true"></ion-searchbar>
   <ion-list *ngIf="searchQuery.trim() == ''">
     <button ion-item *ngFor="let reference of referenceData" (click)="goToReferenceDetailPage(reference.id)">
       <ion-thumbnail item-left>
