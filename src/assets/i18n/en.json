@@ -41,6 +41,9 @@
             "PENDING_ELEMENTS": "Drafts",
             "CHOOSE_TYPE": "Choose source type",
             "SHARE_TEXT": "Here are the sources for project « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
+            "COPY": "Copy",
+            "COPIED": "Sources copied to clipboard",
+            "EXPORT_EMAIL": "Export by email",
             "MODAL":{
                 "TITLE": "New source",
                 "SCAN": "Scan barcode",
@@ -92,7 +95,7 @@
                     "HAS_AUTHORS": "Source has an author",
                     "WEBPAGE_NAME": "Webpage's title",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
-                    "WEBSITE_NAME": "Website's title",
+                    "WEBSITE_NAME": "Homepage title",
                     "WEBSITE_NAME_PLACEHOLDER": "Wikipedia, the free encyclopedia",
                     "URL": "Web address",
                     "URL_PLACEHOLDER": "http://www.en.wikipedia.org",
@@ -162,9 +165,9 @@
                 "BOOKS": "books"
             },
             "POPUP": {
-                "ERRORS_SOURCES": "The sources you're trying to share contain <strong>{{errNum}}</strong> error(s). Do you want to share them ?",
-                "SHARE_TEXT": "Sharing",
-                "SHARE": "Share",
+                "ERRORS_SOURCES": "The sources you're trying to export contain <strong>{{errNum}}</strong> error(s). Do you want to export them ?",
+                "SHARE_TEXT": "Export",
+                "SHARE": "Export",
                 "DELETE_TITLE": "Deletion",
                 "DELETE_TEXT": "Deleting this source will destroy all data related to it, the deletion won't affect other sources. This action cannot be cancelled.",
                 "BOOK_UNAVAILABLE_TITLE": "Book unavailable",
@@ -197,6 +200,8 @@
         },
         "SOURCE":{
             "NO_ERROR": "Zero error",
+            "COPY": "Copy current source",
+            "COPIED": "Current source copied to clipboard",
             "MODAL": {
                 "TITLE": "Edit source"
             }
@@ -405,9 +410,9 @@
                 "EXAMPLE": "16"
             },
             "HOMEPAGE_TITLE": {
-                "TITLE": "Website's title",
-                "TEXT": "Enter website's title",
-                "DESC": "Website's title",
+                "TITLE": "Homepage",
+                "TEXT": "Enter the homepage title",
+                "DESC": "Homepage title",
                 "EXAMPLE": "Wikipedia, the free encyclopedia"
             },
             "PAGE_TITLE": {
@@ -564,7 +569,8 @@
         }
     },
     "REFERENCES":{
-        "TAB_TITLE": "Reference"
+        "TAB_TITLE": "Reference",
+        "EMPTY_SEARCH": "No result, you can search across articles title and content"
     },
     "SETTINGS":{
         "TAB_TITLE": "Settings",

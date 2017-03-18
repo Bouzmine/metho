@@ -14,7 +14,7 @@ import { TranslatedAlertController } from "../../providers/translated-alert-cont
   templateUrl: "projects.html"
 })
 export class ProjectsPage {
-  public projects: any[] = [];
+  public projects: Project[] = [];
   public loading: Boolean = true;
   @ViewChild(List) list: List;
 
@@ -82,7 +82,7 @@ export class ProjectsPage {
           handler: () => {
             this.storage.deleteProject(project._id);
             let index = this.projects.indexOf(project);
-            if(index > -1) {
+            if (index > -1) {
               this.projects.splice(index, 1);
             }
           }

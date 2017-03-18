@@ -1,8 +1,7 @@
 source-modal-movie {
-    .item-datetime ion-label {
-        color: #7f7f7f;
-    }
+    @include GenericModal;
 
+    // Multi-line user info for more than one author
     ion-item-divider ion-label {
         white-space: normal;
     }

@@ -14,7 +14,7 @@ import { References } from "../../providers/references";
 export class ReferencesDetailPage {
   public name: string = "";
   public text: string = "";
-  public entries: any[] = [];
+  public entries: ReferenceObject[] = [];
   public id: string;
 
   constructor(

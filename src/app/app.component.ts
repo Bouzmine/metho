@@ -6,7 +6,9 @@ import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { TabsPage } from "../pages/tabs/tabs";
 
+import { AdvancedMode } from "../providers/advanced-mode";
 import { AppStorage } from "../providers/app-storage";
+import { Attributions } from "../providers/attributions";
 import { Language } from "../providers/language";
 import { References } from "../providers/references";
 
@@ -15,11 +17,13 @@ import { References } from "../providers/references";
   template: `<ion-nav [root]="rootPage"></ion-nav>`
 })
 export class MyApp {
-  rootPage: any = TabsPage;
+  rootPage: Component = TabsPage;
 
   constructor(
     public platform: Platform,
+    public advanced: AdvancedMode,
     public storage: AppStorage,
+    public attributions: Attributions,
     public language: Language,
     public references: References,
     public translate: TranslateService,
@@ -33,6 +37,8 @@ export class MyApp {
           Splashscreen.hide();
           StatusBar.styleDefault();
           this.references.load();
+          this.advanced.init(false);
+          this.attributions.load();
         }, 100);
       });
     });

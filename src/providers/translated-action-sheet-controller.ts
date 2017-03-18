@@ -12,7 +12,7 @@ export class TranslatedActionSheetController {
     public translate: TranslateService,
   ) {}
 
-  present(opts: ActionSheetOptions, translationOpts: any = {}): Promise<{ dismiss: () => Promise<any> }> {
+  present(opts: ActionSheetOptions, translationOpts: TranslationOptions = {}): Promise<{ dismiss: () => Promise<void> }> {
     let tokens = [
       opts.title,
       opts.subTitle
@@ -24,7 +24,6 @@ export class TranslatedActionSheetController {
     }
 
     let cleanTokens = tokens.filter(element => element !== undefined);
-    console.log(cleanTokens);
 
     return new Promise(resolve => {
       this.translate.get(cleanTokens, translationOpts).subscribe(translations => {

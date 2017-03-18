@@ -12,7 +12,7 @@ export class TranslatedAlertController {
     public translate: TranslateService,
   ) {}
 
-  present(opts: AlertOptions, nav?: NavOptions, translationOpts: any = {}): Promise<{ dismiss: () => Promise<any> }> {
+  present(opts: AlertOptions, nav?: NavOptions, translationOpts: TranslationOptions = {}): Promise<{ dismiss: () => Promise<void> }> {
     let tokens = [
       opts.title,
       opts.subTitle,
@@ -35,7 +35,6 @@ export class TranslatedAlertController {
     }
 
     let cleanTokens = tokens.filter(element => element !== undefined);
-    console.log(cleanTokens);
 
     return new Promise(resolve => {
       this.translate.get(cleanTokens, translationOpts).subscribe(translations => {

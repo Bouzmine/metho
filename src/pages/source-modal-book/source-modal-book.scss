@@ -1,18 +1,7 @@
 source-modal-book {
-    .no-margin-bottom {
-        margin-bottom: 0;
-    }
+    @include GenericModal;
 
-    .no-margin {
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-
-    .no-margin-with-header {
-        margin-top: 20px;
-        margin-bottom: 0;
-    }
-
+    // Browser / Scan button
     .no-padding {
         padding: 0;
 
@@ -25,38 +14,5 @@ source-modal-book {
         position: absolute;
         left: 10px;
         top: 12px;
-    }
-
-    .will-90 ion-icon {
-        padding: 5px;
-        transition: transform 0.5s ease;
-    }
-
-    .rotate-90 ion-icon {
-        transform: rotate(90deg);
-    }
-
-    .height-one {
-        height: 45px;
-    }
-
-    .height-one-and-half {
-        height: 68px;
-    }
-
-    .height-two-and-half {
-        height: 113px;
-    }
-
-    .authors {
-        border-bottom: 1px;
-        border-bottom-color: #c8c7cc;
-        border-bottom-style: solid;
-
-        div.inputs {
-            border-top: 1px;
-            border-top-color: #e4e2e8;
-            border-top-style: solid;
-        }
     }
 }

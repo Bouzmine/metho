@@ -9,4 +9,4 @@
 
 ### WKWebView
 - Focus of inputs
-- `ng2-translate` won't update template with translations
+- Alerts appear up the screen when there are inputs in them

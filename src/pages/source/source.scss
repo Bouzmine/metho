@@ -22,4 +22,10 @@ source {
         padding-top: 40px;
         font-size: 36px;
     }
+
+    button[clear] {
+        position: absolute;
+        bottom: 20px;
+        font-size: 24px;
+    }
 }

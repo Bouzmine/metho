@@ -23,16 +23,16 @@ export class Scan {
     public settings: Settings,
   ) {}
 
-  scan(): Promise<any> {
+  scan(): Promise<ScanResponse> {
     return new Promise((resolve, reject) => {
-      if (!this.settings.get("scanBoardingDone")) {
+      if (!this.settings.get(Settings.wasScanBoardingShown)) {
         let modal = this.modalCtrl.create(BoardingScanPage);
         modal.onDidDismiss(() => {
           this.openScanner()
           .then((data) => resolve(data))
           .catch(err => reject(err));
         });
-        this.settings.set("scanBoardingDone", true);
+        this.settings.set(Settings.wasScanBoardingShown, true);
         modal.present();
       }else {
         this.openScanner()
@@ -42,9 +42,9 @@ export class Scan {
     });
   }
 
-  public openScanner(): Promise<any> {
+  public openScanner(): Promise<ScanResponse> {
     return new Promise((resolve, reject) => {
-      BarcodeScanner.scan().then((data) => {
+      BarcodeScanner.scan().then((data: BarcodeScannerResponse) => {
         if (!data.cancelled) {
           if (data.format == "EAN_13") {
             this.fetchFromISBN(data.text).then(data => {
@@ -60,7 +60,7 @@ export class Scan {
     });
   }
 
-  public fetchFromISBN(isbn: string, transition: Promise<any> = Promise.resolve()): Promise<any> {
+  public fetchFromISBN(isbn: string, transition: Promise<void> = Promise.resolve()): Promise<ScanResponse> {
     return new Promise((resolve, reject) => {
       transition.then(() => {
         if (navigator.onLine) {
@@ -80,7 +80,7 @@ export class Scan {
               transition: loadingTransition || Promise.resolve()
             });
           }).catch((response) => {
-            var transition = <Promise<any>>Promise.resolve(true);
+            var transition = <Promise<void>>Promise.resolve();
             if (isLoading) {
               transition = loading.dismiss();
             }
@@ -93,25 +93,6 @@ export class Scan {
                 this.alert408(resolve, isbn);
                 break;
                 case 500:
-                case 501:
-                case 502:
-                case 503:
-                case 504:
-                case 505:
-                case 506:
-                case 507:
-                case 508:
-                case 509:
-                case 510:
-                case 511:
-                case 520:
-                case 521:
-                case 522:
-                case 523:
-                case 524:
-                case 525:
-                case 526:
-                case 530:
                 this.alert500(resolve);
                 break;
                 default:
@@ -127,7 +108,7 @@ export class Scan {
     });
   }
 
-  public alert404(resolve: (any) => any) {
+  public alert404(resolve: (data: any) => any) {
     let alert = this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE",
       message: "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TEXT",
@@ -142,7 +123,7 @@ export class Scan {
     });
   }
 
-  public alert408(resolve: (any) => void, isbn: string) {
+  public alert408(resolve: (data: any) => void, isbn: string) {
     let alert = this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.TIMEOUT_TITLE",
       message: "PROJECT.DETAIL.POPUP.TIMEOUT_TEXT",
@@ -175,7 +156,7 @@ export class Scan {
     });
   }
 
-  public alert500(resolve: (any) => void) {
+  public alert500(resolve: (data: any) => void) {
     let alert = this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.ERROR",
       message: "PROJECT.DETAIL.POPUP.ERROR_500",
@@ -190,7 +171,7 @@ export class Scan {
     });
   }
 
-  public alertOffline(resolve: (any) => void, isbn: string) {
+  public alertOffline(resolve: (data: any) => void, isbn: string) {
     let alert = this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.NO_CONNECTION",
       message: "PROJECT.DETAIL.POPUP.ADD_TO_PENDINGS",
@@ -223,7 +204,7 @@ export class Scan {
     });
   }
 
-  public alertScanUnavailable(resolve: (any) => void) {
+  public alertScanUnavailable(resolve: (data: any) => void) {
     this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN",
       message: "PROJECT.DETAIL.POPUP.UNABLE_TO_SCAN_TEXT",
@@ -238,7 +219,7 @@ export class Scan {
     });
   }
 
-  public alertWrongBarcode(resolve: (any) => void) {
+  public alertWrongBarcode(resolve: (data: any) => void) {
     this.alertCtrl.present({
       title: "PROJECT.DETAIL.POPUP.BOOK_UNAVAILABLE_TITLE",
       message: "PROJECT.DETAIL.POPUP.NOT_RIGHT_BARCODE_TYPE",

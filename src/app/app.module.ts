@@ -31,6 +31,7 @@ import { MyApp } from "./app.component";
 
 import { AdvancedMode } from "../providers/advanced-mode";
 import { AppStorage } from "../providers/app-storage";
+import { Attributions } from "../providers/attributions";
 import { Fetch } from "../providers/fetch";
 import { Language } from "../providers/language";
 import { Parse } from "../providers/parse";
@@ -41,6 +42,10 @@ import { Scan } from "../providers/scan";
 import { Settings } from "../providers/settings";
 import { TranslatedActionSheetController } from "../providers/translated-action-sheet-controller";
 import { TranslatedAlertController } from "../providers/translated-alert-controller";
+import { TranslatedToastController } from "../providers/translated-toast-controller";
+
+import { InstantSearchComponent } from "../components/instant-search/instant-search";
+import { SliderComponent } from "../components/slider/slider";
 
 export function translateDeps (http: Http) {
   return new TranslateStaticLoader(http, "assets/i18n", ".json");
@@ -69,7 +74,9 @@ export function translateDeps (http: Http) {
     SourceModalInternetPage,
     SourceModalInterviewPage,
     SourceModalMoviePage,
-    SourcesPage
+    SourcesPage,
+    InstantSearchComponent,
+    SliderComponent
   ],
   imports: [
     HttpModule,
@@ -107,6 +114,7 @@ export function translateDeps (http: Http) {
   ],
   providers: [
     AppStorage,
+    Attributions,
     Parse,
     Fetch,
     References,
@@ -118,7 +126,8 @@ export function translateDeps (http: Http) {
     Scan,
     Storage,
     TranslatedActionSheetController,
-    TranslatedAlertController
+    TranslatedAlertController,
+    TranslatedToastController
   ]
 })
 export class AppModule {}

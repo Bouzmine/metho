@@ -3,4 +3,16 @@ references {
         text-overflow: ellipsis;
         overflow: hidden;
     }
+
+    .flex {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(100% - 44px);
+        flex-direction: column;
+    }
+    
+    .big::before {
+        font-size: 54px;
+    }
 }

@@ -38,39 +38,41 @@ export class AdvancedMode {
     public alertCtrl: TranslatedAlertController,
     public report: Report,
     public settings: Settings,
-  ) {
-    this.init();
-  }
+  ) {}
 
-  init() {
-    if (navigator.onLine) {
+  init(retryOnFail: boolean) {
+    const isOnline = navigator.onLine;
+    const isAlreadyLoaded = (this.hasLoaded);
+    if (isOnline && !isAlreadyLoaded) {
       InAppPurchase.getProducts(["com.fclavette.metho.advanced"]).then(products => {
         let product = products[0];
-        this.price = product.price;
-        this.productId = product.productId;
-        this.hasLoaded = true;
-        this.loadEvents.emit(true);
+        this.completeInit(product.price, product.productId);
       }).catch(err => {
         if (err != "cordova_not_available") {
           this.report.report(err);
         }
-        this.price = "1,39$";
-        this.hasLoaded = true;
-        this.loadEvents.emit(true);
+        this.completeInit("1,39$", "");
       });
-    }else {
+    }else if (!isAlreadyLoaded && retryOnFail) {
       setTimeout(() => {
-        this.init();
+        this.init(true);
       }, 5000);
     }
   }
 
+  completeInit(price: string, productId: string) {
+    this.price = price;
+    this.productId = productId;
+    this.hasLoaded = true;
+    this.loadEvents.emit(true);
+  }
+
   enable(): Promise<any> {
-    if (!this.settings.get("advanced") && !!window.cordova) {
+    if (!this.settings.get(Settings.isAdvanced) && !!window.cordova) {
       return new Promise((resolve, reject) => {
         if (navigator.onLine && this.hasLoaded) {
           InAppPurchase.buy(this.productId).then((data) => {
-            this.settings.set("advanced", true);
+            this.settings.set(Settings.isAdvanced, true);
             resolve();
           }).catch(err => {
             reject();
@@ -91,18 +93,18 @@ export class AdvancedMode {
         }
       });
     }else {
-      this.settings.set("advanced", true);
+      this.settings.set(Settings.isAdvanced, true);
       return Promise.resolve();
     }
   }
 
   restore(): Promise<any> {
-    if (!this.settings.get("advanced")) {
+    if (!this.settings.get(Settings.isAdvanced)) {
       return new Promise((resolve, reject) => {
         if (navigator.onLine) {
           InAppPurchase.restorePurchases().then((data) => {
             if (data.length && data[0].productId == this.productId) {
-              this.settings.set("advanced", true);
+              this.settings.set(Settings.isAdvanced, true);
               resolve();
             }else {
               this.alertCtrl.present({
@@ -140,11 +142,11 @@ export class AdvancedMode {
   }
 
   disable() {
-    this.settings.set("advanced", false);
+    this.settings.set(Settings.isAdvanced, false);
   }
 
   isEnabled() {
-    return this.settings.get("advanced");
+    return this.settings.get(Settings.isAdvanced);
   }
 
   isAvailable(): boolean {

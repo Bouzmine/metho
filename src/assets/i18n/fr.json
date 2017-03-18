@@ -41,6 +41,9 @@
             "PENDING_ELEMENTS": "Brouillons",
             "CHOOSE_TYPE": "Choisir le type de source",
             "SHARE_TEXT": "Voici les sources du projet « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
+            "COPY": "Copier",
+            "COPIED": "Sources copiées dans le presse-papier",
+            "EXPORT_EMAIL": "Exporter par courriel",
             "MODAL":{
                 "TITLE": "Nouvelle source",
                 "SCAN": "Balayer le code",
@@ -92,7 +95,7 @@
                     "HAS_AUTHORS": "La source a un auteur",
                     "WEBPAGE_NAME": "Titre de l'article",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
-                    "WEBSITE_NAME": "Nom du site web",
+                    "WEBSITE_NAME": "Titre de la page d'accueil",
                     "WEBSITE_NAME_PLACEHOLDER": "Wikipédia, l'encyclopédie libre",
                     "URL": "Adresse web",
                     "URL_PLACEHOLDER": "http://www.fr.wikipedia.org",
@@ -162,9 +165,9 @@
                 "BOOKS": "livres"
             },
             "POPUP": {
-                "ERRORS_SOURCES": "Les source que vous essayez de partager contiennent <strong>{{errNum}}</strong> erreur(s). Voulez-vous les partager quand même ?",
-                "SHARE_TEXT": "Partage",
-                "SHARE": "Partager",
+                "ERRORS_SOURCES": "Les sources que vous essayez d'exporter contiennent <strong>{{errNum}}</strong> erreur(s). Voulez-vous les exporter quand même ?",
+                "SHARE_TEXT": "Exportation",
+                "SHARE": "Exporter",
                 "DELETE_TITLE": "Suppression",
                 "DELETE_TEXT": "La suppression de cette source entrainera la perte de toutes les données ratachées à celle-ci. Cette action est irréversible.",
                 "BOOK_UNAVAILABLE_TITLE": "Livre introuvable",
@@ -197,6 +200,8 @@
         },
         "SOURCE":{
             "NO_ERROR": "Aucune erreur",
+            "COPY": "Copier la source",
+            "COPIED": "Source copiée dans le presse-papier",
             "MODAL": {
                 "TITLE": "Modif. la source"
             }
@@ -564,7 +569,8 @@
         }
     },
     "REFERENCES":{
-        "TAB_TITLE": "Référence"
+        "TAB_TITLE": "Référence",
+        "EMPTY_SEARCH": "Aucun résultat, vous pouvez rechercher parmi les titres et le contenu des articles du Guide de méthodologie"
     },
     "SETTINGS":{
         "TAB_TITLE": "Paramètres",

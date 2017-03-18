@@ -11,7 +11,7 @@ import { SettingsPage } from "../settings/settings";
   templateUrl: "tabs.html"
 })
 export class TabsPage {
-  tab1Root: any = ProjectsPage;
-  tab2Root: any = ReferencesPage;
-  tab3Root: any = SettingsPage;
+  tab1Root: Component = ProjectsPage;
+  tab2Root: Component = ReferencesPage;
+  tab3Root: Component = SettingsPage;
 }

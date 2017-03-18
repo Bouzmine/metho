@@ -5,13 +5,13 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class References {
-  data: any;
+  data: ReferenceObject[];
 
   constructor(
     private http: Http,
   ) {}
 
-  load() {
+  load(): Promise<ReferenceObject[]> {
     if (this.data) {
       return Promise.resolve(this.data);
     }
@@ -32,5 +32,44 @@ export class References {
       let img = new Image();
       img.src = this.data[i].icon;
     }
+  }
+
+  search(q: string): SearchReferenceObject[] {
+    let qa = q.trim().split(" ");
+
+    let filteredList: SearchReferenceObject[] = [];
+
+    this.data.forEach(v => {
+      let currentObj = {
+        title: v.name,
+        id: v.id,
+        content: []
+      };
+      if (this.containsOneOf(qa, v.name)) {
+        currentObj.content.push(v);
+      }
+
+      v.subPages.forEach(sub => {
+        if (this.containsOneOf(qa, sub.name) || this.containsOneOf(qa, sub.text)) {
+          currentObj.content.push(sub);
+        }
+      });
+
+      if (currentObj.content.length > 0) {
+        filteredList.push(currentObj);
+      }
+    });
+
+    return filteredList;
+  }
+
+  containsOneOf(qa: Array<string>, str: string): boolean {
+    for (var i = 0; i < qa.length; i++) {
+      if (str.toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
+      }else {
+        return false;
+      }
+    }
+    return true;
   }
 }

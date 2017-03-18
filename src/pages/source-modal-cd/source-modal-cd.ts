@@ -10,20 +10,14 @@ import { Settings } from "../../providers/settings";
 import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
 import { TranslatedAlertController } from "../../providers/translated-alert-controller";
 
+import { SourceModalBase } from "../source-modal/source-modal";
 
 @Component({
   selector: "source-modal-cd",
   templateUrl: "source-modal-cd.html"
 })
-export class SourceModalCdPage {
-  public isNew: boolean;
-  public noData: boolean;
-  public previous: Source;
-  public pendingId: string;
-  public projectId: string;
-  public hasConfirmed: boolean = false;
-
-  public form: FormGroup;
+export class SourceModalCdPage extends SourceModalBase {
+  public type = "cd";
 
   constructor(
     public viewCtrl: ViewController,
@@ -35,24 +29,7 @@ export class SourceModalCdPage {
     public settings: Settings,
     public fb: FormBuilder,
   ) {
-    if(this.params.get("editing") == true) {
-      this.isNew = false;
-    }else {
-      this.isNew = true;
-    }
-
-    if (typeof this.params.get("data") !== "undefined") {
-      this.noData = false;
-      this.previous = this.params.get("data");
-    }else {
-      this.noData = true;
-    }
-
-    this.projectId = this.params.get("projectId");
-
-    if (typeof this.params.get("pendingId") !== "undefined") {
-      this.pendingId = this.params.get("pendingId");
-    }
+    super(viewCtrl, params, actionSheetCtrl, storage, parse);
 
     this.form = fb.group({
       hasAuthors: [this.noData ? false : this.previous.hasAuthors],
@@ -68,77 +45,21 @@ export class SourceModalCdPage {
   }
 
   ionViewDidEnter() {
-    if (!this.settings.get("cdAlertShown")) {
-      let alert = this.alertCtrl.present({
-        title: "PROJECT.DETAIL.POPUP.CAUTION",
-        message: "PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION",
-        buttons: [
-          {
-            text: "COMMON.OK"
-          }
-        ]
-      });
-      this.settings.set("cdAlertShown", true);
+    if (!this.settings.get(Settings.wasCdAlertShown)) {
+      this.showCdAlert();
+      this.settings.set(Settings.wasCdAlertShown, true);
     }
   }
 
-  dismiss() {
-    if (!this.isEmpty() && this.isNew) {
-      let actionsheet = this.actionSheetCtrl.present({
-        buttons: [
-          {
-            text: "PROJECT.DETAIL.MODAL.DELETE_DRAFT",
-            role: "destructive",
-            handler: () => {
-              actionsheet.then(obj => {
-                obj.dismiss().then(() => {
-                  this.viewCtrl.dismiss();
-                });
-              });
-              return false;
-            }
-          },
-          {
-            text: "COMMON.CANCEL",
-            role: "cancel"
-          }
-        ]
-      });
-    }else {
-      this.viewCtrl.dismiss();
-    }
-  }
-
-  submitIfEnter(event) {
-    if (event.keyCode == 13 && !this.hasConfirmed) {
-      this.confirm();
-      this.hasConfirmed = true;
-    }
-  }
-
-  confirm() {
-    var values = this.form.value;
-    values.type = "cd";
-    let parsed = this.parse.parse(values);
-    parsed.project_id = this.projectId;
-    if (this.isNew) {
-      this.storage.createSource(parsed);
-      if (this.pendingId) {
-        this.storage.deletePending(this.pendingId);
-      }
-    }else {
-      this.storage.setSourceFromId(this.previous._id, parsed);
-    }
-
-    Keyboard.close();
-    this.viewCtrl.dismiss();
-  }
-
-  isEmpty() {
-    if (!this.form.value.author1firstname && !this.form.value.author1lastname && !this.form.value.author2firstname && !this.form.value.author2lastname && !this.form.value.editor && !this.form.value.title && !this.form.value.hasAuthors && !this.form.value.publicationDate && !this.form.value.publicationLocation) {
-      return true;
-    }else {
-      return false;
-    }
+  showCdAlert() {
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.CAUTION",
+      message: "PROJECT.DETAIL.POPUP.USE_CD_FOR_INFORMATION",
+      buttons: [
+        {
+          text: "COMMON.OK"
+        }
+      ]
+    });
   }
 }

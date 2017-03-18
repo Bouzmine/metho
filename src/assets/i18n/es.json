@@ -41,6 +41,9 @@
             "PENDING_ELEMENTS": "Borradores",
             "CHOOSE_TYPE": "Elegir un typo de fuente",
             "SHARE_TEXT": "Aquí está las fuentes del proyecto « {{project_title}} » : <br><br><table width='100%' border='0' cellspacing='0' cellpadding='0'><tr><td align='center'>BIBLIOGRAPHIE</td></tr></table><br>",
+            "COPY": "Copiar",
+            "COPIED": "Fuentes copiadas hacia el portapapeles",
+            "EXPORT_EMAIL": "Exportar por mail",
             "MODAL":{
                 "TITLE": "Nueva fuente",
                 "SCAN": "Escáner el código de barras",
@@ -92,7 +95,7 @@
                     "HAS_AUTHORS": "La fuente tiene un autor",
                     "WEBPAGE_NAME": "Titulo del articulo",
                     "WEBPAGE_NAME_PLACHOLDER": "Isaac Newton",
-                    "WEBSITE_NAME": "Nombre del sitio web",
+                    "WEBSITE_NAME": "Titulo de la pagina de inicio",
                     "WEBSITE_NAME_PLACEHOLDER": "Wikipedia, la encyclopedia libre",
                     "URL": "Dirección web",
                     "URL_PLACEHOLDER": "http://www.es.wikipedia.org",
@@ -162,9 +165,9 @@
                 "BOOKS": "libros"
             },
             "POPUP": {
-                "ERRORS_SOURCES": "Las fuentes que trata de compartir contienen <strong>{{errNum}}</strong> error(es). ¿ Quiere compartirlas ?",
-                "SHARE_TEXT": "Compartición",
-                "SHARE": "Compartir",
+                "ERRORS_SOURCES": "Las fuentes que trata de exportar contienen <strong>{{errNum}}</strong> error(es). ¿ Quiere exportarles ?",
+                "SHARE_TEXT": "Exportacion",
+                "SHARE": "Exportar",
                 "DELETE_TITLE": "Eliminación",
                 "DELETE_TEXT": "La eliminación de esta fuente arrastrará la pérdida de todas la información en eso. La eliminación es irreversible.",
                 "BOOK_UNAVAILABLE_TITLE": "Libro inencontrable",
@@ -178,7 +181,7 @@
                 "ADD_TO_PENDINGS": "¿ Quiere añadir el codigo de barras a los borradores ?",
                 "NOT_RIGHT_BARCODE_TYPE": "El codigo de barras era escánado pero este codigo de barras no es uno de libro. El codigo de barras normalmente tiene una mención ISBN sobre lo. Si hay dos codigos de barras, el incorrecto era tal vez escánado. Puede reintentar.",
                 "UNABLE_TO_SCAN": "Imposible de escáner",
-                "UNABLE_TO_SCAN_TEXT": "Essayez d'activer l'accès à l'appareil photo pour cette application dans l'onglet Confidentialité des Réglages. Pruebe de activar el acceso a la cámara en la pestaña Confidentialidad de los Ajustes",
+                "UNABLE_TO_SCAN_TEXT": "Pruebe de activar el acceso a la cámara en la pestaña Confidentialidad de los Ajustes.",
                 "SAVE_INTERVIEWER_NAME": "¿ Quiere salvaguardar el nombre del entrevistador para una utilisación futura ?",
                 "NO_SUGGESTIONS": "Ningún sugerencia",
                 "NO_SUGGESTIONS_DESC": "No hay ningún sugerencia disponible",
@@ -197,6 +200,8 @@
         },
         "SOURCE":{
             "NO_ERROR": "Ningún error",
+            "COPY": "Copiar la fuente",
+            "COPIED": "Fuente copiada hacia el portapapeles",
             "MODAL": {
                 "TITLE": "Modificar la fuente"
             }
@@ -405,9 +410,9 @@
                 "EXAMPLE": "16"
             },
             "HOMEPAGE_TITLE": {
-                "TITLE": "Nombre del sitio web",
-                "TEXT": "Introduzca el nombre del sitio web",
-                "DESC": "Nombre del sitio web",
+                "TITLE": "Pagina de inicio",
+                "TEXT": "Introduzca el titulo de la pagina de inicio",
+                "DESC": "Titulo de la pagina de inicio",
                 "EXAMPLE": "Wikipedia, la encyclopedia libre"
             },
             "PAGE_TITLE": {
@@ -564,7 +569,8 @@
         }
     },
     "REFERENCES":{
-        "TAB_TITLE": "Referencia"
+        "TAB_TITLE": "Referencia",
+        "EMPTY_SEARCH": "Ningún resultado, puede buscar entre el titulo y el contenido del articulo del Guide de méthodologie"
     },
     "SETTINGS":{
         "TAB_TITLE": "Ajustes",

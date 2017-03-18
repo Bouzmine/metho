@@ -97,31 +97,11 @@
 
     <!-- Autres champs -->
     <ion-list class="no-margin">
-      <ion-item>
-        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.TITLE_LABEL" | translate}}</ion-label>
-        <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate}}" (input)="search()"></ion-input>
-        <ion-spinner *ngIf="instantStatus.loading" name="ios-small" class="spinner-suggestions" item-right></ion-spinner>
-        <button ion-button *ngIf="instantStatus.ok" (click)="toggleInstantSearch()" [class.rotate-90]="instantStatus.shown" class="will-90" color="dark" clear item-right icon-only>
-          <ion-icon name="arrow-forward"></ion-icon>
-        </button>
-        <button ion-button *ngIf="instantStatus.none" (click)="openExplaining()" color="dark" clear item-right icon-only>
-          <ion-icon name="close-circle"></ion-icon>
-        </button>
-        <button ion-button *ngIf="instantStatus.err500" (click)="openExplaining()" clear color="dark" item-right icon-only>
-          <ion-icon name="alert"></ion-icon>
-        </button>
-      </ion-item>
-      <ion-item *ngIf="instantStatus.shown">
-        <ion-scroll scrollY="true" [class.height-one]="instantList.length == 1" [class.height-one-and-half]="instantList.length == 2" [class.height-two-and-half]="instantList.length > 2">
-          <ion-list class="no-margin">
-            <button ion-item *ngFor="let suggestion of instantList" (click)="fillInfos(suggestion)">
-              <ion-icon name="bookmarks-outline" item-left></ion-icon>
-              {{ suggestion.title }}
-              <span *ngIf="suggestion.author1lastname && suggestion.author1firstname">(<em>{{suggestion.author1firstname}} {{suggestion.author1lastname}}</em>)</span>
-            </button>
-          </ion-list>
-        </ion-scroll>
-      </ion-item>
+      <instant-search formControlName="title"
+      placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.TITLE_PLACEHOLDER' | translate}}"
+      [firstname]="form.value.author1firstname"
+      [lastname]="form.value.author1lastname"
+      (onFill)="fillInfos($event)"></instant-search>
       <ion-item>
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.EDITOR_LABEL" | translate}}</ion-label>
         <ion-input formControlName="editor" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.EDITOR_PLACEHOLDER' | translate}}"></ion-input>
@@ -154,31 +134,33 @@
         <ion-label>{{"PROJECT.DETAIL.MODAL.BOOK.HAS_BEEN_TRANSLATED" | translate}}</ion-label>
         <ion-checkbox formControlName="hasBeenTranslated"></ion-checkbox>
       </ion-item>
-      <ion-list *ngIf="form.value.hasBeenTranslated == true" class="no-margin">
-          <ion-item>
-            <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_LABEL" | translate}}</ion-label>
-            <ion-input formControlName="translatedFrom" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_PLACEHOLDER' | translate}}"></ion-input>
-          </ion-item>
-          <ion-list class="no-margin-with-header" no-lines>
-            <ion-list-header>
-              {{"PROJECT.DETAIL.MODAL.BOOK.TRANSLATOR_NAME" | translate}}
-            </ion-list-header>
+      <slider [isOpen]="form.value.hasBeenTranslated == true">
+        <ion-list class="no-margin">
             <ion-item>
-              <ion-input formControlName="translator1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
+              <ion-label stacked>{{"PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_LABEL" | translate}}</ion-label>
+              <ion-input formControlName="translatedFrom" placeholder="{{'PROJECT.DETAIL.MODAL.BOOK.ORIGIN_LANGUAGE_PLACEHOLDER' | translate}}"></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-input formControlName="translator1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
-            </ion-item>
-            <div *ngIf="form.value.translator1firstname != '' || form.value.translator1lastname != ''" class="inputs">
+            <ion-list class="no-margin-with-header" no-lines>
+              <ion-list-header>
+                {{"PROJECT.DETAIL.MODAL.BOOK.TRANSLATOR_NAME" | translate}}
+              </ion-list-header>
               <ion-item>
-                <ion-input placeholder="{{ 'COMMON.FIRSTNAME' | translate }}" formControlName="translator2firstname"></ion-input>
+                <ion-input formControlName="translator1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
               </ion-item>
               <ion-item>
-                <ion-input placeholder="{{ 'COMMON.LASTNAME' | translate }}" formControlName="translator2lastname"></ion-input>
+                <ion-input formControlName="translator1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
               </ion-item>
-            </div>
-          </ion-list>
-      </ion-list>
+              <div *ngIf="form.value.translator1firstname != '' || form.value.translator1lastname != ''" class="inputs">
+                <ion-item>
+                  <ion-input placeholder="{{ 'COMMON.FIRSTNAME' | translate }}" formControlName="translator2firstname"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input placeholder="{{ 'COMMON.LASTNAME' | translate }}" formControlName="translator2lastname"></ion-input>
+                </ion-item>
+              </div>
+            </ion-list>
+        </ion-list>
+      </slider>
     </ion-list>
   </form>
 </ion-content>

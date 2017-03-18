@@ -1,16 +1,11 @@
 import { ViewChild, Component } from "@angular/core";
 
 import { NavController, NavParams, ModalController, List, Content } from "ionic-angular";
-import { SocialSharing } from "ionic-native";
+import { SocialSharing, Clipboard } from "ionic-native";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
+import getModalFromType from "../source-modal/choose-modal";
 import { AdvancedModePage } from "../advanced-mode/advanced-mode";
-import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
-import { SourceModalArticlePage } from "../source-modal-article/source-modal-article";
-import { SourceModalInternetPage } from "../source-modal-internet/source-modal-internet";
-import { SourceModalCdPage } from "../source-modal-cd/source-modal-cd";
-import { SourceModalMoviePage } from "../source-modal-movie/source-modal-movie";
-import { SourceModalInterviewPage } from "../source-modal-interview/source-modal-interview";
 import { SourcePage } from "../source/source";
 import { PendingsPage } from "../pendings/pendings";
 
@@ -18,6 +13,7 @@ import { AppStorage } from "../../providers/app-storage";
 import { Settings } from "../../providers/settings";
 import { TranslatedActionSheetController } from "../../providers/translated-action-sheet-controller";
 import { TranslatedAlertController } from "../../providers/translated-alert-controller";
+import { TranslatedToastController } from "../../providers/translated-toast-controller";
 
 
 @Component({
@@ -31,7 +27,14 @@ export class SourcesPage {
   public pendingNumber: number = 0;
   public searchQuery: string = "";
   public filteredSources: Source[] = [];
-  public typeTable: any = {};
+  public typeTable: SourceTypes = {
+    "PROJECT.TYPES.BOOK": "",
+    "PROJECT.TYPES.ARTICLE": "",
+    "PROJECT.TYPES.INTERNET": "",
+    "PROJECT.TYPES.CD_PARSE": "",
+    "PROJECT.TYPES.MOVIE": "",
+    "PROJECT.TYPES.INTERVIEW": ""
+  };
   @ViewChild(List) list: List;
   @ViewChild(Content) content: Content;
 
@@ -41,6 +44,7 @@ export class SourcesPage {
     public translate: TranslateService,
     public actionSheetCtrl: TranslatedActionSheetController,
     public alertCtrl: TranslatedAlertController,
+    public toastCtrl: TranslatedToastController,
     public modalCtrl: ModalController,
     public storage: AppStorage,
     public settings: Settings,
@@ -97,7 +101,7 @@ export class SourcesPage {
         "PROJECT.TYPES.CD_PARSE": translations["PROJECT.TYPES.CD_PARSE"],
         "PROJECT.TYPES.MOVIE": translations["PROJECT.TYPES.MOVIE"],
         "PROJECT.TYPES.INTERVIEW": translations["PROJECT.TYPES.INTERVIEW"]
-      }
+      };
     });
   }
 
@@ -188,37 +192,20 @@ export class SourcesPage {
   }
 
   openModal(type: string, transition: Promise<any> = Promise.resolve(), openScan: boolean = false, editing: boolean = false, source: Source = undefined) {
-    let navParams = {
+    const navParams = {
       projectId: this.projectId,
       data: source,
       editing: editing,
       scan: openScan
     };
-    let modalOpts = {
+    const modalOpts = {
       enableBackdropDismiss: false
     };
-    switch (type) {
-      case "book":
-        var modal = this.modalCtrl.create(SourceModalBookPage, navParams, modalOpts);
-        break;
-      case "article":
-        var modal = this.modalCtrl.create(SourceModalArticlePage, navParams, modalOpts);
-        break;
-      case "internet":
-        var modal = this.modalCtrl.create(SourceModalInternetPage, navParams, modalOpts);
-        break;
-      case "cd":
-        var modal = this.modalCtrl.create(SourceModalCdPage, navParams, modalOpts);
-        break;
-      case "movie":
-        var modal = this.modalCtrl.create(SourceModalMoviePage, navParams, modalOpts);
-        break;
-      case "interview":
-        var modal = this.modalCtrl.create(SourceModalInterviewPage, navParams, modalOpts);
-        break;
-    }
+
+    let modal = this.modalCtrl.create(getModalFromType(type), navParams, modalOpts);
 
     modal.onWillDismiss(() => {
+      !!this.list && this.list.closeSlidingItems();
       this.loadSources();
       this.loadPendingNumber();
     });
@@ -255,59 +242,135 @@ export class SourcesPage {
   }
 
   share() {
-    this.translate.get("PROJECT.DETAIL.SHARE_TEXT", { project_title: this.project.name }).subscribe(text => {
-      let textToShare = text;
-      let errNum = 0;
-      let arr_sources = JSON.parse(JSON.stringify(this.sources)).sort((a, b) => {
-        return a.parsedSource.localeCompare(b.parsedSource);
-      });
-      arr_sources.forEach(value => {
-        textToShare += value.parsedSource + "<br><br>";
-        errNum += value.errors.length;
-      });
+    let action = this.actionSheetCtrl.present({
+      title: "",
+      buttons: [
+        {
+          text: "PROJECT.DETAIL.COPY",
+          handler: () => {
+            action.then(sheet => {
+              sheet.dismiss().then(() => this.exportViaCopy());
+            });
+            return false;
+          }
+        },
+        {
+          text: "PROJECT.DETAIL.EXPORT_EMAIL",
+          handler: () => {
+            action.then(sheet => {
+              sheet.dismiss().then(() => this.exportViaEmail());
+            });
+            return false;
+          }
+        },
+        {
+          text: "COMMON.CANCEL",
+          role: "cancel"
+        }
+      ]
+    });
+  }
 
-      if (errNum > 0 && !this.settings.get("ignoreErrors")) {
-        this.alertCtrl.present({
-          title: "PROJECT.DETAIL.POPUP.SHARE_TEXT",
-          message: "PROJECT.DETAIL.POPUP.ERRORS_SOURCES",
-          buttons: [
-            {
-              text: "COMMON.CANCEL"
-            },
-            {
-              text: "PROJECT.DETAIL.POPUP.SHARE",
-              handler: () => {
-                SocialSharing.shareViaEmail(
-                  textToShare,
-                  this.project.name,
-                  [],
-                  [],
-                  [],
-                  []
-                ).then(() => {
-                  this.promptForAdvanced();
-                }).catch(() => {});
-              }
-            }
-          ]
-        }, undefined, { errNum: errNum });
+  exportViaEmail() {
+    this.translate.get("PROJECT.DETAIL.SHARE_TEXT", {
+      project_title: this.project.name
+    }).subscribe(header => {
+      let content = this.getExportText(false, header);
+      let numberOfErrors = this.getNumberOfErrors();
+
+      if (numberOfErrors > 0 && !this.settings.get(Settings.shouldIgnoreErrors)) {
+        this.askIfIgnoreErrors(numberOfErrors, () => {
+          this.openEmailComposer(this.project.name, content).then(() => {
+            this.promptForAdvanced();
+          }).catch((err) => console.log(err));
+        });
       } else {
-        SocialSharing.shareViaEmail(
-          textToShare,
-          this.project.name,
-          [],
-          [],
-          [],
-          []
-        ).then(() => {
+        this.openEmailComposer(this.project.name, content).then(() => {
           this.promptForAdvanced();
-        }).catch(() => {});
+        }).catch((err) => console.log(err));
       }
     });
   }
 
+  getExportText(removeHTML: boolean, header: string = ""): string {
+    const lineEnding = removeHTML ? "\n\n" : "<br><br>";
+
+    let textWithHTML = this.sources.concat().sort((a, b) => {
+      return a.parsedSource.localeCompare(b.parsedSource);
+    }).reduce((accumulator, current) => {
+      return accumulator + current.parsedSource + lineEnding;
+    }, header);
+
+    if (removeHTML) {
+      return textWithHTML.replace(/[<][/]?[a-z]+[>]/g, "");
+    }else {
+      return textWithHTML;
+    }
+  }
+
+  getNumberOfErrors(): number {
+    return this.sources.reduce((acc, item) => {
+      return acc + item.errors.length;
+    }, 0);
+  }
+
+  askIfIgnoreErrors(numberOfErrors: number, callback: () => void) {
+    this.alertCtrl.present({
+      title: "PROJECT.DETAIL.POPUP.SHARE_TEXT",
+      message: "PROJECT.DETAIL.POPUP.ERRORS_SOURCES",
+      buttons: [
+        {
+          text: "COMMON.CANCEL"
+        },
+        {
+          text: "PROJECT.DETAIL.POPUP.SHARE",
+          handler: callback
+        }
+      ]
+    }, {}, { errNum: numberOfErrors });
+  }
+
+  openEmailComposer(title: string, body: string): Promise<void> {
+    return SocialSharing.shareViaEmail(
+        body,
+        title,
+        [],
+        [],
+        [],
+        []
+      );
+  }
+
+  copyTextToClipboard(text: string) {
+    Clipboard.copy(text).then(() => {
+      this.toastCtrl.present({
+        message: "PROJECT.DETAIL.COPIED",
+        duration: 1500,
+        dismissOnPageChange: true,
+        showCloseButton: false,
+        position: "top"
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+
+  exportViaCopy() {
+    let numberOfErrors = this.getNumberOfErrors();
+    let text = this.getExportText(true);
+    if (numberOfErrors > 0 && !this.settings.get(Settings.shouldIgnoreErrors)) {
+      this.askIfIgnoreErrors(numberOfErrors, () => {
+        this.copyTextToClipboard(text);
+      });
+    }else {
+      this.copyTextToClipboard(text);
+    }
+  }
+
+
+
   promptForAdvanced() {
-    if (!this.settings.get("advanced")) {
+    if (!this.settings.get(Settings.isAdvanced)) {
       let alert = this.alertCtrl.present({
         title: "PROJECT.DETAIL.POPUP.ADVANCED_MODE",
         message: "PROJECT.DETAIL.POPUP.ADVANCED_MODE_MESSAGE",

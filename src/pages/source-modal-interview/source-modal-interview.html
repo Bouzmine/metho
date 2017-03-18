@@ -24,29 +24,29 @@
       </ion-item>
     </ion-list>
     <ion-list class="no-margin-with-header">
-      <div>
-        <ion-list-header>
-          {{"PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED" | translate}}
-        </ion-list-header>
-        <ion-item>
-          <ion-label>{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_TITLE" | translate}}</ion-label>
-          <ion-select formControlName="civility" selectOptions="{ title: {{ 'PROJECT.PARSE.CIVILITY_TITLE.TITLE' | translate }} }" cancelText="{{'COMMON.CANCEL' | translate}}">
-            <ion-option value="mister">{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER" | translate}}</ion-option>
-            <ion-option value="miss">{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS" | translate}}</ion-option>
-            <ion-option value="miss_young">{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG" | translate}}</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-input formControlName="interviewed1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input formControlName="interviewed1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
-        </ion-item>
-        <ion-item class="authors">
-          <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE" | translate}}</ion-label>
-          <ion-input formControlName="interviewedTitle" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE_PLACEHOLDER' | translate }}"></ion-input>
-        </ion-item>
-      </div>
+      <ion-list-header>
+        {{"PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED" | translate}}
+      </ion-list-header>
+      <ion-item>
+        <ion-label>{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_TITLE" | translate}}</ion-label>
+        <ion-select formControlName="civility" cancelText="{{'COMMON.CANCEL' | translate}}">
+          <ion-option value="mister">{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISTER" | translate}}</ion-option>
+          <ion-option value="miss">{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS" | translate}}</ion-option>
+          <ion-option value="miss_young">{{"PROJECT.DETAIL.MODAL.INTERVIEW.CIVILITY_MISS_YOUNG" | translate}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="interviewed1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input formControlName="interviewed1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE" | translate}}</ion-label>
+        <ion-input formControlName="interviewedTitle" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEWED_TITLE_PLACEHOLDER' | translate }}"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list>
       <ion-item>
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION" | translate}}</ion-label>
         <ion-input  formControlName="publicationLocation" placeholder="{{ 'PROJECT.DETAIL.MODAL.INTERVIEW.INTERVIEW_LOCATION_PLACEHOLDER' | translate }}"></ion-input>

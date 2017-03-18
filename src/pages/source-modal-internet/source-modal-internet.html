@@ -12,19 +12,21 @@
 
 <ion-content>
   <form [formGroup]="form" (keypress)="submitIfEnter($event)">
-    <ion-list>
+    <ion-list class="no-margin-bottom">
       <ion-item>
         <ion-label>{{"PROJECT.DETAIL.MODAL.INTERNET.HAS_AUTHORS" | translate}}</ion-label>
         <ion-checkbox formControlName="hasAuthors"></ion-checkbox>
       </ion-item>
-      <div *ngIf="form.value.hasAuthors" class="authors">
+    </ion-list>
+    <ion-list>
+      <slider [isOpen]="form.value.hasAuthors" class="authors">
         <ion-item>
           <ion-input formControlName="author1firstname" placeholder="{{ 'COMMON.FIRSTNAME' | translate }}"></ion-input>
         </ion-item>
         <ion-item>
           <ion-input formControlName="author1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
         </ion-item>
-      </div>
+      </slider>
       <ion-item>
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME" | translate}}</ion-label>
         <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.INTERNET.WEBPAGE_NAME_PLACHOLDER' | translate}}"></ion-input>

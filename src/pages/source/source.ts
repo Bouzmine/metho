@@ -1,18 +1,14 @@
 import { Component } from "@angular/core";
 
 import { NavController, NavParams, ModalController } from "ionic-angular";
-import { Keyboard } from "ionic-native";
+import { Keyboard, Clipboard } from "ionic-native";
 
-import { SourceModalBookPage } from "../source-modal-book/source-modal-book";
-import { SourceModalArticlePage } from "../source-modal-article/source-modal-article";
-import { SourceModalInternetPage } from "../source-modal-internet/source-modal-internet";
-import { SourceModalCdPage } from "../source-modal-cd/source-modal-cd";
-import { SourceModalMoviePage } from "../source-modal-movie/source-modal-movie";
-import { SourceModalInterviewPage } from "../source-modal-interview/source-modal-interview";
+import getModalFromType from "../source-modal/choose-modal";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Parse } from "../../providers/parse";
 import { TranslatedAlertController } from "../../providers/translated-alert-controller";
+import { TranslatedToastController } from "../../providers/translated-toast-controller";
 
 
 @Component({
@@ -33,6 +29,7 @@ export class SourcePage {
     public params: NavParams,
     public alertCtrl: TranslatedAlertController,
     public modalCtrl: ModalController,
+    public toastCtrl: TranslatedToastController,
     public storage: AppStorage,
     public parse: Parse,
   ) {
@@ -105,67 +102,36 @@ export class SourcePage {
   }
 
   edit() {
-    switch (this.source.type) {
-      case "book":
-        var modal = this.modalCtrl.create(SourceModalBookPage, {
-          data: this.source,
-          editing: true,
-          projectId: this.source.project_id
-        }, {
-          enableBackdropDismiss: false
-        });
-        break;
-      case "article":
-        var modal = this.modalCtrl.create(SourceModalArticlePage, {
-          data: this.source,
-          editing: true,
-          projectId: this.source.project_id
-        }, {
-          enableBackdropDismiss: false
-        });
-        break;
-      case "internet":
-        var modal = this.modalCtrl.create(SourceModalInternetPage, {
-          data: this.source,
-          editing: true,
-          projectId: this.source.project_id
-        }, {
-          enableBackdropDismiss: false
-        });
-        break;
-      case "cd":
-        var modal = this.modalCtrl.create(SourceModalCdPage, {
-          data: this.source,
-          editing: true,
-          projectId: this.source.project_id
-        }, {
-          enableBackdropDismiss: false
-        });
-        break;
-      case "movie":
-        var modal = this.modalCtrl.create(SourceModalMoviePage, {
-          data: this.source,
-          editing: true,
-          projectId: this.source.project_id
-        }, {
-          enableBackdropDismiss: false
-        });
-        break;
-      case "interview":
-        var modal = this.modalCtrl.create(SourceModalInterviewPage, {
-          data: this.source,
-          editing: true,
-          projectId: this.source.project_id
-        }, {
-          enableBackdropDismiss: false
-        });
-        break;
-    }
+    const navParams = {
+      data: this.source,
+      editing: true,
+      projectId: this.source.project_id
+    };
+    const modalOpts = {
+      enableBackdropDismiss: false
+    };
+
+    var modal = this.modalCtrl.create(getModalFromType(this.source.type), navParams, modalOpts);
 
     modal.onWillDismiss(() => {
       this.loadSource();
     });
 
     modal.present();
+  }
+
+  copy() {
+    let sourceWithoutHTML = this.source.parsedSource.replace(/[<][/]?[a-z]+[>]/g, "");
+    Clipboard.copy(sourceWithoutHTML).then(() => {
+      this.toastCtrl.present({
+        message: "PROJECT.SOURCE.COPIED",
+        duration: 1250,
+        dismissOnPageChange: true,
+        showCloseButton: false,
+        position: "top"
+      });
+    }).catch((err) => {
+      console.log(err);
+    });
   }
 }

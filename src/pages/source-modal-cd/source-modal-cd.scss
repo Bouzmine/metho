@@ -1,13 +1,3 @@
 source-modal-cd {
-    .authors {
-        border-bottom: 1px;
-        border-bottom-color: #c8c7cc;
-        border-bottom-style: solid;
-
-        div.inputs {
-            border-top: 1px;
-            border-top-color: #e4e2e8;
-            border-top-style: solid;
-        }
-    }
+    @include GenericModal;
 }
