@@ -20,7 +20,9 @@ export class TranslatedAlertController {
     ];
     if (opts.buttons) {
       opts.buttons.forEach((value) => {
-        tokens.push(value.text);
+        if (this.isAlertButton(value)) {
+          tokens.push(value.text);
+        }
       });
     }
     if (opts.inputs) {
@@ -48,10 +50,12 @@ export class TranslatedAlertController {
 
         if (opts.buttons) {
           opts.buttons.forEach((value) => {
-            alertOpts.buttons.push({
-              text: translations[value.text],
-              handler: value.handler
-            });
+            if (this.isAlertButton(value)) {
+              alertOpts.buttons.push({
+                text: translations[value.text],
+                handler: value.handler
+              });
+            }
           });
         }
         if (opts.inputs) {
@@ -73,5 +77,9 @@ export class TranslatedAlertController {
         resolve(alert);
       });
     });
+  }
+
+  isAlertButton(arg: any): arg is AlertButton {
+    return arg.text !== undefined && arg.handler !== undefined;
   }
 }

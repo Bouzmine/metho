@@ -208,3 +208,10 @@ interface BarcodeScannerResponse {
   format: string;
   text: string;
 }
+
+// ionic
+interface AlertButton {
+  text?: string;
+  role?: string;
+  handler?: Function;
+}
