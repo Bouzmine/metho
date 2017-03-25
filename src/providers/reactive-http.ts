@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
 import { TimeoutError } from "rxjs";
 
-import { HTTP } from "ionic-native";
+import { HTTP } from "@ionic-native/http";
 
 interface CordovaWindow extends Window {
   cordova: any;
@@ -13,13 +13,14 @@ declare var window: CordovaWindow;
 export class ReactiveHttp {
 
   constructor(
-    public http: Http
+    public http: Http,
+    public nativeHttp: HTTP,
   ) {}
 
   get(url: string): Promise<any> {
     return new Promise((resolve, reject) => {
       if (!!window.cordova) {
-        HTTP.get(url, {}, {}).then(success => {
+        this.nativeHttp.get(url, {}, {}).then(success => {
           if (success.status == 200) {
             resolve(JSON.parse(success.data));
           }else {

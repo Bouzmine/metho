@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 import { NavController } from "ionic-angular";
-import { SafariViewController } from "ionic-native";
+import { SafariViewController } from "@ionic-native/safari-view-controller";
 
 import { LicensePage } from "../license/license";
 
@@ -19,9 +19,10 @@ export class AttributionsPage {
 
   constructor(
     public nav: NavController,
-    public attributions: Attributions
+    public attributions: Attributions,
+    public safariViewController: SafariViewController
   ) {
-    SafariViewController.warmUp();
+    this.safariViewController.warmUp();
     this.attributions.load().then(data => {
       this.libraries = data.libraries;
       this.plugins = data.plugins;
@@ -34,6 +35,6 @@ export class AttributionsPage {
   }
 
   openWebsite(url: string) {
-    SafariViewController.show({ url: url });
+    this.safariViewController.show({ url: url });
   }
 }

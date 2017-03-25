@@ -2,7 +2,8 @@ import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { ViewController, NavParams } from "ionic-angular";
-import { SafariViewController, Keyboard } from "ionic-native";
+import { Keyboard } from "@ionic-native/keyboard";
+import { SafariViewController } from "@ionic-native/safari-view-controller";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Fetch } from "../../providers/fetch";
@@ -40,8 +41,10 @@ export class SourceModalBookPage extends SourceModalBase {
     public scanProvider: Scan,
     public settings: Settings,
     public fb: FormBuilder,
+    public keyboard: Keyboard,
+    public safariViewController: SafariViewController
   ) {
-    super(viewCtrl, params, actionSheetCtrl, storage, parse);
+    super(viewCtrl, params, actionSheetCtrl, storage, parse, keyboard);
 
     if (this.params.get("hideScan") == true) {
       this.hideScan = true;
@@ -52,7 +55,7 @@ export class SourceModalBookPage extends SourceModalBase {
     if (typeof this.params.get("url") !== "undefined") {
       this.url = this.params.get("url");
       this.showBrowser = true;
-      SafariViewController.mayLaunchUrl(this.url);
+      this.safariViewController.mayLaunchUrl(this.url);
       this.viewCtrl.didEnter.subscribe(() => {
         this.openBrowser();
       });
@@ -155,9 +158,9 @@ export class SourceModalBookPage extends SourceModalBase {
   }
 
   openBrowser() {
-    SafariViewController.isAvailable().then(avail => {
+    this.safariViewController.isAvailable().then(avail => {
       if (avail) {
-        SafariViewController.show({
+        this.safariViewController.show({
           url: this.url
         });
       }

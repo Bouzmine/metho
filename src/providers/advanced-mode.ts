@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from "@angular/core";
 
-import { InAppPurchase, Device } from "ionic-native";
+import { Device } from "@ionic-native/device";
+import { InAppPurchase } from "@ionic-native/in-app-purchase";
 
 import { Report } from "./report";
 import { Settings } from "./settings";
@@ -38,13 +39,15 @@ export class AdvancedMode {
     public alertCtrl: TranslatedAlertController,
     public report: Report,
     public settings: Settings,
+    public device: Device,
+    public inAppPurchase: InAppPurchase,
   ) {}
 
   init(retryOnFail: boolean) {
     const isOnline = navigator.onLine;
     const isAlreadyLoaded = (this.hasLoaded);
     if (isOnline && !isAlreadyLoaded) {
-      InAppPurchase.getProducts(["com.fclavette.metho.advanced"]).then(products => {
+      this.inAppPurchase.getProducts(["com.fclavette.metho.advanced"]).then(products => {
         let product = products[0];
         this.completeInit(product.price, product.productId);
       }).catch(err => {
@@ -71,7 +74,7 @@ export class AdvancedMode {
     if (!this.settings.get(Settings.isAdvanced) && !!window.cordova) {
       return new Promise((resolve, reject) => {
         if (navigator.onLine && this.hasLoaded) {
-          InAppPurchase.buy(this.productId).then((data) => {
+          this.inAppPurchase.buy(this.productId).then((data) => {
             this.settings.set(Settings.isAdvanced, true);
             resolve();
           }).catch(err => {
@@ -102,7 +105,7 @@ export class AdvancedMode {
     if (!this.settings.get(Settings.isAdvanced)) {
       return new Promise((resolve, reject) => {
         if (navigator.onLine) {
-          InAppPurchase.restorePurchases().then((data) => {
+          this.inAppPurchase.restorePurchases().then((data) => {
             if (data.length && data[0].productId == this.productId) {
               this.settings.set(Settings.isAdvanced, true);
               resolve();
@@ -150,8 +153,8 @@ export class AdvancedMode {
   }
 
   isAvailable(): boolean {
-    if (Device.platform == "iOS") {
-      if (this.prohibited.indexOf(Device.model) > -1) {
+    if (this.device.platform == "iOS") {
+      if (this.prohibited.indexOf(this.device.model) > -1) {
         return false;
       }else {
         return true;

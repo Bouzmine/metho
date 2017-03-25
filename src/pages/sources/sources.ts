@@ -1,7 +1,8 @@
 import { ViewChild, Component } from "@angular/core";
 
 import { NavController, NavParams, ModalController, List, Content } from "ionic-angular";
-import { SocialSharing, Clipboard } from "ionic-native";
+import { Clipboard } from "@ionic-native/clipboard";
+import { SocialSharing } from "@ionic-native/social-sharing";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import getModalFromType from "../source-modal/choose-modal";
@@ -48,6 +49,8 @@ export class SourcesPage {
     public modalCtrl: ModalController,
     public storage: AppStorage,
     public settings: Settings,
+    public clipboard: Clipboard,
+    public socialSharing: SocialSharing,
   ) {
     this.projectId = params.get("id");
     this.loadProjectInfo();
@@ -331,7 +334,7 @@ export class SourcesPage {
   }
 
   openEmailComposer(title: string, body: string): Promise<void> {
-    return SocialSharing.shareViaEmail(
+    return this.socialSharing.shareViaEmail(
         body,
         title,
         [],
@@ -342,7 +345,7 @@ export class SourcesPage {
   }
 
   copyTextToClipboard(text: string) {
-    Clipboard.copy(text).then(() => {
+    this.clipboard.copy(text).then(() => {
       this.toastCtrl.present({
         message: "PROJECT.DETAIL.COPIED",
         duration: 1500,

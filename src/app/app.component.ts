@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 
 import { Platform } from "ionic-angular";
-import { StatusBar, Splashscreen } from "ionic-native";
+import { StatusBar } from "@ionic-native/status-bar";
+import { SplashScreen } from "@ionic-native/splash-screen";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { TabsPage } from "../pages/tabs/tabs";
@@ -27,6 +28,8 @@ export class MyApp {
     public language: Language,
     public references: References,
     public translate: TranslateService,
+    public splashscreen: SplashScreen,
+    public statusBar: StatusBar,
   ) {
     this.platform.ready().then(() => {
       this.storage.init();
@@ -34,8 +37,8 @@ export class MyApp {
       let subscription = this.translate.onLangChange.subscribe(() => {
         subscription.unsubscribe();
         setTimeout(() => {
-          Splashscreen.hide();
-          StatusBar.styleDefault();
+          this.splashscreen.hide();
+          this.statusBar.styleDefault();
           this.references.load();
           this.advanced.init(false);
           this.attributions.load();

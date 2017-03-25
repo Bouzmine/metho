@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { ModalController, LoadingController } from "ionic-angular";
-import { BarcodeScanner } from "ionic-native";
+import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 
 import { BoardingScanPage } from "../pages/boarding-scan/boarding-scan";
 
@@ -21,6 +21,7 @@ export class Scan {
     public fetch: Fetch,
     public report: Report,
     public settings: Settings,
+    public barcodeScanner: BarcodeScanner,
   ) {}
 
   scan(): Promise<ScanResponse> {
@@ -44,7 +45,7 @@ export class Scan {
 
   public openScanner(): Promise<ScanResponse> {
     return new Promise((resolve, reject) => {
-      BarcodeScanner.scan().then((data: BarcodeScannerResponse) => {
+      this.barcodeScanner.scan().then((data: BarcodeScannerResponse) => {
         if (!data.cancelled) {
           if (data.format == "EAN_13") {
             this.fetchFromISBN(data.text).then(data => {

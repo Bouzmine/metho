@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { ViewController, NavParams, NavController } from "ionic-angular";
-import { Keyboard } from "ionic-native";
+import { Keyboard } from "@ionic-native/keyboard";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Language } from "../../providers/language";
@@ -30,8 +30,9 @@ export class SourceModalInterviewPage extends SourceModalBase {
     public parse: Parse,
     public settings: Settings,
     public fb: FormBuilder,
+    public keyboard: Keyboard,
   ) {
-    super(viewCtrl, params, actionSheetCtrl, storage, parse);
+    super(viewCtrl, params, actionSheetCtrl, storage, parse, keyboard);
 
     let moment = this.language.getMoment();
     this.generateLabels(moment);
@@ -64,7 +65,7 @@ export class SourceModalInterviewPage extends SourceModalBase {
           {
             text: "COMMON.NO",
             handler: () => {
-              Keyboard.close();
+              this.keyboard.close();
               this.viewCtrl.dismiss();
             }
           },
@@ -77,7 +78,7 @@ export class SourceModalInterviewPage extends SourceModalBase {
                 this.settings.set(Settings.userLastname, this.form.value.author1lastname);
 
                 transition.then(() => {
-                  Keyboard.close();
+                  this.keyboard.close();
                   this.viewCtrl.dismiss();
                 });
               });
@@ -87,7 +88,7 @@ export class SourceModalInterviewPage extends SourceModalBase {
         ]
       });
     }else {
-      Keyboard.close();
+      this.keyboard.close();
       this.viewCtrl.dismiss();
     }
   }

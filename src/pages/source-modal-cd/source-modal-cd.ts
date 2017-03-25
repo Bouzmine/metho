@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 
 import { ViewController, NavParams } from "ionic-angular";
-import { Keyboard } from "ionic-native";
+import { Keyboard } from "@ionic-native/keyboard";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Parse } from "../../providers/parse";
@@ -28,8 +28,9 @@ export class SourceModalCdPage extends SourceModalBase {
     public parse: Parse,
     public settings: Settings,
     public fb: FormBuilder,
+    public keyboard: Keyboard,
   ) {
-    super(viewCtrl, params, actionSheetCtrl, storage, parse);
+    super(viewCtrl, params, actionSheetCtrl, storage, parse, keyboard);
 
     this.form = fb.group({
       hasAuthors: [this.noData ? false : this.previous.hasAuthors],

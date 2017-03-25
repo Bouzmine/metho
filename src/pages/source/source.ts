@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
 
 import { NavController, NavParams, ModalController } from "ionic-angular";
-import { Keyboard, Clipboard } from "ionic-native";
+import { Clipboard } from "@ionic-native/clipboard";
+import { Keyboard } from "@ionic-native/keyboard";
 
 import getModalFromType from "../source-modal/choose-modal";
 
@@ -32,6 +33,8 @@ export class SourcePage {
     public toastCtrl: TranslatedToastController,
     public storage: AppStorage,
     public parse: Parse,
+    public clipboard: Clipboard,
+    public keyboard: Keyboard,
   ) {
     this.id = this.params.get("id");
   }
@@ -54,13 +57,13 @@ export class SourcePage {
         {
           text: "COMMON.CANCEL",
           handler: () => {
-            Keyboard.close();
+            this.keyboard.close();
           }
         },
         {
           text: "COMMON.OK",
           handler: data => {
-            Keyboard.close();
+            this.keyboard.close();
             if (error.complex) {
               if (error.type == "select") {
                 this.source[error.var] = data;
@@ -122,7 +125,7 @@ export class SourcePage {
 
   copy() {
     let sourceWithoutHTML = this.source.parsedSource.replace(/[<][/]?[a-z]+[>]/g, "");
-    Clipboard.copy(sourceWithoutHTML).then(() => {
+    this.clipboard.copy(sourceWithoutHTML).then(() => {
       this.toastCtrl.present({
         message: "PROJECT.SOURCE.COPIED",
         duration: 1250,

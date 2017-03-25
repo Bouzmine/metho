@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { Config } from "ionic-angular";
-import { Globalization } from "ionic-native";
+import { Globalization } from "@ionic-native/globalization";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { Settings } from "./settings";
@@ -20,6 +20,7 @@ export class Language {
     public config: Config,
     public translate: TranslateService,
     public settings: Settings,
+    public globalization: Globalization,
   ) {}
 
   init() {
@@ -39,7 +40,7 @@ export class Language {
     return new Promise(resolve => {
       this.settings.getAsync(Settings.overridenLanguage).then(overideLang => {
         if (overideLang == "") {
-          Globalization.getPreferredLanguage().then(lang => {
+          this.globalization.getPreferredLanguage().then(lang => {
             resolve(lang.value.split("-")[0]);
           }).catch(err => {
             resolve("fr");

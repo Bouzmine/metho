@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 
 import { NavController } from "ionic-angular";
-import { SocialSharing } from "ionic-native";
+import { SocialSharing } from "@ionic-native/social-sharing";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { Report } from "../../providers/report";
@@ -16,6 +16,7 @@ export class FeedbackPage {
     public nav: NavController,
     public translate: TranslateService,
     public report: Report,
+    public socialSharing: SocialSharing,
   ) {}
 
   open(type: string) {
@@ -26,7 +27,7 @@ export class FeedbackPage {
           "SETTINGS.FEEDBACK.EMAIL.PROJECT_TITLE"
         ]).subscribe(translations => {
           this.report.diagnostics().then(diags => {
-            SocialSharing.shareViaEmail(
+            this.socialSharing.shareViaEmail(
               `${translations["SETTINGS.FEEDBACK.EMAIL.PROJECT"]}
               ${diags}
               </p>
@@ -46,7 +47,7 @@ export class FeedbackPage {
           "SETTINGS.FEEDBACK.EMAIL.REFERENCE_TITLE"
         ]).subscribe(translations => {
           this.report.diagnostics().then(diags => {
-            SocialSharing.shareViaEmail(
+            this.socialSharing.shareViaEmail(
               `${translations["SETTINGS.FEEDBACK.EMAIL.REFERENCE"]}
               ${diags}
               </p>
@@ -66,7 +67,7 @@ export class FeedbackPage {
           "SETTINGS.FEEDBACK.EMAIL.SETTINGS_TITLE"
         ]).subscribe(translations => {
           this.report.diagnostics().then(diags => {
-            SocialSharing.shareViaEmail(
+            this.socialSharing.shareViaEmail(
               `${translations["SETTINGS.FEEDBACK.EMAIL.SETTINGS"]}
               ${diags}
               </p>
@@ -85,7 +86,7 @@ export class FeedbackPage {
           "SETTINGS.FEEDBACK.EMAIL.COMMENT",
           "SETTINGS.FEEDBACK.EMAIL.COMMENT_TITLE"
         ]).subscribe(translations => {
-          SocialSharing.shareViaEmail(
+          this.socialSharing.shareViaEmail(
             translations["SETTINGS.FEEDBACK.EMAIL.COMMENT"],
             translations["SETTINGS.FEEDBACK.EMAIL.COMMENT_TITLE"],
             ["methoappeei@gmail.com"],
@@ -100,7 +101,7 @@ export class FeedbackPage {
           "SETTINGS.FEEDBACK.EMAIL.FEATURE",
           "SETTINGS.FEEDBACK.EMAIL.FEATURE_TITLE"
         ]).subscribe(translations => {
-          SocialSharing.shareViaEmail(
+          this.socialSharing.shareViaEmail(
             translations["SETTINGS.FEEDBACK.EMAIL.FEATURE"],
             translations["SETTINGS.FEEDBACK.EMAIL.FEATURE_TITLE"],
             ["methoappeei@gmail.com"],

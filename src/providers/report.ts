@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 
-import { SocialSharing, Device, AppVersion, Splashscreen } from "ionic-native";
+import { AppVersion } from "@ionic-native/app-version";
+import { Device } from "@ionic-native/device";
+import { SocialSharing } from "@ionic-native/social-sharing";
+import { SplashScreen } from "@ionic-native/splash-screen";
 import { TranslateService } from "ng2-translate/ng2-translate";
 
 import { TranslatedAlertController } from "./translated-alert-controller";
@@ -10,6 +13,10 @@ export class Report {
   constructor(
     public translate: TranslateService,
     public alertCtrl: TranslatedAlertController,
+    public appVersion: AppVersion,
+    public device: Device,
+    public socialSharing: SocialSharing,
+    public splashscreen: SplashScreen,
   ) {}
 
   report(err: any) {
@@ -48,7 +55,7 @@ export class Report {
             {
               text: "COMMON.YES",
               handler: () => {
-                SocialSharing.shareViaEmail(
+                this.socialSharing.shareViaEmail(
                   `<b>${translations["REPORT.DESC"]}</b><br><br><br>
                   <b>${translations["REPORT.DO_NOT_EDIT"]}</b><br>
                   ${diags}</p><br>
@@ -82,7 +89,7 @@ export class Report {
           {
             text: "COMMON.YES",
             handler: () => {
-              Splashscreen.show();
+              this.splashscreen.show();
               document.location.reload();
             }
           }
@@ -93,17 +100,17 @@ export class Report {
 
   diagnostics(): Promise<string> {
     return new Promise(resolve => {
-      Promise.all([AppVersion.getVersionNumber(), AppVersion.getVersionCode()]).then(result => {
-        resolve(`${Device.platform} ${Device.version}<br>
-          ${Device.manufacturer} ${Device.model}<br>
+      Promise.all([this.appVersion.getVersionNumber(), this.appVersion.getVersionCode()]).then(result => {
+        resolve(`${this.device.platform} ${this.device.version}<br>
+          ${this.device.manufacturer} ${this.device.model}<br>
           ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}<br>
-          Cordova ${Device.cordova}<br>
+          Cordova ${this.device.cordova}<br>
           Metho v${result[0]}(${result[1]})`);
       }).catch(err => {
-        resolve(`${Device.platform} ${Device.version}<br>
-          ${Device.manufacturer} ${Device.model}<br>
+        resolve(`${this.device.platform} ${this.device.version}<br>
+          ${this.device.manufacturer} ${this.device.model}<br>
           ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}<br>
-          Cordova ${Device.cordova}`);
+          Cordova ${this.device.cordova}`);
       });
     });
   }

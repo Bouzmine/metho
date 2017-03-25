@@ -1,7 +1,7 @@
 import { FormGroup } from "@angular/forms";
 
 import { ViewController, NavParams } from "ionic-angular";
-import { Keyboard } from "ionic-native";
+import { Keyboard } from "@ionic-native/keyboard";
 
 import { AppStorage } from "../../providers/app-storage";
 import { Language } from "../../providers/language";
@@ -32,6 +32,7 @@ export abstract class SourceModalBase {
     public actionSheetCtrl: TranslatedActionSheetController,
     public storage: AppStorage,
     public parse: Parse,
+    public keyboard: Keyboard,
   ) {
     if (this.params.get("editing") == true) {
       this.isNew = false;
@@ -88,7 +89,7 @@ export abstract class SourceModalBase {
   }
 
   confirm(closeFunc = () => {
-    Keyboard.close();
+    this.keyboard.close();
     this.viewCtrl.dismiss();
   }) {
     let values = this.form.value;
