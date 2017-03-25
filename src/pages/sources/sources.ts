@@ -299,7 +299,7 @@ export class SourcesPage {
     const lineEnding = removeHTML ? "\n\n" : "<br><br>";
 
     let textWithHTML = this.sources.concat().sort((a, b) => {
-      return a.parsedSource.localeCompare(b.parsedSource);
+      return a.parsedSource.replace(/[<][/]?[a-z]+[>]/g, "").localeCompare(b.parsedSource.replace(/[<][/]?[a-z]+[>]/g, ""));
     }).reduce((accumulator, current) => {
       return accumulator + current.parsedSource + lineEnding;
     }, header);
