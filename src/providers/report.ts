@@ -94,16 +94,16 @@ export class Report {
   diagnostics(): Promise<string> {
     return new Promise(resolve => {
       Promise.all([AppVersion.getVersionNumber(), AppVersion.getVersionCode()]).then(result => {
-        resolve(`${Device.device.platform} ${Device.device.version}<br>
-          ${Device.device.manufacturer} ${Device.device.model}<br>
+        resolve(`${Device.platform} ${Device.version}<br>
+          ${Device.manufacturer} ${Device.model}<br>
           ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}<br>
-          Cordova ${Device.device.cordova}<br>
+          Cordova ${Device.cordova}<br>
           Metho v${result[0]}(${result[1]})`);
       }).catch(err => {
-        resolve(`${Device.device.platform} ${Device.device.version}<br>
-          ${Device.device.manufacturer} ${Device.device.model}<br>
+        resolve(`${Device.platform} ${Device.version}<br>
+          ${Device.manufacturer} ${Device.model}<br>
           ${window.screen.width * window.devicePixelRatio}x${window.screen.height * window.devicePixelRatio}<br>
-          Cordova ${Device.device.cordova}`);
+          Cordova ${Device.cordova}`);
       });
     });
   }

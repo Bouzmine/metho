@@ -150,8 +150,8 @@ export class AdvancedMode {
   }
 
   isAvailable(): boolean {
-    if (Device.device.platform == "iOS") {
-      if (this.prohibited.indexOf(Device.device.model) > -1) {
+    if (Device.platform == "iOS") {
+      if (this.prohibited.indexOf(Device.model) > -1) {
         return false;
       }else {
         return true;

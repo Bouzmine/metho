@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Http } from "@angular/http";
-import "rxjs/Rx";
+import { TimeoutError } from "rxjs";
 
 import { HTTP } from "ionic-native";
 
@@ -30,11 +30,14 @@ export class ReactiveHttp {
         });
       }else {
         this.http.get(url)
-          .timeout(2000, 408)
+          .timeout(2000)
           .map(res => res.json())
           .subscribe(data => {
             resolve(data);
           }, err => {
+            if (err instanceof TimeoutError) {
+              err = 408;
+            }
             reject(err);
           });
       }
