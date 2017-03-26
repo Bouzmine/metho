@@ -177,7 +177,7 @@ export class InstantSearchComponent implements ControlValueAccessor {
   // ControlValueAccessor
   writeValue(val) {
     this._value = val;
-    this.onValueChange();
+    this.onValueChange(val);
     this.onInputTouched();
   }
 
