@@ -11,7 +11,6 @@ export class Attributions {
   ) {}
 
   load(): Promise<AttributionsObjects> {
-    console.log("load start");
     if (this.data) {
       return Promise.resolve(this.data);
     }
@@ -21,7 +20,6 @@ export class Attributions {
         .map(res => res.json())
         .subscribe(data => {
           this.data = data;
-          console.log("load end");
           resolve(this.data);
         });
     });
