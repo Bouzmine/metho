@@ -46,7 +46,19 @@ import { TranslatedToastController } from "../providers/translated-toast-control
 import { InstantSearchComponent } from "../components/instant-search/instant-search";
 import { SliderComponent } from "../components/slider/slider";
 
-import getNativeModules from "./native-modules";
+import getMockedNativeModules from "./mock-native-modules";
+import { AppVersion } from "@ionic-native/app-version";
+import { BarcodeScanner } from "@ionic-native/barcode-scanner";
+import { Clipboard } from "@ionic-native/clipboard";
+import { Device } from "@ionic-native/device";
+import { Globalization } from "@ionic-native/globalization";
+import { HTTP } from "@ionic-native/http";
+import { InAppPurchase } from "@ionic-native/in-app-purchase";
+import { Keyboard } from "@ionic-native/keyboard";
+import { SafariViewController } from "@ionic-native/safari-view-controller";
+import { SocialSharing } from "@ionic-native/social-sharing";
+import { SplashScreen } from "@ionic-native/splash-screen";
+import { StatusBar } from "@ionic-native/status-bar";
 
 export function translateDeps (http: Http) {
   return new TranslateStaticLoader(http, "assets/i18n", ".json");
@@ -129,7 +141,19 @@ export function translateDeps (http: Http) {
     TranslatedActionSheetController,
     TranslatedAlertController,
     TranslatedToastController,
-    ...getNativeModules()
+    // ...getMockedNativeModules(),
+    AppVersion,
+    BarcodeScanner,
+    Clipboard,
+    Device,
+    Globalization,
+    HTTP,
+    InAppPurchase,
+    Keyboard,
+    SafariViewController,
+    SocialSharing,
+    SplashScreen,
+    StatusBar
   ]
 })
 export class AppModule {}

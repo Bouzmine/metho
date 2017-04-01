@@ -24,36 +24,19 @@ import SocialSharingMock from "./mocks/social-sharing";
 import SplashScreenMock from "./mocks/splash-screen";
 import StatusBarMock from "./mocks/status-bar";
 
-export default function getNativeModules(): any[] {
-  if ("cordova" in window) {
-    return [
-      AppVersion,
-      BarcodeScanner,
-      Clipboard,
-      Device,
-      Globalization,
-      HTTP,
-      InAppPurchase,
-      Keyboard,
-      SafariViewController,
-      SocialSharing,
-      SplashScreen,
-      StatusBar
-    ];
-  }else {
-    return [
-      { provide: AppVersion, useClass: AppVersionMock },
-      { provide: BarcodeScanner, useClass: BarcodeScannerMock },
-      { provide: Clipboard, useClass: ClipboardMock },
-      { provide: Device, useClass: DeviceMock },
-      { provide: Globalization, useClass: GlobalizationMock },
-      { provide: HTTP, useClass: HTTPMock },
-      { provide: InAppPurchase, useClass: InAppPurchaseMock },
-      { provide: Keyboard, useClass: KeyboardMock },
-      { provide: SafariViewController, useClass: SafariViewControllerMock },
-      { provide: SocialSharing, useClass: SocialSharingMock },
-      { provide: SplashScreen, useClass: SplashScreenMock },
-      { provide: StatusBar, useClass: StatusBarMock }
-    ];
-  }
+export default function getMockedNativeModules(): any[] {
+  return [
+    { provide: AppVersion, useClass: AppVersionMock },
+    { provide: BarcodeScanner, useClass: BarcodeScannerMock },
+    { provide: Clipboard, useClass: ClipboardMock },
+    { provide: Device, useClass: DeviceMock },
+    { provide: Globalization, useClass: GlobalizationMock },
+    { provide: HTTP, useClass: HTTPMock },
+    { provide: InAppPurchase, useClass: InAppPurchaseMock },
+    { provide: Keyboard, useClass: KeyboardMock },
+    { provide: SafariViewController, useClass: SafariViewControllerMock },
+    { provide: SocialSharing, useClass: SocialSharingMock },
+    { provide: SplashScreen, useClass: SplashScreenMock },
+    { provide: StatusBar, useClass: StatusBarMock }
+  ];
 }
