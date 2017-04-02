@@ -44,7 +44,7 @@
     "js-extend": "1.0.1",
     "moment": "2.15.1",
     "ng2-translate": "4.0.0",
-    "pouchdb": "6.0.7",
+    "pouchdb": "6.1.2",
     "pouchdb-adapter-cordova-sqlite": "1.0.0",
     "rxjs": "5.0.1",
     "sw-toolbox": "3.4.0",
