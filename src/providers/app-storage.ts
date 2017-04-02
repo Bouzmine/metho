@@ -4,11 +4,6 @@ import { Fetch } from "./fetch";
 import { Parse } from "./parse";
 import { Report } from "./report";
 
-interface CordovaWindow extends Window {
-  cordova: any;
-}
-declare var window: CordovaWindow;
-
 import PouchDB from "pouchdb";
 import PouchDB_Adapter_Cordova_SQLite from "pouchdb-adapter-cordova-sqlite";
 
@@ -43,7 +38,7 @@ export class AppStorage {
 
   init() {
     PouchDB.plugin(PouchDB_Adapter_Cordova_SQLite);
-    let adapter = !!window.cordova ? "cordova-sqlite" : "websql";
+    let adapter = ("cordova" in window) ? "cordova-sqlite" : "websql";
     this.projectDB = new PouchDB("projects", { adapter: adapter });
     this.sourceDB = new PouchDB("sources", { adapter: adapter });
     this.pendingDB = new PouchDB("pendings", { adapter: adapter });

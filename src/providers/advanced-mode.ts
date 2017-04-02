@@ -7,11 +7,6 @@ import { Report } from "./report";
 import { Settings } from "./settings";
 import { TranslatedAlertController } from "./translated-alert-controller";
 
-interface CordovaWindow extends Window {
-  cordova: any;
-}
-declare var window: CordovaWindow;
-
 
 @Injectable()
 export class AdvancedMode {
@@ -71,7 +66,7 @@ export class AdvancedMode {
   }
 
   enable(): Promise<any> {
-    if (!this.settings.get(Settings.isAdvanced) && !!window.cordova) {
+    if (!this.settings.get(Settings.isAdvanced) && "cordova" in window) {
       return new Promise((resolve, reject) => {
         if (navigator.onLine && this.hasLoaded) {
           this.inAppPurchase.buy(this.productId).then((data) => {
