@@ -2,7 +2,7 @@ import { Component, NgModule } from "@angular/core";
 import { HttpModule, Http } from "@angular/http";
 
 import { Platform, IonicApp, IonicModule } from "ionic-angular";
-import { Storage } from "@ionic/storage";
+import { IonicStorageModule } from "@ionic/storage";
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from "ng2-translate/ng2-translate";
 
 import { AdvancedModePage } from "../pages/advanced-mode/advanced-mode";
@@ -98,6 +98,9 @@ export function translateDeps (http: Http) {
       provide: TranslateLoader,
       useFactory: translateDeps,
       deps: [Http]
+    }),
+    IonicStorageModule.forRoot({
+      driverOrder: ["localstorage", "indexeddb", "websql", "sqlite"]
     })
   ],
   bootstrap: [IonicApp],
@@ -137,7 +140,6 @@ export function translateDeps (http: Http) {
     AdvancedMode,
     Language,
     Scan,
-    Storage,
     TranslatedActionSheetController,
     TranslatedAlertController,
     TranslatedToastController,
