@@ -171,7 +171,7 @@ interface ComplexSourceError {
   }[];
 }
 
-interface Cache {
+interface SourceCache {
   [key: string]: SourceFields;
 }
 

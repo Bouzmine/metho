@@ -5,9 +5,9 @@ import { ReactiveHttp } from "./reactive-http";
 
 @Injectable()
 export class Fetch {
-  public cacheByISBN: Cache = {};
-  public cacheByName: Cache = {};
-  public cacheByNameWithAuthors: Cache = {};
+  public cacheByISBN: SourceCache = {};
+  public cacheByName: SourceCache = {};
+  public cacheByNameWithAuthors: SourceCache = {};
   public ISBNdbApiKeys: Array<string> = [
     "S07CWYQY",
     "YVFT6RLV"

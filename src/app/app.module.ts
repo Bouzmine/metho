@@ -1,3 +1,4 @@
+import { BrowserModule } from "@angular/platform-browser";
 import { Component, NgModule } from "@angular/core";
 import { HttpModule, Http } from "@angular/http";
 
@@ -94,6 +95,7 @@ export function translateDeps (http: Http) {
     SliderComponent
   ],
   imports: [
+    BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
     TranslateModule.forRoot({
