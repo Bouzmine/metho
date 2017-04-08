@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button clear (click)="dismiss()">{{"PROJECT.DETAIL.BOARDING.CLOSE" | translate}}</button>
+    </ion-buttons>
+    <ion-title>{{ card.title }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <!-- <div class="flex"> -->
+    <div class="card" *ngIf="card.type == 'bibliography'">
+      <p>{{ card.biblio_type }}</p>
+      <p [innerHtml]="card.source"></p>
+      <p><b>Résumé</b> : {{ card.summary }}</p>
+      <p><b>Utilité</b> : <span [innerHtml]="card.utility"></span></p>
+      <p *ngIf="card.cote" [innerHtml]="card.cote"></p>
+    </div>
+    <div class="card" *ngIf="card.type == 'document'">
+      <ion-row class="border-bottom">
+        <ion-col width-50>
+          <p>{{ card.first_title }}</p>
+          <p>{{ card.second_title }}</p>
+        </ion-col>
+        <ion-col width-50>
+          <p class="right-aligned" [innerHtml]="card.source"></p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <p [innerHtml]="card.content"></p>
+      </ion-row>
+    </div>
+  <!-- </div> -->
+</ion-content>

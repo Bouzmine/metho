@@ -143,5 +143,177 @@
         "icon": "assets/img/biblio.png",
         "text": "<p>Un travail de recherche doit se faire à partir d'une documentation issue de sources fiables. De plus, toute citation (extrait repris textuellement), citation d'idée (résumé de la pensée d'un auteur) ou données, statistiques, etc. appelle une référence bibliographique qui contient dans l'ordre : </p><ul><li>son nom en majuscules suivi d'une virgule</li><li>le prénom de l'auteur en minuscule suivi d'un point</li><li>le titre souligné (manuscrit) ou en italique (traitement de texte)</li><li>l'adresse bibliographique : lieu de publication, nom de l'éditeur, année de publication suivi d'une virgule</li><li>la référence au volume ou au tome suivi d'une virgule</li><li>le nombre de pages</li></ul><p>Une note de bas de page est la référence bibliographique mentionnée au bas de la page où se trouve une citation. Cependant, on remplace le nombre de pages par le numéro de la page de l'ouvrage où la citation a été puisée, et on indique dans l'ordre suivant, le prénom et le nom de famille sans majuscule. Dans un travail de plusieurs pages comportant une bibliographie, il est possible d'utiliser la référence courte, soit l'auteur, le titre et la page.</p>",
         "containsSub": true
+    },
+    {
+        "id": 3,
+        "name": "Méthode des fiches",
+        "description": "Fiches bibliographique, résumé, citation, reformulée et non-reformulée",
+        "subPages": [
+            {
+                "id": 0,
+                "name": "Fiche bibliographique",
+                "text": "<p>Voici les informations à consigner pour rédiger une fiche bibliographique.</p><ul><li>Type de document consulté : article de périodique, site Internet, monographie, encyclopédie, etc.</li><li>La référence de la source documentaire : (voir section Références bibliographiques)</li><li>Brève description du contenu (résumé) et des documents autres que le texte principal (glossaire, index, cartes, graphiques, illustrations, statistiques, etc.)</li><li>Indiquer l'utilité; à quel aspect ou partie du travail peut se rattacher le document.</li><li>La cote du livre (Dewey) ainsi que le nom de la bibliothèque, s'il y a lieu.</li></ul>",
+                "card_example": [
+                  {
+                    "type": "bibliography",
+                    "title": "Livre",
+                    "biblio_type": "Livre",
+                    "source": "CORBO, Claude. <i>Les États-Unis d'Amérique. Les institutions politiques</i>, tome 2, Québec, Septentrion, 2007, 448 p.",
+                    "summary": "Livre qui décrit dans les détails le système politique américain, ses origines et ses mécanismes. Il y a un index thématique ainsi qu'une bibliographie sélective.",
+                    "utility": "Pourrait servir à fournir de l'information sur : <br>Les amendements à la constitution américaine et le processus électoral. Deux sujets abordés dans ma 3e idée principale.",
+                    "cote": "<b>Cote</b> : 973 E83 Bibliothèque de McMasterville"
+                  },
+                  {
+                    "type": "bibliography",
+                    "title": "Article de périodique",
+                    "biblio_type": "Article de périodique",
+                    "source": "NIVAT, Anne. «Afghanistan, de l'autre côté du miroir», <em>L'actualité</em>, vol. 36, no 4, 15 mars 2011, p. 36-44.",
+                    "summary": "L'auteur explique que dans la ville de Kandahar, des entrepreneurs payés par l'armée canadienne embauchent des talibans. Elle fait état de la corruption qui est partout présente en Afghanistan. L'article comprend plusieurs photos.",
+                    "utility": "Pourrait être utile pour confirmer les difficultés auxquelles est confrontée l'armée canadienne dans cette région.",
+                    "cote": "<b>Cote</b> : Bibliothèque de McMasterville (non coté)"
+                  },
+                  {
+                    "type": "bibliography",
+                    "title": "Site Internet",
+                    "biblio_type": "Site Internet",
+                    "source": "OUIMET, Michèle. «Le sacrifice de Soroya. Série au nom de l'honneur», [en ligne]. [http://www.cyberpresse.ca] (8 mars 2011)",
+                    "summary": "L'article de Michèle Ouimet soulève le voile sur les crimes d'honneur fait aux femmes immigrées au Canada.",
+                    "utility": "Permet de mieux comprendre la détresse de certaines femmes immigrées, sujet abordé dans ma création plastique.",
+                    "cote": "À domicile"
+                  },
+                  {
+                    "type": "bibliography",
+                    "title": "Disque CD",
+                    "biblio_type": "Disque CD",
+                    "source": "MES AÏEUX, «Le fantôme du Forum», La ligne orange, Montréal, Les Disques Victoire, 56 min., 2008, [CD].",
+                    "summary": "La chanson rend hommage au joueur de hockey Howie Morenz du club Canadien mort accidentellement lors d'une partie au forum de Montréal.",
+                    "utility": "Pourrait être utile pour souligner l'importance du hockey dans la culture populaire du Québec.",
+                    "cote": "Discographie personnelle"
+                  },
+                  {
+                    "type": "bibliography",
+                    "title": "DVD",
+                    "biblio_type": "DVD",
+                    "source": "BLANDFORD, Mark. <em>Duplessis</em>, Montréal, Radio-Canada, 6h30, 1973 [3 DVD].",
+                    "summary": "Reconstitution des différentes périodes du règne de Duplessis en sept épisodes de 50 minutes.",
+                    "utility": "Permet de mieux comprendre le personnage et de visualiser cette période de l'histoire du Québec.",
+                    "cote": "Bibliothèque personnelle"
+                  },
+                  {
+                    "type": "bibliography",
+                    "title": "Entrevue",
+                    "biblio_type": "Entrevue",
+                    "source": "BÉDARD, Sandrine. Entrevue avec M. Jacques Bédard, ancien membre de la <em>Royal Air Force</em>, Saint-Bruno, le 24 mai 2010.",
+                    "summary": "Entrevue très enrichissante sur les conditions de vie dans les camps de militaires de Terre-Neuve lors de la Deuxième Guerre mondiale.",
+                    "utility": "Peut servir pour répondre à ma problématique sur mon objet ancien : «En quoi cet uniforme militaire est-il le reflet de son époque ?»",
+                    "cote": ""
+                  },
+                  {
+                    "type": "bibliography",
+                    "title": "Caricature",
+                    "biblio_type": "Caricature",
+                    "source": "CHAPLEAU, Serge. «premier ministre du Québec», La Presse, vol. 127, no 118, 8 mars 2011, p. A-29",
+                    "summary": "Le premier ministre du Québec Jean Charest sous la tempête de neige affirmant ne pas être, cette fois, responsable du mécontentement de la population.",
+                    "utility": "À mettre en annexe de mon essai sur l'influence des médias sur les partis politiques.",
+                    "cote": "Bibliothèque de McMasterville (sans cote)"
+                  }
+                ]
+            },
+            {
+                "id": 1,
+                "name": "Fiche documentaire",
+                "header": true
+            },
+            {
+                "id": 2,
+                "name": "Présentation",
+                "text": "<h4>Format du papier</h4><p>Le format du papier utilisé pour une fiche est de 5\"x8\" ou 13x20 cm. Une demi-page 8<span class='diag-fract'>1/2</span> par 11.</p><h4>Thème de la fiche</h4><p>Chaque fiche doit comporter une vedette et une sous-vedette tirées du plan de recherche qui s'inscrit à la gauche de la fiche. La vedette est établie à partir des idées principales ou secondaires du plan de recherche. La sous-vedette est établie à partir des idées tertiaires.</p><h4>Référence bibliographique</h4><p>La source à partir de laquelle la fiche a été rédigée est inscrite à droite de la fiche et elle indique (dans le cas d'un livre) :</p><ul><li>l'auteur (nom en majuscule et prénom en minuscule)</li><li>le titre (en italique)</li><li>la ou les pages d'où sont tirés les citations ou résumés.</li></ul><h4>Plusieurs fiches pour une sous-vedette</h4><p>Lorsqu'on rédige plusieurs fiches portant sur la même sous-vedette, il faut répéter sur chaque fiche la vedette et la référence, et numéroter ces fiches pour en indiquer l'ordre logique.</p>",
+                "card_example": [
+                  {
+                    "type": "document",
+                    "title": "Squelette d'une fiche",
+                    "first_title": "Vedette (Idée principale ou secondaire)",
+                    "second_title": "Sous-vedette (Idée tertiaire)",
+                    "content": "Contenu",
+                    "source": "Source"
+                  }
+                ]
+            },
+            {
+                "id": 3,
+                "name": "Fiche-citation",
+                "text": "<p>La fiche-citation intégrale d'un auteur permet de noter, mot à mot, un passage d'un texte particulièrement pertinent pour répondre à la problématique. Il s'agit souvent d'une affirmation explicite ou d'une prise de position de l'auteur sur un sujet précis ou encore de sa pensée. Avant de sélectionner un passage, il faut prendre en compte la fiabilité de la source, la crédibilité de l'auteur, ainsi que l'originalité des propos.</p><p>Il est souvent pertinent, dans un travail de dix pages ou plus, d'effectuer une citation longue de plus de quatre lignes pour chaque idée principale.</p><p>Il est généralement utile d'ajouter, au bas de la fiche, un commentaire personnel soulignant la pertinence de la citation pour le travail.</p><p>On utilise les chevrons pour identifier ce type de fiche.</p><p>Lorsqu'à l'intérieur du passage cité, on supprime une phrase ou une partie de phrase jugée moins pertinente ou essentielle, on doit l'indiquer à l'aide de points de suspension placés entre crochets : [...]</p>",
+                "card_example": [
+                  {
+                    "type": "document",
+                    "title": "Fiche-citation",
+                    "first_title": "3.3 Les causes de la Réforme",
+                    "second_title": "3.3.1 Les abus de l'Église",
+                    "content": "<p>« L'exemple de ces abus vient de haut. À Rome, les papes soucieux surtout de belles lettres de constructions ou de politiques italiennes, favorisent sans vergogne les membres de leur famille (népotisme), cependant que les cardinaux de la Curie, administration centrale de l'Église, s'efforcent de tirer le maximum d'argent des Églises nationales. »</p>",
+                    "source": "LEBRUN, François. <em>L'Europe et le monde</em>, p. 55"
+                  },
+                  {
+                    "type": "document",
+                    "title": "Fiche-citation avec commentaire",
+                    "first_title": "1.1 Les guerres intercoloniales",
+                    "second_title": "1.1.1 Les causes",
+                    "content": "<p>« Dès le 17e siècle, la rivalité commerciale entre la France et l'Angleterre au sujet de la fourrure se traduit par une guérilla presque continuelle, notamment à la baie d'Hudson, aux Grands Lacs, dans la vallée du Mississippi et dans celle de l'Ohio. À cet enjeu s'ajoute celui de la mainmise sur les pêcheries de l'Atlantique.</p><p>L'expansion territoriale de la Nouvelle-France aux 17e et 18e siècles bloque celles des 13 colonies britanniques. Or, ces colonies prospères et densément peuplées cherchent au 18e siècle à s'étendre de en plus vers l'ouest. »</p><p><b>Commentaire :</b> Cette citation souligne, l'importance économique du commerce des fourrures et des pêcheries en Amérique du Nord comme source de conflit entre les deux métropoles, ainsi que la différence démographique des colonies.</p>",
+                    "source": "BÉDARD, Raymond <em>et al.</em> <em>Le Québec, Une histoire à suivre</em>, vol. 1, p. 99"
+                  },
+                  {
+                    "type": "document",
+                    "title": "Fiche-citation et résumé",
+                    "first_title": "2.2 Le développement de la science expérimentale",
+                    "second_title": "2.2.1 Francis Bacon",
+                    "content": "<p>«Bacon vit les grandes possibilités de la science en formation et proposa des perspectives de développement à différents niveaux aussi bien théorique qu'institutionnel.»</p><p>/Francis Bacon (1561-1626) était un esprit universel, un savant distingué en politique, en droit, en littérature, en philosophie et en sciences. Il vécut toute sa vie à la cour d'Angleterre, centre du pouvoir politique, sous les règnes d'Élisabeth 1re et de Jacques 1er.</p><p>À l'âge de trente-six ans, il publia le recueil d'essais qui demeure son livre le plus populaire.</p><p>Bacon fut l'un des premiers à s'apercevoir que la connaissance scientifique pouvait donner aux hommes le pouvoir sur la nature, et donc que les progrès de la science pourraient favoriser leur prospérité./</p>",
+                    "source": "MAGEE, Bryan. <em>Histoire de la philosophie</em>, p. 74-75"
+                  }
+                ]
+            },
+            {
+                "id": 4,
+                "name": "Fiche-résumé",
+                "text": "<p>Une bonne fiche-résumé est souvent constituée d'informations consignées sous forme de points ou de phrases courtes. Il est préférable de faire un résumé que de retranscrire des paragraphes complets d'un texte. C'est ce type de fiche que l'on fait en plus grand nombre puisqu'elles servent de matière première pour la rédaction du travail. On peut les formuler de deux façons :</p><h4>Reformulée dans ses mots</h4><p>Il s'agit de reformuler, dans ses propres mots, soit des propos d'un auteur sans modifier sa pensée, soit des informations plus factuelles ou données.</p><h4>Rédigée à partir des mots du texte (fiche-citation d'idée)</h4><p>Cette fiche reprend l'essentiel du texte d'un auteur en se servant des phrases clés. On utilise le symbole des barres obliques pour indiquer que le texte n'a pas été modifié : <em>/ texte /</em>.</p>",
+                "card_example": [
+                  {
+                    "type": "document",
+                    "title": "Fiche-résumé reformulée",
+                    "first_title": "3.1 Les femmes des premières nations",
+                    "second_title": "3.1.1 Les tâches des femmes algonquiennes",
+                    "content": "<ul><li>Le travail des femmes dans les tribus nomades algonquiennes procure l'essentiel de leur subsistance.</li><li>Par exemple, les peuples algonquiens vivent surtout de la chasse, de la pêche et de la cueillette effectuée par les femmes.</li><li>La cueillette est importante parce que l'approvisionnement en provenance de la chasse est souvent très irrégulier.</li><li>De plus, ce sont elles qui confectionnent tous les vêtements.</li><li>Lors des expéditions de chasse ou des déplacements de la tribu, les femmes transportent sur leur dos les bagages : c'est une tâche harassante car les expéditions sont longues, nombreuses et les chargements sont très lourds.</li></ul>",
+                    "source": "Collectif Clio. <em>L'histoire des femmes au Québec</em>, p. 23-25"
+                  },
+                  {
+                    "type": "document",
+                    "title": "Fiche-résumé non reformulée",
+                    "first_title": "2.1 L'esclavage",
+                    "second_title": "2.1.1 Avant la guerre de Sécession",
+                    "content": "<p>/Il est difficile de généraliser à propos des conditions de vie ou de survie des esclaves. Vers 1850, l'expectative de vie pour les Blancs est de 25,5 ans et de 20,4 ans pour les Noirs. Ils sont mal logés, mal nourris et surmenés. Les fièvres, les infections sont nombreuses. La mortalité chez les enfants d'esclaves est le double de la mortalité des enfants Blancs.</p><p>Le travail des champs est éreintant. Les esclaves vieillissent vite. Règle générale, leur diète est monotone mais suffisante. Comme l'esclave représente un capital investi, le maître cherche à en tirer le maximum. Le travail va du lever au coucher du soleil./</p>",
+                    "source": "DESBIENS, Albert. <em>Les États-Unis d'Amérique. Synthèse historique</em>, t. 1, p. 122"
+                  },
+                  {
+                    "type": "document",
+                    "title": "Fiche-résumé et commentaire",
+                    "first_title": "1.1 Le gaz de schiste",
+                    "second_title": "1.1.1 Découverte au Québec",
+                    "content": "<p>/Si le gaz de shale suscite autant de controverse, c'est que cette richesse est accessible comme jamais auparavant grâce à des techniques d'analyse et de forage inédites.</p><p>La présence de ce gaz de shale dans la vallée du Saint-Laurent est attestée depuis les années 1960. Dans les années 1970, des relevés sismiques réalisés par la Société québécoise d'initiative pétrolière (SOQUIP), près de Saint-Hyacinthe, ont confirmé l'existence de gisements de gaz./</p><p><strong>Commentaire</strong> : Ces informations confirment le fait que le gouvernement du Québec est depuis longtemps conscient du potentiel d'exploitation de ce type de gaz.</p>",
+                    "source": "CLER, Emilie. «Le gaz de la discorde», <em>Québec science</em>, nov. 2010, p. 19"
+                  }
+                ]
+            },
+            {
+                "id": 5,
+                "name": "Fiche-commentaire",
+                "text": "<p>La fiche-commentaire sert à consigner des réflexions personnelles, des interrogations, des positions en regard de l'opinion d'un auteur, etc. En conséquence, ce type de fiche ne comporte pas de référence.</p><p>En vue de la rédaction finale du travail de recherche, il est très utile de faire une fiche-commentaire au début de chaque idée principale pour présenter cette idée et indiquer en quoi elle est liée à la problématique ou à la question-directrice. Il convient également de rédiger une fiche-commentaire à la fin de chaque idée principale pour résumer cette idée globalement et indiquer sa pertinence. Au moment de la rédaction du travail, ces fiches servent par la même occasion à introduire et conclure une idée principale.</p><p>On utilise les crochets pour identifier ce type de fiche.</p>"
+            },
+            {
+                "id": 6,
+                "name": "Combinaisons de fiches",
+                "text": "<p>Il est possible de combiner sur une même fiche deux types de fiches différentes, par exemple : </p><ul><li>fiche-citation et résumé</li><li>fiche-résumé et commentaire</li><li>fiche-citation et commentaire</li></ul><p>Pour les exemples, voir la section de chacune des fiches.</p>"
+            }
+        ],
+        "icon": "assets/img/fiches.png",
+        "text": "<p>Les fiches servent à consigner des informations sur les documents consultés au cours d'un travail de recherche, qu'il s'agisse de la référence (fiche bibliographique) ou de renseignements sur le thème abordé (fiche documentaire). Elles offrent l'avantage de se manipuler facilement, ce qui rend le classement plus efficace.</p>",
+        "containsSub": true
     }
 ]

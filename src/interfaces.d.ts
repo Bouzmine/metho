@@ -133,11 +133,28 @@ interface LibraryObject {
 interface ReferenceObject {
   id: number;
   name: string;
+  header?: boolean;
   description?: string;
   icon?: string;
   text: string;
   containsSub?: boolean;
+  card_example: Card[];
   subPages: ReferenceObject[];
+}
+
+interface Card {
+  type: string;
+  title: string;
+  // Documentary
+  first_title?: string;
+  second_title?: string;
+  content?: string;
+  source?: string;
+  // Bibliographical
+  biblio_type?: string;
+  summary?: string;
+  utility?: string;
+  cote?: string;
 }
 
 interface SearchReferenceObject {

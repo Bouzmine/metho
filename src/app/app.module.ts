@@ -13,6 +13,7 @@ import { LicensePage } from "../pages/license/license";
 import { PendingsPage } from "../pages/pendings/pendings";
 import { ProjectModalPage } from "../pages/project-modal/project-modal";
 import { ProjectsPage } from "../pages/projects/projects";
+import { ReferenceCardExamplePage } from "../pages/reference-card-example/reference-card-example";
 import { ReferencesPage } from "../pages/references/references";
 import { ReferencesDetailPage } from "../pages/references-detail/references-detail";
 import { ReferencesSubPage } from "../pages/references-sub/references-sub";
@@ -76,6 +77,7 @@ export function translateDeps (http: Http) {
     PendingsPage,
     ProjectModalPage,
     ProjectsPage,
+    ReferenceCardExamplePage,
     ReferencesPage,
     ReferencesDetailPage,
     ReferencesSubPage,
@@ -115,6 +117,7 @@ export function translateDeps (http: Http) {
     PendingsPage,
     ProjectModalPage,
     ProjectsPage,
+    ReferenceCardExamplePage,
     ReferencesPage,
     ReferencesDetailPage,
     ReferencesSubPage,

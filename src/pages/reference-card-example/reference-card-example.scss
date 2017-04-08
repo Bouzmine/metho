@@ -1,0 +1,33 @@
+page-reference-card-example {
+  .card {
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+
+    margin: 10px;
+    padding: 5px;
+  }
+
+  .flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 44px);
+    flex-direction: column;
+  }
+
+  .right-aligned {
+    text-align: right;
+  }
+
+  .border-bottom {
+    border-bottom-style: solid;
+    border-color: black;
+    border-width: 1px;
+  }
+
+  p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
