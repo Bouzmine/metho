@@ -50,6 +50,9 @@ export class References {
       }
 
       v.subPages.forEach(sub => {
+        if (sub.header) {
+          return;
+        }
         if (this.containsOneOf(qa, sub.name) || this.containsOneOf(qa, sub.text)) {
           currentObj.content.push(sub);
         }
@@ -64,6 +67,9 @@ export class References {
   }
 
   containsOneOf(qa: Array<string>, str: string): boolean {
+    if (!str || !qa.length) {
+      return false;
+    }
     for (var i = 0; i < qa.length; i++) {
       if (str.toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
       }else {
