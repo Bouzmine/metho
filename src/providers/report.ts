@@ -4,7 +4,7 @@ import { AppVersion } from "@ionic-native/app-version";
 import { Device } from "@ionic-native/device";
 import { SocialSharing } from "@ionic-native/social-sharing";
 import { SplashScreen } from "@ionic-native/splash-screen";
-import { TranslateService } from "ng2-translate/ng2-translate";
+import { TranslateService } from "@ngx-translate/core";
 
 import { TranslatedAlertController } from "./translated-alert-controller";
 

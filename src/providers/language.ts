@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { Config } from "ionic-angular";
 import { Globalization } from "@ionic-native/globalization";
-import { TranslateService } from "ng2-translate/ng2-translate";
+import { TranslateService } from "@ngx-translate/core";
 
 import { Settings } from "./settings";
 

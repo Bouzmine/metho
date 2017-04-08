@@ -4,7 +4,8 @@ import { HttpModule, Http } from "@angular/http";
 
 import { Platform, IonicApp, IonicModule } from "ionic-angular";
 import { IonicStorageModule } from "@ionic/storage";
-import { TranslateModule, TranslateLoader, TranslateStaticLoader } from "ng2-translate/ng2-translate";
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 
 import { AdvancedModePage } from "../pages/advanced-mode/advanced-mode";
 import { AttributionsPage } from "../pages/attributions/attributions";
@@ -62,8 +63,8 @@ import { SocialSharing } from "@ionic-native/social-sharing";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 
-export function translateDeps (http: Http) {
-  return new TranslateStaticLoader(http, "assets/i18n", ".json");
+export function HttpLoaderFactory (http: Http) {
+  return new TranslateHttpLoader(http, "assets/i18n/", ".json");
 }
 
 @NgModule({
@@ -99,9 +100,11 @@ export function translateDeps (http: Http) {
     HttpModule,
     IonicModule.forRoot(MyApp),
     TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: translateDeps,
-      deps: [Http]
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [Http]
+      }
     }),
     IonicStorageModule.forRoot({
       driverOrder: ["localstorage", "indexeddb", "websql", "sqlite"]

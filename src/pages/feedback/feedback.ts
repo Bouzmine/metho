@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 
 import { NavController } from "ionic-angular";
 import { SocialSharing } from "@ionic-native/social-sharing";
-import { TranslateService } from "ng2-translate/ng2-translate";
+import { TranslateService } from "@ngx-translate/core";
 
 import { Report } from "../../providers/report";
 
