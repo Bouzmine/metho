@@ -72,19 +72,17 @@ export class SourcesPage {
     }
   }
 
-  loadSources() {
-    this.storage.getSourcesFromProjectId(this.projectId).then(sources => {
-      this.sources = sources;
-      this.updateSearch();
-      this.sources.sort((a, b) => {
-        if (a.title && b.title) {
-          return a.title.localeCompare(b.title);
-        } else if (a.title) {
-          return a.title.localeCompare(b.parsedSource);
-        } else if (b.title) {
-          return a.parsedSource.localeCompare(b.title);
-        }
-      });
+  async loadSources() {
+    this.sources = await this.storage.getSourcesFromProjectId(this.projectId);
+    this.updateSearch();
+    this.sources.sort((a, b) => {
+      if (a.title && b.title) {
+        return a.title.localeCompare(b.title);
+      } else if (a.title) {
+        return a.title.localeCompare(b.parsedSource);
+      } else if (b.title) {
+        return a.parsedSource.localeCompare(b.title);
+      }
     });
   }
 
@@ -108,16 +106,12 @@ export class SourcesPage {
     });
   }
 
-  loadProjectInfo() {
-    this.storage.getProjectFromId(this.projectId).then(project => {
-      this.project = project;
-    });
+  async loadProjectInfo() {
+    this.project = await this.storage.getProjectFromId(this.projectId);
   }
 
-  loadPendingNumber() {
-    this.storage.getPendingNumber(this.projectId).then(num => {
-      this.pendingNumber = num;
-    });
+  async loadPendingNumber() {
+    this.pendingNumber = await this.storage.getPendingNumber(this.projectId);
 
     this.storage.loadPendingsFromProjectId(this.projectId);
   }

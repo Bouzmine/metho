@@ -31,17 +31,18 @@ export class PendingsPage {
     this.projectId = params.get("pId");
   }
 
-  loadPendings(dismissOnEmpty?: boolean) {
+  async loadPendings(dismissOnEmpty?: boolean) {
     let moment = this.language.getMoment();
-    this.storage.getPendingsFromProjectId(this.projectId).then(pendings => {
-      this.pendings = pendings.map(pending => {
-        pending.datestring = moment(pending.date).format("LL");
-        return pending;
-      });
-      if (dismissOnEmpty && this.pendings.length == 0) {
-        this.nav.pop();
-      }
+    let pendings = await this.storage.getPendingsFromProjectId(this.projectId);
+
+    this.pendings = pendings.map(pending => {
+      pending.datestring = moment(pending.date).format("LL");
+      return pending;
     });
+
+    if (dismissOnEmpty && this.pendings.length == 0) {
+      this.nav.pop();
+    }
   }
 
   solvePending(pending: Pending) {

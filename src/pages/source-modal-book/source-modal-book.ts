@@ -157,13 +157,11 @@ export class SourceModalBookPage extends SourceModalBase {
     });
   }
 
-  openBrowser() {
-    this.safariViewController.isAvailable().then(avail => {
-      if (avail) {
-        this.safariViewController.show({
-          url: this.url
-        });
-      }
-    });
+  async openBrowser() {
+    if (await this.safariViewController.isAvailable()) {
+      this.safariViewController.show({
+        url: this.url
+      });
+    }
   }
 }

@@ -27,14 +27,12 @@ export class ProjectsPage {
     this.loadProjects();
   }
 
-  loadProjects() {
-    this.storage.getProjects().then(projects => {
-      this.projects = projects;
-      this.projects.sort((a, b) => {
-        return a.name.localeCompare(b.name);
-      });
-      this.loading = false;
+  async loadProjects() {
+    this.projects = await this.storage.getProjects();
+    this.projects.sort((a, b) => {
+      return a.name.localeCompare(b.name);
     });
+    this.loading = false;
   }
 
   createProject() {

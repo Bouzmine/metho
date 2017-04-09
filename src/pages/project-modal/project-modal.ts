@@ -51,18 +51,16 @@ export class ProjectModalPage {
     }
   }
 
-  confirm() {
+  async confirm() {
     if (this.projectForm.valid) {
       if (this.isNew) {
-        this.storage.createProject(this.projectForm.value).then(() => {
-          this.keyboard.close();
-          this.viewCtrl.dismiss();
-        });
+        await this.storage.createProject(this.projectForm.value);
+        this.keyboard.close();
+        this.viewCtrl.dismiss();
       }else {
-        this.storage.setProjectFromId(this.previous._id, this.projectForm.value).then(() => {
-          this.keyboard.close();
-          this.viewCtrl.dismiss();
-        });
+        await this.storage.setProjectFromId(this.previous._id, this.projectForm.value);
+        this.keyboard.close();
+        this.viewCtrl.dismiss();
       }
     }else {
       this.hasConfirmed = false;

@@ -38,19 +38,19 @@ export class AdvancedMode {
     public inAppPurchase: InAppPurchase,
   ) {}
 
-  init(retryOnFail: boolean) {
+  async init(retryOnFail: boolean) {
     const isOnline = navigator.onLine;
     const isAlreadyLoaded = (this.hasLoaded);
     if (isOnline && !isAlreadyLoaded) {
-      this.inAppPurchase.getProducts(["com.fclavette.metho.advanced"]).then(products => {
-        let product = products[0];
+      try {
+        const [product] = await this.inAppPurchase.getProducts(["com.fclavette.metho.advanced"]);
         this.completeInit(product.price, product.productId);
-      }).catch(err => {
+      } catch (err) {
         if (err != "cordova_not_available") {
           this.report.report(err);
         }
         this.completeInit("1,39$", "");
-      });
+      }
     }else if (!isAlreadyLoaded && retryOnFail) {
       setTimeout(() => {
         this.init(true);

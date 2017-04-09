@@ -43,10 +43,8 @@ export class SourcePage {
     this.loadSource();
   }
 
-  loadSource() {
-    this.storage.getSourceFromId(this.id).then(source => {
-      this.source = source;
-    });
+  async loadSource() {
+    this.source = await this.storage.getSourceFromId(this.id);
   }
 
   solve(error: SourceError) {
