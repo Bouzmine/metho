@@ -22,14 +22,10 @@ export class ReferencesSubPage {
     public params: NavParams,
     public references: References,
   ) {
-    let index = this.params.get("id");
-    let subIndex = this.params.get("subId");
-    this.references.load().then(data => {
-      let reference = data[index].subPages[subIndex];
-      this.name = reference.name;
-      this.text = reference.text;
-      this.card_example = reference.card_example;
-    });
+    let reference = this.params.data;
+    this.name = reference.name;
+    this.text = reference.text;
+    this.card_example = reference.card_example;
   }
 
   openCard(card: Card) {

@@ -131,7 +131,6 @@ interface LibraryObject {
 }
 
 interface ReferenceObject {
-  id: number;
   name: string;
   header?: boolean;
   description?: string;
@@ -159,7 +158,6 @@ interface Card {
 
 interface SearchReferenceObject {
   title: string;
-  id: number;
   content: ReferenceObject[];
 }
 

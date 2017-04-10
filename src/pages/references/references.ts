@@ -41,16 +41,11 @@ export class ReferencesPage {
     }
   }
 
-  goToReferenceDetailPage(id: number) {
-    this.nav.push(ReferencesDetailPage, {
-      id: id
-    });
+  goToReferenceDetailPage(reference: ReferenceObject) {
+    this.nav.push(ReferencesDetailPage, reference);
   }
 
-  goToReferenceSubPage(id: number, subId: number) {
-    this.nav.push(ReferencesSubPage, {
-      id: id,
-      subId: subId
-    });
+  goToReferenceSubPage(entry: ReferenceObject) {
+    this.nav.push(ReferencesSubPage, entry);
   }
 }

@@ -9,7 +9,7 @@
 
   <ion-list>
     <ng-container *ngFor="let entry of entries">
-      <button ion-item *ngIf="entry.text && !entry.header" (click)="goToReferenceSubPage(entry.id)" [class.break-section]="entry.break">
+      <button ion-item *ngIf="entry.text && !entry.header" (click)="goToReferenceSubPage(entry)" [class.break-section]="entry.break">
         <h2>{{ entry.name }}</h2>
       </button>
       <ion-item *ngIf="!entry.text && !entry.header">

@@ -7,7 +7,7 @@
 <ion-content>
   <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="updateSearch($event)" (keypress)="closeKeyboard($event)" (ionCancel)="updateSearch($event)" cancelButtonText="{{'COMMON.CANCEL' | translate}}" showCancelButton="true" placeholder="{{'PROJECT.DETAIL.SEARCH' | translate}}" animated="true"></ion-searchbar>
   <ion-list *ngIf="searchQuery.trim() == ''">
-    <button ion-item *ngFor="let reference of referenceData" (click)="goToReferenceDetailPage(reference.id)">
+    <button ion-item *ngFor="let reference of referenceData" (click)="goToReferenceDetailPage(reference)">
       <ion-thumbnail item-left>
         <img [src]="reference.icon">
       </ion-thumbnail>
@@ -19,7 +19,7 @@
   <ion-list *ngIf="searchQuery.trim() && searchData.length">
     <ion-item-group *ngFor="let section of searchData">
       <ion-item-divider color="light">{{ section.title }}</ion-item-divider>
-      <button ion-item *ngFor="let entry of section.content" (click)="goToReferenceSubPage(section.id, entry.id)">
+      <button ion-item *ngFor="let entry of section.content" (click)="goToReferenceSubPage(entry)">
         <h3>{{ entry.name }}</h3>
       </button>
     </ion-item-group>

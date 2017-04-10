@@ -42,7 +42,6 @@ export class References {
     this.data.forEach(v => {
       let currentObj = {
         title: v.name,
-        id: v.id,
         content: []
       };
       if (this.containsOneOf(qa, v.name)) {
