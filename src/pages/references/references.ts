@@ -18,7 +18,6 @@ export class ReferencesPage {
   public searchQuery: string = "";
   public referenceData: ReferenceObject[] = [];
   public searchData: SearchReferenceObject[] = [];
-  public advanced: boolean;
 
   constructor(
     public nav: NavController,
