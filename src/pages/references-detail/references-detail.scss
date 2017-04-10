@@ -3,4 +3,12 @@ references-detail {
         text-overflow: ellipsis;
         overflow: hidden;
     }
+
+    button.break-section {
+      border-bottom: 0.55px solid #c8c7cc;
+
+      .item-inner {
+        border-bottom: none !important;
+      }
+    }
 }
