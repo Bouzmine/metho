@@ -11,4 +11,17 @@ references-detail {
         border-bottom: none !important;
       }
     }
+
+    .diag-fract {
+        font-size: 0.83em;
+        vertical-align: super;
+    }
+
+    @supports (font-variant-numeric: diagonal-fractions) {
+        .diag-fract {
+            font-variant-numeric: diagonal-fractions;
+            font-size: 1em;
+            vertical-align: baseline;
+        }
+    }
 }

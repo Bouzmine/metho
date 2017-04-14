@@ -18,7 +18,6 @@ import { ProjectsPage } from "../pages/projects/projects";
 import { ReferenceCardExamplePage } from "../pages/reference-card-example/reference-card-example";
 import { ReferencesPage } from "../pages/references/references";
 import { ReferencesDetailPage } from "../pages/references-detail/references-detail";
-import { ReferencesSubPage } from "../pages/references-sub/references-sub";
 import { SettingsPage } from "../pages/settings/settings";
 import { SourcePage } from "../pages/source/source";
 import { SourceModalArticlePage } from "../pages/source-modal-article/source-modal-article";
@@ -82,7 +81,6 @@ export function HttpLoaderFactory (http: Http) {
     ReferenceCardExamplePage,
     ReferencesPage,
     ReferencesDetailPage,
-    ReferencesSubPage,
     SettingsPage,
     SourcePage,
     SourceModalArticlePage,
@@ -125,7 +123,6 @@ export function HttpLoaderFactory (http: Http) {
     ReferenceCardExamplePage,
     ReferencesPage,
     ReferencesDetailPage,
-    ReferencesSubPage,
     SettingsPage,
     SourcePage,
     SourceModalArticlePage,

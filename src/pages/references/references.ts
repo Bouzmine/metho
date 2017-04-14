@@ -4,7 +4,6 @@ import { NavController } from "ionic-angular";
 import { Keyboard } from "@ionic-native/keyboard";
 
 import { ReferencesDetailPage } from "../references-detail/references-detail";
-import { ReferencesSubPage } from "../references-sub/references-sub";
 
 import { References } from "../../providers/references";
 import { Settings } from "../../providers/settings";
@@ -43,9 +42,5 @@ export class ReferencesPage {
 
   goToReferenceDetailPage(reference: ReferenceObject) {
     this.nav.push(ReferencesDetailPage, reference);
-  }
-
-  goToReferenceSubPage(entry: ReferenceObject) {
-    this.nav.push(ReferencesSubPage, entry);
   }
 }

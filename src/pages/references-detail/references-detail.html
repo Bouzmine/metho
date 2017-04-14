@@ -7,7 +7,7 @@
 <ion-content>
   <div padding *ngIf="text" [innerHtml]="text"></div>
 
-  <ion-list>
+  <ion-list *ngIf="entries.length">
     <ng-container *ngFor="let entry of entries">
       <button ion-item *ngIf="entry.text && !entry.header" (click)="goToReferenceSubPage(entry)" [class.break-section]="entry.break">
         <h2>{{ entry.name }}</h2>
@@ -19,5 +19,13 @@
         {{ entry.name }}
       </ion-list-header>
     </ng-container>
+  </ion-list>
+  <ion-list *ngIf="cardExample && cardExample.length">
+    <ion-list-header>
+      Exemple de fiche
+    </ion-list-header>
+    <button ion-item *ngFor="let card of cardExample" (click)="openCard(card)">
+      {{ card.title }}
+    </button>
   </ion-list>
 </ion-content>

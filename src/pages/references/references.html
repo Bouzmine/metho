@@ -19,7 +19,7 @@
   <ion-list *ngIf="searchQuery.trim() && searchData.length">
     <ion-item-group *ngFor="let section of searchData">
       <ion-item-divider color="light">{{ section.title }}</ion-item-divider>
-      <button ion-item *ngFor="let entry of section.content" (click)="goToReferenceSubPage(entry)">
+      <button ion-item *ngFor="let entry of section.content" (click)="goToReferenceDetailPage(entry)">
         <h3>{{ entry.name }}</h3>
       </button>
     </ion-item-group>
