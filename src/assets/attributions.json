@@ -26,6 +26,11 @@
       "image": "assets/img/momentjs.png"
     },
     {
+      "label": "Font Awesome",
+      "website": "http://fontawesome.io",
+      "image": "assets/img/font-awesome.png"
+    },
+    {
       "label": "Angular Translate",
       "website": "http://angular-translate.github.io",
       "image": null
