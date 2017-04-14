@@ -16,9 +16,9 @@ If you find a bug, or have a feature request post that as an issue on GitHub or 
 
 ## Technologies
 
-The technologies in use in this project are [Ionic](http://ionicframework.com), [AngularJS](http://angularjs.org), [PouchDB](http://pouchdb.com),  and [Cordova](http://cordova.apache.org). This means it is an hybrid app (app using web technologies). Languages in use are HTML, CSS and JavaScript.
+The technologies in use in this project are [Ionic](http://ionicframework.com), [Angular](http://angular.io), [PouchDB](http://pouchdb.com),  and [Cordova](http://cordova.apache.org). This means it is an hybrid app (app using web technologies). Languages in use are HTML, CSS and JavaScript.
 
-## Attributions and licences
-Attributions and licences are inside the app in *Settings -> Attributions* view. You cannot redistribute the app.
+## Attributions and licenses
+Attributions and licenses are inside the app in *Settings -> Attributions* view. You cannot redistribute the app.
 
 Francis Clavette © 2016. All rights reserved.
