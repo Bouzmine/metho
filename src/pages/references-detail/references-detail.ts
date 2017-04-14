@@ -24,7 +24,7 @@ export class ReferencesDetailPage {
     this.text = reference.text;
     this.entries = reference.subPages || [];
     this.name = reference.name;
-    this.cardExample = reference.card_example || [];
+    this.cardExample = reference.cardExample || [];
   }
 
   goToReferenceSubPage(entry: ReferenceObject) {

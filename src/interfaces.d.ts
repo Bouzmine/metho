@@ -137,7 +137,7 @@ interface ReferenceObject {
   icon?: string;
   text: string;
   containsSub?: boolean;
-  card_example?: Card[];
+  cardExample?: Card[];
   subPages?: ReferenceObject[];
 }
 

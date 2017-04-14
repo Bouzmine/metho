@@ -125,7 +125,7 @@
             {
                 "name": "Fiche bibliographique",
                 "text": "<p>Voici les informations à consigner pour rédiger une fiche bibliographique.</p><ul><li>Type de document consulté : article de périodique, site Internet, monographie, encyclopédie, etc.</li><li>La référence de la source documentaire : (voir section Références bibliographiques)</li><li>Brève description du contenu (résumé) et des documents autres que le texte principal (glossaire, index, cartes, graphiques, illustrations, statistiques, etc.)</li><li>Indiquer l'utilité; à quel aspect ou partie du travail peut se rattacher le document.</li><li>La cote du livre (Dewey) ainsi que le nom de la bibliothèque, s'il y a lieu.</li></ul>",
-                "card_example": [
+                "cardExample": [
                   {
                     "type": "bibliography",
                     "title": "Livre",
@@ -198,7 +198,7 @@
             {
                 "name": "Présentation",
                 "text": "<h4>Format du papier</h4><p>Le format du papier utilisé pour une fiche est de 5\"x8\" ou 13x20 cm. Une demi-page 8<span class='diag-fract'>1/2</span> par 11.</p><h4>Thème de la fiche</h4><p>Chaque fiche doit comporter une vedette et une sous-vedette tirées du plan de recherche qui s'inscrit à la gauche de la fiche. La vedette est établie à partir des idées principales ou secondaires du plan de recherche. La sous-vedette est établie à partir des idées tertiaires.</p><h4>Référence bibliographique</h4><p>La source à partir de laquelle la fiche a été rédigée est inscrite à droite de la fiche et elle indique (dans le cas d'un livre) :</p><ul><li>l'auteur (nom en majuscule et prénom en minuscule)</li><li>le titre (en italique)</li><li>la ou les pages d'où sont tirés les citations ou résumés.</li></ul><h4>Plusieurs fiches pour une sous-vedette</h4><p>Lorsqu'on rédige plusieurs fiches portant sur la même sous-vedette, il faut répéter sur chaque fiche la vedette et la référence, et numéroter ces fiches pour en indiquer l'ordre logique.</p>",
-                "card_example": [
+                "cardExample": [
                   {
                     "type": "document",
                     "title": "Squelette d'une fiche",
@@ -212,7 +212,7 @@
             {
                 "name": "Fiche-citation",
                 "text": "<p>La fiche-citation intégrale d'un auteur permet de noter, mot à mot, un passage d'un texte particulièrement pertinent pour répondre à la problématique. Il s'agit souvent d'une affirmation explicite ou d'une prise de position de l'auteur sur un sujet précis ou encore de sa pensée. Avant de sélectionner un passage, il faut prendre en compte la fiabilité de la source, la crédibilité de l'auteur, ainsi que l'originalité des propos.</p><p>Il est souvent pertinent, dans un travail de dix pages ou plus, d'effectuer une citation longue de plus de quatre lignes pour chaque idée principale.</p><p>Il est généralement utile d'ajouter, au bas de la fiche, un commentaire personnel soulignant la pertinence de la citation pour le travail.</p><p>On utilise les chevrons pour identifier ce type de fiche.</p><p>Lorsqu'à l'intérieur du passage cité, on supprime une phrase ou une partie de phrase jugée moins pertinente ou essentielle, on doit l'indiquer à l'aide de points de suspension placés entre crochets : [...]</p>",
-                "card_example": [
+                "cardExample": [
                   {
                     "type": "document",
                     "title": "Fiche-citation",
@@ -242,7 +242,7 @@
             {
                 "name": "Fiche-résumé",
                 "text": "<p>Une bonne fiche-résumé est souvent constituée d'informations consignées sous forme de points ou de phrases courtes. Il est préférable de faire un résumé que de retranscrire des paragraphes complets d'un texte. C'est ce type de fiche que l'on fait en plus grand nombre puisqu'elles servent de matière première pour la rédaction du travail. On peut les formuler de deux façons :</p><h4>Reformulée dans ses mots</h4><p>Il s'agit de reformuler, dans ses propres mots, soit des propos d'un auteur sans modifier sa pensée, soit des informations plus factuelles ou données.</p><h4>Rédigée à partir des mots du texte (fiche-citation d'idée)</h4><p>Cette fiche reprend l'essentiel du texte d'un auteur en se servant des phrases clés. On utilise le symbole des barres obliques pour indiquer que le texte n'a pas été modifié : <em>/ texte /</em>.</p>",
-                "card_example": [
+                "cardExample": [
                   {
                     "type": "document",
                     "title": "Fiche-résumé reformulée",
