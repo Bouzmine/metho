@@ -30,11 +30,11 @@
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.MOVIE.DOC_NAME" | translate}}</ion-label>
         <ion-input formControlName="title" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.DOC_NAME_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item class="optional">
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.MOVIE.EPISODE_NAME" | translate}}</ion-label>
         <ion-input formControlName="episodeTitle" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.EPISODE_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item class="optional">
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_LOCATION" | translate}}</ion-label>
         <ion-input formControlName="productionLocation" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_LOCATION_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
@@ -42,7 +42,7 @@
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.MOVIE.PRODUCTOR" | translate}}</ion-label>
         <ion-input formControlName="productor" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.PRODUCTOR_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item class="optional">
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.MOVIE.BROADCASTER" | translate}}</ion-label>
         <ion-input formControlName="broadcaster" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.BROADCASTER_PLACEHOLDER' | translate}}"></ion-input>
       </ion-item>
@@ -50,11 +50,11 @@
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.MOVIE.LENGTH" | translate}}</ion-label>
         <ion-input type="number" formControlName="duration" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.LENGTH_PLACEHOLDER' | translate}}" pattern="[0-9]*"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item class="optional">
         <ion-label stacked>{{"PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_DATE" | translate}}</ion-label>
         <ion-input formControlName="publicationDate" placeholder="{{'PROJECT.DETAIL.MODAL.MOVIE.PUBLICATION_DATE_PLACEHOLDER' | translate}}" pattern="[0-9]*"></ion-input>
       </ion-item>
-      <ion-item>
+      <ion-item class="optional">
         <ion-label>{{"PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_TYPE" | translate}}</ion-label>
         <ion-select formControlName="support" cancelText="{{'COMMON.CANCEL' | translate}}">
           <ion-option value="cd">{{"PROJECT.DETAIL.MODAL.MOVIE.SUPPORT_CD" | translate}}</ion-option>
