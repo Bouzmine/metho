@@ -14,7 +14,7 @@ export default class ClipboardMock extends Clipboard {
   copy(payload: string): Promise<any> {
     console.info("Clipboard: copy");
     this.payload = payload;
-    console.log(payload);
+    console.log(payload); // tslint:disable-line
     document.execCommand("copy");
     return new Promise((resolve) => {
       setTimeout(resolve, 250);

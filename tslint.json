@@ -89,6 +89,14 @@
             "check-decl",
             "check-separator",
             "check-type"
-        ]
+        ],
+        "prefer-for-of": true,
+        "await-promise": true,
+        "no-debugger": true,
+        "no-for-in-array": true,
+        "no-invalid-template-strings": true,
+        "no-use-before-declare": true,
+        "use-isnan": true,
+        "no-console": [true, "log", "error", "dir", "time"]
     }
 }

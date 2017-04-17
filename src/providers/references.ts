@@ -28,9 +28,9 @@ export class References {
   }
 
   loadImages() {
-    for (var i = 0; i < this.data.length; i++) {
+    for (let section of this.data) {
       let img = new Image();
-      img.src = this.data[i].icon;
+      img.src = section.icon;
     }
   }
 
@@ -65,12 +65,12 @@ export class References {
     return filteredList;
   }
 
-  containsOneOf(qa: Array<string>, str: string): boolean {
-    if (!str || !qa.length) {
+  containsOneOf(wordList: Array<string>, str: string): boolean {
+    if (!str || !wordList.length) {
       return false;
     }
-    for (var i = 0; i < qa.length; i++) {
-      if (str.toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
+    for (let word of wordList) {
+      if (str.toLowerCase().indexOf(word.toLowerCase()) > -1) {
       }else {
         return false;
       }

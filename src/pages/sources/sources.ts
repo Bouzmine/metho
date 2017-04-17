@@ -394,17 +394,17 @@ export class SourcesPage {
   updateSearch() {
     this.filteredSources = this.sources;
 
-    let q = this.searchQuery;
+    let query = this.searchQuery;
 
-    if (q.trim() == "") {
+    if (query.trim() == "") {
       return;
     }
 
-    let qa = q.trim().split(" ");
+    let wordList = query.trim().split(" ");
 
     this.filteredSources = this.filteredSources.filter((v) => {
-      for (var i = 0; i < qa.length; i++) {
-        if (v.parsedSource.toLowerCase().indexOf(qa[i].toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(qa[i].toLowerCase()) > -1) {
+      for (let word of wordList) {
+        if (v.parsedSource.toLowerCase().indexOf(word.toLowerCase()) > -1 || this.typeTable[v.parsedType].toLowerCase().indexOf(word.toLowerCase()) > -1) {
         }else {
           return false;
         }
