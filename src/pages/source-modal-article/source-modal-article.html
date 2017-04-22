@@ -22,6 +22,22 @@
       <ion-item>
         <ion-input formControlName="author1lastname" placeholder="{{ 'COMMON.LASTNAME' | translate }}"></ion-input>
       </ion-item>
+      <div *ngIf="form.value.author1firstname || form.value.author1lastname" class="inputs">
+        <ion-item>
+          <ion-input placeholder="{{ 'COMMON.FIRSTNAME' | translate }}" formControlName="author2firstname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="{{ 'COMMON.LASTNAME' | translate }}" formControlName="author2lastname"></ion-input>
+        </ion-item>
+      </div>
+      <div *ngIf="form.value.author2firstname || form.value.author2lastname" class="inputs">
+        <ion-item>
+          <ion-input placeholder="{{ 'COMMON.FIRSTNAME' | translate }}" formControlName="author3firstname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="{{ 'COMMON.LASTNAME' | translate }}" formControlName="author3lastname"></ion-input>
+        </ion-item>
+      </div>
     </ion-list>
     <ion-list>
       <ion-item>

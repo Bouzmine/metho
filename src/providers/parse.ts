@@ -439,25 +439,7 @@ export class Parse {
   }
 
   private parseArticle(sourceToParse: Source): Source {
-    // Auteur
-    if (sourceToParse.author1lastname || sourceToParse.author1firstname) {
-      if (sourceToParse.author1lastname) {
-        sourceToParse.parsedSource += sourceToParse.author1lastname.toUpperCase() + ", ";
-      } else {
-        sourceToParse.parsedSource += "?, ";
-        sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_LASTNAME", "author1lastname"));
-      }
-
-      if (sourceToParse.author1firstname) {
-        sourceToParse.parsedSource += sourceToParse.author1firstname + ". ";
-      } else {
-        sourceToParse.parsedSource += "?. ";
-        sourceToParse.errors.push(this.addError("AUTHOR_ARTICLE_FIRSTNAME", "author1firstname"));
-      }
-    } else {
-      sourceToParse.parsedSource += "?, ?. ";
-      sourceToParse.errors.push(this.addMultiInputError([{errorId: "FIRST_AUTHOR_FIRSTNAME", variable: "author1firstname"}, {errorId: "FIRST_AUTHOR_LASTNAME", variable: "author1lastname"}], "FIRST_AUTHOR"));
-    }
+    sourceToParse = this.parseBookOneToThreeAuthors(sourceToParse);
 
     // Titre de l"Article
     if (sourceToParse.title) {

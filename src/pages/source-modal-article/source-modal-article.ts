@@ -33,6 +33,10 @@ export class SourceModalArticlePage extends SourceModalBase {
     this.form = fb.group({
       author1firstname: [this.noData ? "" : this.previous.author1firstname],
       author1lastname: [this.noData ? "" : this.previous.author1lastname],
+      author2firstname: [this.noData ? "" : this.previous.author2firstname],
+      author2lastname: [this.noData ? "" : this.previous.author2lastname],
+      author3firstname: [this.noData ? "" : this.previous.author3firstname],
+      author3lastname: [this.noData ? "" : this.previous.author3lastname],
       title: [this.noData ? "" : this.previous.title],
       editor: [this.noData ? "" : this.previous.editor],
       editionNumber: [this.noData ? "" : this.previous.editionNumber],
