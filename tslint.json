@@ -90,13 +90,18 @@
             "check-separator",
             "check-type"
         ],
-        "prefer-for-of": true,
+        "prefer-for-of": {
+          "severity": "warning"
+        },
         "await-promise": true,
         "no-debugger": true,
         "no-for-in-array": true,
         "no-invalid-template-strings": true,
         "no-use-before-declare": true,
         "use-isnan": true,
-        "no-console": [true, "log", "error", "dir", "time"]
+        "no-console": {
+          "options": ["log", "error", "dir", "time"],
+          "severity": "warning"
+        }
     }
 }
