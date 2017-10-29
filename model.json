@@ -1,0 +1,107 @@
+{
+  "name": {
+    "fr": "asdf",
+    "en": "fdsa"
+  },
+  "translatedIn": [
+    "fr",
+    "en"
+  ],
+  "templates": [
+    {
+      "name": {
+        "fr": "asdf",
+        "en": "fdsa"
+      },
+      "translatedIn": [
+        "fr",
+        "en"
+      ],
+      "fields": [
+        {
+          "type": "authors",
+          "transform": "firstLetterDotAfterLastName|firstNameAfterLastName|firstNameLastName",
+          "token": "authors",
+          "repeatUpTo": 5,
+          "multipleAuthorsAmpersand": "&",
+          "moreThan": {
+            "number": 5,
+            "cite": 1,
+            "expression": "et al."
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "asdf",
+          "withMonth": true,
+          "withDay": true,
+          "transform": "yearCommaMonthAndDay|DayShortMonthDotYear"
+        },
+        {
+          "type": "title",
+          "name": {
+            "fr": "Titre",
+            "en": "Title"
+          }
+        },
+        {
+          "type": "publicationLocation",
+          "token": "mustBeUnique"
+        },
+        {
+          "type": "publisher",
+          "name": {
+            "fr": "asdf",
+            "en": "fdsa"
+          },
+          "token": "asdf"
+        },
+        {
+          "type": "number",
+          "name": {},
+          "min": 0,
+          "max": 1000,
+          "token": "asdf"
+        },
+        {
+          "type": "text",
+          "name": {},
+          "token": "fdsa"
+        },
+        {
+          "type": "url",
+          "name": {},
+          "token": "fdsa"
+        },
+        {
+          "type": "date",
+          "token": "asdf",
+          "name": {},
+          "future": false
+        },
+        {
+          "type": "select",
+          "token": "asdf",
+          "options": [
+            "First",
+            "Second"
+          ]
+        }
+      ],
+      "compile": {
+        "if": [
+          {
+            "with": ["token1"],
+            "without": ["token6"],
+            "compileString": "{{token}}. {{token1}}. {{token2}}: {{token3}}, {{token4}}, p.{{token5}}"
+          },
+          "..."
+        ],
+        "else": "str"
+      }
+    },
+    {
+      "string": "err"
+    }
+  ]
+}
