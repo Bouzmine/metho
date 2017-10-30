@@ -1,0 +1,689 @@
+{
+  "name": {
+    "fr": "APA",
+    "en": "APA"
+  },
+  "translatedIn": [
+    "fr",
+    "en"
+  ],
+  "templates": [
+    {
+      "name": {
+        "fr": "Livre",
+        "en": "Book"
+      },
+      "translatedIn": [
+        "fr",
+        "en"
+      ],
+      "fields": [
+        {
+          "type": "authors",
+          "transform": "firstLetterDotAfterLastName",
+          "token": "authors",
+          "repeatUpTo": 5,
+          "multipleAuthorsAmpersand": "&",
+          "moreThan": {
+            "number": 5,
+            "cite": 1,
+            "expression": "et al."
+          }
+        },
+        {
+          "type": "authors",
+          "transform": "firstLetterDotAfterLastName",
+          "token": "translators",
+          "repeatUpTo": 3,
+          "multipleAuthorsAmpersand": "&",
+          "moreThan": {
+            "number": 5,
+            "cite": 1,
+            "expression": "et al."
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "publicationYear"
+        },
+        {
+          "type": "title",
+          "name": {
+            "fr": "Titre du livre",
+            "en": "Title of the book"
+          }
+        },
+        {
+          "type": "publicationLocation",
+          "token": "publicationLocation"
+        },
+        {
+          "type": "publisher",
+          "name": {
+            "fr": "Éditeur",
+            "en": "Publisher"
+          },
+          "token": "publisher"
+        }
+      ],
+      "compile": {
+        "if": [
+          {
+            "with": ["translators"],
+            "without": [],
+            "compileString": "{{authors}}. ({{publicationYear}}). <i>{{title}}</i>. ({{translators}}, Trans.). {{publicationLocation}}: {{publisher}}."
+          }
+        ],
+        "default": "{{authors}}. ({{publicationYear}}). <i>{{title}}</i>. {{publicationLocation}}: {{publisher}}."
+      }
+    },
+    {
+      "name": {
+        "fr": "Article de périodique",
+        "en": "Journal Article"
+      },
+      "translatedIn": [
+        "fr",
+        "en"
+      ],
+      "fields": [
+        {
+          "type": "authors",
+          "transform": "firstLetterDotAfterLastName",
+          "token": "authors",
+          "repeatUpTo": 5,
+          "multipleAuthorsAmpersand": "&",
+          "moreThan": {
+            "number": 5,
+            "cite": 1,
+            "expression": "et al."
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "publicationYear",
+          "default": "n.d."
+        },
+        {
+          "type": "text",
+          "token": "articleTitle",
+          "name": {
+            "fr": "Titre de l'article",
+            "en": "Article itle"
+          }
+        },
+        {
+          "type": "text",
+          "token": "journalTitle",
+          "name": {
+            "fr": "Nom du périodique",
+            "en": "Journal title"
+          }
+        },
+        {
+          "type": "number",
+          "token": "volumeNumber",
+          "name": {
+            "fr": "Numéro de volume",
+            "en": "Volume number"
+          }
+        },
+        {
+          "type": "number",
+          "token": "issueNumber",
+          "name": {
+            "fr": "Numéro de parution",
+            "en": "Issue number"
+          }
+        },
+        {
+          "type": "url",
+          "name": {
+            "fr": "Adresse web d'origine",
+            "en": "Retrieved from web address"
+          },
+          "token": "url"
+        },
+        {
+          "type": "number",
+          "token": "startPage",
+          "name": {
+            "fr": "Page de début",
+            "en": "Start page"
+          }
+        },
+        {
+          "type": "number",
+          "token": "endPage",
+          "name": {
+            "fr": "Page de fin",
+            "en": "End page"
+          }
+        }
+      ],
+      "compile": {
+        "if": [
+          {
+            "with": ["volumeNumber", "issueNumber", "url"],
+            "without": ["startPage", "endPage"],
+            "compileString": "{{authors}}. ({{publicationYear}}). {{articleTitle}}. <i>{{journalTitle}}</i>, {{volumeNumber}}({{issueNumber}}). Retrieved from {{url}}"
+          },
+          {
+            "with": ["startPage", "endPage"],
+            "without": ["volumeNumber", "issueNumber", "url"],
+            "compileString": "{{authors}}. ({{publicationYear}}). {{articleTitle}}. <i>{{journalTitle}}</i>, {{startPage}}-{{endPage}}."
+          },
+          {
+            "with": ["startPage", "endPage", "url"],
+            "without": ["volumeNumber", "issueNumber"],
+            "compileString": "{{authors}}. ({{publicationYear}}). {{articleTitle}}. <i>{{journalTitle}}</i>, {{startPage}}-{{endPage}}. Retrieved from {{url}}"
+          },
+          {
+            "with": ["volumeNumber", "issueNumber"],
+            "without": ["url", "startPage", "endPage"],
+            "compileString": "{{authors}}. ({{publicationYear}}). {{articleTitle}}. <i>{{journalTitle}}</i>, {{volumeNumber}}({{issueNumber}})."
+          },
+          {
+            "with": ["volumeNumber"],
+            "without": ["issueNumber", "url", "startPage", "endPage"],
+            "compileString": "{{authors}}. ({{publicationYear}}). {{articleTitle}}. <i>{{journalTitle}}</i>, {{volumeNumber}}."
+          },
+          {
+            "with": ["volumeNumber", "issueNumber"],
+            "without": ["url", "startPage", "endPage"],
+            "compileString": "{{authors}}. ({{publicationYear}}). {{articleTitle}}. <i>{{journalTitle}}</i>, {{volumeNumber}}({{issueNumber}})."
+          }
+        ],
+        "default": "{{authors}}. ({{publicationYear}}). {{articleTitle}}. <i>{{journalTitle}}</i>, {{volumeNumber}}({{issueNumber}}), {{startPage}}-{{endPage}}. Retrieved from {{url}}"
+      }
+    },
+    {
+      "name": {
+        "fr": "Article de journal",
+        "en": "Newspaper Article"
+      },
+      "translatedIn": [
+        "fr",
+        "en"
+      ],
+      "fields": [
+        {
+          "type": "authors",
+          "transform": "firstLetterDotAfterLastName",
+          "token": "authors",
+          "repeatUpTo": 5,
+          "multipleAuthorsAmpersand": "&",
+          "moreThan": {
+            "number": 5,
+            "cite": 1,
+            "expression": "et al."
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "publicationYear",
+          "withMonth": true,
+          "withDay": true,
+          "transform": "yearCommaMonthAndDay",
+          "default": "n.d."
+        },
+        {
+          "type": "text",
+          "token": "articleTitle",
+          "name": {
+            "fr": "Titre de l'article",
+            "en": "Article title"
+          }
+        },
+        {
+          "type": "text",
+          "token": "journalTitle",
+          "name": {
+            "fr": "Nom du journal",
+            "en": "Newspaper's name"
+          }
+        },
+        {
+          "type": "url",
+          "name": {
+            "fr": "Adresse web d'origine",
+            "en": "Retrieved from web address"
+          },
+          "token": "url"
+        },
+        {
+          "type": "number",
+          "token": "startPage",
+          "name": {
+            "fr": "Page de début",
+            "en": "Start page"
+          }
+        },
+        {
+          "type": "number",
+          "token": "endPage",
+          "name": {
+            "fr": "Page de fin",
+            "en": "End page"
+          }
+        }
+      ],
+      "compile": {
+        "if": [
+          {
+            "with": ["startPage", "endPage"],
+            "without": ["url"],
+            "compileString": "{{authors}} ({{publicationYear}}). {{articleTitle}}. <i>{{journalTitle}}</i>, pp. {{startPage}}-{{endPage}}."
+          },
+          {
+            "with": ["url"],
+            "without": ["startPage", "endPage"],
+            "compileString": "{{authors}}. ({{publicationYear}}). {{articleTitle}}. <i>{{journalTitle}}</i>. Retrieved from {{url}}"
+          }
+        ],
+        "default": "{{authors}} ({{publicationYear}}). {{articleTitle}}. <i>{{journalTitle}}</i>, pp. {{startPage}}-{{endPage}}. Retrieved from {{url}}"
+      }
+    },
+    {
+      "name": {
+        "fr": "Données",
+        "en": "Data"
+      },
+      "translatedIn": [
+        "fr",
+        "en"
+      ],
+      "fields": [
+        {
+          "type": "text",
+          "token": "organisation",
+          "name": {
+            "fr": "Organisation",
+            "en": "Organisation"
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "publicationYear",
+          "default": "n.d."
+        },
+        {
+          "type": "text",
+          "token": "projectName",
+          "name": {
+            "fr": "Nom du projet",
+            "en": "Project name"
+          }
+        },
+        {
+          "type": "text",
+          "token": "format",
+          "name": {
+            "fr": "Format",
+            "en": "Format"
+          }
+        },
+        {
+          "type": "url",
+          "name": {
+            "fr": "Adresse web d'origine",
+            "en": "Retrieved from web address"
+          },
+          "token": "url"
+        }
+      ],
+      "compile": {
+        "if": [
+          {
+            "with": [],
+            "without": ["format"],
+            "compileString": "{{organisation}}. ({{publicationYear}}). <i>{{projectName}}</i>. Retrieved from {{url}}"
+          }
+        ],
+        "default": "{{organisation}}. ({{publicationYear}}). <i>{{projectName}}</i> [{{format}}]. Retrieved from {{url}}"
+      }
+    },
+    {
+      "name": {
+        "fr": "Wiki",
+        "en": "Wiki"
+      },
+      "translatedIn": [
+        "fr",
+        "en"
+      ],
+      "fields": [
+        {
+          "type": "text",
+          "token": "pageTitle",
+          "name": {
+            "fr": "Titre de la page",
+            "en": "Page title"
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "lastEdited",
+          "withMonth": true,
+          "withDay": true,
+          "name": {
+            "fr": "Date de dernière modification",
+            "en": "Last edited date"
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "consultationDate",
+          "withMonth": true,
+          "withDay": true,
+          "name": {
+            "fr": "Date de consultation",
+            "en": "Consultation date"
+          },
+          "transform": "MonthDayCommaYear"
+        },
+        {
+          "type": "text",
+          "token": "wikiName",
+          "name": {
+            "fr": "Nom du wiki",
+            "en": "Wiki name"
+          }
+        },
+        {
+          "type": "url",
+          "name": {
+            "fr": "Adresse web d'origine",
+            "en": "Retrieved from web address"
+          },
+          "token": "url"
+        }
+      ],
+      "compile": {
+        "if": [],
+        "default": "{{pageTitle}}. ({{lastEdited}}). Retrieved {{consultationDate}} from {{wikiName}}: {{url}}"
+      }
+    },
+    {
+      "name": {
+        "fr": "Présentation/Conférence",
+        "en": "Presentation/Conference"
+      },
+      "translatedIn": [
+        "fr",
+        "en"
+      ],
+      "fields": [
+        {
+          "type": "authors",
+          "transform": "firstLetterDotAfterLastName",
+          "token": "authors",
+          "repeatUpTo": 5,
+          "multipleAuthorsAmpersand": "&",
+          "moreThan": {
+            "number": 5,
+            "cite": 1,
+            "expression": "et al."
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "publicationYear",
+          "withMonth": true,
+          "withDay": true,
+          "transform": "yearCommaMonthAndDay"
+        },
+        {
+          "type": "text",
+          "token": "presentationTitle",
+          "name": {
+            "fr": "Titre de la présentation",
+            "en": "Title of presentation"
+          }
+        },
+        {
+          "type": "text",
+          "token": "format",
+          "name": {
+            "fr": "Format",
+            "en": "Format"
+          }
+        },
+        {
+          "type": "url",
+          "name": {
+            "fr": "Adresse web d'origine",
+            "en": "Retrieved from web address"
+          },
+          "token": "url"
+        }
+      ],
+      "compile": {
+        "if": [
+          {
+            "with": [],
+            "without": ["format"],
+            "compileString": "{{authors}}. ({{publicationYear}}). {{presentationTitle}}. Retrieved from {{url}}"
+          }
+        ],
+        "default": "{{authors}}. ({{publicationYear}}). {{presentationTitle}} [{{format}}]. Retrieved from {{url}}"
+      }
+    },
+    {
+      "name": {
+        "fr": "Vidéo en ligne",
+        "en": "Online video"
+      },
+      "translatedIn": [
+        "fr",
+        "en"
+      ],
+      "fields": [
+        {
+          "type": "text",
+          "token": "organisation",
+          "name": {
+            "fr": "Organisation",
+            "en": "Organisation"
+          }
+        },
+        {
+          "type": "authors",
+          "transform": "firstLetterDotAfterLastName",
+          "token": "authors",
+          "repeatUpTo": 5,
+          "multipleAuthorsAmpersand": "&",
+          "moreThan": {
+            "number": 5,
+            "cite": 1,
+            "expression": "et al."
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "publicationYear",
+          "withDay": true,
+          "withMonth": true,
+          "transform": "yearCommaMonthAndDay",
+          "default": "n.d."
+        },
+        {
+          "type": "text",
+          "token": "videoTitle",
+          "name": {
+            "fr": "Nom de la vidéo",
+            "en": "Video title"
+          }
+        },
+        {
+          "type": "text",
+          "token": "format",
+          "name": {
+            "fr": "Format",
+            "en": "Format"
+          }
+        },
+        {
+          "type": "url",
+          "name": {
+            "fr": "Adresse web d'origine",
+            "en": "Retrieved from web address"
+          },
+          "token": "url"
+        }
+      ],
+      "compile": {
+        "if": [
+          {
+            "with": ["authors"],
+            "without": ["format"],
+            "compileString": "{{authors}} ({{publicationYear}}). \"{{articleTitle}}\". Retrieved from {{url}}"
+          },
+          {
+            "with": [],
+            "without": ["format", "authors"],
+            "compileString": "{{organisation}}. ({{publicationYear}}). \"{{articleTitle}}\". Retrieved from {{url}}"
+          },
+          {
+            "with": ["format", "authors"],
+            "without": [],
+            "compileString": "{{authors}} ({{publicationYear}}). \"{{articleTitle}}\". [{{format}}]. Retrieved from {{url}}"
+          }
+        ],
+        "default": "{{organisation}}. ({{publicationYear}}). \"{{articleTitle}}\". [{{format}}]. Retrieved from {{url}}"
+      }
+    },
+    {
+      "name": {
+        "fr": "Site web",
+        "en": "Website"
+      },
+      "translatedIn": [
+        "fr",
+        "en"
+      ],
+      "fields": [
+        {
+          "type": "text",
+          "token": "organisation",
+          "name": {
+            "fr": "Organisation",
+            "en": "Organisation"
+          }
+        },
+        {
+          "type": "authors",
+          "transform": "firstLetterDotAfterLastName",
+          "token": "authors",
+          "repeatUpTo": 5,
+          "multipleAuthorsAmpersand": "&",
+          "moreThan": {
+            "number": 5,
+            "cite": 1,
+            "expression": "et al."
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "publicationYear",
+          "withDay": true,
+          "withMonth": true,
+          "transform": "yearCommaMonthAndDay",
+          "default": "n.d."
+        },
+        {
+          "type": "text",
+          "token": "pageTitle",
+          "name": {
+            "fr": "Titre de la page",
+            "en": "Page title"
+          }
+        },
+        {
+          "type": "url",
+          "name": {
+            "fr": "Adresse web d'origine",
+            "en": "Retrieved from web address"
+          },
+          "token": "url"
+        }
+      ],
+      "compile": {
+        "if": [
+          {
+            "with": ["authors"],
+            "without": [],
+            "compileString": "{{authors}} ({{publicationYear}}). <i>{{pageTitle}}</i>. Retrieved from {{url}}"
+          }
+        ],
+        "default": "{{organisation}}. ({{publicationYear}}). <i>{{pageTitle}}</i>. Retrieved from {{url}}"
+      }
+    },
+    {
+      "name": {
+        "fr": "Blogue",
+        "en": "Blog"
+      },
+      "translatedIn": [
+        "fr",
+        "en"
+      ],
+      "fields": [
+        {
+          "type": "text",
+          "token": "screenName",
+          "name": {
+            "fr": "Pseudonyme",
+            "en": "Screen name"
+          }
+        },
+        {
+          "type": "authors",
+          "transform": "firstLetterDotAfterLastName",
+          "token": "authors",
+          "repeatUpTo": 5,
+          "multipleAuthorsAmpersand": "&",
+          "moreThan": {
+            "number": 5,
+            "cite": 1,
+            "expression": "et al."
+          }
+        },
+        {
+          "type": "publicationYear",
+          "token": "publicationYear",
+          "withDay": true,
+          "withMonth": true,
+          "transform": "yearCommaMonthAndDay",
+          "default": "n.d."
+        },
+        {
+          "type": "text",
+          "token": "postTitle",
+          "name": {
+            "fr": "Titre de l'article",
+            "en": "Post title"
+          }
+        },
+        {
+          "type": "url",
+          "name": {
+            "fr": "Adresse web d'origine",
+            "en": "Retrieved from web address"
+          },
+          "token": "url"
+        }
+      ],
+      "compile": {
+        "if": [
+          {
+            "with": ["authors"],
+            "without": [],
+            "compileString": "{{authors}} ({{publicationYear}}). {{postTitle}} [blog]. Retrieved from {{url}}"
+          }
+        ],
+        "default": "{{organisation}}. ({{publicationYear}}). {{postTitle}} [blog]. Retrieved from {{url}}"
+      }
+    }
+  ]
+}
