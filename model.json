@@ -35,7 +35,8 @@
           "token": "asdf",
           "withMonth": true,
           "withDay": true,
-          "transform": "yearCommaMonthAndDay|DayShortMonthDotYear"
+          "transform": "yearCommaMonthAndDay|DayShortMonthDotYear|MonthDayCommaYear",
+          "default": "fdsa"
         },
         {
           "type": "title",
@@ -61,7 +62,8 @@
           "name": {},
           "min": 0,
           "max": 1000,
-          "token": "asdf"
+          "token": "asdf",
+          "transform": "month"
         },
         {
           "type": "text",
@@ -97,11 +99,11 @@
           },
           "..."
         ],
-        "else": "str"
+        "default": "str"
       }
     },
     {
-      "string": "err"
+      "string": "..."
     }
   ]
 }
